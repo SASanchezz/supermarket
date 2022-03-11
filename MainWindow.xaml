@@ -27,5 +27,6 @@
         <Button x:Name="signUpPageButton" Content="Зареєструватися" Grid.Row="4" HorizontalAlignment="Center" Width="150" Height="24" VerticalAlignment="Center" FontSize="12" Click="SignUpPage_Button" Margin="0,10,0,0"/>
 
 
+        <Button Content="check DB" Grid.Row="4" HorizontalAlignment="Right" Width="80" Height="24" VerticalAlignment="Bottom" FontSize="12" Click="ChechDb_Button" Margin="0,10,0,0"/>
     </Grid>
 </Window>
