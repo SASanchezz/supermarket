@@ -20,9 +20,24 @@ namespace supermarket
     /// </summary>
     public partial class MainWindow : Window
     {
+        private string userLogin;
+        private string userPassword;
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void SignIn_Button(object sender, RoutedEventArgs e)
+        {
+            userLogin = loginBox.Text;
+            userPassword = passwordBox.Text;
+            //TODO: sign in via database - 11.03.2022 
+        }
+
+        private void SignUpPage_Button(object sender, RoutedEventArgs e)
+        {
+            //TODO: open sign up page - 11.03.2022 
         }
     }
 }
