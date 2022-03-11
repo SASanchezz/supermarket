@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.Common;
+using MySql.Data.MySqlClient;
+using supermarket.connections;
 
 namespace supermarket
 {
@@ -38,6 +41,41 @@ namespace supermarket
         private void SignUpPage_Button(object sender, RoutedEventArgs e)
         {
             //TODO: open sign up page - 11.03.2022 
+        }
+
+        private void ChechDb_Button(object sender, RoutedEventArgs e)
+        {
+            MySqlConnection db = DBUtils.Db();
+
+            string sql = "SELECT category_number FROM Category";
+
+            // Создать объект Command.
+            MySqlCommand cmd = new();
+
+            // Сочетать Command с Connection.
+            cmd.Connection = db;
+            cmd.CommandText = sql;
+
+
+            using (DbDataReader reader = cmd.ExecuteReader())
+            {
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        // Индекс (index) столбца Emp_ID в команде SQL.
+                        int categoryNumberIndex = reader.GetOrdinal("category_number"); // 0
+
+                        int categoryNumber = reader.GetInt32(categoryNumberIndex);
+                        MessageBox.Show(categoryNumber.ToString());
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No data in Category table");
+                }
+            }
+
         }
     }
 }
