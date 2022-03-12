@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Data.Common;
 using MySql.Data.MySqlClient;
 using supermarket.connections;
+using supermarket.middlewares.signIn;
 
 namespace supermarket
 {
@@ -28,6 +29,7 @@ namespace supermarket
 
         public MainWindow()
         {
+            DBUtils.GetDBConnection(); //open connection to MySQL
             InitializeComponent();
         }
 
@@ -35,7 +37,15 @@ namespace supermarket
         {
             userLogin = loginBox.Text;
             userPassword = passwordBox.Text;
-            //TODO: sign in via database - 11.03.2022 
+            string result = SignInValidator.validate(userLogin, userPassword);
+            if (result != "")
+            {
+                MessageBox.Show(result);
+                return;
+            }
+
+            Close();
+            //TODO: open new window - 12.03.2022
         }
 
         private void SignUpWindow_Button(object sender, RoutedEventArgs e)
@@ -48,11 +58,10 @@ namespace supermarket
 
         private void ChechDb_Button(object sender, RoutedEventArgs e)
         {
-            MySqlConnection db = DBUtils.Db();
 
             string sql = "SELECT * FROM Category";
 
-            List<string> result = DBUtils.FindAll(db, sql);
+            List<string> result = DBUtils.FindAll(sql);
 
             if (!result.Any())
             {
