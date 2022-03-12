@@ -44,8 +44,9 @@ namespace supermarket
                 return;
             }
 
+            ManagerMainWindow window = new();
+            window.Show();
             Close();
-            //TODO: open new window - 12.03.2022
         }
 
         private void SignUpWindow_Button(object sender, RoutedEventArgs e)
