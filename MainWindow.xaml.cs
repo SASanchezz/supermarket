@@ -52,7 +52,7 @@ namespace supermarket
 
             string sql = "SELECT * FROM Category";
 
-            List<string> result = DBUtils.FindSQL(db, sql);
+            List<string> result = DBUtils.FindAll(db, sql);
 
             if (!result.Any())
             {
