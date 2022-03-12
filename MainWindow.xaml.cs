@@ -38,44 +38,32 @@ namespace supermarket
             //TODO: sign in via database - 11.03.2022 
         }
 
-        private void SignUpPage_Button(object sender, RoutedEventArgs e)
+        private void SignUpWindow_Button(object sender, RoutedEventArgs e)
         {
-            //TODO: open sign up page - 11.03.2022 
+            SignUpWindow signUpWindow = new();
+            signUpWindow.Owner = this;
+            Hide();
+            signUpWindow.Show();
         }
 
         private void ChechDb_Button(object sender, RoutedEventArgs e)
         {
             MySqlConnection db = DBUtils.Db();
 
-            string sql = "SELECT category_number FROM Category";
+            string sql = "SELECT * FROM Category";
 
-            // Создать объект Command.
-            MySqlCommand cmd = new();
+            List<string> result = DBUtils.FindSQL(db, sql);
 
-            // Сочетать Command с Connection.
-            cmd.Connection = db;
-            cmd.CommandText = sql;
-
-
-            using (DbDataReader reader = cmd.ExecuteReader())
+            if (!result.Any())
             {
-                if (reader.HasRows)
+                MessageBox.Show("No data in Category table");
+            }else
+            {
+                foreach (string row in result)
                 {
-                    while (reader.Read())
-                    {
-                        // Индекс (index) столбца Emp_ID в команде SQL.
-                        int categoryNumberIndex = reader.GetOrdinal("category_number"); // 0
-
-                        int categoryNumber = reader.GetInt32(categoryNumberIndex);
-                        MessageBox.Show(categoryNumber.ToString());
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("No data in Category table");
+                    MessageBox.Show(row);
                 }
             }
-
         }
     }
 }
