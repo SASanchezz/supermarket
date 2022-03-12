@@ -3,28 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 using System.Data.Common;
-using MySql.Data.MySqlClient;
 using System.Data;
+using MySql.Data.MySqlClient;
 
 namespace supermarket.connections
 {
     public class DBUtils
     {
 
-        public static List<string> FindSQL(MySqlConnection db, string sql)
+        public static void Execute(MySqlConnection db, string sql)
         {
-            MySqlCommand cmd = new();
+            MySqlCommand cmd = new(sql, db);
+            cmd.ExecuteNonQuery();
+        }
 
-            // Сочетать Command с Connection.
-            cmd.Connection = db;
-            cmd.CommandText = sql;
+        public static List<string> FindAll(MySqlConnection db, string sql)
+        {
+            MySqlCommand cmd = new(sql, db);
 
             using DbDataReader reader = cmd.ExecuteReader();
             int columnsNumber = reader.FieldCount;
-
             List<string> output = new();
+
             if (reader.HasRows)
             {
                 while (reader.Read())
