@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace supermarket.utils
+namespace supermarket.Utils
 {
     class IdUtils
     {
-        private static Random random = new Random();
+        private readonly static Random random = new();
         public static string Id(int length=8)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

@@ -11,10 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using supermarket.middlewares.signUp;
-using supermarket.interfaces;
-using supermarket.utils;
-using supermarket.connections;
+using supermarket.Middlewares.SignUp;
+using supermarket.Data;
+using supermarket.Utils;
+using supermarket.Connections;
 
 namespace supermarket
 {
@@ -60,7 +60,7 @@ namespace supermarket
                 "'{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}')",
                 result, surname, name, patronymic, Roles.roleKeys[role], float.Parse(salary),
                 Convert.ToDateTime(dateBirth).ToString(s_format), Convert.ToDateTime(dateStart).ToString(s_format),
-                phoneNumber, CryptUtils.hashPassword(password), city, street, zipcode);
+                phoneNumber, CryptUtils.HashPassword(password), city, street, zipcode);
 
             DBUtils.Execute(sql); //TODO finish add user and make models - 13.03.2022
 

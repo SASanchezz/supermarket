@@ -8,7 +8,7 @@ using System.Data.Common;
 using System.Data;
 using MySql.Data.MySqlClient;
 
-namespace supermarket.connections
+namespace supermarket.Connections
 {
     public class DBUtils
     {
