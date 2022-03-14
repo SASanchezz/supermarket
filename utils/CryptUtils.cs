@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BC = BCrypt.Net.BCrypt;
+﻿using BC = BCrypt.Net.BCrypt;
 
 namespace supermarket.Utils
 {
