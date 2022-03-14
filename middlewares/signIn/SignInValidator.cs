@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using supermarket.connections;
-using supermarket.utils;
+using supermarket.Connections;
+using supermarket.Utils;
 
-namespace supermarket.middlewares.signIn
+namespace supermarket.Middlewares.SignIn
 {
     public static class SignInValidator
     {
 
-        public static string validate(string phone, string password)
+        public static string Validate(string phone, string password)
         {
             string sql = String.Format("SELECT * FROM Employee WHERE phone_number='{0}'", phone);
             List<string> result = DBUtils.FindAll(sql);
@@ -19,7 +19,7 @@ namespace supermarket.middlewares.signIn
             {
                 return "Нема такого телефону";
             }
-            if (password.Length == 0 || !CryptUtils.compare(password, result[0].Split(',')[9]))
+            if (password.Length == 0 || !CryptUtils.Compare(password, result[0].Split(',')[9]))
             {
                 return "Неправильний пароль";
             }

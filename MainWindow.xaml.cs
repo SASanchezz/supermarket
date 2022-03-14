@@ -14,8 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.Common;
 using MySql.Data.MySqlClient;
-using supermarket.connections;
-using supermarket.middlewares.signIn;
+using supermarket.Connections;
+using supermarket.Middlewares.SignIn;
 
 namespace supermarket
 {
@@ -35,7 +35,7 @@ namespace supermarket
         {
             string userLogin = loginBox.Text;
             string userPassword = passwordBox.Text;
-            string result = SignInValidator.validate(userLogin, userPassword);
+            string result = SignInValidator.Validate(userLogin, userPassword);
             if (result != "")
             {
                 MessageBox.Show(result);

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using supermarket.connections;
-using supermarket.utils;
-using supermarket.interfaces;
+using supermarket.Connections;
+using supermarket.Utils;
+using supermarket.Data;
 
-namespace supermarket.middlewares.signUp
+namespace supermarket.Middlewares.SignUp
 {
     public static class SignUpValidator
     {
