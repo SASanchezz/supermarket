@@ -26,7 +26,7 @@ namespace supermarket.Middlewares.SignUp
             
             if (surname.Length == 0 || surname.Length > 51)
             {
-                return "Введіть фамілію довжиною < 51";
+                return "Введіть прізвище довжиною < 51";
             }
             if (name.Length == 0 || name.Length > 51)
             {

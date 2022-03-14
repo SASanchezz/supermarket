@@ -16,6 +16,7 @@ using System.Data.Common;
 using MySql.Data.MySqlClient;
 using supermarket.Connections;
 using supermarket.Middlewares.SignIn;
+using supermarket.Windows.ManagerMenu;
 
 namespace supermarket
 {
