@@ -19,9 +19,9 @@ namespace supermarket.connections
             return connection;
         }
 
-        public static void Execute(MySqlConnection db, string sql)
+        public static void Execute(string sql)
         {
-            MySqlCommand cmd = new(sql, db);
+            MySqlCommand cmd = new(sql, Db());
             cmd.ExecuteNonQuery();
         }
 
