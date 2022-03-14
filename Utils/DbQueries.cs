@@ -6,10 +6,10 @@ namespace supermarket.Utils
     public static class DbQueries
     {
 
-        public static List<string> GetAllEmployee()
+        public static List<string[]> GetAllEmployee()
         {
             string sql = "SELECT * FROM Employee";
-            return DBUtils.FindAll(sql);
+            return DbUtils.FindAll(sql);
         }
     }
 }

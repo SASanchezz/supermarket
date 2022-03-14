@@ -51,16 +51,18 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
                 Convert.ToDateTime(dateBirth).ToString(s_format), Convert.ToDateTime(dateStart).ToString(s_format),
                 phoneNumber, CryptUtils.HashPassword(password), city, street, zipcode);
 
-            DBUtils.Execute(sql);
+            DbUtils.Execute(sql);
 
+            MainUserWindow window = new();
+            window.Show();
             Close();
-            Owner.Show();
         }
 
         public void Return_Button(object sender, RoutedEventArgs e)
         {
+            MainUserWindow window = new();
+            window.Show();
             Close();
-            Owner.Show();
         }
     }
 }

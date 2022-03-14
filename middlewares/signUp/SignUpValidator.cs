@@ -14,19 +14,19 @@ namespace supermarket.Middlewares.SignUp
             string city, string street, string zipcode, string password)
         {
             string uniqueId;
-            List<string> result;
+            List<string[]> result;
             do //to avoid similar id's
             {
                 uniqueId = IdUtils.Id();
                 string sql = String.Format("SELECT * FROM Employee WHERE id_employee='{0}'", uniqueId);
-                result = DBUtils.FindAll(sql);
+                result = DbUtils.FindAll(sql);
             } while (result.Any());
             
-            if (surname.Length == 0 || surname.Length > 51)
+            if (surname.Length is 0 or > 51)
             {
                 return "Введіть прізвище довжиною < 51";
             }
-            if (name.Length == 0 || name.Length > 51)
+            if (name.Length is 0 or > 51)
             {
                 return "Введіть ім'я довжиною < 51";
             }
@@ -38,7 +38,7 @@ namespace supermarket.Middlewares.SignUp
             try
             {
                 int findRole = Roles.roleKeys[role];
-            } catch (KeyNotFoundException e)
+            } catch (KeyNotFoundException)
             {
                 return "Нема такої ролі";
             }
@@ -47,7 +47,7 @@ namespace supermarket.Middlewares.SignUp
             try
             {
                 float floatSalary = float.Parse(salary);
-            } catch (FormatException e)
+            } catch (FormatException)
             {
                 return "Некоректно введена зарплата";
             }
@@ -70,26 +70,30 @@ namespace supermarket.Middlewares.SignUp
                 return "Особа не досягла повноліття";
             }
 
-            int daysToStart = DateUtils.GetDays(startDate, nowDate); // let it be
+            int ageAtStart = DateUtils.GetAge(birtDate, startDate);
+            if (ageAtStart < 18)
+            {
+                return "Особа не досягла повноліття на момент початку роботи";
+            }
 
-            if (phoneNumber.Length > 13 || phoneNumber.Length < 10)
+            if (phoneNumber.Length is > 13 or < 10)
             {
                 return "Номер телефу некоректний";
             }
-            if (city.Length == 0 || city.Length > 51)
+            if (city.Length is 0 or > 51)
             {
                 return "Введіть місто довжиною < 51";
             }
-            if (street.Length == 0 || street.Length > 51)
+            if (street.Length is 0 or > 51)
             {
                 return "Введіть вулицю довжиною < 51";
             }
-            if (zipcode.Length == 0 || zipcode.Length > 9)
+            if (zipcode.Length is 0 or > 9)
             {
                 return "Введіть поштовий індекс довжиною < 10";
             }
 
-            if (password.Length == 0 || password.Length > 51)
+            if (password.Length is 0 or > 51)
             {
                 return "Введіть пароль до 16 символів";
             }

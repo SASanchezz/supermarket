@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace supermarket.Data
 {
     static class Roles
     {
-        public static Dictionary<int, string> roleNames = new()
+        public static string[] roleNames = new string[2]
         {
-            { 0, "Менеджер" },
-            { 1, "Касир" }
+            "Менеджер", "Касир"
         };
+        
 
         public static Dictionary<string, int> roleKeys = new()
         {
