@@ -25,9 +25,9 @@ namespace supermarket.Windows.ManagerMenu
             InitializeComponent();
         }
 
-        private void OpenRegisterWindow_Button(object sender, RoutedEventArgs e)
+        private void OpenUsersWindow_Button(object sender, RoutedEventArgs e)
         {
-            AddUserWindow window = new();
+            MainUserWindow window = new();
             window.Owner = this;
             Hide();
             window.Show();

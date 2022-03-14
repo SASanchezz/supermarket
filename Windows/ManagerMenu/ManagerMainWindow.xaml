@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:supermarket.Windows.ManagerMenu"
         mc:Ignorable="d"
         Title="ManagerMainWindow" Height="450" Width="800">
-    <Grid x:Name="MainGrid" Background="LightGray" Margin="10">
+    <Grid Background="LightGray" Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -16,6 +16,6 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" HorizontalAlignment="Center" Text="Меню менеджера" VerticalAlignment="Top" FontSize="24"/>
 
-        <Button Content="Додати нового користувача" Grid.Row="1" HorizontalAlignment="Left" Width="164" Height="24" VerticalAlignment="Top" FontSize="12" Click="OpenRegisterWindow_Button" Margin="20,0,0,0"/>
+        <Button Content="Панель робітників" Grid.Row="1" HorizontalAlignment="Left" Width="164" Height="24" VerticalAlignment="Top" FontSize="12" Click="OpenUsersWindow_Button" Margin="20,0,0,0"/>
     </Grid>
 </Window>
