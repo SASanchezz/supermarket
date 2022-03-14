@@ -24,8 +24,6 @@ namespace supermarket
     /// </summary>
     public partial class MainWindow : Window
     {
-        private string userLogin;
-        private string userPassword;
 
         public MainWindow()
         {
@@ -35,8 +33,8 @@ namespace supermarket
 
         private void SignIn_Button(object sender, RoutedEventArgs e)
         {
-            userLogin = loginBox.Text;
-            userPassword = passwordBox.Text;
+            string userLogin = loginBox.Text;
+            string userPassword = passwordBox.Text;
             string result = SignInValidator.validate(userLogin, userPassword);
             if (result != "")
             {
@@ -47,14 +45,6 @@ namespace supermarket
             ManagerMainWindow window = new();
             window.Show();
             Close();
-        }
-
-        private void SignUpWindow_Button(object sender, RoutedEventArgs e)
-        {
-            SignUpWindow signUpWindow = new();
-            signUpWindow.Owner = this;
-            Hide();
-            signUpWindow.Show();
         }
 
         private void ChechDb_Button(object sender, RoutedEventArgs e)

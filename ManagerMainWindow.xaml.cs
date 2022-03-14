@@ -25,7 +25,10 @@ namespace supermarket
         }
         private void OpenRegisterWindow_Button(object sender, RoutedEventArgs e)
         {
-            //TODO
+            AddUserWindow window = new();
+            window.Owner = this;
+            Hide();
+            window.Show();
         }
 
 
