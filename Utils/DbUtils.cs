@@ -48,7 +48,6 @@ namespace supermarket.Utils
                     {
                         rowData[i] = reader.GetString(i);
                     }
-                    rowData = rowData[..^1];
                     output.Add(rowData);
                 }
             }
