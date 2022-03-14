@@ -6,7 +6,16 @@
         xmlns:local="clr-namespace:supermarket.Windows.ManagerMenu.UserWindows"
         mc:Ignorable="d"
         Title="MainUserWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Background="LightGray" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Rectangle Fill="Azure" />
+        <Button Content="Додати нового користувача" Grid.Row="0" HorizontalAlignment="Left" Width="164" Height="24" VerticalAlignment="Top" FontSize="12" Click="OpenRegisterWindow_Button" Margin="20,20,0,0"/>
+        <ScrollViewer Grid.Row="1">
+            <StackPanel x:Name="employeePanel">
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>
