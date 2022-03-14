@@ -4,6 +4,7 @@ using System.Windows;
 using supermarket.Connections;
 using supermarket.Middlewares.SignIn;
 using supermarket.Windows.ManagerMenu;
+using supermarket.Utils;
 
 namespace supermarket
 {
@@ -15,7 +16,7 @@ namespace supermarket
 
         public MainWindow()
         {
-            DBUtils.GetDBConnection(); //open connection to MySQL
+            DbUtils.SetDbConnection(); //open connection to MySQL
             InitializeComponent();
         }
 
@@ -38,18 +39,18 @@ namespace supermarket
         private void ChechDb_Button(object sender, RoutedEventArgs e)
         {
 
-            string sql = "SELECT * FROM Category";
+            string sql = "SELECT * FROM Category LIMIT 1;";
 
-            List<string> result = DBUtils.FindAll(sql);
+            List<string[]> result = DbUtils.FindAll(sql);
 
             if (!result.Any())
             {
                 MessageBox.Show("No data in Category table");
             }else
             {
-                foreach (string row in result)
+                foreach (string[] row in result)
                 {
-                    MessageBox.Show(row);
+                    MessageBox.Show(row[0]);
                 }
             }
         }
