@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 using supermarket.Utils;
 using empl = supermarket.Data.DbMaps.EmployeeMap;
 
@@ -29,15 +30,32 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
                     + employee[(int)empl.id_employee];
                 
                 button.Name = employee[(int) empl.id_employee];
-
                 employeePanel.Children.Add(button);
+
+                button.Click += new RoutedEventHandler(OpenUserWindow_Button);
             }
+
+
+        }
+
+        void OpenUserWindow_Button(object sender, RoutedEventArgs e)
+        {
+            string employeeId = (sender as Button).Name.ToString(); //get id of button that is employee_id
+            ManageUserWindow window = new(employeeId);
+            window.Show();
+            Close();
         }
 
         private void OpenRegisterWindow_Button(object sender, RoutedEventArgs e)
         {
             AddUserWindow window = new();
             window.Show();
+            Close();
+        }
+
+        public void Return_Button(object sender, RoutedEventArgs e)
+        {
+            Owner.Show();
             Close();
         }
     }

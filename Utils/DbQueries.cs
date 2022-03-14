@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using supermarket.Connections;
 
 namespace supermarket.Utils
 {
@@ -9,6 +8,11 @@ namespace supermarket.Utils
         public static List<string[]> GetAllEmployee()
         {
             string sql = "SELECT * FROM Employee";
+            return DbUtils.FindAll(sql);
+        }
+        public static List<string[]> GetEmployeeByID(string employeeId)
+        {
+            string sql = string.Format("SELECT * FROM Employee WHERE id_employee='{0}'", employeeId);
             return DbUtils.FindAll(sql);
         }
     }

@@ -2,15 +2,15 @@
 
 namespace supermarket.Data
 {
-    static class Roles
+    public static class Roles
     {
-        public static string[] roleNames = new string[2]
+        public static readonly string[] roleNames = new string[2]
         {
             "Менеджер", "Касир"
         };
         
 
-        public static Dictionary<string, int> roleKeys = new()
+        public static readonly Dictionary<string, int> roleKeys = new()
         {
             { "Менеджер", 0 },
             { "Касир", 1 }

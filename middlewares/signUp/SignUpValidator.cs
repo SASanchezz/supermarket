@@ -18,8 +18,7 @@ namespace supermarket.Middlewares.SignUp
             do //to avoid similar id's
             {
                 uniqueId = IdUtils.Id();
-                string sql = String.Format("SELECT * FROM Employee WHERE id_employee='{0}'", uniqueId);
-                result = DbUtils.FindAll(sql);
+                result = DbQueries.GetEmployeeByID(uniqueId);
             } while (result.Any());
             
             if (surname.Length is 0 or > 51)
