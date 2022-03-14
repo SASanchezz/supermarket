@@ -7,21 +7,27 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="AddUserWindow.xaml.cs">
+    <Compile Update="Windows\ManagerMenu\ManagerMainWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="ManagerMainWindow.xaml.cs">
+    <Compile Update="Windows\ManagerMenu\UserWindows\AddUserWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\ManagerMenu\UserWindows\MainUserWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="AddUserWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="ManagerMainWindow.xaml">
+    <Page Update="Windows\ManagerMenu\ManagerMainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\ManagerMenu\UserWindows\AddUserWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\ManagerMenu\UserWindows\MainUserWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

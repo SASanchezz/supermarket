@@ -11,8 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using supermarket.Windows.ManagerMenu.UserWindows;
 
-namespace supermarket
+namespace supermarket.Windows.ManagerMenu
 {
     /// <summary>
     /// Interaction logic for ManagerMainWindow.xaml
@@ -23,6 +24,7 @@ namespace supermarket
         {
             InitializeComponent();
         }
+
         private void OpenRegisterWindow_Button(object sender, RoutedEventArgs e)
         {
             AddUserWindow window = new();
@@ -30,7 +32,5 @@ namespace supermarket
             Hide();
             window.Show();
         }
-
-
     }
 }

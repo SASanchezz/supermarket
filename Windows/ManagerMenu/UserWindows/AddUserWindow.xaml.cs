@@ -16,7 +16,7 @@ using supermarket.Data;
 using supermarket.Utils;
 using supermarket.Connections;
 
-namespace supermarket
+namespace supermarket.Windows.ManagerMenu.UserWindows
 {
     /// <summary>
     /// Interaction logic for AddUserWindow.xaml
@@ -62,7 +62,7 @@ namespace supermarket
                 Convert.ToDateTime(dateBirth).ToString(s_format), Convert.ToDateTime(dateStart).ToString(s_format),
                 phoneNumber, CryptUtils.HashPassword(password), city, street, zipcode);
 
-            DBUtils.Execute(sql); //TODO finish add user and make models - 13.03.2022
+            DBUtils.Execute(sql);
 
             Close();
             Owner.Show();

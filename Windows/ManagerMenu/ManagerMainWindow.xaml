@@ -1,9 +1,9 @@
-﻿<Window x:Class="supermarket.ManagerMainWindow" Background="LightSlateGray"
+﻿<Window x:Class="supermarket.Windows.ManagerMenu.ManagerMainWindow" Background="LightSlateGray"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:supermarket"
+        xmlns:local="clr-namespace:supermarket.Windows.ManagerMenu"
         mc:Ignorable="d"
         Title="ManagerMainWindow" Height="450" Width="800">
     <Grid x:Name="MainGrid" Background="LightGray" Margin="10">
