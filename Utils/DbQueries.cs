@@ -15,5 +15,11 @@ namespace supermarket.Utils
             string sql = string.Format("SELECT * FROM Employee WHERE id_employee='{0}'", employeeId);
             return DbUtils.FindAll(sql);
         }
+
+        public static void DeleteEmployeeByID(string employeeId)
+        {
+            string sql = string.Format("DELETE FROM Employee WHERE id_employee='{0}'", employeeId);
+            DbUtils.Execute(sql);
+        }
     }
 }

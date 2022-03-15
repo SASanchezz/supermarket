@@ -53,15 +53,14 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
 
             DbUtils.Execute(sql);
 
-            MainUserWindow window = new();
-            window.Show();
-            Close();
+            MainUserWindow owner = (MainUserWindow)Owner; //So we can renew buttons 
+            owner.SetEmployeeButtons();
+            owner.Show();
         }
 
         public void Return_Button(object sender, RoutedEventArgs e)
         {
-            MainUserWindow window = new();
-            window.Show();
+            Owner.Show();
             Close();
         }
     }
