@@ -18,5 +18,19 @@
             street,
             zipcode
         }
+
+        public enum ProductMap : int
+        {
+            id_product,
+            category_number,
+            product_name,
+            characteristics,
+        }
+
+        public enum CategoryMap : int
+        {
+            category_number,
+            category_name,
+        }
     }
 }
