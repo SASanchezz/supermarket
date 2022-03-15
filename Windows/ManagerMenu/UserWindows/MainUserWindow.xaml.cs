@@ -17,12 +17,21 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
             SetEmployeeButtons();
         }
 
-        private void SetEmployeeButtons()
+        public void SetEmployeeButtons()
         {
             List<string[]> employeeList = DbQueries.GetAllEmployee();
             foreach (string[] employee in employeeList)
             {
-                System.Windows.Controls.Button button = new();
+                //Delete all old buttons if they exists
+                Button buttonToDel = (Button)FindName(employee[(int)empl.id_employee]);
+                employeePanel.Children.Remove(buttonToDel);
+                if (buttonToDel != null)
+                {
+                    UnregisterName(buttonToDel.Name);
+                }
+
+
+                Button button = new();
 
                 button.Height = 20;
                 button.Content = employee[(int)empl.empl_surname] + " "
@@ -30,30 +39,33 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
                     + employee[(int)empl.id_employee];
                 
                 button.Name = employee[(int) empl.id_employee];
+
                 employeePanel.Children.Add(button);
+                RegisterName(button.Name, button);
 
                 button.Click += new RoutedEventHandler(OpenUserWindow_Button);
             }
 
-
         }
 
-        void OpenUserWindow_Button(object sender, RoutedEventArgs e)
+        private void OpenUserWindow_Button(object sender, RoutedEventArgs e)
         {
             string employeeId = (sender as Button).Name.ToString(); //get id of button that is employee_id
             ManageUserWindow window = new(employeeId);
+            window.Owner = this;
             window.Show();
-            Close();
+            Hide();
         }
 
         private void OpenRegisterWindow_Button(object sender, RoutedEventArgs e)
         {
             AddUserWindow window = new();
+            window.Owner = this;
             window.Show();
-            Close();
+            Hide();
         }
 
-        public void Return_Button(object sender, RoutedEventArgs e)
+        private void Return_Button(object sender, RoutedEventArgs e)
         {
             Owner.Show();
             Close();

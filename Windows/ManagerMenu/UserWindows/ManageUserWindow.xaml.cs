@@ -1,16 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using supermarket.Utils;
 using empl = supermarket.Data.DbMaps.EmployeeMap;
 using supermarket.Middlewares.SignUp;
@@ -23,8 +12,8 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
     /// </summary>
     public partial class ManageUserWindow : Window
     {
-        const string s_format = "yyyy-MM-dd HH:mm:ss";
-
+        private const string s_format = "yyyy-MM-dd HH:mm:ss";
+        private const string s_defaultPassword = "somePassword";
         private string _employeeId;
 
         public ManageUserWindow(string employeeId)
@@ -61,10 +50,11 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
             string dateBirth = birthDate.Text;
             string dateStart = startDate.Text;
             string phoneNumber = phoneNumberBox.Text;
-            string password = passwordBox.Text;
+            string password = (passwordBox.Text == "") ? s_defaultPassword : passwordBox.Text;
             string city = cityBox.Text;
             string street = streetBox.Text;
             string zipcode = zipcodeBox.Text;
+
             string result = SignUpValidator.Validate(surname, name, patronymic, role,
                 salary, dateBirth, dateStart, phoneNumber,
                 city, street, zipcode, password);
@@ -75,27 +65,41 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
                 return;
             }
 
-            string sql = String.Format("UPDATE Employee SET " +
+            string[] employee = DbQueries.GetEmployeeByID(_employeeId)[0];
+            //If password is default, we remain old user's password, otherwise set new
+            password = (password == s_defaultPassword) ? employee[(int)empl.password] : CryptUtils.HashPassword(password);
+
+            string sql = string.Format("UPDATE Employee SET " +
                 "empl_surname='{1}', empl_name='{2}', empl_patronymic='{3}', empl_role={4}, salary={5}," +
                 "date_of_birth='{6}', date_of_start='{7}', phone_number='{8}', password='{9}', city='{10}', street='{11}', zip_code='{12}'" +
                 "WHERE id_employee='{0}'",
-                
                 _employeeId, surname, name, patronymic, Roles.roleKeys[role], float.Parse(salary),
                 Convert.ToDateTime(dateBirth).ToString(s_format), Convert.ToDateTime(dateStart).ToString(s_format),
-                phoneNumber, CryptUtils.HashPassword(password), city, street, zipcode);
+                phoneNumber, password, city, street, zipcode);
 
             DbUtils.Execute(sql);
 
-            MainUserWindow window = new();
-            window.Show();
+            MainUserWindow owner = (MainUserWindow)Owner; //So we can renew buttons 
+            owner.SetEmployeeButtons();
+            owner.Show();
             Close();
         }
 
         public void Return_Button(object sender, RoutedEventArgs e)
         {
-            MainUserWindow window = new();
-            window.Show();
+            Owner.UpdateLayout();
+            Owner.Show();
             Close();
+        }
+
+        public void Delete_Button(object sender, RoutedEventArgs e)
+        {
+            DbQueries.DeleteEmployeeByID(_employeeId);
+            MainUserWindow owner = (MainUserWindow)Owner; //So we can renew buttons 
+            owner.SetEmployeeButtons();
+            owner.Show();
+            Close();
+
         }
     }
 }
