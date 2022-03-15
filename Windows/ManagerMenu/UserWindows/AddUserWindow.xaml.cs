@@ -56,6 +56,7 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
             MainUserWindow owner = (MainUserWindow)Owner; //So we can renew buttons 
             owner.SetEmployeeButtons();
             owner.Show();
+            Close();
         }
 
         public void Return_Button(object sender, RoutedEventArgs e)

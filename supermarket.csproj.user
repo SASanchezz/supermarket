@@ -10,6 +10,15 @@
     <Compile Update="Windows\ManagerMenu\ManagerMainWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Windows\ManagerMenu\ProductWindows\AddProductWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\ManagerMenu\ProductWindows\MainProductWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\ManagerMenu\ProductWindows\ManageProductWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Windows\ManagerMenu\UserWindows\AddUserWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -25,6 +34,15 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\ManagerMenu\ManagerMainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\ManagerMenu\ProductWindows\AddProductWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\ManagerMenu\ProductWindows\MainProductWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\ManagerMenu\ProductWindows\ManageProductWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\ManagerMenu\UserWindows\AddUserWindow.xaml">
