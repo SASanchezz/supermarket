@@ -4,7 +4,9 @@ using System.Linq;
 using supermarket.Connections;
 using supermarket.Utils;
 using supermarket.Data;
-
+/*
+ * This class validates data for signing in
+ */
 namespace supermarket.Middlewares.SignUp
 {
     public static class SignUpValidator
@@ -15,7 +17,10 @@ namespace supermarket.Middlewares.SignUp
         {
             string uniqueId;
             List<string[]> result;
-            do //to avoid similar id's
+            /*
+             * Check if we have such id in Employee table
+             */
+            do
             {
                 uniqueId = IdUtils.Id();
                 result = DbQueries.GetEmployeeByID(uniqueId);
@@ -34,6 +39,9 @@ namespace supermarket.Middlewares.SignUp
                 return "Введіть по батькові довжиною < 51";
             }
 
+            /*
+             * Check if we have such role in static data
+             */
             try
             {
                 int findRole = Roles.roleKeys[role];
@@ -42,6 +50,9 @@ namespace supermarket.Middlewares.SignUp
                 return "Нема такої ролі";
             }
 
+            /*
+             * Check if salary is enetered correctly
+             */
             salary = salary.Replace(',', '.');
             try
             {
@@ -51,6 +62,9 @@ namespace supermarket.Middlewares.SignUp
                 return "Некоректно введена зарплата";
             }
 
+            /*
+             * Check for date correctness 
+             */
             DateTime nowDate = DateTime.Now;
             DateTime birtDate;
             DateTime startDate;
@@ -62,19 +76,23 @@ namespace supermarket.Middlewares.SignUp
             {
                 return "Дата некоректна";
             }
-
+            /*
+            * Check for age correctness 
+            */
             int age = DateUtils.GetAge(birtDate, nowDate);
             if (age < 18)
             {
                 return "Особа не досягла повноліття";
             }
-
             int ageAtStart = DateUtils.GetAge(birtDate, startDate);
             if (ageAtStart < 18)
             {
                 return "Особа не досягла повноліття на момент початку роботи";
             }
 
+            /*
+            * Check for phone correctness (we should add check for letters)
+            */
             if (phoneNumber.Length is > 13 or < 10)
             {
                 return "Номер телефу некоректний";
@@ -92,7 +110,7 @@ namespace supermarket.Middlewares.SignUp
                 return "Введіть поштовий індекс довжиною < 10";
             }
 
-            if (password.Length is 0 or > 51)
+            if (password.Length is 0 or > 16)
             {
                 return "Введіть пароль до 16 символів";
             }

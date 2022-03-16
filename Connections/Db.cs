@@ -1,5 +1,10 @@
 ﻿using MySql.Data.MySqlClient;
 
+/*
+ * This class creates connection to mysql server.
+ * If you create mysql server with docker-compose in this proj,
+ * you don't need to change properties below
+ */
 namespace supermarket.Connections
 {
     public class Db

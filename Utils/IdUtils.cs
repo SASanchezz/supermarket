@@ -1,11 +1,17 @@
 ﻿using System;
 using System.Linq;
-
+/*
+ * This class contains methods for working with ids in project
+ */
 namespace supermarket.Utils
 {
     class IdUtils
     {
         private readonly static Random random = new();
+
+        /*
+        * This method generates unique id with specific length
+        */
         public static string Id(int length=8)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -13,21 +19,35 @@ namespace supermarket.Utils
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
+        /*
+        * This method adds 'i' before id so WPF doesn't swear on x:Name 
+        */
         public static string IdToName(string thatId)
         {
             return 'i' + thatId;
         }
 
+        /*
+        * This method removes 'i' before id
+        */
         public static string NameToId(string thatId)
         {
             return thatId[1..]; //removes first char
         }
 
+        /*
+        * This method concatinates 2 words via dash, so we can write them in some lists
+        */
         public static string Compound(string first, string second)
         {
             return first + " - " + second;
         }
 
+        /*
+        * This method takes compounded word and returns string array with both words
+        *   OR
+        * ["", "-1"] if there is no " - " in string
+        */
         public static string[] Decompound(string word)
         {
             try

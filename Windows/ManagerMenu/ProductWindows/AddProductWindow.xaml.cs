@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Windows;
 using supermarket.Middlewares.AddProduct;
-using supermarket.Data;
 using supermarket.Utils;
 using System.Collections.Generic;
 using System.Windows.Controls;
 using ctgry = supermarket.Data.DbMaps.CategoryMap;
 
+/*
+* Class concerns AddProductWindow that adds new product to database
+*/
 namespace supermarket.Windows.ManagerMenu.ProductWindows
 {
-    /// <summary>
-    /// Interaction logic for AddProductWindow.xaml
-    /// </summary>
     public partial class AddProductWindow : Window
     {
         public AddProductWindow()
@@ -20,6 +19,9 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
             SetCategoryList();
         }
 
+        /*
+        * This method sets comboBox with categories that we retrieve from database
+        */
         private void SetCategoryList()
         {
             List<string[]> categoryList = DbQueries.GetAllCategories();
@@ -28,13 +30,16 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
 
             foreach (string[] category in categoryList)
             {
+                //This thing just adds row to comboBox with "category_name - category_number"
                 comboBox.Items.Add(IdUtils.Compound(category[(int)ctgry.category_name], category[(int)ctgry.category_number]));
             }
-
             RegisterName(comboBox.Name, comboBox);
             productPanel.Children.Add(comboBox);
         }
 
+        /*
+        * This method is realization for adding new product to database
+        */
         public void Add_Button(object sender, RoutedEventArgs e)
         {
             ComboBox categoryList = (ComboBox)FindName("categoryList");
@@ -44,6 +49,7 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
             string name = nameBox.Text;
             string characteristic = characteristicBox.Text;
 
+            //Validate enetered data
             string result = AddProductValidator.Validate(productId, name, categoryNumber, characteristic);
 
             if (result.Length != 0)
@@ -59,7 +65,8 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
 
             DbUtils.Execute(sql);
 
-            MainProductWindow owner = (MainProductWindow)Owner; //So we can renew buttons 
+            MainProductWindow owner = (MainProductWindow)Owner;
+            //Renew buttons in MainProductWindow (i.e. add new product window)
             owner.DeleteOldProductButtons();
             owner.SetProductButtons();
             owner.Show();

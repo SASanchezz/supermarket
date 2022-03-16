@@ -6,9 +6,9 @@ using empl = supermarket.Data.DbMaps.EmployeeMap;
 
 namespace supermarket.Windows.ManagerMenu.UserWindows
 {
-    /// <summary>
-    /// Interaction logic for MainUserWindow.xaml
-    /// </summary>
+    /*
+    * This class concerns MainUserWindow, that has buttons to add\ manage employee
+    */
     public partial class MainUserWindow : Window
     {
         public MainUserWindow()
@@ -17,6 +17,9 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
             SetEmployeeButtons();
         }
 
+        /*
+        * This method deletes old buttons with employee
+        */
         public void DeleteOldEmployeeButtons()
         {
             List<string[]> employeeList = DbQueries.GetAllEmployee();
@@ -32,7 +35,9 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
             }
         }
 
-
+        /*
+        * This method creates buttons with for employee in MainUserWindow
+        */
         public void SetEmployeeButtons()
         {
             List<string[]> employeeList = DbQueries.GetAllEmployee();
@@ -55,6 +60,9 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
 
         }
 
+        /*
+        * This method opens window for managing user
+        */
         private void OpenUserWindow_Button(object sender, RoutedEventArgs e)
         {
             string employeeId = (sender as Button).Name.ToString(); //get id of button that is employee_id
@@ -64,6 +72,9 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
             Hide();
         }
 
+        /*
+        * This method opens window for registering new user
+        */
         private void OpenRegisterWindow_Button(object sender, RoutedEventArgs e)
         {
             AddUserWindow window = new();

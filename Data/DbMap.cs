@@ -1,4 +1,9 @@
-﻿namespace supermarket.Data
+﻿/*
+ * This class contains columns of database tables
+ * (for example, columns of Employee table in database)
+ */
+
+namespace supermarket.Data
 {
     class DbMaps
     {

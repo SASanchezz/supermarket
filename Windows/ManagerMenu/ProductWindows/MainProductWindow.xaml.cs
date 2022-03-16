@@ -4,12 +4,11 @@ using System.Windows.Controls;
 using supermarket.Utils;
 using prdct = supermarket.Data.DbMaps.ProductMap;
 using ctgry = supermarket.Data.DbMaps.CategoryMap;
-
+/*
+* Class concerns MainProductWindow that contains buttons to add\ manage product unit
+*/
 namespace supermarket.Windows.ManagerMenu.ProductWindows
 {
-    /// <summary>
-    /// Interaction logic for MainProductWindow.xaml
-    /// </summary>
     public partial class MainProductWindow : Window
     {
         public MainProductWindow()
@@ -18,6 +17,9 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
             SetProductButtons();
         }
 
+        /*
+        * This method deletes all buttons of products in MainProductWindow
+        */
         public void DeleteOldProductButtons()
         {
             List<string[]> productList = DbQueries.GetAllProducts();
@@ -33,6 +35,9 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
             }
         }
 
+        /*
+        * This method creates list of buttons of products in MainProductWindow
+        */
         public void SetProductButtons()
         {
             List<string[]> productList = DbQueries.GetAllProducts();
@@ -54,6 +59,9 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
 
         }
 
+        /*
+        * This method opens window for managing product unit
+        */
         private void OpenProductWindow_Button(object sender, RoutedEventArgs e)
         {
             string productId = (sender as Button).Name.ToString(); //get id of button that is employee_id
@@ -63,6 +71,9 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
             Hide();
         }
 
+        /*
+        * This method opens window for managing product unit
+        */
         private void OpenAddProductWindow_Button(object sender, RoutedEventArgs e)
         {
             AddProductWindow window = new();

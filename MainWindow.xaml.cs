@@ -5,12 +5,11 @@ using supermarket.Connections;
 using supermarket.Middlewares.SignIn;
 using supermarket.Windows.ManagerMenu;
 using supermarket.Utils;
-
+/*
+* Main window with Signing in
+*/
 namespace supermarket
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
 
@@ -35,7 +34,10 @@ namespace supermarket
             window.Show();
             Close();
         }
-
+        /*
+         * Button to check your connection to db
+         * if it creates MessageBox with at least something, it's OK
+         */
         private void ChechDb_Button(object sender, RoutedEventArgs e)
         {
 
