@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
-
+/*
+* This class contains simple SQL queries, that can be often used,
+* easily explained with method name and don't require much arguments
+*/
 namespace supermarket.Utils
 {
     public static class DbQueries

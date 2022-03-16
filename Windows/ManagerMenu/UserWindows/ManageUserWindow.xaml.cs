@@ -7,9 +7,9 @@ using supermarket.Data;
 
 namespace supermarket.Windows.ManagerMenu.UserWindows
 {
-    /// <summary>
-    /// Interaction logic for ManageUserWindow.xaml
-    /// </summary>
+    /*
+    * This class concerns ManageUserWindow for managing employee
+    */
     public partial class ManageUserWindow : Window
     {
         private const string s_format = "yyyy-MM-dd HH:mm:ss";
@@ -23,6 +23,9 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
             FillBoxes();
         }
 
+        /*
+        * This method fills boxes with information from database
+        */
         private void FillBoxes()
         {
             string[] employee = DbQueries.GetEmployeeByID(_employeeId)[0];
@@ -40,6 +43,9 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
             zipcodeBox.Text = employee[(int)empl.zipcode];
         }
 
+        /*
+        * This method updates information in database from boxes
+        */
         public void Update_Button(object sender, RoutedEventArgs e)
         {
             string surname = surnameBox.Text;
@@ -79,7 +85,7 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
 
             DbUtils.Execute(sql);
 
-            MainUserWindow owner = (MainUserWindow)Owner; //So we can renew buttons 
+            MainUserWindow owner = (MainUserWindow)Owner;
             owner.DeleteOldEmployeeButtons();
             owner.SetEmployeeButtons();
             owner.Show();

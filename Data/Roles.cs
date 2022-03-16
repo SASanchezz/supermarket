@@ -1,5 +1,9 @@
 ﻿using System.Collections.Generic;
 
+/*
+ * This class contains employee roles and its corresponding number in database
+ */
+
 namespace supermarket.Data
 {
     public static class Roles

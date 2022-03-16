@@ -3,13 +3,12 @@ using System.Windows;
 using supermarket.Middlewares.SignUp;
 using supermarket.Data;
 using supermarket.Utils;
-using supermarket.Connections;
 
 namespace supermarket.Windows.ManagerMenu.UserWindows
 {
-    /// <summary>
-    /// Interaction logic for AddUserWindow.xaml
-    /// </summary>
+    /*
+    * This class concerns AddUserWindow, that add new employee to database
+    */
     public partial class AddUserWindow : Window
     {
         const string s_format = "yyyy-MM-dd HH:mm:ss";
@@ -18,6 +17,9 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
             InitializeComponent();
         }
 
+        /*
+        * This method sign up new user
+        */
         public void SignUp_Button(object sender, RoutedEventArgs e)
         {
             string surname = surnameBox.Text;
@@ -32,6 +34,8 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
             string city = cityBox.Text;
             string street = streetBox.Text;
             string zipcode = zipcodeBox.Text;
+
+            //Validates entered information
             string result = SignUpValidator.Validate(surname, name, patronymic, role,
                 salary, dateBirth, dateStart, phoneNumber,
                 city, street, zipcode, password);
@@ -42,6 +46,7 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
                 return;
             }
 
+            //Query to insert new employee
             string sql = String.Format("INSERT INTO Employee " +
                 "(id_employee, empl_surname, empl_name, empl_patronymic, empl_role, salary, " +
                 "date_of_birth, date_of_start, phone_number, password, city, street, zip_code) " +
@@ -53,7 +58,8 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
 
             DbUtils.Execute(sql);
 
-            MainUserWindow owner = (MainUserWindow)Owner; //So we can renew buttons 
+            MainUserWindow owner = (MainUserWindow)Owner;
+            //Renew buttons in MainUserWindow
             owner.DeleteOldEmployeeButtons();
             owner.SetEmployeeButtons();
             owner.Show();

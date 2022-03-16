@@ -7,12 +7,11 @@ using supermarket.Middlewares.AddProduct;
 using supermarket.Data;
 using System.Windows.Controls;
 using System.Collections.Generic;
-
+/*
+* Class concerns ManageProductWindow that contains realiztion for managing products
+*/
 namespace supermarket.Windows.ManagerMenu.ProductWindows
 {
-    /// <summary>
-    /// Interaction logic for ManageProductWindow.xaml
-    /// </summary>
     public partial class ManageProductWindow : Window
     {
         private string _productId;
@@ -25,6 +24,10 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
             FillBoxes();
         }
 
+        /*
+        * This method sets comboBox with categories that we retrieve from database
+        * (the same as in AddProductWindow. Probably, we should make some inheritance later)
+        */
         private void SetCategoryList()
         {
             List<string[]> categoryList = DbQueries.GetAllCategories();
@@ -40,6 +43,9 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
             productPanel.Children.Add(comboBox);
         }
 
+        /*
+        * This method fills boxes in window with information from database
+        */
         private void FillBoxes()
         {
             string[] product = DbQueries.GetProductByID(_productId)[(int)prdct.id_product];
@@ -53,6 +59,9 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
             characteristicBox.Text = product[(int)prdct.characteristics];
         }
 
+        /*
+        * This method updates information in database from text boxes
+        */
         public void Update_Button(object sender, RoutedEventArgs e)
         {
             ComboBox categoryList = (ComboBox)FindName("categoryList");
@@ -78,7 +87,8 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
 
             DbUtils.Execute(sql);
 
-            MainProductWindow owner = (MainProductWindow)Owner; //So we can renew buttons 
+            MainProductWindow owner = (MainProductWindow)Owner;
+            //Renew buttons in MainProductWindow
             owner.DeleteOldProductButtons();
             owner.SetProductButtons();
             owner.Show();
@@ -92,6 +102,9 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
             Close();
         }
 
+        /*
+         * Delete production unit from database
+         */
         private void Delete_Button(object sender, RoutedEventArgs e)
         {
             MainProductWindow owner = (MainProductWindow)Owner; //So we can renew buttons 
