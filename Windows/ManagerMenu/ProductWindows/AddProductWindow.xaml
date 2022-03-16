@@ -32,8 +32,8 @@
 
 
 
-        <Button Content="Додати новий запис" Grid.Row="2" Grid.ColumnSpan="3" Width="128" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="12" Click="Add_Button" Margin="0,0,0,50"/>
+        <Button Content="Додати новий запис" Grid.Row="2" Grid.ColumnSpan="3" Width="128" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="12" Click="AddClick" Margin="0,0,0,50"/>
 
-        <Button Content="←Назад" Grid.Row="0" HorizontalAlignment="Left" Width="64" Height="24" VerticalAlignment="Top" FontSize="12" Click="Return_Button" Margin="0,0,0,0"/>
+        <Button Content="←Назад" Grid.Row="0" HorizontalAlignment="Left" Width="64" Height="24" VerticalAlignment="Top" FontSize="12" Click="ReturnClick" Margin="0,0,0,0"/>
     </Grid>
 </Window>

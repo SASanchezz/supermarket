@@ -20,7 +20,7 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
         /*
         * This method sign up new user
         */
-        public void SignUp_Button(object sender, RoutedEventArgs e)
+        public void SignUpClick(object sender, RoutedEventArgs e)
         {
             string surname = surnameBox.Text;
             string name = nameBox.Text;
@@ -66,7 +66,7 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
             Close();
         }
 
-        public void Return_Button(object sender, RoutedEventArgs e)
+        public void ReturnClick(object sender, RoutedEventArgs e)
         {
             Owner.Show();
             Close();

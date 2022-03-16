@@ -55,7 +55,7 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
                 employeePanel.Children.Add(button);
                 RegisterName(button.Name, button);
 
-                button.Click += new RoutedEventHandler(OpenUserWindow_Button);
+                button.Click += new RoutedEventHandler(OpenUserWindowClick);
             }
 
         }
@@ -63,7 +63,7 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
         /*
         * This method opens window for managing user
         */
-        private void OpenUserWindow_Button(object sender, RoutedEventArgs e)
+        private void OpenUserWindowClick(object sender, RoutedEventArgs e)
         {
             string employeeId = (sender as Button).Name.ToString(); //get id of button that is employee_id
             ManageUserWindow window = new(IdUtils.NameToId(employeeId));
@@ -75,7 +75,7 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
         /*
         * This method opens window for registering new user
         */
-        private void OpenRegisterWindow_Button(object sender, RoutedEventArgs e)
+        private void OpenRegisterWindowClick(object sender, RoutedEventArgs e)
         {
             AddUserWindow window = new();
             window.Owner = this;
@@ -83,7 +83,7 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
             Hide();
         }
 
-        private void Return_Button(object sender, RoutedEventArgs e)
+        private void ReturnClick(object sender, RoutedEventArgs e)
         {
             Owner.Show();
             Close();
