@@ -60,6 +60,7 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
             DbUtils.Execute(sql);
 
             MainProductWindow owner = (MainProductWindow)Owner; //So we can renew buttons 
+            owner.DeleteOldProductButtons();
             owner.SetProductButtons();
             owner.Show();
             Close();

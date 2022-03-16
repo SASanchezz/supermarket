@@ -18,7 +18,7 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
             SetProductButtons();
         }
 
-        public void SetProductButtons()
+        public void DeleteOldProductButtons()
         {
             List<string[]> productList = DbQueries.GetAllProducts();
             foreach (string[] product in productList)
@@ -30,8 +30,14 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
                 {
                     UnregisterName(buttonToDel.Name);
                 }
+            }
+        }
 
-
+        public void SetProductButtons()
+        {
+            List<string[]> productList = DbQueries.GetAllProducts();
+            foreach (string[] product in productList)
+            {
                 Button button = new();
 
                 button.Height = 20;

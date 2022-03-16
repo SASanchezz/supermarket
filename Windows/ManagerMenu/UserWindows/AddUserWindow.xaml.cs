@@ -54,6 +54,7 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
             DbUtils.Execute(sql);
 
             MainUserWindow owner = (MainUserWindow)Owner; //So we can renew buttons 
+            owner.DeleteOldEmployeeButtons();
             owner.SetEmployeeButtons();
             owner.Show();
             Close();
