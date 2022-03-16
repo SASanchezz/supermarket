@@ -12,12 +12,12 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Rectangle Fill="Azure" />
-        <Button Content="Додати нового користувача" Grid.Row="0" Background="LawnGreen" Width="164" Height="24" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="12" Click="OpenRegisterWindow_Button" Margin="0,0,20,0"/>
+        <Button Content="Додати нового користувача" Grid.Row="0" Background="LawnGreen" Width="164" Height="24" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="12" Click="OpenRegisterWindowClick" Margin="0,0,20,0"/>
         <ScrollViewer Grid.Row="1">
             <StackPanel x:Name="employeePanel">
             </StackPanel>
         </ScrollViewer>
 
-        <Button Content="←Назад" Grid.Row="0" HorizontalAlignment="Left" Width="64" Height="24" VerticalAlignment="Center" FontSize="12" Click="Return_Button" Margin="20,0,0,0"/>
+        <Button Content="←Назад" Grid.Row="0" HorizontalAlignment="Left" Width="64" Height="24" VerticalAlignment="Center" FontSize="12" Click="ReturnClick" Margin="20,0,0,0"/>
     </Grid>
 </Window>

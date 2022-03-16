@@ -14,7 +14,7 @@ namespace supermarket.Windows.ManagerMenu
             InitializeComponent();
         }
 
-        private void OpenUsersWindow_Button(object sender, RoutedEventArgs e)
+        private void OpenUsersWindowClick(object sender, RoutedEventArgs e)
         {
             MainUserWindow window = new();
             window.Owner = this;
@@ -22,7 +22,7 @@ namespace supermarket.Windows.ManagerMenu
             window.Show();
         }
 
-        private void OpenProductsWindow_Button(object sender, RoutedEventArgs e)
+        private void OpenProductsWindowClick(object sender, RoutedEventArgs e)
         {
             MainProductWindow window = new();
             window.Owner = this;

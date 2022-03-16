@@ -19,7 +19,7 @@ namespace supermarket
             InitializeComponent();
         }
 
-        private void SignIn_Button(object sender, RoutedEventArgs e)
+        private void SignInClick(object sender, RoutedEventArgs e)
         {
             string userLogin = loginBox.Text;
             string userPassword = passwordBox.Text;
@@ -38,7 +38,7 @@ namespace supermarket
          * Button to check your connection to db
          * if it creates MessageBox with at least something, it's OK
          */
-        private void ChechDb_Button(object sender, RoutedEventArgs e)
+        private void ChechDbClick(object sender, RoutedEventArgs e)
         {
 
             string sql = "SELECT * FROM Category LIMIT 1;";

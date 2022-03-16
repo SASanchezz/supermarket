@@ -46,7 +46,7 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
         /*
         * This method updates information in database from boxes
         */
-        public void Update_Button(object sender, RoutedEventArgs e)
+        public void UpdateClick(object sender, RoutedEventArgs e)
         {
             string surname = surnameBox.Text;
             string name = nameBox.Text;
@@ -92,14 +92,14 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
             Close();
         }
 
-        public void Return_Button(object sender, RoutedEventArgs e)
+        public void ReturnClick(object sender, RoutedEventArgs e)
         {
             Owner.UpdateLayout();
             Owner.Show();
             Close();
         }
 
-        public void Delete_Button(object sender, RoutedEventArgs e)
+        public void DeleteClick(object sender, RoutedEventArgs e)
         {
             MainUserWindow owner = (MainUserWindow)Owner; //So we can renew buttons 
             owner.DeleteOldEmployeeButtons();

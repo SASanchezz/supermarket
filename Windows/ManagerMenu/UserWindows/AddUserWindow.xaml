@@ -63,8 +63,8 @@
 
 
 
-        <Button Content="Зареєструвати" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Width="128" Height="30" VerticalAlignment="Center" FontSize="12" Click="SignUp_Button" Margin="0,0,0,5"/>
+        <Button Content="Зареєструвати" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Width="128" Height="30" VerticalAlignment="Center" FontSize="12" Click="SignUpClick" Margin="0,0,0,5"/>
 
-        <Button Content="←Назад" Grid.Row="0" HorizontalAlignment="Left" Width="64" Height="24" VerticalAlignment="Top" FontSize="12" Click="Return_Button" Margin="0,0,0,0"/>
+        <Button Content="←Назад" Grid.Row="0" HorizontalAlignment="Left" Width="64" Height="24" VerticalAlignment="Top" FontSize="12" Click="ReturnClick" Margin="0,0,0,0"/>
     </Grid>
 </Window>

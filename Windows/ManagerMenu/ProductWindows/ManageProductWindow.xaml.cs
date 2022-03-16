@@ -62,7 +62,7 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
         /*
         * This method updates information in database from text boxes
         */
-        public void Update_Button(object sender, RoutedEventArgs e)
+        public void UpdateClick(object sender, RoutedEventArgs e)
         {
             ComboBox categoryList = (ComboBox)FindName("categoryList");
 
@@ -95,7 +95,7 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
             Close();
         }
 
-        private void Return_Button(object sender, RoutedEventArgs e)
+        private void ReturnClick(object sender, RoutedEventArgs e)
         {
             Owner.UpdateLayout();
             Owner.Show();
@@ -105,7 +105,7 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
         /*
          * Delete production unit from database
          */
-        private void Delete_Button(object sender, RoutedEventArgs e)
+        private void DeleteClick(object sender, RoutedEventArgs e)
         {
             MainProductWindow owner = (MainProductWindow)Owner; //So we can renew buttons 
             owner.DeleteOldProductButtons();

@@ -54,7 +54,7 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
                 productPanel.Children.Add(button);
                 RegisterName(button.Name, button);
 
-                button.Click += new RoutedEventHandler(OpenProductWindow_Button);
+                button.Click += new RoutedEventHandler(OpenProductWindowClick);
             }
 
         }
@@ -62,7 +62,7 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
         /*
         * This method opens window for managing product unit
         */
-        private void OpenProductWindow_Button(object sender, RoutedEventArgs e)
+        private void OpenProductWindowClick(object sender, RoutedEventArgs e)
         {
             string productId = (sender as Button).Name.ToString(); //get id of button that is employee_id
             ManageProductWindow window = new(IdUtils.NameToId(productId));
@@ -74,7 +74,7 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
         /*
         * This method opens window for managing product unit
         */
-        private void OpenAddProductWindow_Button(object sender, RoutedEventArgs e)
+        private void OpenAddProductWindowClick(object sender, RoutedEventArgs e)
         {
             AddProductWindow window = new();
             window.Owner = this;
@@ -82,7 +82,7 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
             Hide();
         }
 
-        private void Return_Button(object sender, RoutedEventArgs e)
+        private void ReturnClick(object sender, RoutedEventArgs e)
         {
             Owner.Show();
             Close();

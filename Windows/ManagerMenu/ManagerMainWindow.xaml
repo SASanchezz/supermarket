@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" HorizontalAlignment="Center" Text="Меню менеджера" VerticalAlignment="Top" FontSize="24"/>
 
-        <Button Content="Панель робітників" Grid.Row="1" Width="164" Height="24" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12" Click="OpenUsersWindow_Button" Margin="20,0,0,0"/>
-        <Button Content="Панель товарів" Grid.Row="1"  Width="164" Height="24" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" Click="OpenProductsWindow_Button" Margin="20,0,0,0"/>
+        <Button Content="Панель робітників" Grid.Row="1" Width="164" Height="24" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12" Click="OpenUsersWindowClick" Margin="20,0,0,0"/>
+        <Button Content="Панель товарів" Grid.Row="1"  Width="164" Height="24" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" Click="OpenProductsWindowClick" Margin="20,0,0,0"/>
     </Grid>
 </Window>

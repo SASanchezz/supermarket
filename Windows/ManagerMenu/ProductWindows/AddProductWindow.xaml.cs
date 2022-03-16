@@ -40,7 +40,7 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
         /*
         * This method is realization for adding new product to database
         */
-        public void Add_Button(object sender, RoutedEventArgs e)
+        public void AddClick(object sender, RoutedEventArgs e)
         {
             ComboBox categoryList = (ComboBox)FindName("categoryList");
 
@@ -73,7 +73,7 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
             Close();
         }
 
-        public void Return_Button(object sender, RoutedEventArgs e)
+        public void ReturnClick(object sender, RoutedEventArgs e)
         {
             Owner.Show();
             Close();
