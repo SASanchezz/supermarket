@@ -79,6 +79,7 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
             DbUtils.Execute(sql);
 
             MainProductWindow owner = (MainProductWindow)Owner; //So we can renew buttons 
+            owner.DeleteOldProductButtons();
             owner.SetProductButtons();
             owner.Show();
             Close();
@@ -93,8 +94,9 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
 
         private void Delete_Button(object sender, RoutedEventArgs e)
         {
-            DbQueries.DeleteProductByID(_productId);
             MainProductWindow owner = (MainProductWindow)Owner; //So we can renew buttons 
+            owner.DeleteOldProductButtons();
+            DbQueries.DeleteProductByID(_productId);
             owner.SetProductButtons();
             owner.Show();
             Close();
