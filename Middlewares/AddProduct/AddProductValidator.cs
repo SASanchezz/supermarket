@@ -8,8 +8,10 @@ namespace supermarket.Middlewares.AddProduct
     public static class AddProductValidator
     {
 
-        public static string Validate(string productId, string name, int categoryNumber , string characteristics)
+        public static string Validate(string productId, string name, string categoryNumber , string characteristics)
         {
+
+            
             List<string[]> result = DbQueries.GetProductByID(productId);
             if (result.Any())
             {
@@ -23,13 +25,12 @@ namespace supermarket.Middlewares.AddProduct
 
             if (characteristics.Length is > 100 or 0)
             {
-                return "Введіть характеристику товару < 50 символів";
+                return "Введіть характеристику товару < 100 символів";
             }
 
-            List<string[]> category = DbQueries.GetCategoryByID(categoryNumber);
-            if (!category.Any())
+            if (!DbQueries.GetCategoryByID(categoryNumber).Any())
             {
-                return "Такої категорії не існує";
+                return "Оберіть категорію зі списку";
             }
 
             return ""; //Alright

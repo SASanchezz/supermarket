@@ -28,12 +28,11 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
 
             foreach (string[] category in categoryList)
             {
-                comboBox.Items.Add(category[(int)ctgry.category_name] + " - " + category[(int)ctgry.category_number]);
+                comboBox.Items.Add(IdUtils.Compound(category[(int)ctgry.category_name], category[(int)ctgry.category_number]));
             }
 
             RegisterName(comboBox.Name, comboBox);
             productPanel.Children.Add(comboBox);
-
         }
 
         public void Add_Button(object sender, RoutedEventArgs e)
@@ -41,7 +40,7 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
             ComboBox categoryList = (ComboBox)FindName("categoryList");
 
             string productId = idBox.Text;
-            int categoryNumber = int.Parse(categoryList.Text.Split(" - ")[1]);
+            string categoryNumber = IdUtils.Decompound(categoryList.Text)[1];
             string name = nameBox.Text;
             string characteristic = characteristicBox.Text;
 

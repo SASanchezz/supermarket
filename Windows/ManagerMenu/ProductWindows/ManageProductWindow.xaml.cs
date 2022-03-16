@@ -2,9 +2,11 @@
 using System.Windows;
 using supermarket.Utils;
 using prdct = supermarket.Data.DbMaps.ProductMap;
+using ctgry = supermarket.Data.DbMaps.CategoryMap;
 using supermarket.Middlewares.AddProduct;
 using supermarket.Data;
 using System.Windows.Controls;
+using System.Collections.Generic;
 
 namespace supermarket.Windows.ManagerMenu.ProductWindows
 {
@@ -19,17 +21,34 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
         {
             _productId = productId;
             InitializeComponent();
+            SetCategoryList();
             FillBoxes();
+        }
+
+        private void SetCategoryList()
+        {
+            List<string[]> categoryList = DbQueries.GetAllCategories();
+            ComboBox comboBox = new();
+            comboBox.Name = "categoryList";
+
+            foreach (string[] category in categoryList)
+            {
+                comboBox.Items.Add(IdUtils.Compound(category[(int)ctgry.category_name], category[(int)ctgry.category_number]));
+            }
+
+            RegisterName(comboBox.Name, comboBox);
+            productPanel.Children.Add(comboBox);
         }
 
         private void FillBoxes()
         {
-            string[] product = DbQueries.GetEmployeeByID(_productId)[(int)prdct.id_product];
+            string[] product = DbQueries.GetProductByID(_productId)[(int)prdct.id_product];
 
             ComboBox categoryList = (ComboBox)FindName("categoryList");
+            string[] categoryRow = DbQueries.GetCategoryByID(product[(int)prdct.category_number])[0];
 
             idBox.Text = product[(int)prdct.id_product];
-            categoryList.Text = product[(int)prdct.category_number];
+            categoryList.Text =  IdUtils.Compound(categoryRow[(int)ctgry.category_name], categoryRow[(int)ctgry.category_number]);
             nameBox.Text = product[(int)prdct.product_name];
             characteristicBox.Text = product[(int)prdct.characteristics];
         }
@@ -39,11 +58,12 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
             ComboBox categoryList = (ComboBox)FindName("categoryList");
 
             string idProduct = idBox.Text;
-            int categoryNumber = int.Parse(categoryList.Text.Split(" - ")[1]);
+            string categoryNumber = IdUtils.Decompound(categoryList.Text)[1];
             string name = nameBox.Text;
             string characteristic = characteristicBox.Text;
 
-            string result = AddProductValidator.Validate(idProduct, name, categoryNumber, characteristic);
+            string result = AddProductValidator.Validate("anyId", name, categoryNumber, characteristic);
+
 
             if (result.Length != 0)
             {
@@ -51,9 +71,9 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
                 return;
             }
 
-            string sql = string.Format("UPDATE Employee SET " +
-                "id_product='{0}', category_number={1}, product_name='{2}', characteristics={3}" +
-                "WHERE id_product = {0}",
+            string sql = string.Format("UPDATE Product SET " +
+                "id_product={0}, category_number={1}, product_name='{2}', characteristics='{3}' " +
+                "WHERE id_product={0}",
                 idProduct, categoryNumber, name, characteristic);
 
             DbUtils.Execute(sql);
@@ -64,21 +84,20 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
             Close();
         }
 
-        public void Return_Button(object sender, RoutedEventArgs e)
+        private void Return_Button(object sender, RoutedEventArgs e)
         {
             Owner.UpdateLayout();
             Owner.Show();
             Close();
         }
 
-        public void Delete_Button(object sender, RoutedEventArgs e)
+        private void Delete_Button(object sender, RoutedEventArgs e)
         {
-            DbQueries.DeleteEmployeeByID(_productId);
+            DbQueries.DeleteProductByID(_productId);
             MainProductWindow owner = (MainProductWindow)Owner; //So we can renew buttons 
             owner.SetProductButtons();
             owner.Show();
             Close();
-
         }
     }
 }
