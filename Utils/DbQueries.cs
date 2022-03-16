@@ -36,7 +36,7 @@ namespace supermarket.Utils
 
         public static void DeleteProductByID(string productId)
         {
-            string sql = string.Format("DELETE FROM Product WHERE id_product='{0}'", productId);
+            string sql = string.Format("DELETE FROM Product WHERE id_product={0}", productId);
             DbUtils.Execute(sql);
         }
 
@@ -46,7 +46,7 @@ namespace supermarket.Utils
             string sql = "SELECT * FROM Category";
             return DbUtils.FindAll(sql);
         }
-        public static List<string[]> GetCategoryByID(int categoryNumber)
+        public static List<string[]> GetCategoryByID(string categoryNumber)
         {
             string sql = string.Format("SELECT * FROM Category WHERE category_number='{0}'", categoryNumber);
             return DbUtils.FindAll(sql);

@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using supermarket.Utils;
 using prdct = supermarket.Data.DbMaps.ProductMap;
+using ctgry = supermarket.Data.DbMaps.CategoryMap;
 
 namespace supermarket.Windows.ManagerMenu.ProductWindows
 {
@@ -23,7 +24,7 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
             foreach (string[] product in productList)
             {
                 //Delete all old buttons if they exists
-                Button buttonToDel = (Button)FindName(product[(int)prdct.id_product]);
+                Button buttonToDel = (Button)FindName(IdUtils.IdToName(product[(int)prdct.id_product]));
                 productPanel.Children.Remove(buttonToDel);
                 if (buttonToDel != null)
                 {
@@ -35,9 +36,9 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
 
                 button.Height = 20;
                 button.Content = product[(int)prdct.product_name] + "  -  "
-                    + product[(int)prdct.category_number];
+                    + DbQueries.GetCategoryByID(product[(int)prdct.category_number])[0][(int)ctgry.category_name];
 
-                button.Name = product[(int)prdct.id_product];
+                button.Name = IdUtils.IdToName(product[(int)prdct.id_product]);
 
                 productPanel.Children.Add(button);
                 RegisterName(button.Name, button);
@@ -50,7 +51,7 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
         private void OpenProductWindow_Button(object sender, RoutedEventArgs e)
         {
             string productId = (sender as Button).Name.ToString(); //get id of button that is employee_id
-            ManageProductWindow window = new(productId);
+            ManageProductWindow window = new(IdUtils.NameToId(productId));
             window.Owner = this;
             window.Show();
             Hide();
