@@ -68,7 +68,7 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
             MainProductWindow owner = (MainProductWindow)Owner;
             //Renew buttons in MainProductWindow (i.e. add new product window)
             owner.DeleteOldProductButtons();
-            owner.SetProductButtons();
+            owner.SetProductButtons(owner.SetSortList());
             owner.Show();
             Close();
         }

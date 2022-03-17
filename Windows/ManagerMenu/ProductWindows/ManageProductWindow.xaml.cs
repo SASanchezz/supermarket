@@ -90,7 +90,7 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
             MainProductWindow owner = (MainProductWindow)Owner;
             //Renew buttons in MainProductWindow
             owner.DeleteOldProductButtons();
-            owner.SetProductButtons();
+            owner.SetProductButtons(owner.SetSortList());
             owner.Show();
             Close();
         }
@@ -110,7 +110,7 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
             MainProductWindow owner = (MainProductWindow)Owner; //So we can renew buttons 
             owner.DeleteOldProductButtons();
             DbQueries.DeleteProductByID(_productId);
-            owner.SetProductButtons();
+            owner.SetProductButtons(owner.SetSortList());
             owner.Show();
             Close();
         }

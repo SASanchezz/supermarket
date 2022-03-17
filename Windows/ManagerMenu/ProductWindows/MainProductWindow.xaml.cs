@@ -11,36 +11,79 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
 {
     public partial class MainProductWindow : Window
     {
+        private const string ASC = "ASC";
+        private const string DESC = "DESC";
+        private const string NameUp = "Назва↑";
+        private const string NameDown = "Назва↓";
+
+        /*
+         *Sorting \ order variables
+         */
+        private string NameSort = ASC; // ASC as default value
+        private string CategorySort = ASC; // ASC as default value
+        private string CategoryFilter = ""; // "" - default value as all categories
         public MainProductWindow()
         {
             InitializeComponent();
-            SetProductButtons();
+            SetSorting();
+            SetProductButtons(SetSortList());
         }
 
         /*
-        * This method deletes all buttons of products in MainProductWindow
+        * This method creates button and field for sorting and filtering product buttons
         */
-        public void DeleteOldProductButtons()
+        private void SetSorting()
         {
-            List<string[]> productList = DbQueries.GetAllProducts();
-            foreach (string[] product in productList)
+            Button button = new();
+
+            Grid.SetRow(button, 0);
+            button.Height = 24;
+            button.Width = 64;
+            button.FontSize = 12;
+            button.Margin = new Thickness(0, 0, 200, 0);
+            button.HorizontalAlignment = HorizontalAlignment.Center;
+            button.VerticalAlignment = VerticalAlignment.Center;
+            button.Content = NameDown;
+
+            rootGrid.Children.Add(button);
+
+            button.Click += new RoutedEventHandler(NameSortClick);
+        }
+
+        public string[] SetSortList()
+        {
+            return new string[]
             {
-                //Delete all old buttons if they exists
-                Button buttonToDel = (Button)FindName(IdUtils.IdToName(product[(int)prdct.id_product]));
-                productPanel.Children.Remove(buttonToDel);
-                if (buttonToDel != null)
-                {
-                    UnregisterName(buttonToDel.Name);
-                }
+                "category_number", CategoryFilter,
+                "category_number", CategorySort,
+                "product_name", NameSort,
+            };
+        }
+
+        private void NameSortClick(object sender, RoutedEventArgs e)
+        {
+            //Renew buttons
+            DeleteOldProductButtons();
+            if ((string) ((Button)sender).Content == NameDown)
+            {
+                ((Button)sender).Content = NameUp;
+                NameSort = DESC;
             }
+            else
+            {
+                ((Button)sender).Content = NameDown;
+                NameSort = ASC;
+            }
+            SetProductButtons(SetSortList());
         }
 
         /*
         * This method creates list of buttons of products in MainProductWindow
         */
-        public void SetProductButtons()
+        public void SetProductButtons(params string[] list)
         {
-            List<string[]> productList = DbQueries.GetAllProducts();
+
+            List<string[]> productList = DbQueries.GetAllProducts(list);
             foreach (string[] product in productList)
             {
                 Button button = new();
@@ -56,7 +99,24 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
 
                 button.Click += new RoutedEventHandler(OpenProductWindowClick);
             }
+        }
 
+        /*
+        * This method deletes all buttons of products in MainProductWindow
+        */
+        public void DeleteOldProductButtons()
+        {
+            List<string[]> productList = DbQueries.GetAllProducts(SetSortList());
+            foreach (string[] product in productList)
+            {
+                //Delete all old buttons if they exists
+                Button buttonToDel = (Button)FindName(IdUtils.IdToName(product[(int)prdct.id_product]));
+                productPanel.Children.Remove(buttonToDel);
+                if (buttonToDel != null)
+                {
+                    UnregisterName(buttonToDel.Name);
+                }
+            }
         }
 
         /*

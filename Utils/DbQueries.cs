@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using prdct = supermarket.Data.DbMaps.ProductMap;
 /*
 * This class contains simple SQL queries, that can be often used,
 * easily explained with method name and don't require much arguments
@@ -25,10 +26,28 @@ namespace supermarket.Utils
             DbUtils.Execute(sql);
         }
 
-
-        public static List<string[]> GetAllProducts()
+        public static List<string[]> GetAllProducts(params string[] sorts)
         {
-            string sql = "SELECT * FROM Product";
+            string categoryNumbers = sorts[1];
+
+
+            string filter = (sorts[1] == "") ? "" : string.Format(" WHERE {0} in ({1})", sorts[0], sorts[1]);
+
+
+            string order = "";
+            //get asc\desc parameters for columns
+            for (int i = 0; i < sorts.Length; ++i)
+            {
+                if (i % 2 == 0)
+                {
+                    order += sorts[i] + ' ';
+                } else
+                {
+                    order += sorts[i] + ", ";
+                }
+            }
+            order = (order == "") ? "" : " ORDER BY " + order[..^2];
+            string sql = "SELECT * FROM Product" + filter + order;
             return DbUtils.FindAll(sql);
         }
         public static List<string[]> GetProductByID(string productId)
