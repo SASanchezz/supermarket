@@ -2,8 +2,10 @@
 using System.Windows;
 using System.Windows.Controls;
 using supermarket.Utils;
+using Category = supermarket.Models.Category;
 using prdct = supermarket.Data.DbMaps.ProductMap;
 using ctgry = supermarket.Data.DbMaps.CategoryMap;
+using System;
 /*
 * Class concerns MainProductWindow that contains buttons to add\ manage product unit
 */
@@ -13,53 +15,117 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
     {
         private const string ASC = "ASC";
         private const string DESC = "DESC";
+        private const string nothing = "";
+
         private const string NameUp = "Назва↑";
         private const string NameDown = "Назва↓";
+        private const string CategoryUp = "Категорія↑";
+        private const string CategoryDown = "Категорія↓";
+        private const string NoCategory = "Категорія";
 
         /*
          *Sorting \ order variables
          */
         private string NameSort = ASC; // ASC as default value
         private string CategorySort = ASC; // ASC as default value
-        private string CategoryFilter = ""; // "" - default value as all categories
+        private List<int> CategoryFilter = new(); // "" - default value as all categories
         public MainProductWindow()
         {
             InitializeComponent();
-            SetSorting();
+            SetFiltering();
             SetProductButtons(SetSortList());
         }
 
         /*
-        * This method creates button and field for sorting and filtering product buttons
+        * This method fill combobox for filtering products
         */
-        private void SetSorting()
+        private void SetFiltering()
         {
-            Button button = new();
+            List<string[]> allCategories = DbQueries.GetAllCategories();
 
-            Grid.SetRow(button, 0);
-            button.Height = 24;
-            button.Width = 64;
-            button.FontSize = 12;
-            button.Margin = new Thickness(0, 0, 200, 0);
-            button.HorizontalAlignment = HorizontalAlignment.Center;
-            button.VerticalAlignment = VerticalAlignment.Center;
-            button.Content = NameDown;
+            ComboBox comboBox = (ComboBox)FindName("categoryFilterComboBox");
+            comboBox.Items.Add("Категорії");
+            comboBox.SelectedIndex = 0;
 
-            rootGrid.Children.Add(button);
+            StackPanel categoryFilterPanel = new();
+            comboBox.Items.Add(categoryFilterPanel);
 
-            button.Click += new RoutedEventHandler(NameSortClick);
+            foreach (string[] category in allCategories)
+            {
+                CheckBox checkBox = new();
+                checkBox.Name = IdUtils.IdToName(category[(int)ctgry.category_number]);
+                checkBox.Content = category[(int)ctgry.category_name];
+                checkBox.Click += new RoutedEventHandler(CategoryFilterClick);
+
+                RegisterName(checkBox.Name, checkBox);
+                categoryFilterPanel.Children.Add(checkBox);
+            }
         }
 
+        /*
+         * This method add filtering to sql query
+         */
+        private void CategoryFilterClick(object sender, RoutedEventArgs e)
+        {
+            CheckBox thisCheckBox = (CheckBox)sender;
+            int categoryNumber = int.Parse(IdUtils.NameToId(thisCheckBox.Name));
+
+            if ((bool)thisCheckBox.IsChecked)
+            {
+                DeleteOldProductButtons();
+                CategoryFilter.Add(categoryNumber);
+                SetProductButtons(SetSortList());
+            }
+            else
+            {
+                DeleteOldProductButtons();
+                CategoryFilter.Remove(categoryNumber);
+                SetProductButtons(SetSortList());
+            }
+        }
+
+
+        /*
+         * This method creates string array to pass it to dbQuery and maintain sorting\filtering
+         */
         public string[] SetSortList()
         {
             return new string[]
             {
-                "category_number", CategoryFilter,
-                "category_number", CategorySort,
+                "category_number", string.Join(',', CategoryFilter),
+                "category_name", CategorySort,
                 "product_name", NameSort,
             };
         }
 
+        /*
+         * manages button for category asc\desc sorting
+         */
+        private void CategorySortClick(object sender, RoutedEventArgs e)
+        {
+            //Renew buttons
+            DeleteOldProductButtons();
+            if ((string)((Button)sender).Content == CategoryDown)
+            {
+                ((Button)sender).Content = CategoryUp;
+                CategorySort = DESC;
+            }
+            else if ((string)((Button)sender).Content == CategoryUp)
+            {
+                ((Button)sender).Content = NoCategory;
+                CategorySort = nothing;
+            }
+            else
+            {
+                ((Button)sender).Content = CategoryDown;
+                CategorySort = ASC;
+            }
+            SetProductButtons(SetSortList());
+        }
+
+        /*
+         * manages button for name asc\desc sorting
+         */
         private void NameSortClick(object sender, RoutedEventArgs e)
         {
             //Renew buttons
