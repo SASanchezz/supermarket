@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using prdct = supermarket.Data.DbMaps.ProductMap;
 /*
 * This class contains simple SQL queries, that can be often used,
