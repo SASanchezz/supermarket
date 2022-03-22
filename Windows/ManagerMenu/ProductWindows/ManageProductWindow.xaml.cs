@@ -94,14 +94,6 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
             owner.Show();
             Close();
         }
-
-        private void ReturnClick(object sender, RoutedEventArgs e)
-        {
-            Owner.UpdateLayout();
-            Owner.Show();
-            Close();
-        }
-
         /*
          * Delete production unit from database
          */
@@ -114,5 +106,14 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
             owner.Show();
             Close();
         }
+
+        private void ReturnClick(object sender, RoutedEventArgs e)
+        {
+            Owner.UpdateLayout();
+            Owner.Show();
+            Close();
+        }
+
+        
     }
 }

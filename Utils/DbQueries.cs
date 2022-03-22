@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using prdct = supermarket.Data.DbMaps.ProductMap;
 /*
 * This class contains simple SQL queries, that can be often used,
@@ -28,26 +28,23 @@ namespace supermarket.Utils
 
         public static List<string[]> GetAllProducts(params string[] sorts)
         {
-            string categoryNumbers = sorts[1];
-
-
-            string filter = (sorts[1] == "") ? "" : string.Format(" WHERE {0} in ({1})", sorts[0], sorts[1]);
-
-
+            string filter = "";
             string order = "";
-            //get asc\desc parameters for columns
-            for (int i = 0; i < sorts.Length; ++i)
+            try
             {
-                if (i % 2 == 0)
-                {
-                    order += sorts[i] + ' ';
-                } else
-                {
-                    order += sorts[i] + ", ";
-                }
-            }
-            order = (order == "") ? "" : " ORDER BY " + order[..^2];
-            string sql = "SELECT * FROM Product" + filter + order;
+                string categoryNumbers = sorts[1];
+                filter = (sorts[1] == "") ? "" : string.Format(" WHERE Product.{0} in ({1})", sorts[0], sorts[1]);
+
+                //get asc\desc parameters for columns
+                order = Utils.ParseOrder(2, sorts); //2 - To pass filter options
+                order = (order == "") ? "" : " ORDER BY " + order[..^2];
+            } catch { }
+            
+            string sql =
+                "SELECT id_product, Product.category_number, product_name, characteristics, Category.category_name AS category_name" +
+                " FROM Product LEFT JOIN Category" +
+                " ON Product.category_number = Category.category_number"
+                + filter + order;
             return DbUtils.FindAll(sql);
         }
         public static List<string[]> GetProductByID(string productId)
@@ -63,8 +60,21 @@ namespace supermarket.Utils
         }
 
 
-        public static List<string[]> GetAllCategories()
+        public static List<string[]> GetAllCategories(params string[] sorts)
         {
+            string filter = "";
+            string order = "";
+            try
+            {
+                string categoryNumbers = sorts[1];
+                filter = (sorts[1] == "") ? "" : string.Format(" WHERE {0} in ({1})", sorts[0], sorts[1]);
+
+                //get asc\desc parameters for columns
+                order = Utils.ParseOrder(0, sorts);
+                order = (order == "") ? "" : " ORDER BY " + order[..^2];
+            }
+            catch { }
+
             string sql = "SELECT * FROM Category";
             return DbUtils.FindAll(sql);
         }
