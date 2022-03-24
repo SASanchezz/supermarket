@@ -62,12 +62,9 @@ namespace supermarket.Utils
 
         public static List<string[]> GetAllCategories(params string[] sorts)
         {
-            string filter = "";
             string order = "";
             try
             {
-                string categoryNumbers = sorts[1];
-                filter = (sorts[1] == "") ? "" : string.Format(" WHERE {0} in ({1})", sorts[0], sorts[1]);
 
                 //get asc\desc parameters for columns
                 order = Utils.ParseOrder(0, sorts);
@@ -75,13 +72,18 @@ namespace supermarket.Utils
             }
             catch { }
 
-            string sql = "SELECT * FROM Category";
+            string sql = "SELECT * FROM Category" + order;
             return DbUtils.FindAll(sql);
         }
         public static List<string[]> GetCategoryByID(string categoryNumber)
         {
             string sql = string.Format("SELECT * FROM Category WHERE category_number='{0}'", categoryNumber);
             return DbUtils.FindAll(sql);
+        }
+        public static void DeleteCategoryByID(string categoryNumber)
+        {
+            string sql = string.Format("DELETE FROM Product WHERE category_number={0}", categoryNumber);
+            DbUtils.Execute(sql);
         }
 
     }

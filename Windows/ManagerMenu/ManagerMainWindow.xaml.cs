@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using supermarket.Windows.ManagerMenu.UserWindows;
 using supermarket.Windows.ManagerMenu.ProductWindows;
+using supermarket.Windows.ManagerMenu.CategoryWindows;
 
 namespace supermarket.Windows.ManagerMenu
 {
@@ -25,6 +26,14 @@ namespace supermarket.Windows.ManagerMenu
         private void OpenProductsWindowClick(object sender, RoutedEventArgs e)
         {
             MainProductWindow window = new();
+            window.Owner = this;
+            Hide();
+            window.Show();
+        }
+
+        private void OpenCategoriesWindowClick(object sender, RoutedEventArgs e)
+        {
+            MainCategoryWindow window = new();
             window.Owner = this;
             Hide();
             window.Show();
