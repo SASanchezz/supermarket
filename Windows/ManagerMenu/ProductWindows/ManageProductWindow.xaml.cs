@@ -3,7 +3,7 @@ using System.Windows;
 using supermarket.Utils;
 using prdct = supermarket.Data.DbMaps.ProductMap;
 using ctgry = supermarket.Data.DbMaps.CategoryMap;
-using supermarket.Middlewares.AddProduct;
+using supermarket.Middlewares.Product;
 using supermarket.Data;
 using System.Windows.Controls;
 using System.Collections.Generic;
@@ -48,7 +48,7 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
         */
         private void FillBoxes()
         {
-            string[] product = DbQueries.GetProductByID(_productId)[(int)prdct.id_product];
+            string[] product = DbQueries.GetProductByID(_productId)[0];
 
             ComboBox categoryList = (ComboBox)FindName("categoryList");
             string[] categoryRow = DbQueries.GetCategoryByID(product[(int)prdct.category_number])[0];
@@ -64,14 +64,18 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
         */
         public void UpdateClick(object sender, RoutedEventArgs e)
         {
+            MainProductWindow owner = (MainProductWindow)Owner;
+            //Renew buttons in MainProductWindow
+            owner.DeleteOldProductButtons();
+
             ComboBox categoryList = (ComboBox)FindName("categoryList");
 
-            string idProduct = idBox.Text;
+            string idProduct = (idBox.Text != _productId) ? idBox.Text : "9999999999099999991999999999";
             string categoryNumber = IdUtils.Decompound(categoryList.Text)[1];
             string name = nameBox.Text;
             string characteristic = characteristicBox.Text;
 
-            string result = AddProductValidator.Validate("anyId", name, categoryNumber, characteristic);
+            string result = ProductValidator.Validate(idProduct, name, categoryNumber, characteristic);
 
 
             if (result.Length != 0)
@@ -80,16 +84,14 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
                 return;
             }
 
+            idProduct = idBox.Text;
             string sql = string.Format("UPDATE Product SET " +
-                "id_product={0}, category_number={1}, product_name='{2}', characteristics='{3}' " +
+                "id_product={1}, category_number={2}, product_name='{3}', characteristics='{4}' " +
                 "WHERE id_product={0}",
-                idProduct, categoryNumber, name, characteristic);
+                _productId, idProduct, categoryNumber, name, characteristic);
 
             DbUtils.Execute(sql);
-
-            MainProductWindow owner = (MainProductWindow)Owner;
-            //Renew buttons in MainProductWindow
-            owner.DeleteOldProductButtons();
+            
             owner.SetProductButtons(owner.SetSortList());
             owner.Show();
             Close();

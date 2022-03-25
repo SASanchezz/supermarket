@@ -8,6 +8,10 @@ namespace supermarket.Middlewares.Category
 
         public static string Validate(string categoryNumber, string categoryName)
         {
+            if (categoryNumber.Any(x => !char.IsDigit(x)))
+            {
+                return "Невалідний номер";
+            }
             //If someone tries to add product with product_id, that already exists
             if (DbQueries.GetCategoryByID(categoryNumber).Any())
             {
