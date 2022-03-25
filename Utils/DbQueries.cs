@@ -49,7 +49,7 @@ namespace supermarket.Utils
         }
         public static List<string[]> GetProductByID(string productId)
         {
-            string sql = string.Format("SELECT * FROM Product WHERE id_product='{0}'", productId);
+            string sql = string.Format("SELECT * FROM Product WHERE id_product={0}", productId);
             return DbUtils.FindAll(sql);
         }
 

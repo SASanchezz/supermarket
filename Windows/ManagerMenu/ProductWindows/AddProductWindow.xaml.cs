@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows;
-using supermarket.Middlewares.AddProduct;
+using supermarket.Middlewares.Product;
 using supermarket.Utils;
 using System.Collections.Generic;
 using System.Windows.Controls;
@@ -50,7 +50,7 @@ namespace supermarket.Windows.ManagerMenu.ProductWindows
             string characteristic = characteristicBox.Text;
 
             //Validate enetered data
-            string result = AddProductValidator.Validate(productId, name, categoryNumber, characteristic);
+            string result = ProductValidator.Validate(productId, name, categoryNumber, characteristic);
 
             if (result.Length != 0)
             {

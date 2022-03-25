@@ -23,9 +23,9 @@ namespace supermarket.Windows.ManagerMenu.CategoryWindows
 
         public ManageCategoryWindow(string categoryId)
         {
+            _categoryId = categoryId;
             InitializeComponent();
             FillBoxes();
-            _categoryId = categoryId;
         }
 
         /*
@@ -33,7 +33,7 @@ namespace supermarket.Windows.ManagerMenu.CategoryWindows
         */
         private void FillBoxes()
         {
-            string[] category = DbQueries.GetProductByID(_categoryId)[0];
+            string[] category = DbQueries.GetCategoryByID(_categoryId)[0];
 
             idBox.Text = category[(int)ctgry.category_number];
             nameBox.Text = category[(int)ctgry.category_name];
@@ -44,8 +44,11 @@ namespace supermarket.Windows.ManagerMenu.CategoryWindows
         */
         public void UpdateClick(object sender, RoutedEventArgs e)
         {
+            MainCategoryWindow owner = (MainCategoryWindow)Owner;
+            //Renew buttons in MainProductWindow
+            owner.DeleteOldButtons();
 
-            string categoryNumber = idBox.Text;
+            string categoryNumber = (idBox.Text != _categoryId) ? idBox.Text : "9999999999099999991999999999";
             string categoryName = nameBox.Text;
 
             string result = CategoryValidator.Validate(categoryNumber, categoryName);
@@ -57,6 +60,8 @@ namespace supermarket.Windows.ManagerMenu.CategoryWindows
                 return;
             }
 
+            categoryNumber = idBox.Text;
+
             string sql = string.Format("UPDATE Category SET " +
                 "category_number={1}, category_name='{2}'" +
                 "WHERE category_number={0}",
@@ -64,9 +69,7 @@ namespace supermarket.Windows.ManagerMenu.CategoryWindows
 
             DbUtils.Execute(sql);
 
-            MainCategoryWindow owner = (MainCategoryWindow)Owner;
-            //Renew buttons in MainProductWindow
-            owner.DeleteOldButtons();
+            
             owner.SetButtons(owner.SetSortList());
             owner.Show();
             Close();

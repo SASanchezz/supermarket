@@ -1,20 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using supermarket.Utils;
 
 /*
  * This class ccontains validation for adding new product to database
  */
 
-namespace supermarket.Middlewares.AddProduct
+namespace supermarket.Middlewares.Product
 {
-    public static class AddProductValidator
+    public static class ProductValidator
     {
 
         public static string Validate(string productId, string name, string categoryNumber , string characteristics)
         {
             //If someone tries to add product with product_id, that already exists
+            if (productId.Any(x => !char.IsDigit(x)))
+            {
+                return "Невалідний код продукту";
+            }
             if (DbQueries.GetProductByID(productId).Any())
             {
                 return "Товар з таким кодом вже існує";
