@@ -12,46 +12,66 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ctgry = supermarket.Data.DbMaps.CategoryMap;
+using cstmr = supermarket.Data.DbMaps.CustomerMap;
 
-namespace supermarket.Windows.ManagerMenu.CategoryWindows
+namespace supermarket.Windows.ManagerMenu.ClientWindows
 {
-    
-    public partial class MainCategoryWindow : Window
+    public partial class MainClientWindow : Window
     {
         private const string ASC = "ASC";
         private const string DESC = "DESC";
 
-        private const string NameUp = "Назва↑";
-        private const string NameDown = "Назва↓";
+        private const string SurnameUp = "Прізвище↑";
+        private const string SurnameDown = "Прізвище↓";
 
         /*
          *Sorting \ order variables
          */
-        private string NameSort = ASC; // ASC as default value
-        public MainCategoryWindow()
+        private string SurnameSort = ASC; // ASC as default value
+        private double percentMax = 100.0;
+        private double percentMin = 0.0;
+        public MainClientWindow()
         {
             InitializeComponent();
-            SetButtons();
+            SetButtons(SetSortList());
         }
 
+        /*
+         * manages min slider
+         */
+        private void sliderMin_ValueChanged(object sender, RoutedEventArgs e)
+        {
+            DeleteOldButtons();
+            percentMin = ((Slider)sender).Value;
+            SetButtons(SetSortList());
+        }
+
+        /*
+         * manages max slider
+         */
+        private void sliderMax_ValueChanged(object sender, RoutedEventArgs e)
+        {
+            DeleteOldButtons();
+            percentMax = ((Slider)sender).Value;
+            SetButtons(SetSortList());
+        }
 
         /*
          * manages button for name asc\desc sorting
          */
-        private void NameSortClick(object sender, RoutedEventArgs e)
+        private void SurnameSortClick(object sender, RoutedEventArgs e)
         {
             //Renew buttons
             DeleteOldButtons();
-            if ((string)((Button)sender).Content == NameDown)
+            if ((string)((Button)sender).Content == SurnameDown)
             {
-                ((Button)sender).Content = NameUp;
-                NameSort = DESC;
+                ((Button)sender).Content = SurnameUp;
+                SurnameSort = DESC;
             }
             else
             {
-                ((Button)sender).Content = NameDown;
-                NameSort = ASC;
+                ((Button)sender).Content = SurnameDown;
+                SurnameSort = ASC;
             }
             SetButtons(SetSortList());
         }
@@ -63,7 +83,9 @@ namespace supermarket.Windows.ManagerMenu.CategoryWindows
         {
             return new string[]
             {
-                "category_name", NameSort
+                "percent <", percentMax.ToString(),
+                "percent >", percentMin.ToString(),
+                "cust_surname", SurnameSort
             };
         }
 
@@ -73,16 +95,16 @@ namespace supermarket.Windows.ManagerMenu.CategoryWindows
         public void SetButtons(params string[] list)
         {
 
-            List<string[]> categoryList = DbQueries.GetAllCategories(list);
-            foreach (string[] category in categoryList)
+            List<string[]> customerList = DbQueries.GetAllCustomers(list);
+            foreach (string[] customer in customerList)
             {
                 Button button = new();
 
                 button.Height = 20;
-                button.Content = category[(int)ctgry.category_name] + "  -  "
-                    + category[(int)ctgry.category_number];
+                button.Content = IdUtils.Compound(customer[(int)cstmr.cust_surname],
+                    customer[(int)cstmr.phone_number]);
 
-                button.Name = IdUtils.IdToName(category[(int)ctgry.category_number]);
+                button.Name = IdUtils.IdToName(customer[(int)cstmr.card_number]);
 
                 panel.Children.Add(button);
                 RegisterName(button.Name, button);
@@ -96,8 +118,8 @@ namespace supermarket.Windows.ManagerMenu.CategoryWindows
         */
         private void OpenCategoryWindowClick(object sender, RoutedEventArgs e)
         {
-            string categoryId = (sender as Button).Name.ToString();
-            ManageCategoryWindow window = new(IdUtils.NameToId(categoryId));
+            string customerId = (sender as Button).Name.ToString();
+            ManageClientWindow window = new(IdUtils.NameToId(customerId));
             window.Owner = this;
             window.Show();
             Hide();
@@ -108,11 +130,11 @@ namespace supermarket.Windows.ManagerMenu.CategoryWindows
         */
         public void DeleteOldButtons()
         {
-            List<string[]> categoryList = DbQueries.GetAllCategories(SetSortList());
-            foreach (string[] category in categoryList)
+            List<string[]> customerList = DbQueries.GetAllCustomers(SetSortList());
+            foreach (string[] customer in customerList)
             {
                 //Delete all old buttons if they exists
-                Button buttonToDel = (Button)FindName(IdUtils.IdToName(category[(int)ctgry.category_number]));
+                Button buttonToDel = (Button)FindName(IdUtils.IdToName(customer[(int)cstmr.card_number]));
                 panel.Children.Remove(buttonToDel);
                 if (buttonToDel != null)
                 {
@@ -126,8 +148,8 @@ namespace supermarket.Windows.ManagerMenu.CategoryWindows
         */
         private void OpenProductWindowClick(object sender, RoutedEventArgs e)
         {
-            string categoryId = (sender as Button).Name.ToString();
-            ManageCategoryWindow window = new(IdUtils.NameToId(categoryId));
+            string clientId = (sender as Button).Name.ToString();
+            ManageClientWindow window = new(IdUtils.NameToId(clientId));
             window.Owner = this;
             window.Show();
             Hide();
@@ -138,7 +160,7 @@ namespace supermarket.Windows.ManagerMenu.CategoryWindows
         */
         private void OpenAddCategoryWindowClick(object sender, RoutedEventArgs e)
         {
-            AddCategoryWindow window = new();
+            AddClientWindow window = new();
             window.Owner = this;
             window.Show();
             Hide();
