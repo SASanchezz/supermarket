@@ -86,5 +86,41 @@ namespace supermarket.Utils
             DbUtils.Execute(sql);
         }
 
+
+        public static List<string[]> GetAllCustomers(params string[] sorts)
+        {
+            string order = "";
+            string filter = "";
+            try
+            {
+                string categoryNumbers = sorts[1];
+                filter = (sorts[1] == "") ? "" : string.Format(" WHERE Customer_Card.{0} {1}", sorts[0], sorts[1]);
+                filter = (sorts[3] == "") ? filter : filter += string.Format(" AND Customer_Card.{0} {1}", sorts[2], sorts[3]);
+
+                //get asc\desc parameters for columns
+                order = Utils.ParseOrder(4, sorts);
+                order = (order == "") ? "" : " ORDER BY " + order[..^2];
+            }
+            catch { }
+
+            string sql = "SELECT * FROM Customer_Card" + filter + order;
+            return DbUtils.FindAll(sql);
+        }
+        public static List<string[]> GetCustomerByID(string cardNumber)
+        {
+            string sql = string.Format("SELECT * FROM Customer_Card WHERE card_number ='{0}'", cardNumber);
+            return DbUtils.FindAll(sql);
+        }
+        public static List<string[]> GetCustomerByPhone(string phone)
+        {
+            string sql = string.Format("SELECT * FROM Customer_Card WHERE phone_number ='{0}'", phone);
+            return DbUtils.FindAll(sql);
+        }
+
+        public static void DeleteCustomerByID(string cardNumber)
+        {
+            string sql = string.Format("DELETE FROM Customer_Card WHERE card_number ={0}", cardNumber);
+            DbUtils.Execute(sql);
+        }
     }
 }

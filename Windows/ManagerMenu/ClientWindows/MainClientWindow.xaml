@@ -1,0 +1,36 @@
+﻿<Window x:Class="supermarket.Windows.ManagerMenu.ClientWindows.MainClientWindow" Background="LightSlateGray"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:supermarket.Windows.ManagerMenu.ClientWindows"
+        mc:Ignorable="d"
+        Title="MainClientWindow" Height="450" Width="800">
+    <Grid x:Name="rootGrid" Background="LightGray" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="64"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Rectangle Fill="Azure" />
+
+        <Button Content="Додати нового клієнта" Grid.Row="0" Background="LawnGreen" Width="164" Height="24" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="12" Click="OpenAddCategoryWindowClick" Margin="0,0,20,0"/>
+
+        <Button Content="Прізвище↓" Grid.Row="0" HorizontalAlignment="Center" Width="64" Height="24" VerticalAlignment="Center" FontSize="12" Click="SurnameSortClick" Margin="0, 0, 400, 0"/>
+        
+        <TextBlock Text="Max" HorizontalAlignment="Center" VerticalAlignment="Center" Width="224" Height="24" FontSize="12" Margin="0, 0, 0, 30"/>
+        <Slider x:Name="sliderMax" HorizontalAlignment="Center" VerticalAlignment="Center" Width="224" Height="24" FontSize="12" Thumb.DragCompleted = "sliderMax_ValueChanged"  Maximum="100" TickFrequency="0.5" IsSnapToTickEnabled="True" Margin="50, 0, 0, 30"/>
+        <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding ElementName=sliderMax, Path=Value, UpdateSourceTrigger=PropertyChanged}"  TextAlignment="Right" Width="40" Height="20" Margin="320, 0, 0, 30" />
+
+        <TextBlock Text="Min" HorizontalAlignment="Center" VerticalAlignment="Center" Width="224" Height="24" FontSize="12" Margin="0, 30, 0, 0"/>
+        <Slider x:Name="sliderMin" HorizontalAlignment="Center" VerticalAlignment="Center" Width="224" Height="24" FontSize="12" Thumb.DragCompleted="sliderMin_ValueChanged" Maximum="100" TickFrequency="0.5" IsSnapToTickEnabled="True" Margin="50, 30, 0, 0"/>
+        <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding ElementName=sliderMin, Path=Value, UpdateSourceTrigger=PropertyChanged}"  TextAlignment="Right" Width="40" Height="20" Margin="320, 30, 0, 0" />
+
+
+        <ScrollViewer Grid.Row="1">
+            <StackPanel x:Name="panel">
+            </StackPanel>
+        </ScrollViewer>
+
+        <Button Content="←Назад" Grid.Row="0" HorizontalAlignment="Left" Width="64" Height="24" VerticalAlignment="Center" FontSize="12" Click="ReturnClick" Margin="20,0,0,0"/>
+    </Grid>
+</Window>

@@ -56,8 +56,11 @@ namespace supermarket.Utils
                 {
                     string[] rowData = new string[columnsNumber];
                     for (int i = 0; i < columnsNumber; ++i)
-                    {
-                        rowData[i] = reader.GetString(i);
+                    {   
+                        try
+                        {
+                            rowData[i] = reader.GetString(i);
+                        } catch { rowData[i] = null; }
                     }
                     output.Add(rowData);
                 }

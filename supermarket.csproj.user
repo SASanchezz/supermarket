@@ -13,6 +13,15 @@
     <Compile Update="Windows\ManagerMenu\CategoryWindows\ManageCategoryWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Windows\ManagerMenu\ClientWindows\AddClientWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\ManagerMenu\ClientWindows\MainClientWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\ManagerMenu\ClientWindows\ManageClientWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Windows\ManagerMenu\ManagerMainWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -43,6 +52,15 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\ManagerMenu\CategoryWindows\ManageCategoryWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\ManagerMenu\ClientWindows\AddClientWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\ManagerMenu\ClientWindows\MainClientWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\ManagerMenu\ClientWindows\ManageClientWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\ManagerMenu\ManagerMainWindow.xaml">
