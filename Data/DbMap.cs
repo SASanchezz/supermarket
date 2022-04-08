@@ -7,6 +7,17 @@ namespace supermarket.Data
 {
     class DbMaps
     {
+        public enum StoreProductMap : int
+        {
+            UPC,
+            UPC_prom,
+            id_product,
+            selling_price,
+            products_number,
+            promotional_product,
+            product_name,
+        }
+
         public enum CustomerMap : int
         {
             card_number,

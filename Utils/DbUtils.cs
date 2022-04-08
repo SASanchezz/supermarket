@@ -68,5 +68,31 @@ namespace supermarket.Utils
             return output;
         }
 
+        public static string StringifyOrder(string[][] orders)
+        {
+            if (orders.Length == 0) return "";
+
+            string finalOrder = "";
+            foreach(string[] order in orders)
+            {
+                if (order[0] == "") continue;
+                finalOrder += " " + order[0] + " " + order[1] + ",";
+            }
+
+            return (finalOrder == "") ? "" : "ORDER BY" + finalOrder.TrimEnd(',');
+        }
+
+        public static string StringifyFilter(string[][] filters)
+        {
+            if (filters[0].Length == 0) return "";
+
+            string finalFilter = "WHERE";
+            foreach (string[] order in filters)
+            {
+                finalFilter += " " + order[0] + order[1];
+            }
+
+            return finalFilter;
+        }
     }
 }

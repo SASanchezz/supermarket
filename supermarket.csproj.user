@@ -34,6 +34,21 @@
     <Compile Update="Windows\ManagerMenu\ProductWindows\ManageProductWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Windows\ManagerMenu\StoreProduct\AddPromStoreProductWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\ManagerMenu\StoreProduct\AddStoreProductWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\ManagerMenu\StoreProduct\MainStoreProductWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\ManagerMenu\StoreProduct\ManagePromStoreProductWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\ManagerMenu\StoreProduct\ManageStoreProductWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Windows\ManagerMenu\UserWindows\AddUserWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -73,6 +88,21 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\ManagerMenu\ProductWindows\ManageProductWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\ManagerMenu\StoreProduct\AddPromStoreProductWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\ManagerMenu\StoreProduct\AddStoreProductWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\ManagerMenu\StoreProduct\MainStoreProductWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\ManagerMenu\StoreProduct\ManagePromStoreProductWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\ManagerMenu\StoreProduct\ManageStoreProductWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\ManagerMenu\UserWindows\AddUserWindow.xaml">

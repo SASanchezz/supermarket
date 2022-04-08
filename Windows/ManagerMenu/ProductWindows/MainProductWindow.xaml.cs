@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using supermarket.Utils;
-using Category = supermarket.Models.Category;
 using prdct = supermarket.Data.DbMaps.ProductMap;
 using ctgry = supermarket.Data.DbMaps.CategoryMap;
 using System;

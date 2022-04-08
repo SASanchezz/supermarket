@@ -8,7 +8,9 @@ namespace supermarket.Utils
 {
     public static class DbQueries
     {
-
+        /*
+         * Employees
+         */
         public static List<string[]> GetAllEmployee()
         {
             string sql = "SELECT * FROM Employee";
@@ -26,6 +28,10 @@ namespace supermarket.Utils
             DbUtils.Execute(sql);
         }
 
+
+        /*
+         * Products
+         */
         public static List<string[]> GetAllProducts(params string[] sorts)
         {
             string filter = "";
@@ -60,6 +66,9 @@ namespace supermarket.Utils
         }
 
 
+        /*
+         * Categories
+         */
         public static List<string[]> GetAllCategories(params string[] sorts)
         {
             string order = "";
@@ -87,6 +96,9 @@ namespace supermarket.Utils
         }
 
 
+        /*
+         * Customers
+         */
         public static List<string[]> GetAllCustomers(params string[] sorts)
         {
             string order = "";
@@ -120,6 +132,37 @@ namespace supermarket.Utils
         public static void DeleteCustomerByID(string cardNumber)
         {
             string sql = string.Format("DELETE FROM Customer_Card WHERE card_number ={0}", cardNumber);
+            DbUtils.Execute(sql);
+        }
+
+
+        /*
+         * Market Products
+         */
+        public static List<string[]> GetAllStoreProducts(string filters = "", string orders = "")
+        {
+            string sql = string.Format("SELECT UPC, UPC_prom, Store_Product.id_product, selling_price, products_number, promotional_product, Product.product_name" +
+                " FROM Store_Product" +
+                " LEFT JOIN Product" +
+                " ON Store_Product.id_product  = Product.id_product" +
+                " {0} {1}", filters, orders);
+
+            return DbUtils.FindAll(sql);
+        }
+        public static List<string[]> GetStoreProductByID(string UPC)
+        {
+            string sql = string.Format("SELECT * FROM Store_Product WHERE UPC ='{0}'", UPC);
+            return DbUtils.FindAll(sql);
+        }
+        public static List<string[]> GetStoreProductByPromUpc(string UPC_Prom)
+        {
+            string sql = string.Format("SELECT * FROM Store_Product WHERE UPC_Prom ='{0}'", UPC_Prom);
+            return DbUtils.FindAll(sql);
+        }
+
+        public static void DeleteStoreProductByID(string UPC)
+        {
+            string sql = string.Format("DELETE FROM Store_Product WHERE UPC = '{0}'", UPC);
             DbUtils.Execute(sql);
         }
     }
