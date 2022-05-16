@@ -47,6 +47,7 @@ dlldata.c
 project.lock.json
 artifacts/
 
+supermarket.sln
 *_i.c
 *_p.c
 *_i.h
