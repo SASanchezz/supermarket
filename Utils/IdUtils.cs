@@ -3,6 +3,8 @@ using System.Linq;
 /*
  * This class contains methods for working with ids in project
  */
+
+
 namespace supermarket.Utils
 {
     class IdUtils
@@ -32,11 +34,11 @@ namespace supermarket.Utils
         */
         public static string NameToId(string thatId)
         {
-            return thatId[1..]; //removes first char
+            return thatId[1..]; //removes first char.
         }
 
         /*
-        * This method concatinates 2 words via dash, so we can write them in some lists
+        * This method concatinates 2 words via dash, so we can write them in some lists.
         */
         public static string Compound(string first, string second)
         {
@@ -46,7 +48,7 @@ namespace supermarket.Utils
         /*
         * This method takes compounded word and returns string array with both words
         *   OR
-        * ["", "-1"] if there is no " - " in string
+        * ["", "-1"] if there is no " - " in string.
         */
         public static string[] Decompound(string word)
         {

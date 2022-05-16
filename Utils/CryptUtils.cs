@@ -1,4 +1,7 @@
 ﻿using BC = BCrypt.Net.BCrypt;
+
+
+
 /*
 * This class contains methods for hashing and checking passwords with BCrypt lib
 */
