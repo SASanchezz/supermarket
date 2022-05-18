@@ -28,7 +28,6 @@ namespace supermarket.Utils
             DbUtils.Execute(sql);
         }
 
-
         /*
          * Products
          */

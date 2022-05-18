@@ -36,7 +36,7 @@ namespace supermarket.Data
             id_employee,
             empl_surname,
             empl_name,
-            empl_patronumic,
+            empl_patronymic,
             empl_role,
             salary,
             date_of_birth,
@@ -60,6 +60,14 @@ namespace supermarket.Data
         {
             category_number,
             category_name,
+        }
+
+        public enum CheckMap : int
+        {
+            id_check,
+            date,
+            sum,
+            pdv,
         }
     }
 }

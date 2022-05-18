@@ -32,7 +32,7 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
 
             surnameBox.Text = employee[(int)empl.empl_surname];
             nameBox.Text = employee[(int)empl.empl_name];
-            patronymicBox.Text = employee[(int)empl.empl_patronumic];
+            patronymicBox.Text = employee[(int)empl.empl_patronymic];
             roleList.Text = Roles.roleNames[int.Parse(employee[(int)empl.empl_role])];
             salaryBox.Text = employee[(int)empl.salary];
             birthDate.Text = employee[(int)empl.date_of_birth];
@@ -87,7 +87,7 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
 
             MainUserWindow owner = (MainUserWindow)Owner;
             owner.DeleteOldEmployeeButtons();
-            owner.SetEmployeeButtons();
+            //owner.SetEmployeeButtons();
             owner.Show();
             Close();
         }
@@ -104,7 +104,7 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
             MainUserWindow owner = (MainUserWindow)Owner; //So we can renew buttons 
             owner.DeleteOldEmployeeButtons();
             DbQueries.DeleteEmployeeByID(_employeeId);
-            owner.SetEmployeeButtons();
+            //owner.SetEmployeeButtons();
             owner.Show();
             Close();
 

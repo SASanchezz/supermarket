@@ -61,7 +61,7 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
             MainUserWindow owner = (MainUserWindow)Owner;
             //Renew buttons in MainUserWindow
             owner.DeleteOldEmployeeButtons();
-            owner.SetEmployeeButtons();
+            //owner.SetEmployeeButtons();
             owner.Show();
             Close();
         }
