@@ -11,7 +11,6 @@ namespace supermarket.Middlewares.SignIn
 {
     public static class SignInValidator
     {
-
         public static string Validate(string phone, string password)
         {
             string sql = String.Format("SELECT * FROM Employee WHERE phone_number='{0}'", phone);

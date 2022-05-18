@@ -3,10 +3,31 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:supermarket.ViewModels"
+        d:DataContext="{d:DesignInstance Type=vm:MainWindowVM}"
         xmlns:local="clr-namespace:supermarket"
         mc:Ignorable="d"
-        Title="StartingPage" Height="450" Width="800">
-    <Grid x:Name="MainGrid" Background="LightGray" Margin="10">
+        Title="StartingPage" Height="450" Width="800" FontFamily="Montserrat">
+    <Grid x:Name="MainGrid" Background="#F2F2F2">
+        <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0, 0, 0, 10"
+                   Text="Вхід" FontSize="35" FontWeight="Bold"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="5,10,0,0"
+                   Text="Телефон" Foreground="DimGray" FontSize="15" FontFamily="Montserrat" FontWeight="DemiBold"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Height="28" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0,0,0,20"
+                 FontSize="14" FontWeight="Regular"
+                 Text="{Binding Login, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,10,0,0" 
+                   Text="Пароль" Foreground="DimGray" FontSize="15" FontFamily="Montserrat" FontWeight="DemiBold"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Height="28" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0,0,0,20"
+                 FontSize="14" FontWeight="Regular"
+                 Text="{Binding Password, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <Button Grid.Row="3" Grid.Column="1" Width="140" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"
+                Content="Увійти" FontSize="15" FontWeight="DemiBold"
+                Command="{Binding SignInCommand}"/>
+
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -14,17 +35,10 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" HorizontalAlignment="Center" Text="Вхід" VerticalAlignment="Bottom" FontSize="36"/>
-        
-        <TextBlock Grid.Row="1" HorizontalAlignment="Center" Text="телефон" Foreground="DimGray" VerticalAlignment="Top" FontSize="18" Margin="0,10,0,0"/>
-        <TextBox x:Name="loginBox" Grid.Row="1" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"/>
-
-        <TextBlock Grid.Row="2" HorizontalAlignment="Center" Text="пароль" Foreground="DimGray" VerticalAlignment="Top" FontSize="18" Margin="0,0,0,0"/>
-        <TextBox x:Name="passwordBox" Grid.Row="2" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,25"/>
-
-        <Button Content="Увійти" Grid.Row="3" HorizontalAlignment="Center" Width="64" Height="24" VerticalAlignment="Top" FontSize="12" Click="SignInClick" Margin="0,0,0,0"/>
-
-
-        <Button Content="check DB" Grid.Row="4" HorizontalAlignment="Right" Width="80" Height="24" VerticalAlignment="Bottom" FontSize="12" Click="ChechDbClick" Margin="0,10,0,0"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
     </Grid>
 </Window>

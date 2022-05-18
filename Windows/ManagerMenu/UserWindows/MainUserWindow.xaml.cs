@@ -2,6 +2,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using supermarket.Utils;
+using supermarket.ViewModels;
+using static supermarket.Data.DbMaps;
 using empl = supermarket.Data.DbMaps.EmployeeMap;
 
 namespace supermarket.Windows.ManagerMenu.UserWindows
@@ -14,7 +16,8 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
         public MainUserWindow()
         {
             InitializeComponent();
-            SetEmployeeButtons();
+            DataContext = new MainUserWindowVM();
+            //SetEmployeeButtons();
         }
 
         /*
@@ -38,27 +41,7 @@ namespace supermarket.Windows.ManagerMenu.UserWindows
         /*
         * This method creates buttons with for employee in MainUserWindow
         */
-        public void SetEmployeeButtons()
-        {
-            List<string[]> employeeList = DbQueries.GetAllEmployee();
-            foreach (string[] employee in employeeList)
-            {
-                Button button = new();
-
-                button.Height = 20;
-                button.Content = employee[(int)empl.empl_surname] + " "
-                    + employee[(int)empl.empl_name] + "  -  "
-                    + employee[(int)empl.id_employee];
-                
-                button.Name = IdUtils.IdToName(employee[(int) empl.id_employee]);
-
-                employeePanel.Children.Add(button);
-                RegisterName(button.Name, button);
-
-                button.Click += new RoutedEventHandler(OpenUserWindowClick);
-            }
-
-        }
+        
 
         /*
         * This method opens window for managing user

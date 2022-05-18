@@ -5,22 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:supermarket.Windows.ManagerMenu"
         mc:Ignorable="d"
-        Title="ManagerMainWindow" Height="450" Width="800">
-    <Grid Background="LightGray" Margin="10">
+        Title="ManagerMainWindow" Height="450" Width="800" FontFamily="Montserrat">
+    <Grid Background="#F2F2F2">
+        <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top"
+                   Text="Меню менеджера" FontSize="25" FontWeight="Bold"/>
+
+        <Button Content="Панель робітників" FontSize="12" FontWeight="DemiBold"
+                Grid.Row="2" Grid.Column="1" Width="180" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                Click="OpenUsersWindowClick" />
+        
+        <Button Content="Панель товарів" FontSize="12" FontWeight="DemiBold"
+                Grid.Row="3" Grid.Column="1" Width="180" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                Click="OpenProductsWindowClick"/>
+        
+        <Button Content="Панель категорій" FontSize="12" FontWeight="DemiBold"
+                Grid.Row="4" Grid.Column="1" Width="180" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                Click="OpenCategoriesWindowClick"/>
+
+        <Button Content="Панель клієнтів" FontSize="12" FontWeight="DemiBold"
+                Grid.Row="5" Grid.Column="1" Width="180" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                Click="OpenClientsWindowClick"/>
+
+        <Button Content="Панель товарів магазину" FontSize="12" FontWeight="DemiBold"
+                Grid.Row="6" Grid.Column="1" Width="180" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                Click="OpenStoreProductsClick"/>
+
         <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" HorizontalAlignment="Center" Text="Меню менеджера" VerticalAlignment="Top" FontSize="24"/>
-
-        <Button Content="Панель робітників" Grid.Row="1" Width="164" Height="24" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12" Click="OpenUsersWindowClick" Margin="20,0,0,0"/>
-        <Button Content="Панель товарів" Grid.Row="1"  Width="164" Height="24" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" Click="OpenProductsWindowClick" Margin="0,0,0,0"/>
-        <Button Content="Панель категорій" Grid.Row="1"  Width="164" Height="24" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="12" Click="OpenCategoriesWindowClick" Margin="0,0,20,0"/>
-
-        <Button Content="Панель клієнтів" Grid.Row="2"  Width="164" Height="24" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12" Click="OpenClientsWindowClick" Margin="20,0,0,0"/>
-        <Button Content="Панель товарів магазину" Grid.Row="2"  Width="164" Height="24" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" Click="OpenStoreProductsClick" Margin="20,0,0,0"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
     </Grid>
 </Window>

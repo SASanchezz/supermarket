@@ -12,7 +12,6 @@ namespace supermarket.Data
         {
             "Менеджер", "Касир"
         };
-        
 
         public static readonly Dictionary<string, int> roleKeys = new()
         {
