@@ -39,15 +39,18 @@ namespace supermarket.ViewModels.ManagerMenu
 
         protected override INavigatableWindowViewModel CreateWindowViewModel(WindowTypes type)
         {
-            INavigatableWindowViewModel windowViewModel;
             try
             {
                 switch (type)
                 {
                     case WindowTypes.ManagerAddEmployee:
-                        windowViewModel = new ManagerAddEmployeeWindowViewModel();
-                        windowViewModel.Window.Closed += (object sender, EventArgs e) => IsEnabled = true;
-                        return windowViewModel;
+                        var addWindowViewModel = new ManagerAddEmployeeWindowViewModel();
+                        addWindowViewModel.Window.Closed += (object sender, EventArgs e) => 
+                        {
+                            IsEnabled = true;
+                            ViewModel.UpdateData();
+                        };
+                        return addWindowViewModel;
 
                     case WindowTypes.ManagerEditEmployee:
                         if (_viewModel.SelectedEmployee == null)
@@ -55,9 +58,14 @@ namespace supermarket.ViewModels.ManagerMenu
                             IsEnabled = true;
                             throw new Exception("No selected item");
                         }
+                        
                         var editWindowViewModel = new ManagerEditEmployeeWindowViewModel();
-                        editWindowViewModel.Window.Closed += (object sender, EventArgs e) => IsEnabled = true;
-                        editWindowViewModel.ViewModel.Employee = ViewModel.SelectedEmployee;
+                        editWindowViewModel.Window.Closed += (object sender, EventArgs e) =>
+                        {
+                            IsEnabled = true;
+                            ViewModel.UpdateData();
+                        };
+                        editWindowViewModel.ViewModel.SetData(ViewModel.SelectedEmployee);
                         ViewModel.SelectedEmployee = null;
                         return editWindowViewModel;
 

@@ -24,34 +24,9 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
         private string _street;
         private string _zipcode;
 
-        private string[] _employee;
-
         private RelayCommand<object> _updateCommand;
         private RelayCommand<object> _closeCommand;
-        public string[] Employee 
-        { 
-            get
-            {
-                return _employee;
-            }
-            set
-            {
-                _employee = value;
 
-                Name = _employee[1];
-                Surname = _employee[2];
-                Patronymic = _employee[3];
-                Role = Roles.roleKeys[_employee[4]];
-                Salary = _employee[5];
-                Date_of_birth = DateTime.Parse(_employee[6]);
-                Date_of_start = DateTime.Parse(_employee[7]);
-                Phone_number = _employee[8];
-                Password = _employee[9];
-                City = _employee[10];
-                Street = _employee[11];
-                Zipcode = _employee[12];
-            }
-        }
         public string Name 
         { 
             get => _name; 
@@ -161,13 +136,34 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
             }
         }
         public Action Close { get; set; }
-        //public RelayCommand<object> UpdateCommand 
-        //{ 
-        //    get
-        //    {
-        //        return _updateCommand ??= new RelayCommand<object>(_ => MessageBox.Show(Employee[0]));
-        //    }
-        //}
+        public RelayCommand<object> UpdateCommand
+        {
+            get
+            {
+                return _updateCommand ??= new RelayCommand<object>(_ => SetNewEmployee());
+            }
+        }
+
+        private void SetNewEmployee()
+        {
+            // сюда саша
+        }
+
+        public void SetData(string[] data)
+        {
+            Name = data[1];
+            Surname = data[2];
+            Patronymic = data[3];
+            Role = Roles.roleKeys[data[4]];
+            Salary = data[5];
+            Date_of_birth = DateTime.Parse(data[6]);
+            Date_of_start = DateTime.Parse(data[7]);
+            Phone_number = data[8];
+            Password = data[9];
+            City = data[10];
+            Street = data[11];
+            Zipcode = data[12];
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

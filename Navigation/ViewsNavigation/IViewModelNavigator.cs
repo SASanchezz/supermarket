@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace supermarket.Navigation.ViewsNavigation
+﻿namespace supermarket.Navigation.ViewsNavigation
 {
     internal interface IViewModelNavigator
     {

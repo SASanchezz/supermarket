@@ -79,6 +79,11 @@ namespace supermarket.ViewModels.ManagerMenu
             }
         }
 
+        public void UpdateData()
+        {
+            _employees = DbQueries.GetAllEmployee();
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
