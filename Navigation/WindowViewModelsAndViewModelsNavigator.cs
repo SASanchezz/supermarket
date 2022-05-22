@@ -1,15 +1,12 @@
 ﻿using supermarket.Navigation.ViewsNavigation;
 using supermarket.Navigation.WindowsNavigation;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace supermarket.Navigation
 {
     internal abstract class WindowViewModelsAndViewModelsNavigator : IViewModelNavigator, IWindowViewModelNavigator, INotifyPropertyChanged
     {
-        private List<INavigatableViewModel> _viewModels = new();
         private INavigatableViewModel _currentViewModel;
 
         private bool _isEnabled;
@@ -54,23 +51,7 @@ namespace supermarket.Navigation
             if (CurrentViewModel != null && CurrentViewModel.ViewType.Equals(type))
                 return;
 
-            INavigatableViewModel viewModel = GetViewModel(type);
-
-            if (_viewModels == null)
-                return;
-
-            _viewModels.Add(viewModel);
-            CurrentViewModel = viewModel;
-        }
-
-        private INavigatableViewModel GetViewModel(ViewTypes type)
-        {
-            INavigatableViewModel viewModel = _viewModels.FirstOrDefault(viewModel => viewModel.ViewType.Equals(type));
-
-            if (viewModel != null)
-                return viewModel;
-
-            return CreateViewModel(type);
+            CurrentViewModel = CreateViewModel(type);
         }
 
         public void Navigate(WindowTypes type)

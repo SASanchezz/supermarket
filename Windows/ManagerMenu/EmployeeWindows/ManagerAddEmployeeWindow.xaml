@@ -9,7 +9,7 @@
         d:DataContext="{d:DesignInstance Type=vm:ManagerAddEmployeeWindowViewModel}"
         mc:Ignorable="d"
         Title="AddUserWindow" Height="450" Width="800"
-        Content="{Binding CurrentViewModel, Mode=OneWay}" IsEnabled="{Binding IsEnabled, Mode=OneWay}" ResizeMode="NoResize">
+        Content="{Binding ViewModel, Mode=OneWay}" IsEnabled="{Binding IsEnabled, Mode=OneWay}" ResizeMode="NoResize">
     <Window.Resources>
         <DataTemplate DataType="{ x:Type vm:ManagerAddEmployeeViewModel}">
             <v:ManagerAddEmployeeView/>

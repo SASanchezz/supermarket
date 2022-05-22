@@ -43,6 +43,7 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
 
         private void AddEmployee()
         {
+            // сюда саша
             /*
         * This method sign up new user
         */
