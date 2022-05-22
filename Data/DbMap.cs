@@ -33,11 +33,11 @@ namespace supermarket.Data
 
         public enum EmployeeMap : int
         {
-            id_employee,
-            empl_surname,
-            empl_name,
-            empl_patronymic,
-            empl_role,
+            id,
+            surname,
+            name,
+            patronymic,
+            role,
             salary,
             date_of_birth,
             date_of_start,

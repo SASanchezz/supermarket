@@ -7,6 +7,18 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\MainWindow\ManagerMenuView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ManagerMenu\EmployeesViews\ManagerAddEmployeeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ManagerMenu\EmployeesViews\ManagerEditEmployeeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ManagerMenu\ManagerEmployeesView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Windows\ManagerMenu\CategoryWindows\AddCategoryWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -20,9 +32,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Windows\ManagerMenu\ClientWindows\ManageClientWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Windows\ManagerMenu\ManagerMainWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Windows\ManagerMenu\ProductWindows\AddProductWindow.xaml.cs">
@@ -49,18 +58,33 @@
     <Compile Update="Windows\ManagerMenu\StoreProduct\ManageStoreProductWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\ManagerMenu\UserWindows\AddUserWindow.xaml.cs">
+    <Compile Update="Windows\ManagerMenu\EmployeeWindows\ManagerAddEmployeeWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\ManagerMenu\UserWindows\MainUserWindow.xaml.cs">
+    <Compile Update="Windows\ManagerMenu\ManagerEmployeesWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\ManagerMenu\UserWindows\ManageUserWindow.xaml.cs">
+    <Compile Update="Windows\ManagerMenu\EmployeeWindows\ManagerEditEmployeeWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\MainWindow\SignInView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\MainWindow\ManagerMenuView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ManagerMenu\EmployeesViews\ManagerAddEmployeeView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ManagerMenu\EmployeesViews\ManagerEditEmployeeView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ManagerMenu\ManagerEmployeesView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\ManagerMenu\CategoryWindows\AddCategoryWindow.xaml">
@@ -76,9 +100,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\ManagerMenu\ClientWindows\ManageClientWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Windows\ManagerMenu\ManagerMainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\ManagerMenu\ProductWindows\AddProductWindow.xaml">
@@ -105,13 +126,16 @@
     <Page Update="Windows\ManagerMenu\StoreProduct\ManageStoreProductWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Windows\ManagerMenu\UserWindows\AddUserWindow.xaml">
+    <Page Update="Windows\ManagerMenu\EmployeeWindows\ManagerAddEmployeeWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Windows\ManagerMenu\UserWindows\MainUserWindow.xaml">
+    <Page Update="Windows\ManagerMenu\ManagerEmployeesWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Windows\ManagerMenu\UserWindows\ManageUserWindow.xaml">
+    <Page Update="Windows\ManagerMenu\EmployeeWindows\ManagerEditEmployeeWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\MainWindow\SignInView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

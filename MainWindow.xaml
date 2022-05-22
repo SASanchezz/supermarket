@@ -3,42 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:vm="clr-namespace:supermarket.ViewModels"
-        d:DataContext="{d:DesignInstance Type=vm:MainWindowVM}"
+        xmlns:views="clr-namespace:supermarket.Views"
+        xmlns:viewModels="clr-namespace:supermarket.ViewModels"
         xmlns:local="clr-namespace:supermarket"
         mc:Ignorable="d"
-        Title="StartingPage" Height="450" Width="800" FontFamily="Montserrat">
-    <Grid x:Name="MainGrid" Background="#F2F2F2">
-        <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0, 0, 0, 10"
-                   Text="Вхід" FontSize="35" FontWeight="Bold"/>
-
-        <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="5,10,0,0"
-                   Text="Телефон" Foreground="DimGray" FontSize="15" FontFamily="Montserrat" FontWeight="DemiBold"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Height="28" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0,0,0,20"
-                 FontSize="14" FontWeight="Regular"
-                 Text="{Binding Login, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
-
-        <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,10,0,0" 
-                   Text="Пароль" Foreground="DimGray" FontSize="15" FontFamily="Montserrat" FontWeight="DemiBold"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Height="28" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0,0,0,20"
-                 FontSize="14" FontWeight="Regular"
-                 Text="{Binding Password, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
-
-        <Button Grid.Row="3" Grid.Column="1" Width="140" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"
-                Content="Увійти" FontSize="15" FontWeight="DemiBold"
-                Command="{Binding SignInCommand}"/>
-
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-    </Grid>
+        d:DataContext="{d:DesignInstance Type=viewModels:MainWindowViewModel}"
+        Title="MainWindow" Height="450" Width="800"
+        Content="{Binding CurrentViewModel, Mode=OneWay}" IsEnabled="{Binding IsEnabled, Mode=OneWay}" ResizeMode="NoResize">
+    
+    <Window.Resources>
+        <DataTemplate DataType="{ x:Type viewModels:SignInViewModel}">
+            <views:SignInView/>
+        </DataTemplate>
+        <DataTemplate DataType="{ x:Type viewModels:ManagerMenuViewModel}">
+            <views:ManagerMenuView/>
+        </DataTemplate>
+        <!--+ кассир-->
+    </Window.Resources>
+    
 </Window>
