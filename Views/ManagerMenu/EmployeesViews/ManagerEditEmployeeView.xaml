@@ -9,64 +9,81 @@
              d:DataContext="{d:DesignInstance Type=vm:ManagerEditEmployeeViewModel}"
              d:DesignHeight="450" d:DesignWidth="800"
              FontFamily="Montserrat" FontWeight="Medium">
-    <Grid x:Name="MainGrid" Background="LightGray" Margin="10">
+    <Grid Background="#F2F2F2">
 
-        <TextBlock Text="Прізвище" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Foreground="DimGray" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
-        <TextBox Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
-                 Text="{Binding Surname, Mode=TwoWay}"/>
+        <TextBlock Text="Прізвище" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0"
+                   Foreground="DimGray" FontSize="18"/>
+        <TextBox Grid.Row="1" Grid.Column="0" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Margin="0,0,0,15"
+                 Text="{Binding Surname, Mode=TwoWay}" FontSize="14"/>
 
-        <TextBlock Text="Ім'я" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" Foreground="DimGray" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
-        <TextBox Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
-                 Text="{Binding Name, Mode=TwoWay}"/>
+        <TextBlock Text="Ім'я" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0"
+                   Foreground="DimGray" FontSize="18"/>
+        <TextBox Grid.Row="2" Grid.Column="0" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Margin="0,0,0,15"
+                 Text="{Binding Name, Mode=TwoWay}" FontSize="14"/>
 
-        <TextBlock Text="По батькові" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" Foreground="DimGray" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
-        <TextBox Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
-                 Text="{Binding Patronymic, Mode=TwoWay}"/>
+        <TextBlock Text="По батькові" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0"
+                   Foreground="DimGray" FontSize="18"/>
+        <TextBox Grid.Row="3" Grid.Column="0" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Margin="0,0,0,15"
+                 Text="{Binding Patronymic, Mode=TwoWay}" FontSize="14"/>
 
-        <TextBlock Text="Посада" Grid.Row="4" Grid.Column="0" Foreground="DimGray" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
+        <TextBlock Text="Посада" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0"
+                    Foreground="DimGray" FontSize="18"/>
         <ComboBox Grid.Row="4" Grid.Column="0" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,15"
                   SelectedIndex="{Binding Role, Mode=TwoWay}">
             <TextBlock>Менеджер</TextBlock>
             <TextBlock>Касир</TextBlock>
         </ComboBox>
 
-        <TextBlock Text="Зарплата(грн)" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Foreground="DimGray" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
-        <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
-                Text="{Binding Salary, Mode=TwoWay}"/>
+        <TextBlock Text="Зарплата(грн)" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0"
+                   Foreground="DimGray" FontSize="18"/>
+        <TextBox Grid.Row="1" Grid.Column="1"  Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Margin="0,0,0,15"
+                Text="{Binding Salary, Mode=TwoWay}" FontSize="14"/>
 
-        <TextBlock Text="Дата народження" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center"  Foreground="DimGray" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
-        <DatePicker Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
-                    SelectedDate="{Binding Date_of_birth, Mode=TwoWay}"/>
+        <TextBlock Text="Дата народження" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0"
+                   Foreground="DimGray" FontSize="18"/>
+        <DatePicker Grid.Row="2" Grid.Column="1" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Margin="0,0,0,15"
+                    SelectedDate="{Binding Date_of_birth, Mode=TwoWay}" FontSize="14"/>
 
-        <TextBlock Text="Дата початку роботи" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Foreground="DimGray" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
-        <DatePicker Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
-                    SelectedDate="{Binding Date_of_start, Mode=TwoWay}"/>
+        <TextBlock Text="Дата початку роботи" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0"
+                   Foreground="DimGray" FontSize="18"/>
+        <DatePicker Grid.Row="3" Grid.Column="1" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Margin="0,0,0,15"
+                    SelectedDate="{Binding Date_of_start, Mode=TwoWay}" FontSize="14"/>
 
-        <TextBlock Text="Телефон" Grid.Row="4" Grid.Column="1" Foreground="DimGray" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
-        <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
-                 Text="{Binding Phone_number, Mode=TwoWay}"/>
+        <TextBlock Text="Телефон" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0"
+                   Foreground="DimGray" FontSize="18"/>
+        <TextBox Grid.Row="4" Grid.Column="1" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Margin="0,0,0,15"
+                 Text="{Binding Phone_number, Mode=TwoWay}" FontSize="14"/>
 
-        <TextBlock Text="Місто" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" Foreground="DimGray" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
-        <TextBox Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
-                 Text="{Binding City, Mode=TwoWay}"/>
+        <TextBlock Text="Місто" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0"
+                   Foreground="DimGray" FontSize="18"/>
+        <TextBox Grid.Row="1" Grid.Column="2" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Margin="0,0,0,15"
+                 Text="{Binding City, Mode=TwoWay}" FontSize="14"/>
 
-        <TextBlock Text="Вулиця" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" Foreground="DimGray" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
-        <TextBox Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
-                 Text="{Binding Street, Mode=TwoWay}"/>
+        <TextBlock Text="Вулиця" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0"
+                   Foreground="DimGray" FontSize="18"/>
+        <TextBox Grid.Row="2" Grid.Column="2" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Margin="0,0,0,15"
+                 Text="{Binding Street, Mode=TwoWay}" FontSize="14"/>
 
-        <TextBlock Text="Поштовий індекс" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" Foreground="DimGray" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
-        <TextBox Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
-                 Text="{Binding Zipcode, Mode=TwoWay}"/>
+        <TextBlock Text="Поштовий індекс" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0"
+                   Foreground="DimGray" FontSize="18"/>
+        <TextBox Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Margin="0,0,0,15"
+                 Text="{Binding Zipcode, Mode=TwoWay}" FontSize="14"/>
 
-        <TextBlock Text="Пароль" Grid.Row="4" Grid.Column="2" Foreground="DimGray" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
-        <TextBox Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
-                 Text="{Binding Password, Mode=TwoWay}"/>
+        <TextBlock Text="Пароль" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0"
+                    Foreground="DimGray" FontSize="18"/>
+        <TextBox Grid.Row="4" Grid.Column="2" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Margin="0,0,0,15"
+                 Text="{Binding Password, Mode=TwoWay}" FontSize="14"/>
 
-        <Button Content="Оновити" Grid.Row="5" Grid.Column="2"  Width="128" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" Margin="0,0,0,5"
+        <Button Content="Оновити" Grid.Row="5" Grid.Column="2" Width="128" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,5" 
+                FontSize="12"
                 Command="{Binding UpdateCommand}"/>
-        <Button Content="ВИДАЛИТИ" Grid.Row="5" Grid.Column="0" Background="DarkRed" Foreground="White"  Width="128" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" Margin="0,0,0,5"/>
+        <Button Content="ВИДАЛИТИ" Grid.Row="5" Grid.Column="0" Width="128" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,5" 
+                FontSize="12" Background="DarkRed" Foreground="White"
+                Command="{Binding DeleteCommand}"/>
 
-        <Button Content="←Назад" Grid.Row="0" HorizontalAlignment="Left" Width="64" Height="24" VerticalAlignment="Top" FontSize="12" Margin="0,0,0,0"/>
+        <Button Content="←Назад" Grid.Row="0" Width="64" Height="24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" 
+                FontSize="12"
+                Command="{Binding CloseCommand}"/>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -81,6 +98,5 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-
     </Grid>
 </UserControl>

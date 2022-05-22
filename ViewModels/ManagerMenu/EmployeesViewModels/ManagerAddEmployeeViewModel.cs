@@ -20,14 +20,7 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
         private string _zipcode;
 
         private RelayCommand<object> _addEmployeeCommand;
-        public Action Close { get; set; }
-        public RelayCommand<object> AddEmployeeCommand
-        {
-            get
-            {
-                return _addEmployeeCommand ??= new RelayCommand<object>(_ => AddEmployee(), CanExecute);
-            }
-        }
+
         public string Name { get => _name; set => _name = value; }
         public string Surname { get => _surname; set => _surname = value; }
         public string Patronymic { get => _patronymic; set => _patronymic = value; }
@@ -40,6 +33,14 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
         public string City { get => _city; set => _city = value; }
         public string Street { get => _street; set => _street = value; }
         public string Zipcode { get => _zipcode; set => _zipcode = value; }
+        public RelayCommand<object> AddEmployeeCommand
+        {
+            get
+            {
+                return _addEmployeeCommand ??= new RelayCommand<object>(_ => AddEmployee(), CanExecute);
+            }
+        }
+        public Action Close { get; set; }
 
         private void AddEmployee()
         {
