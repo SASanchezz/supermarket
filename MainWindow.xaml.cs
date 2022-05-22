@@ -10,10 +10,10 @@ namespace supermarket
     {
         public MainWindow()
         {
-            DbUtils.SetDbConnection(); //open connection to MySQL
-            var vm = new MainWindowVM();
-            DataContext = vm;
-            vm.ClosingRequest += (sender, e) => this.Close();
+            DbUtils.SetDbConnection();
+            InitializeComponent();
+
+            DataContext = new MainWindowViewModel();
         }
     }
 }
