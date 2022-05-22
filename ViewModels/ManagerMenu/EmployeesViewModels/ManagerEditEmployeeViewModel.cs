@@ -25,6 +25,7 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
         private string _zipcode;
 
         private RelayCommand<object> _updateCommand;
+        private RelayCommand<object> _deleteCommand;
         private RelayCommand<object> _closeCommand;
 
         public string Name 
@@ -135,7 +136,6 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
                 OnPropertyChanged(nameof(Zipcode));
             }
         }
-        public Action Close { get; set; }
         public RelayCommand<object> UpdateCommand
         {
             get
@@ -143,11 +143,21 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
                 return _updateCommand ??= new RelayCommand<object>(_ => SetNewEmployee());
             }
         }
-
-        private void SetNewEmployee()
+        public RelayCommand<object> DeleteCommand
         {
-            // сюда саша
+            get
+            {
+                return _deleteCommand ??= new RelayCommand<object>(_ => DeleteEmployee());
+            }
         }
+        public RelayCommand<object> CloseCommand
+        {
+            get
+            {
+                return _closeCommand ??= new RelayCommand<object>(_ => Close?.Invoke());
+            }
+        }
+        public Action Close { get; set; }
 
         public void SetData(string[] data)
         {
@@ -163,6 +173,16 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
             City = data[10];
             Street = data[11];
             Zipcode = data[12];
+        }
+
+        private void SetNewEmployee()
+        {
+            // сюда саша
+        }
+
+        private void DeleteEmployee()
+        {
+            // сюда пес
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
