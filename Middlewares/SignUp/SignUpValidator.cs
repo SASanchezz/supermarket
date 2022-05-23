@@ -15,17 +15,7 @@ namespace supermarket.Middlewares.SignUp
             string salary, string dateBirth, string dateStart, string phoneNumber,
             string city, string street, string zipcode, string password)
         {
-            string uniqueId;
-            List<string[]> result;
-            /*
-             * Check if we have such id in Employee table
-             */
-            do
-            {
-                uniqueId = IdUtils.Id();
-                result = DbQueries.GetEmployeeByID(uniqueId);
-            } while (result.Any());
-            
+
             if (surname.Length is 0 or > 51)
             {
                 return "Введіть прізвище довжиною < 51";
@@ -115,7 +105,7 @@ namespace supermarket.Middlewares.SignUp
                 return "Введіть пароль до 16 символів";
             }
 
-            return uniqueId; //Alright
+            return ""; //Alright
         }
     }
 }
