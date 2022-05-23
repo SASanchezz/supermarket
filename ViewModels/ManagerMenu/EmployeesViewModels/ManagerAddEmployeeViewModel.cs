@@ -1,6 +1,8 @@
 ﻿using supermarket.Data;
 using supermarket.Utils;
 using System;
+using supermarket.Middlewares.SignUp;
+using supermarket.Models;
 
 namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
 {
@@ -9,7 +11,7 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
         private string _name;
         private string _surname;
         private string _patronymic;
-        private int _role;
+        private string _role;
         private string _salary;
         private DateTime _date_of_birth;
         private DateTime _date_of_start;
@@ -20,11 +22,12 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
         private string _zipcode;
 
         private RelayCommand<object> _addEmployeeCommand;
+        private RelayCommand<object> _closeCommand;
 
         public string Name { get => _name; set => _name = value; }
         public string Surname { get => _surname; set => _surname = value; }
         public string Patronymic { get => _patronymic; set => _patronymic = value; }
-        public int Role { get => _role; set => _role = value; }
+        public string Role { get => _role; set => _role = value; }
         public string Salary { get => _salary; set => _salary = value; }
         public DateTime Date_of_birth { get => _date_of_birth; set => _date_of_birth = value; }
         public DateTime Date_of_start { get => _date_of_start; set => _date_of_start = value; }
@@ -33,6 +36,9 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
         public string City { get => _city; set => _city = value; }
         public string Street { get => _street; set => _street = value; }
         public string Zipcode { get => _zipcode; set => _zipcode = value; }
+        
+        public static string[] Roles { get => Data.Roles.roleNames; }
+
         public RelayCommand<object> AddEmployeeCommand
         {
             get
@@ -40,59 +46,42 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
                 return _addEmployeeCommand ??= new RelayCommand<object>(_ => AddEmployee(), CanExecute);
             }
         }
+        public RelayCommand<object> CloseCommand
+        {
+            get
+            {
+                return _closeCommand ??= new RelayCommand<object>(_ => Close?.Invoke());
+            }
+        }
+
         public Action Close { get; set; }
 
-        private void AddEmployee()
+            private void AddEmployee()
         {
             // сюда саша
+            // Yes honey
             /*
-        * This method sign up new user
-        */
-            //public void SignUpClick(object sender, RoutedEventArgs e)
-            //{
-            //    string surname = surnameBox.Text;
-            //    string name = nameBox.Text;
-            //    string patronymic = patronymicBox.Text;
-            //    string role = roleList.Text;
-            //    string salary = salaryBox.Text;
-            //    string dateBirth = birthDate.Text;
-            //    string dateStart = startDate.Text;
-            //    string phoneNumber = phoneNumberBox.Text;
-            //    string password = passwordBox.Text;
-            //    string city = cityBox.Text;
-            //    string street = streetBox.Text;
-            //    string zipcode = zipcodeBox.Text;
+            * This method sign up new user
+            */
 
-            //    //Validates entered information
-            //    string result = SignUpValidator.Validate(surname, name, patronymic, role,
-            //        salary, dateBirth, dateStart, phoneNumber,
-            //        city, street, zipcode, password);
+            ////Validates entered information
+            string result = SignUpValidator.Validate(_surname, _name, _patronymic, _role,
+                _salary, _date_of_birth, _date_of_start, _phone_number,
+                _city, _street, _zipcode, _password);
 
-            //    if (result.Length != 8) //if returned not uniqueId (hope any other string is not 8 length string)
-            //    {
-            //        MessageBox.Show(result);
-            //        return;
-            //    }
+            if (result.Length != 0)
+            {
+                //MessageBox.Show(result);
+                return;
+            }
 
-            //    //Query to insert new employee
-            //    string sql = String.Format("INSERT INTO Employee " +
-            //        "(id_employee, empl_surname, empl_name, empl_patronymic, empl_role, salary, " +
-            //        "date_of_birth, date_of_start, phone_number, password, city, street, zip_code) " +
-            //        "VALUES ('{0}', '{1}', '{2}', '{3}', {4}, {5}, " +
-            //        "'{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}')",
-            //        result, surname, name, patronymic, Roles.roleKeys[role], float.Parse(salary),
-            //        Convert.ToDateTime(dateBirth).ToString(s_format), Convert.ToDateTime(dateStart).ToString(s_format),
-            //        phoneNumber, CryptUtils.HashPassword(password), city, street, zipcode);
+            //Query to insert new employee
+            Employee.AddEmployee(_surname, _name, _patronymic, _role,
+            _salary, Date_of_birth, Date_of_start, _phone_number,
+            _password, _city, _street, _zipcode);
 
-            //    DbUtils.Execute(sql);
 
-            //    EmployeesWindow owner = (EmployeesWindow)Owner;
-            //    //Renew buttons in MainUserWindow
-            //      owner.DeleteOldEmployeeButtons();
-            //      owner.SetEmployeeButtons();
-            //    owner.Show();
-            //    Close();
-            //}
+            Close();
         }
 
         private bool CanExecute(object obj)

@@ -12,7 +12,7 @@ namespace supermarket.Middlewares.SignUp
     public static class SignUpValidator
     {
         public static string Validate(string surname, string name, string patronymic, string role,
-            string salary, string dateBirth, string dateStart, string phoneNumber,
+            string salary, DateTime birtDate, DateTime startDate, string phoneNumber,
             string city, string street, string zipcode, string password)
         {
 
@@ -53,23 +53,9 @@ namespace supermarket.Middlewares.SignUp
             }
 
             /*
-             * Check for date correctness 
-             */
-            DateTime nowDate = DateTime.Now;
-            DateTime birtDate;
-            DateTime startDate;
-            try
-            {
-                birtDate = Convert.ToDateTime(dateBirth);
-                startDate = Convert.ToDateTime(dateStart);
-            } catch
-            {
-                return "Дата некоректна";
-            }
-            /*
             * Check for age correctness 
             */
-            int age = DateUtils.GetAge(birtDate, nowDate);
+            int age = DateUtils.GetAge(birtDate, DateTime.Now);
             if (age < 18)
             {
                 return "Особа не досягла повноліття";
