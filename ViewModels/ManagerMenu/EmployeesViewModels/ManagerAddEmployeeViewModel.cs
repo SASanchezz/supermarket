@@ -50,13 +50,13 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
         {
             get
             {
-                return _closeCommand ??= new RelayCommand<object>(_ => Close?.Invoke());
+                return _closeCommand ??= new RelayCommand<object>(_ => Close());
             }
         }
 
         public Action Close { get; set; }
 
-            private void AddEmployee()
+        private void AddEmployee()
         {
             // сюда саша
             // Yes honey
@@ -95,11 +95,6 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
                 && !string.IsNullOrWhiteSpace(City)
                 && !string.IsNullOrWhiteSpace(Street)
                 && !string.IsNullOrWhiteSpace(Zipcode);
-        }
-
-        private void UpdateData()
-        {
-
         }
     }
 }

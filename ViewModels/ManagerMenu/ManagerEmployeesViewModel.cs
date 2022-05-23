@@ -14,7 +14,7 @@ namespace supermarket.ViewModels.ManagerMenu
      */
     public class ManagerEmployeesViewModel : IWindowOpeningViewModel, INotifyPropertyChanged
     {
-        private List<string[]> _employees = DbQueries.GetAllEmployee();
+        private List<string[]> _employees;
         private string[] _selectedEmployee;
 
         private RelayCommand<object> _openAddEmployeeWindowCommand;
@@ -23,6 +23,7 @@ namespace supermarket.ViewModels.ManagerMenu
 
         public ManagerEmployeesViewModel()
         {
+            UpdateData();
             int i = 0;
             foreach (var employee in _employees)
             {
@@ -47,21 +48,21 @@ namespace supermarket.ViewModels.ManagerMenu
         {
             get
             {
-                return _openAddEmployeeWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel?.Invoke(WindowTypes.ManagerAddEmployee));
+                return _openAddEmployeeWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(WindowTypes.ManagerAddEmployee));
             }
         }
         public RelayCommand<object> OpenEditEmployeeWindowCommand
         {
             get
             {
-                return _openEditEmployeeWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel?.Invoke(WindowTypes.ManagerEditEmployee));
+                return _openEditEmployeeWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(WindowTypes.ManagerEditEmployee));
             }
         }
         public RelayCommand<object> CloseCommand 
         { 
             get
             {
-                return _closeCommand ??= new RelayCommand<object>(_ => Close?.Invoke());
+                return _closeCommand ??= new RelayCommand<object>(_ => Close());
             }
         }
         public Action<WindowTypes> OpenWindowViewModel { get; set; }
@@ -81,7 +82,7 @@ namespace supermarket.ViewModels.ManagerMenu
 
         public void UpdateData()
         {
-            _employees = DbQueries.GetAllEmployee();
+            Employees = DbQueries.GetAllEmployee();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
