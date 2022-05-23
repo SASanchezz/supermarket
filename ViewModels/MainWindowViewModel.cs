@@ -44,10 +44,10 @@ namespace supermarket.ViewModels
                     _windowViewModel = new ManagerEmployeesWindowViewModel();
                     _windowViewModel.Window.Closed += (object sender, EventArgs e) => IsEnabled = true;
                     return _windowViewModel;
-                //case MainWindowViewTypes.ManagerMenu:
-                //    return _managerMenuViewModel;
-                //case MainWindowViewTypes.CashierMenu:
-                //    return _cashierMenuViewModel;
+                case WindowTypes.ManagerClients:
+                    _windowViewModel = new ManagerClientsWindowViewModel();
+                    _windowViewModel.Window.Closed += (object sender, EventArgs e) => IsEnabled = true;
+                    return _windowViewModel;
                 default:
                     return null;
             }

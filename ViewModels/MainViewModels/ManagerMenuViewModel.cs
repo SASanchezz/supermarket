@@ -52,7 +52,7 @@ namespace supermarket.ViewModels
         {
             get
             {
-                return _openClientsWindowCommand ??= new RelayCommand<object>(_ => OpenEmployeesWindow());
+                return _openClientsWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel?.Invoke(WindowTypes.ManagerClients));
             }
         }
         public RelayCommand<object> OpenStoreProductsWindowCommand

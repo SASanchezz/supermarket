@@ -16,6 +16,9 @@
     <Compile Update="Views\ManagerMenu\EmployeesViews\ManagerEditEmployeeView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\ManagerMenu\ManagerClientsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ManagerMenu\ManagerEmployeesView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -28,7 +31,7 @@
     <Compile Update="Windows\ManagerMenu\ClientWindows\AddClientWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\ManagerMenu\ClientWindows\MainClientWindow.xaml.cs">
+    <Compile Update="Windows\ManagerMenu\ManagerClientsWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Windows\ManagerMenu\ClientWindows\ManageClientWindow.xaml.cs">
@@ -84,6 +87,9 @@
     <Page Update="Views\ManagerMenu\EmployeesViews\ManagerEditEmployeeView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\ManagerMenu\ManagerClientsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\ManagerMenu\ManagerEmployeesView.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -96,7 +102,7 @@
     <Page Update="Windows\ManagerMenu\ClientWindows\AddClientWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Windows\ManagerMenu\ClientWindows\MainClientWindow.xaml">
+    <Page Update="Windows\ManagerMenu\ManagerClientsWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\ManagerMenu\ClientWindows\ManageClientWindow.xaml">

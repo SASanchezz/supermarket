@@ -1,18 +1,18 @@
-﻿<Window x:Class="supermarket.Windows.ManagerMenu.ManagerEmployeesWindow"
+﻿<Window x:Class="supermarket.Windows.ManagerMenu.ManagerClientsWindow" Background="LightSlateGray"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:v="clr-namespace:supermarket.Views.ManagerMenu"
         xmlns:vm="clr-namespace:supermarket.ViewModels.ManagerMenu"
-        xmlns:local="clr-namespace:supermarket.ViewModels.ManagerMenu"
-        d:DataContext="{d:DesignInstance Type=vm:ManagerEmployeesWindowViewModel}"
+        xmlns:local="clr-namespace:supermarket.Windows.ManagerMenu"
+        d:DataContext="{d:DesignInstance Type=vm:ManagerClientsWindowViewModel}"
         mc:Ignorable="d"
-        Title="EmployeesWindow" Height="450" Width="800" FontFamily="Montserrat"
+        Title="MainClientWindow" Height="450" Width="800"
         Content="{Binding ViewModel, Mode=OneWay}" IsEnabled="{Binding IsEnabled, Mode=OneWay}">
     <Window.Resources>
-        <DataTemplate DataType="{ x:Type vm:ManagerEmployeesViewModel}">
-            <v:ManagerEmployeesView/>
+        <DataTemplate DataType="{ x:Type vm:ManagerClientsViewModel}">
+            <v:ManagerClientsView/>
         </DataTemplate>
     </Window.Resources>
 </Window>
