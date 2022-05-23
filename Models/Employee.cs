@@ -12,6 +12,14 @@ namespace supermarket.Models
     {
         const string s_format = "yyyy-MM-dd HH:mm:ss";
 
+        public static string[] GetEmployeeByPhone(string phoneNumber)
+        {
+            string sql = string.Format("SELECT * FROM Employee WHERE phone_number='{0}'", phoneNumber);
+            List<string[]> result = DbUtils.FindAll(sql);
+
+            return result.Count > 0 ? result[0] : null;
+        }
+
         public static void AddEmployee(string surname, string name, string patronymic, string role,
             string salary, DateTime dateBirth, DateTime dateStart, string phoneNumber,
             string password, string city, string street, string zipcode)

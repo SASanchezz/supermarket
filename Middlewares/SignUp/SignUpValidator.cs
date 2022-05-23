@@ -4,6 +4,7 @@ using System.Linq;
 using supermarket.Connections;
 using supermarket.Utils;
 using supermarket.Data;
+using supermarket.Models;
 /*
  * This class validates data for signing in
  */
@@ -73,6 +74,11 @@ namespace supermarket.Middlewares.SignUp
             {
                 return "Номер телефу некоректний";
             }
+            if (Employee.GetEmployeeByPhone(phoneNumber) != null)
+            {
+                return "Номер телефону зайнятий";
+            }
+
             if (city.Length is 0 or > 51)
             {
                 return "Введіть місто довжиною < 51";
