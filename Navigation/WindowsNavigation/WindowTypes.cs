@@ -9,8 +9,11 @@
         ManagerEditEmployee,
 
         ManagerProducts,
+        
         ManagerStoreProducts,
+        
         ManagerCategories,
+        
         ManagerClients,
 
         CashierChecks,
