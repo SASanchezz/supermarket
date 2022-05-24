@@ -44,11 +44,13 @@ namespace supermarket.Middlewares.SignUp
             /*
              * Check if salary is enetered correctly
              */
-            salary = salary.Replace(',', '.');
+            
+            //salary = salary.Replace('.', ',');
             try
             {
                 float floatSalary = float.Parse(salary);
-            } catch (FormatException)
+            }
+            catch (FormatException)
             {
                 return "Некоректно введена зарплата";
             }
