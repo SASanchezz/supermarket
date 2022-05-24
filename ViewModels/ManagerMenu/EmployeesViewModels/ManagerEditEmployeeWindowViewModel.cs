@@ -15,9 +15,6 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
         private ManagerEditEmployeeViewModel _viewModel;
         private Window _window;
 
-        private RelayCommand<object> _editCommand;
-        private RelayCommand<object> _closeCommand;
-
         public ManagerEditEmployeeWindowViewModel()
         {
             _window = new ManagerEditEmployeeWindow()
@@ -28,7 +25,6 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
             _viewModel.Close = Window.Close;
             Window.Show();
         }
-        
         
         public WindowTypes WindowType { get => WindowTypes.ManagerEditEmployee; }
         public Window Window { get => _window; }

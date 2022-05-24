@@ -6,6 +6,7 @@ using supermarket.Models;
 using supermarket.Middlewares.Employee;
 using System.Runtime.CompilerServices;
 using Empl = supermarket.Models.Employee;
+using System.Windows;
 
 namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
 {
@@ -170,7 +171,7 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
         {
             get
             {
-                return _closeCommand ??= new RelayCommand<object>(_ => Close?.Invoke());
+                return _closeCommand ??= new RelayCommand<object>(_ => Close());
             }
         }
         public Action Close { get; set; }
@@ -201,7 +202,7 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
 
             if (result.Length != 0)
             {
-                //MessageBox.Show(result);
+                MessageBox.Show(result);
                 return;
             }
 
