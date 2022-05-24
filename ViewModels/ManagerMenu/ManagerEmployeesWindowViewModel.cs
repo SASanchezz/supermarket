@@ -48,7 +48,7 @@ namespace supermarket.ViewModels.ManagerMenu
                         addWindowViewModel.Window.Closed += (object sender, EventArgs e) => 
                         {
                             IsEnabled = true;
-                            ViewModel.UpdateData();
+                            ViewModel.UpdateEmployees();
                         };
                         return addWindowViewModel;
 
@@ -63,7 +63,7 @@ namespace supermarket.ViewModels.ManagerMenu
                         editWindowViewModel.Window.Closed += (object sender, EventArgs e) =>
                         {
                             IsEnabled = true;
-                            ViewModel.UpdateData();
+                            ViewModel.UpdateEmployees();
                         };
                         editWindowViewModel.ViewModel.SetData(ViewModel.SelectedEmployee);
                         ViewModel.SelectedEmployee = null;

@@ -24,7 +24,7 @@ namespace supermarket.ViewModels.ManagerMenu
 
         public ManagerEmployeesViewModel()
         {
-            UpdateData();
+            UpdateEmployees();
             //int i = 0;
             //foreach (var employee in _employees)
             //{
@@ -85,7 +85,7 @@ namespace supermarket.ViewModels.ManagerMenu
             }
         }
 
-        public void UpdateData()
+        public void UpdateEmployees()
         {
             Employees = DbQueries.GetAllEmployee();
         }
