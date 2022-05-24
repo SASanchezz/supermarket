@@ -15,8 +15,8 @@ namespace supermarket.Data
 
         public static readonly Dictionary<string, int> roleKeys = new()
         {
-            { "Менеджер", 0 },
-            { "Касир", 1 }
+            { "Менеджер", 1 },
+            { "Касир", 2 }
         };
     }
 }

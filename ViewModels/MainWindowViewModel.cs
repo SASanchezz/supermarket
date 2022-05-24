@@ -45,7 +45,7 @@ namespace supermarket.ViewModels
                     _windowViewModel.Window.Closed += (object sender, EventArgs e) => IsEnabled = true;
                     return _windowViewModel;
                 case WindowTypes.ManagerClients:
-                    _windowViewModel = new ManagerClientsWindowViewModel();
+                    _windowViewModel = new ManagerCustomersWindowViewModel();
                     _windowViewModel.Window.Closed += (object sender, EventArgs e) => IsEnabled = true;
                     return _windowViewModel;
                 default:

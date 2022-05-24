@@ -1,3 +1,4 @@
+using supermarket.Data;
 using System.Collections.Generic;
 using prdct = supermarket.Data.DbMaps.ProductMap;
 /*
@@ -19,6 +20,11 @@ namespace supermarket.Utils
         public static List<string[]> GetEmployeeByID(string employeeId)
         {
             string sql = string.Format("SELECT * FROM Employee WHERE id_employee='{0}'", employeeId);
+            return DbUtils.FindAll(sql);
+        }
+        public static List<string[]> GetEmployeesByRole(int employeeRole)
+        {
+            string sql = string.Format("SELECT * FROM Employee WHERE empl_role_id='{0}'", employeeRole);
             return DbUtils.FindAll(sql);
         }
 

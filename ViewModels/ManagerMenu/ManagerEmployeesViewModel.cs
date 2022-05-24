@@ -17,6 +17,7 @@ namespace supermarket.ViewModels.ManagerMenu
     {
         private List<string[]> _employees;
         private string[] _selectedEmployee;
+        private int _selectedRole;
 
         private RelayCommand<object> _openAddEmployeeWindowCommand;
         private RelayCommand<object> _openEditEmployeeWindowCommand;
@@ -25,6 +26,7 @@ namespace supermarket.ViewModels.ManagerMenu
         public ManagerEmployeesViewModel()
         {
             UpdateEmployees();
+            SelectedRole = 0;
             //int i = 0;
             //foreach (var employee in _employees)
             //{
@@ -42,9 +44,10 @@ namespace supermarket.ViewModels.ManagerMenu
             set
             {
                 _employees = value;
+                // set word-roles
                 foreach (string[] employee in _employees)
                 {
-                    employee[Empl.role] = Roles.roleNames[int.Parse(employee[Empl.role])];
+                    employee[Empl.role] = Roles.roleNames[(int.Parse(employee[Empl.role]) - 1)];
                 }
                 OnPropertyChanged(nameof(Employees));
             }
@@ -81,6 +84,26 @@ namespace supermarket.ViewModels.ManagerMenu
             set
             {
                 _selectedEmployee = value;
+                OnPropertyChanged();
+            }
+        }
+        public int SelectedRole
+        {
+            get
+            {
+                return _selectedRole;
+            }
+            set
+            {
+                _selectedRole = value;
+                if (_selectedRole == 0)
+                {
+                    UpdateEmployees();
+                }
+                else
+                {
+                    Employees = DbQueries.GetEmployeesByRole(_selectedRole);
+                }
                 OnPropertyChanged();
             }
         }
