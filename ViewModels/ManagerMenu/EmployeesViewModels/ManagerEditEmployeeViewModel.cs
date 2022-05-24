@@ -16,8 +16,8 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
     internal class ManagerEditEmployeeViewModel : INotifyPropertyChanged
     {
         private string _id;
-        private string _name;
         private string _surname;
+        private string _name;
         private string _patronymic;
         private string _role;
         private string _salary;
@@ -42,6 +42,15 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
                 OnPropertyChanged(nameof(Id));
             }
         }
+        public string Surname
+        {
+            get => _surname;
+            set
+            {
+                _surname = value;
+                OnPropertyChanged(nameof(Surname));
+            }
+        }
         public string Name 
         { 
             get => _name; 
@@ -50,15 +59,6 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
                 _name = value;
                 OnPropertyChanged(nameof(Name));
             } 
-        }
-        public string Surname 
-        { 
-            get => _surname; 
-            set 
-            {
-                _surname = value;
-                OnPropertyChanged(nameof(Surname));
-            }
         }
         public string Patronymic 
         { 
@@ -157,7 +157,7 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
         {
             get
             {
-                return _updateCommand ??= new RelayCommand<object>(_ => UpdateEmployee());
+                return _updateCommand ??= new RelayCommand<object>(_ => UpdateEmployee(), CanExecute);
             }
         }
         public RelayCommand<object> DeleteCommand
@@ -195,7 +195,6 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
 
         private void UpdateEmployee()
         {
-
             string result = UpdateDataValidator.Validate(Id, Surname, Name, Patronymic, Role,
                 Salary, Date_of_birth, Date_of_start, Phone_number,
                 City, Street, Zipcode, Password);
@@ -221,6 +220,19 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
         {
             Employee.DeleteEmployeeByID(Id);
             Close();
+        }
+
+        private bool CanExecute(object obj)
+        {
+            return !string.IsNullOrWhiteSpace(Name)
+                && !string.IsNullOrWhiteSpace(Surname)
+                && !string.IsNullOrWhiteSpace(Patronymic)
+                && !string.IsNullOrWhiteSpace(Salary)
+                && !string.IsNullOrWhiteSpace(Phone_number)
+                //&& !string.IsNullOrWhiteSpace(Password)
+                && !string.IsNullOrWhiteSpace(City)
+                && !string.IsNullOrWhiteSpace(Street)
+                && !string.IsNullOrWhiteSpace(Zipcode);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

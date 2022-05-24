@@ -8,8 +8,8 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
 {
     internal class ManagerAddEmployeeViewModel
     {
-        private string _name;
         private string _surname;
+        private string _name;
         private string _patronymic;
         private string _role;
         private string _salary;
@@ -24,8 +24,8 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
         private RelayCommand<object> _addEmployeeCommand;
         private RelayCommand<object> _closeCommand;
 
-        public string Name { get => _name; set => _name = value; }
         public string Surname { get => _surname; set => _surname = value; }
+        public string Name { get => _name; set => _name = value; }
         public string Patronymic { get => _patronymic; set => _patronymic = value; }
         public string Role { get => _role; set => _role = value; }
         public string Salary { get => _salary; set => _salary = value; }
@@ -36,9 +36,7 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
         public string City { get => _city; set => _city = value; }
         public string Street { get => _street; set => _street = value; }
         public string Zipcode { get => _zipcode; set => _zipcode = value; }
-        
         public static string[] Roles { get => Data.Roles.roleNames; }
-
         public RelayCommand<object> AddEmployeeCommand
         {
             get
@@ -53,7 +51,6 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
                 return _closeCommand ??= new RelayCommand<object>(_ => Close());
             }
         }
-
         public Action Close { get; set; }
 
         private void AddEmployee()
