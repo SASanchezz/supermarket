@@ -4,12 +4,12 @@ using System.Windows.Data;
 
 namespace supermarket.Utils.Convertes
 {
-    [ValueConversion(typeof(DateTime), typeof(string))]
-    public class DateConverter : IValueConverter
+    [ValueConversion(typeof(string), typeof(string))]
+    public class DateStringToShortConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            DateTime date = (DateTime)value;
+            DateTime date = DateTime.Parse((string)value);
             return date.ToShortDateString();
         }
 

@@ -5,9 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:supermarket.Views.ManagerMenu"
              xmlns:viewModels="clr-namespace:supermarket.ViewModels.ManagerMenu"
+             xmlns:converters="clr-namespace:supermarket.Utils.Convertes"
              d:DataContext="{d:DesignInstance Type=viewModels:ManagerEmployeesViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converters:DateStringToShortConverter x:Key="DateStringToShortConverter"/>
+    </UserControl.Resources>
     <Grid Background="#F2F2F2">
         <Rectangle Fill="BlanchedAlmond" />
         <Button Content="←Назад" Grid.Row="0" Width="75" Height="24" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" FontWeight="DemiBold" Margin="20,0,0,0"
@@ -26,8 +30,8 @@
                         <DataGridTextColumn Header="По-батькові"            Binding="{Binding Path=[3]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Посада"                 Binding="{Binding Path=[4]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Зарплата"               Binding="{Binding Path=[5]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="Дата народження"        Binding="{Binding Path=[6]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="Дата початку роботи"    Binding="{Binding Path=[7]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Дата народження"        Binding="{Binding Path=[6], Converter={StaticResource DateStringToShortConverter}}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Дата початку роботи"    Binding="{Binding Path=[7], Converter={StaticResource DateStringToShortConverter}}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Номер телефону"         Binding="{Binding Path=[8]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Пароль"                 Binding="{Binding Path=[9]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Місто"                  Binding="{Binding Path=[10]}"   Width="Auto" IsReadOnly="True" CanUserSort="False"/>
