@@ -41,51 +41,7 @@ namespace supermarket.Windows.ManagerMenu.EmployeeWindows
         ///*
         //* This method updates information in database from boxes
         //*/
-        //public void UpdateClick(object sender, RoutedEventArgs e)
-        //{
-        //    string surname = surnameBox.Text;
-        //    string name = nameBox.Text;
-        //    string patronymic = patronymicBox.Text;
-        //    string role = roleList.Text;
-        //    string salary = salaryBox.Text;
-        //    string dateBirth = birthDate.Text;
-        //    string dateStart = startDate.Text;
-        //    string phoneNumber = phoneNumberBox.Text;
-        //    string password = (passwordBox.Text == "") ? s_defaultPassword : passwordBox.Text;
-        //    string city = cityBox.Text;
-        //    string street = streetBox.Text;
-        //    string zipcode = zipcodeBox.Text;
 
-        //    string result = SignUpValidator.Validate(surname, name, patronymic, role,
-        //        salary, dateBirth, dateStart, phoneNumber,
-        //        city, street, zipcode, password);
-
-        //    if (result.Length != 8) //if returned not uniqueId (hope any other string is not 8 length string)
-        //    {
-        //        MessageBox.Show(result);
-        //        return;
-        //    }
-
-        //    string[] employee = DbQueries.GetEmployeeByID(_employeeId)[0];
-        //    If password is default, we remain old user's password, otherwise set new
-        //    password = (password == s_defaultPassword) ? employee[(int)empl.password] : CryptUtils.HashPassword(password);
-
-        //    string sql = string.Format("UPDATE Employee SET " +
-        //        "empl_surname='{1}', empl_name='{2}', empl_patronymic='{3}', empl_role={4}, salary={5}," +
-        //        "date_of_birth='{6}', date_of_start='{7}', phone_number='{8}', password='{9}', city='{10}', street='{11}', zip_code='{12}'" +
-        //        "WHERE id_employee='{0}'",
-        //        _employeeId, surname, name, patronymic, Roles.roleKeys[role], float.Parse(salary),
-        //        Convert.ToDateTime(dateBirth).ToString(s_format), Convert.ToDateTime(dateStart).ToString(s_format),
-        //        phoneNumber, password, city, street, zipcode);
-
-        //    DbUtils.Execute(sql);
-
-        //    EmployeesWindow owner = (EmployeesWindow)Owner;
-        //    owner.DeleteOldEmployeeButtons();
-        //    owner.SetEmployeeButtons();
-        //    owner.Show();
-        //    Close();
-        //}
 
         //public void ReturnClick(object sender, RoutedEventArgs e)
         //{

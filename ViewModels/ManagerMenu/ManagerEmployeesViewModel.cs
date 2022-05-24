@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using supermarket.Navigation.WindowsNavigation;
 using System.Windows;
 using supermarket.Data;
+using Empl = supermarket.Models.Employee;
 
 namespace supermarket.ViewModels.ManagerMenu
 {
@@ -24,12 +25,12 @@ namespace supermarket.ViewModels.ManagerMenu
         public ManagerEmployeesViewModel()
         {
             UpdateData();
-            int i = 0;
-            foreach (var employee in _employees)
-            {
-                employee[4] = Roles.roleNames[int.Parse(employee[4])];
-                ++i;
-            }
+            //int i = 0;
+            //foreach (var employee in _employees)
+            //{
+            //    employee[4] = Roles.roleNames[int.Parse(employee[4])];
+            //    ++i;
+            //}
         }
 
         public List<string[]> Employees 
@@ -41,6 +42,10 @@ namespace supermarket.ViewModels.ManagerMenu
             set
             {
                 _employees = value;
+                foreach (string[] employee in _employees)
+                {
+                    employee[Empl.role] = Roles.roleNames[int.Parse(employee[Empl.role])];
+                }
                 OnPropertyChanged(nameof(Employees));
             }
         }

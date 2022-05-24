@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using supermarket.Connections;
 using supermarket.Utils;
 using supermarket.Data;
-using supermarket.Models;
-/*
- * This class validates data for signing in
- */
-namespace supermarket.Middlewares.SignUp
+using Empl = supermarket.Models.Employee;
+
+namespace supermarket.Middlewares.Employee
 {
-    public static class SignUpValidator
+    internal class UpdateDataValidator
     {
-        public static string Validate(string surname, string name, string patronymic, string role,
+        public static string Validate(string id, string surname, string name, string patronymic, string role,
             string salary, DateTime birtDate, DateTime startDate, string phoneNumber,
             string city, string street, string zipcode, string password)
         {
@@ -25,20 +21,9 @@ namespace supermarket.Middlewares.SignUp
             {
                 return "Введіть ім'я довжиною < 51";
             }
-            if (patronymic.Length > 51)
+            if (patronymic != null && patronymic.Length > 51)
             {
                 return "Введіть по батькові довжиною < 51";
-            }
-
-            /*
-             * Check if we have such role in static data
-             */
-            try
-            {
-                int findRole = Roles.roleKeys[role];
-            } catch (KeyNotFoundException)
-            {
-                return "Нема такої ролі";
             }
 
             /*
@@ -48,7 +33,8 @@ namespace supermarket.Middlewares.SignUp
             try
             {
                 float floatSalary = float.Parse(salary);
-            } catch (FormatException)
+            }
+            catch (FormatException)
             {
                 return "Некоректно введена зарплата";
             }
@@ -74,7 +60,8 @@ namespace supermarket.Middlewares.SignUp
             {
                 return "Номер телефу некоректний";
             }
-            if (Employee.GetEmployeeByPhone(phoneNumber) != null)
+            string[] employee = Models.Employee.GetEmployeeByPhone(phoneNumber);
+            if (employee != null && employee[Empl.id] != id)
             {
                 return "Номер телефону зайнятий";
             }
@@ -92,7 +79,7 @@ namespace supermarket.Middlewares.SignUp
                 return "Введіть поштовий індекс довжиною < 10";
             }
 
-            if (password.Length is 0 or > 16)
+            if (password.Length != 0 && password.Length > 16)
             {
                 return "Введіть пароль до 16 символів";
             }

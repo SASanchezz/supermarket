@@ -2,7 +2,10 @@
 using System;
 using System.ComponentModel;
 using supermarket.Data;
+using supermarket.Models;
+using supermarket.Middlewares.Employee;
 using System.Runtime.CompilerServices;
+using Empl = supermarket.Models.Employee;
 
 namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
 {
@@ -11,10 +14,11 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
      */
     internal class ManagerEditEmployeeViewModel : INotifyPropertyChanged
     {
+        private string _id;
         private string _name;
         private string _surname;
         private string _patronymic;
-        private int _role;
+        private string _role;
         private string _salary;
         private DateTime _date_of_birth;
         private DateTime _date_of_start;
@@ -28,6 +32,15 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
         private RelayCommand<object> _deleteCommand;
         private RelayCommand<object> _closeCommand;
 
+        public string Id
+        {
+            get => _id;
+            set
+            {
+                _id = value;
+                OnPropertyChanged(nameof(Id));
+            }
+        }
         public string Name 
         { 
             get => _name; 
@@ -55,7 +68,7 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
                 OnPropertyChanged(nameof(Patronymic));
             }
         }
-        public int Role 
+        public string Role 
         { 
             get => _role; 
             set
@@ -136,11 +149,14 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
                 OnPropertyChanged(nameof(Zipcode));
             }
         }
+
+        public static string[] EmployeeRoles { get => Roles.roleNames; }
+
         public RelayCommand<object> UpdateCommand
         {
             get
             {
-                return _updateCommand ??= new RelayCommand<object>(_ => SetNewEmployee());
+                return _updateCommand ??= new RelayCommand<object>(_ => UpdateEmployee());
             }
         }
         public RelayCommand<object> DeleteCommand
@@ -161,28 +177,49 @@ namespace supermarket.ViewModels.ManagerMenu.EmployeesViewModels
 
         public void SetData(string[] data)
         {
-            Name = data[1];
-            Surname = data[2];
-            Patronymic = data[3];
-            Role = Roles.roleKeys[data[4]];
-            Salary = data[5];
-            Date_of_birth = DateTime.Parse(data[6]);
-            Date_of_start = DateTime.Parse(data[7]);
-            Phone_number = data[8];
-            Password = data[9];
-            City = data[10];
-            Street = data[11];
-            Zipcode = data[12];
+            Id = data[Empl.id];
+            Name = data[Empl.name];
+            Surname = data[Empl.surname];
+            Patronymic = data[Empl.patronymic];
+            Role = data[Empl.role];
+            Salary = data[Empl.salary];
+            Date_of_birth = DateTime.Parse(data[Empl.date_of_birth]);
+            Date_of_start = DateTime.Parse(data[Empl.date_of_start]);
+            Phone_number = data[Empl.phone_number];
+            Password = ""; //data[9];
+            City = data[Empl.city];
+            Street = data[Empl.street];
+            Zipcode = data[Empl.zipcode];
         }
 
-        private void SetNewEmployee()
+        private void UpdateEmployee()
         {
-            // сюда саша
+
+            string result = UpdateDataValidator.Validate(Id, Surname, Name, Patronymic, Role,
+                Salary, Date_of_birth, Date_of_start, Phone_number,
+                City, Street, Zipcode, Password);
+
+            if (result.Length != 0)
+            {
+                //MessageBox.Show(result);
+                return;
+            }
+
+            string[] employee = DbQueries.GetEmployeeByID(Id)[0];
+
+            Password = (Password == "") ? employee[Empl.password] : CryptUtils.HashPassword(Password);
+
+            Employee.UpdateEmployee(Id, Surname, Name, Patronymic, Role,
+            Salary, Date_of_birth, Date_of_start, Phone_number,
+            Password, City, Street, Zipcode);
+
+            Close();
         }
 
         private void DeleteEmployee()
         {
-            // сюда пес
+            Employee.DeleteEmployeeByID(Id);
+            Close();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
