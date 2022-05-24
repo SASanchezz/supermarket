@@ -1,36 +1,32 @@
 ﻿using supermarket.Navigation.WindowsNavigation;
 using supermarket.Windows.ManagerMenu;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace supermarket.ViewModels.ManagerMenu
 {
-    internal class ManagerClientsWindowViewModel : WindowViewModelNavigator, INavigatableWindowViewModel
+    internal class ManagerCustomersWindowViewModel : WindowViewModelNavigator, INavigatableWindowViewModel
     {
         private Window _window;
-        private ManagerClientsViewModel _viewModel;
+        private ManagerCustomersViewModel _viewModel;
 
-        public ManagerClientsWindowViewModel()
+        public ManagerCustomersWindowViewModel()
         {
             IsEnabled = true;
 
-            _window = new ManagerClientsWindow
+            _window = new ManagerCustomersWindow
             {
                 DataContext = this
             };
             
-            _viewModel = new ManagerClientsViewModel();
+            _viewModel = new ManagerCustomersViewModel();
 
             Window.Show();
         }
 
         public Window Window => _window;
         public WindowTypes WindowType => WindowTypes.ManagerClients;
-        public ManagerClientsViewModel ViewModel { get => _viewModel; }
+        public ManagerCustomersViewModel ViewModel { get => _viewModel; }
 
         protected override INavigatableWindowViewModel CreateWindowViewModel(WindowTypes type)
         {

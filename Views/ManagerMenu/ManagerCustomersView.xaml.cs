@@ -18,9 +18,9 @@ namespace supermarket.Views.ManagerMenu
     /// <summary>
     /// Логика взаимодействия для ManagerClientsView.xaml
     /// </summary>
-    public partial class ManagerClientsView : UserControl
+    public partial class ManagerCustomersView : UserControl
     {
-        public ManagerClientsView()
+        public ManagerCustomersView()
         {
             InitializeComponent();
         }

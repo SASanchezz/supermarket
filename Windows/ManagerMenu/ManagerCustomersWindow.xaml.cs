@@ -16,7 +16,7 @@ using cstmr = supermarket.Data.DbMaps.CustomerMap;
 
 namespace supermarket.Windows.ManagerMenu
 {
-    public partial class ManagerClientsWindow : Window
+    public partial class ManagerCustomersWindow : Window
     {
         //private const string ASC = "ASC";
         //private const string DESC = "DESC";
@@ -30,7 +30,7 @@ namespace supermarket.Windows.ManagerMenu
         //private string SurnameSort = ASC; // ASC as default value
         //private double percentMax = 100.0;
         //private double percentMin = 0.0;
-        public ManagerClientsWindow()
+        public ManagerCustomersWindow()
         {
             InitializeComponent();
             //SetButtons(SetSortList());

@@ -20,23 +20,31 @@
                 Command="{Binding OpenAddEmployeeWindowCommand}"/>
         <Button Content="Редагувати" Grid.Row="0" Width="110" Height="24" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" FontWeight="DemiBold" Margin="0,0,20,0"
                 Command="{Binding OpenEditEmployeeWindowCommand}"/>
+
+        <ComboBox Grid.Row="0" Width="120" Height="24" HorizontalAlignment="Left" Margin="150, 0, 0, 0"
+                  SelectedIndex="{Binding SelectedRole, Mode=TwoWay}">
+            <TextBlock>Всі</TextBlock>
+            <TextBlock>Менеджер</TextBlock>
+            <TextBlock>Касир</TextBlock>
+        </ComboBox>
+        
         <ScrollViewer Grid.Row="1">
             <StackPanel x:Name="employeePanel">
-                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single">
+                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee, Mode=OneWayToSource}" SelectionMode="Single">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="id"                     Binding="{Binding Path=[0]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Прізвище"               Binding="{Binding Path=[1]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Ім'я"                   Binding="{Binding Path=[2]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="По-батькові"            Binding="{Binding Path=[3]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="По батькові"            Binding="{Binding Path=[3]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Посада"                 Binding="{Binding Path=[4]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Зарплата"               Binding="{Binding Path=[5]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="Дата народження"        Binding="{Binding Path=[6], Converter={StaticResource DateStringToShortConverter}}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="Дата початку роботи"    Binding="{Binding Path=[7], Converter={StaticResource DateStringToShortConverter}}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Дата народження"        Binding="{Binding Path=[6], Converter={StaticResource DateStringToShortConverter}}" Width="Auto" IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Дата початку роботи"    Binding="{Binding Path=[7], Converter={StaticResource DateStringToShortConverter}}" Width="Auto" IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Номер телефону"         Binding="{Binding Path=[8]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Пароль"                 Binding="{Binding Path=[9]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Місто"                  Binding="{Binding Path=[10]}"   Width="Auto" IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Вулиця"                 Binding="{Binding Path=[11]}"   Width="Auto" IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="Індекс пошти"           Binding="{Binding Path=[12]}"   Width="Auto" IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Поштовий індекс"        Binding="{Binding Path=[12]}"   Width="Auto" IsReadOnly="True" CanUserSort="False"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
