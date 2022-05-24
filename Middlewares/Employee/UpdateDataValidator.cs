@@ -29,7 +29,7 @@ namespace supermarket.Middlewares.Employee
             /*
              * Check if salary is enetered correctly
              */
-            salary = salary.Replace(',', '.');
+            //salary = salary.Replace(',', '.');
             try
             {
                 float floatSalary = float.Parse(salary);
