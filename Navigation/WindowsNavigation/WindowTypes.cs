@@ -14,7 +14,7 @@
         
         ManagerCategories,
         
-        ManagerClients,
+        ManagerCustomers,
 
         CashierChecks,
         CashierProducts,

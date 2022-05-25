@@ -13,7 +13,7 @@ namespace supermarket
             DbUtils.SetDbConnection();
             InitializeComponent();
 
-            DataContext = new MainWindowViewModel();
+            DataContext = new MainWindowVM();
         }
     }
 }
