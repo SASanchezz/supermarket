@@ -42,6 +42,14 @@ namespace supermarket.Models
             return result.Count > 0 ? result[0] : null;
         }
 
+        public static List<string[]> GetEmployeesByRole(int employeeRole)
+        {
+            string sql = string.Format("SELECT * FROM Employee WHERE empl_role_id={0}", employeeRole);
+
+            List<string[]> result = DbUtils.FindAll(sql);
+
+            return result.Count > 0 ? result : null;
+        }
         public static void DeleteEmployeeByID(string employeeId)
         {
             string sql = string.Format("DELETE FROM Employee WHERE id_employee='{0}'", employeeId);

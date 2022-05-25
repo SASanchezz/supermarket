@@ -61,12 +61,7 @@
                   Height="24" 
                   HorizontalAlignment="Left" 
                   Margin="150, 0, 0, 0"
-                  SelectedIndex="{Binding SelectedRole, Mode=TwoWay}">
-            
-            <TextBlock>Всі</TextBlock>
-            <TextBlock>Менеджер</TextBlock>
-            <TextBlock>Касир</TextBlock>
-            
+                  ItemsSource="{Binding AllRoles}" SelectedItem="{Binding SelectedRole, Mode=TwoWay}">
         </ComboBox>
         
         <ScrollViewer Grid.Row="1">
@@ -85,7 +80,7 @@
                         <DataGridTextColumn Header="Дата народження"        Binding="{Binding Path=[6], Converter={StaticResource DateStringToShortConverter}}" Width="Auto" IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Дата початку роботи"    Binding="{Binding Path=[7], Converter={StaticResource DateStringToShortConverter}}" Width="Auto" IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Номер телефону"         Binding="{Binding Path=[8]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="Пароль"                 Binding="{Binding Path=[9]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
+                        <!--<DataGridTextColumn Header="Пароль"                 Binding="{Binding Path=[9]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>-->
                         <DataGridTextColumn Header="Місто"                  Binding="{Binding Path=[10]}"   Width="Auto" IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Вулиця"                 Binding="{Binding Path=[11]}"   Width="Auto" IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Поштовий індекс"        Binding="{Binding Path=[12]}"   Width="Auto" IsReadOnly="True" CanUserSort="False"/>
