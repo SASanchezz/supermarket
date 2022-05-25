@@ -16,40 +16,40 @@ namespace supermarket.Windows.ManagerMenu.CategoryWindows
         /*
         * This method is realization for adding new product to database
         */
-        public void AddClick(object sender, RoutedEventArgs e)
-        {
-            string categoryNumber = idBox.Text;
-            string categoryName = nameBox.Text;
+        //public void AddClick(object sender, RoutedEventArgs e)
+        //{
+        //    string categoryNumber = idBox.Text;
+        //    string categoryName = nameBox.Text;
 
-            //Validate enetered data
-            string result = CategoryValidator.Validate(categoryNumber, categoryName);
+        //    //Validate enetered data
+        //    string result = CategoryValidator.Validate(categoryNumber, categoryName);
 
-            if (result.Length != 0)
-            {
-                MessageBox.Show(result);
-                return;
-            }
+        //    if (result.Length != 0)
+        //    {
+        //        MessageBox.Show(result);
+        //        return;
+        //    }
 
-            string sql = String.Format("INSERT INTO Category " +
-                "(category_number, category_name) " +
-                "VALUES ({0}, '{1}')",
-                categoryNumber, categoryName);
+        //    string sql = String.Format("INSERT INTO Category " +
+        //        "(category_number, category_name) " +
+        //        "VALUES ({0}, '{1}')",
+        //        categoryNumber, categoryName);
 
-            DbUtils.Execute(sql);
+        //    DbUtils.Execute(sql);
 
-            MainCategoryWindow owner = (MainCategoryWindow)Owner;
-            //Renew buttons in MainProductWindow (i.e. add new product window)
-            owner.DeleteOldButtons();
-            owner.SetButtons(owner.SetSortList());
-            owner.Show();
-            Close();
-        }
+        //    MainCategoryWindow owner = (MainCategoryWindow)Owner;
+        //    //Renew buttons in MainProductWindow (i.e. add new product window)
+        //    owner.DeleteOldButtons();
+        //    owner.SetButtons(owner.SetSortList());
+        //    owner.Show();
+        //    Close();
+        //}
 
-        public void ReturnClick(object sender, RoutedEventArgs e)
-        {
-            Owner.Show();
-            Close();
-        }
+        //public void ReturnClick(object sender, RoutedEventArgs e)
+        //{
+        //    Owner.Show();
+        //    Close();
+        //}
     }
 }
 

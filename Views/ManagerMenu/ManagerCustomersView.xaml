@@ -7,25 +7,84 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              FontFamily="Montserrat">
+    
     <Grid Background="#F2F2F2">
-        
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="64"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
         <Rectangle Fill="Azure" />
 
-        <Button Content="Додати нового клієнта" Grid.Row="0" Width="164" Height="24" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,20,0"
-                Background="LawnGreen" FontSize="12" />
+        <Button Grid.Row="0" 
+                Content="Додати нового клієнта"  
+                Width="164" 
+                Height="24" 
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center" 
+                FontSize="12"
+                Margin="0,0,20,0"
+                Background="LawnGreen" />
 
-        <TextBlock Text="Max" FontSize="12"
-                   Width="224" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 0, 0, 30"/>
-        <Slider HorizontalAlignment="Center" VerticalAlignment="Center" Width="224" Height="24" FontSize="12" Maximum="100" TickFrequency="0.5" IsSnapToTickEnabled="True" Margin="50, 0, 0, 30"/>
-        <TextBox Text="{Binding ElementName=sliderMax, Path=Value}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Right" Width="40" Height="20" Margin="320, 0, 0, 30" />
+        <TextBlock Text="Max" 
+                   FontSize="12"
+                   Width="224" 
+                   Height="24" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" 
+                   Margin="0, 0, 0, 30"/>
+        
+        <Slider Width="224" 
+                Height="24" 
+                FontSize="12" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Maximum="100" 
+                TickFrequency="0.5" 
+                IsSnapToTickEnabled="True" 
+                Margin="50, 0, 0, 30"/>
 
-        <TextBlock Text="Min" Width="224" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" Margin="0, 30, 0, 0"/>
-        <Slider Width="224" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" Maximum="100" TickFrequency="0.5" IsSnapToTickEnabled="True" Margin="50, 30, 0, 0"/>
-        <TextBox Text="{Binding ElementName=sliderMin, Path=Value}" Width="40" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Right" Margin="320, 30, 0, 0" />
+        <TextBox Text="{Binding ElementName=sliderMax, Path=Value}" 
+                 Width="40" 
+                 Height="20" 
+                 HorizontalAlignment="Center" 
+                 VerticalAlignment="Center" 
+                 TextAlignment="Right"
+                 Margin="320, 0, 0, 30" />
+
+        <TextBlock Text="Min" 
+                   Width="224" 
+                   Height="24" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" 
+                   FontSize="12" 
+                   Margin="0, 30, 0, 0"/>
+        
+        <Slider Width="224" 
+                Height="24"
+                FontSize="12"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Maximum="100" 
+                TickFrequency="0.5" 
+                IsSnapToTickEnabled="True" 
+                Margin="50, 30, 0, 0"/>
+        
+        <TextBox Text="{Binding ElementName=sliderMin, Path=Value}"
+                 Width="40" 
+                 Height="20" 
+                 HorizontalAlignment="Center" 
+                 VerticalAlignment="Center" 
+                 TextAlignment="Right" 
+                 Margin="320, 30, 0, 0" />
 
         <ScrollViewer Grid.Row="1">
             <StackPanel>
-                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer, Mode=OneWayToSource}" SelectionMode="Single">
+                <DataGrid AutoGenerateColumns="False" 
+                          SelectionMode="Single"
+                          ItemsSource="{Binding Customers}" 
+                          SelectedItem="{Binding SelectedCustomer, Mode=OneWayToSource}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Номер карти"        Binding="{Binding Path=[0]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Прізвище"           Binding="{Binding Path=[1]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
@@ -41,10 +100,15 @@
             </StackPanel>
         </ScrollViewer>
 
-        <Button Content="←Назад" FontSize="12" Grid.Row="0" Width="64" Height="24" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0"/>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="64"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+        <Button Grid.Row="0" 
+                Content="←Назад" 
+                Width="64" 
+                Height="24" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center" 
+                FontSize="12" 
+                Margin="20,0,0,0"/>
+
     </Grid>
+    
 </UserControl>

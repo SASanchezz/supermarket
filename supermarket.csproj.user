@@ -16,10 +16,19 @@
     <Compile Update="Views\ManagerMenu\EmployeesViews\ManagerEditEmployeeView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\ManagerMenu\ManagerCategoriesView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ManagerMenu\ManagerCustomersView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\ManagerMenu\ManagerEmployeesView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ManagerMenu\ManagerProductsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ManagerMenu\ManagerStoreProductsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Windows\ManagerMenu\CategoryWindows\AddCategoryWindow.xaml.cs">
@@ -40,7 +49,7 @@
     <Compile Update="Windows\ManagerMenu\ProductWindows\AddProductWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\ManagerMenu\ProductWindows\MainProductWindow.xaml.cs">
+    <Compile Update="Windows\ManagerMenu\ManagerProductsWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Windows\ManagerMenu\ProductWindows\ManageProductWindow.xaml.cs">
@@ -52,7 +61,7 @@
     <Compile Update="Windows\ManagerMenu\StoreProduct\AddStoreProductWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\ManagerMenu\StoreProduct\MainStoreProductWindow.xaml.cs">
+    <Compile Update="Windows\ManagerMenu\ManagerStoreProductsWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Windows\ManagerMenu\StoreProduct\ManagePromStoreProductWindow.xaml.cs">
@@ -87,10 +96,19 @@
     <Page Update="Views\ManagerMenu\EmployeesViews\ManagerEditEmployeeView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\ManagerMenu\ManagerCategoriesView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\ManagerMenu\ManagerCustomersView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\ManagerMenu\ManagerEmployeesView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ManagerMenu\ManagerProductsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ManagerMenu\ManagerStoreProductsView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\ManagerMenu\CategoryWindows\AddCategoryWindow.xaml">
@@ -111,7 +129,7 @@
     <Page Update="Windows\ManagerMenu\ProductWindows\AddProductWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Windows\ManagerMenu\ProductWindows\MainProductWindow.xaml">
+    <Page Update="Windows\ManagerMenu\ManagerProductsWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\ManagerMenu\ProductWindows\ManageProductWindow.xaml">
@@ -123,7 +141,7 @@
     <Page Update="Windows\ManagerMenu\StoreProduct\AddStoreProductWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Windows\ManagerMenu\StoreProduct\MainStoreProductWindow.xaml">
+    <Page Update="Windows\ManagerMenu\ManagerStoreProductsWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\ManagerMenu\StoreProduct\ManagePromStoreProductWindow.xaml">

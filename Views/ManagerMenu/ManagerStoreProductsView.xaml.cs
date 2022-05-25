@@ -1,6 +1,4 @@
-﻿using supermarket.Middlewares.Category;
-using supermarket.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,19 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ctgry = supermarket.Data.DbMaps.CategoryMap;
 
-namespace supermarket.Windows.ManagerMenu.CategoryWindows
+namespace supermarket.Views.ManagerMenu
 {
-    public partial class ManageCategoryWindow : Window
+    /// <summary>
+    /// Логика взаимодействия для ManagerStoreProductsView.xaml
+    /// </summary>
+    public partial class ManagerStoreProductsView : UserControl
     {
-        private string _categoryId;
-
-        public ManageCategoryWindow(string categoryId)
+        public ManagerStoreProductsView()
         {
             InitializeComponent();
         }
-        
     }
 }
