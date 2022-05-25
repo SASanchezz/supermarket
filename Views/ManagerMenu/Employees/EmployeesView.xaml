@@ -56,11 +56,19 @@
                 Margin="0,0,20,0"
                 Command="{Binding OpenEditEmployeeWindowCommand}"/>
 
+        <TextBox Grid.Row="0" 
+                  Width="120"
+                  Height="24" 
+                  HorizontalAlignment="Left" 
+                  Margin="150, 0, 0, 30"
+                  Text="{Binding FilteredSurname, Mode=OneWayToSource}">
+        </TextBox>
+        
         <ComboBox Grid.Row="0" 
                   Width="120"
                   Height="24" 
                   HorizontalAlignment="Left" 
-                  Margin="150, 0, 0, 0"
+                  Margin="150, 30, 0, 0"
                   ItemsSource="{Binding AllRoles}" SelectedItem="{Binding SelectedRole, Mode=TwoWay}">
         </ComboBox>
         
