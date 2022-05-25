@@ -1,4 +1,4 @@
-﻿using supermarket.Navigation.WindowsNavigation;
+﻿using supermarket.Navigation.WindowVM;
 using supermarket.Windows.ManagerMenu.Employees.Changes;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -9,7 +9,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
     /*
      * Controls ManagerAddEmployee Window
      */
-    internal class AddEmployeeWindowVM : INavigatableWindowVM, INotifyPropertyChanged
+    internal class AddEmployeeWindowVM : INavigatableWindowVM<ManagerEmployees>, INotifyPropertyChanged
     {
         private readonly AddEmployeeVM _viewModel;
         private readonly Window _window;
@@ -28,7 +28,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
         }
 
         public AddEmployeeVM ViewModel { get => _viewModel; }
-        public WindowTypes WindowType => WindowTypes.ManagerAddEmployee;
+        public ManagerEmployees WindowType => ManagerEmployees.AddEmployee;
         public Window Window => _window;
 
         public event PropertyChangedEventHandler PropertyChanged;

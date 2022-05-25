@@ -1,11 +1,11 @@
-﻿using supermarket.Navigation.WindowsNavigation;
+﻿using supermarket.Navigation.WindowVM;
 using supermarket.Windows.ManagerMenu.Products;
 using System;
 using System.Windows;
 
 namespace supermarket.ViewModels.ManagerMenu.Products
 {
-    internal class ProductsWindowVM : WindowVMNavigator, INavigatableWindowVM
+    internal class ProductsWindowVM : WindowVMNavigator<ManagerProducts>, INavigatableWindowVM<Main>
     {
         private Window _window;
         private ProductsVM _viewModel;
@@ -26,11 +26,11 @@ namespace supermarket.ViewModels.ManagerMenu.Products
 
         public Window Window => _window;
 
-        public WindowTypes WindowType => WindowTypes.ManagerProducts;
+        public Main WindowType => Main.ManagerProducts;
 
         public ProductsVM ViewModel { get => _viewModel; }
 
-        protected override INavigatableWindowVM CreateWindowViewModel(WindowTypes type)
+        protected override INavigatableWindowVM<ManagerProducts> CreateWindowViewModel(ManagerProducts type)
         {
             throw new NotImplementedException();
         }

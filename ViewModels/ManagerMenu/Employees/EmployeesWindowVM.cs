@@ -1,4 +1,4 @@
-﻿using supermarket.Navigation.WindowsNavigation;
+﻿using supermarket.Navigation.WindowVM;
 using supermarket.ViewModels.ManagerMenu.Employees.Changes;
 using supermarket.Windows.ManagerMenu.Employees;
 using System;
@@ -10,7 +10,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
      * Controls ManagerEmployees Window
      * Set navigating Windows as ManagerAddEmployee Window, ManagerEditEmployee Window
      */
-    internal class EmployeesWindowVM : WindowVMNavigator, INavigatableWindowVM
+    internal class EmployeesWindowVM : WindowVMNavigator<ManagerEmployees>, INavigatableWindowVM<Main>
     {
         private EmployeesVM _viewModel;
         private Window _window;
@@ -28,22 +28,24 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             // there is a button "Back"
             _viewModel.Close = Window.Close;
 
-            SetWindowOpeningViewModel(new IWindowOpeningVM[] { _viewModel });
+            SetWindowOpeningVM(new IWindowOpeningVM<ManagerEmployees>[] { _viewModel });
 
             Window.Show();
         }
 
-        public WindowTypes WindowType { get => WindowTypes.ManagerEmployees; }
-        public Window Window { get => _window; }
-        public EmployeesVM ViewModel { get => _viewModel; }
+        public Main WindowType => Main.ManagerEmployees; 
 
-        protected override INavigatableWindowVM CreateWindowViewModel(WindowTypes type)
+        public Window Window => _window; 
+
+        public EmployeesVM ViewModel => _viewModel; 
+
+        protected override INavigatableWindowVM<ManagerEmployees> CreateWindowViewModel(ManagerEmployees type)
         {
             try
             {
                 switch (type)
                 {
-                    case WindowTypes.ManagerAddEmployee:
+                    case ManagerEmployees.AddEmployee:
                         var addWindowViewModel = new AddEmployeeWindowVM();
                         addWindowViewModel.Window.Closed += (sender, e) =>
                         {
@@ -52,7 +54,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
                         };
                         return addWindowViewModel;
 
-                    case WindowTypes.ManagerEditEmployee:
+                    case ManagerEmployees.EditEmployee:
                         if (_viewModel.SelectedEmployee == null)
                         {
                             IsEnabled = true;

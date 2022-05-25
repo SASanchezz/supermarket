@@ -1,15 +1,15 @@
-﻿using supermarket.Navigation.ViewsNavigation;
-using supermarket.Navigation.WindowsNavigation;
+﻿using supermarket.Navigation.VM;
+using supermarket.Navigation.WindowVM;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace supermarket.Navigation
 {
-    internal abstract class WindowVMAndVMNavigator : IVMNavigator, IWindowVMNavigator, INotifyPropertyChanged
+    internal abstract class WindowVMAndVMNavigator<Type> : IVMNavigator, IWindowVMNavigator<Type>, INotifyPropertyChanged where Type : Enum
     {
-        private INavigatableVM _currentViewModel;
-
         private bool _isEnabled;
+        private INavigatableVM _currentViewModel;
 
         public bool IsEnabled
         {
@@ -38,15 +38,7 @@ namespace supermarket.Navigation
             }
         }
 
-        protected void SetWindowOpeningViewModel(IWindowOpeningVM[] viewModels)
-        {
-            for (int i = 0; i < viewModels.Length; i++)
-            {
-                viewModels[i].OpenWindowViewModel = Navigate;
-            }
-        }
-
-        public void Navigate(ViewTypes type)
+        public void Navigate(VMNavigationTypes type)
         {
             if (CurrentViewModel != null && CurrentViewModel.ViewType.Equals(type))
                 return;
@@ -54,13 +46,22 @@ namespace supermarket.Navigation
             CurrentViewModel = CreateViewModel(type);
         }
 
-        public void Navigate(WindowTypes type)
+        public void Navigate(Type type)
         {
             IsEnabled = false;
             CreateWindowViewModel(type);
         }
-        protected abstract INavigatableWindowVM CreateWindowViewModel(WindowTypes type);
-        protected abstract INavigatableVM CreateViewModel(ViewTypes type);
+
+        protected void SetWindowOpeningVM(IWindowOpeningVM<Type>[] viewModels)
+        {
+            for (int i = 0; i < viewModels.Length; i++)
+            {
+                viewModels[i].OpenWindowViewModel = Navigate;
+            }
+        }
+
+        protected abstract INavigatableWindowVM<Type> CreateWindowViewModel(Type type);
+        protected abstract INavigatableVM CreateViewModel(VMNavigationTypes type);
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

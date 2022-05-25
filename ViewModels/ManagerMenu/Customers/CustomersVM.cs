@@ -1,16 +1,16 @@
-﻿using supermarket.Navigation.WindowsNavigation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using supermarket.Utils;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using supermarket.Navigation.WindowVM;
 
 namespace supermarket.ViewModels.ManagerMenu.Customers
 {
     /*
      * Controls ManagerCustomers View
      */
-    internal class CustomersVM : IWindowOpeningVM, INotifyPropertyChanged
+    internal class CustomersVM : IWindowOpeningVM<ManagerCustomers>, INotifyPropertyChanged
     {
         private List<string[]> _customers;
         private string[] _selectedCustomer;
@@ -24,7 +24,8 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
             UpdateCustomers();
         }
 
-        public Action<WindowTypes> OpenWindowViewModel { get; set; }
+        public Action<ManagerCustomers> OpenWindowViewModel { get; set; }
+
         public List<string[]> Customers
         {
             get
@@ -37,6 +38,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
                 OnPropertyChanged(nameof(Customers));
             }
         }
+
         public string[] SelectedCustomer
         {
             get

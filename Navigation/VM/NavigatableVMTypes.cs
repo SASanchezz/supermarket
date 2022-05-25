@@ -1,6 +1,6 @@
-﻿namespace supermarket.Navigation.ViewsNavigation
+﻿namespace supermarket.Navigation.VM
 {
-    enum ViewTypes
+    enum VMNavigationTypes
     {
         SignIn,
         ManagerMenu,

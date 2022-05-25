@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace supermarket.Navigation.ViewsNavigation
+namespace supermarket.Navigation.VM
 {
     internal abstract class VMNavigator : IVMNavigator, INotifyPropertyChanged
     {
@@ -22,15 +22,15 @@ namespace supermarket.Navigation.ViewsNavigation
             }
         }
 
-        public void Navigate(ViewTypes type)
+        public void Navigate(VMNavigationTypes type)
         {
             if (CurrentViewModel != null && CurrentViewModel.ViewType.Equals(type))
                 return;
-            
+
             CurrentViewModel = CreateViewModel(type);
         }
 
-        protected abstract INavigatableVM CreateViewModel(ViewTypes type);
+        protected abstract INavigatableVM CreateViewModel(VMNavigationTypes type);
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

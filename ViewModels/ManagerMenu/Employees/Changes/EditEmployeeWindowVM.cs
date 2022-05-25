@@ -1,15 +1,15 @@
-﻿using supermarket.Navigation.WindowsNavigation;
-using System.Windows;
+﻿using System.Windows;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using supermarket.Windows.ManagerMenu.Employees.Changes;
+using supermarket.Navigation.WindowVM;
 
 namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
 {
     /*
      * Controls ManagerEditEmployee Window
      */
-    internal class EditEmployeeWindowVM : INavigatableWindowVM, INotifyPropertyChanged
+    internal class EditEmployeeWindowVM : INavigatableWindowVM<ManagerEmployees>, INotifyPropertyChanged
     {
         private EditEmployeeVM _viewModel;
         private Window _window;
@@ -25,9 +25,11 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
             Window.Show();
         }
 
-        public WindowTypes WindowType { get => WindowTypes.ManagerEditEmployee; }
-        public Window Window { get => _window; }
-        public EditEmployeeVM ViewModel { get => _viewModel; }
+        public ManagerEmployees WindowType => ManagerEmployees.EditEmployee; 
+
+        public Window Window => _window; 
+
+        public EditEmployeeVM ViewModel => _viewModel; 
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

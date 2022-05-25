@@ -1,5 +1,5 @@
-﻿using supermarket.Navigation.ViewsNavigation;
-using supermarket.Navigation.WindowsNavigation;
+﻿using supermarket.Navigation.VM;
+using supermarket.Navigation.WindowVM;
 using System;
 
 namespace supermarket.ViewModels.CashierMenu
@@ -7,7 +7,7 @@ namespace supermarket.ViewModels.CashierMenu
     /*
      * Controls Cashier Menu View
      */
-    internal class CashierMenuVM : IWindowOpeningVM, INavigatableVM
+    internal class CashierMenuVM : IWindowOpeningVM<Main>, INavigatableVM
     {
         private Action _goToSignIn;
 
@@ -16,7 +16,8 @@ namespace supermarket.ViewModels.CashierMenu
             _goToSignIn = goToSignIn;
         }
 
-        public ViewTypes ViewType => ViewTypes.CashierMenu;
-        public Action<WindowTypes> OpenWindowViewModel { get; set; }
+        public VMNavigationTypes ViewType => VMNavigationTypes.CashierMenu;
+
+        public Action<Main> OpenWindowViewModel { get; set; }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using supermarket.Navigation;
-using supermarket.Navigation.ViewsNavigation;
-using supermarket.Navigation.WindowsNavigation;
+using supermarket.Navigation.VM;
 using supermarket.ViewModels.CashierMenu;
 using supermarket.ViewModels.ManagerMenu;
 using supermarket.ViewModels.ManagerMenu.Categories;
@@ -9,6 +8,7 @@ using supermarket.ViewModels.ManagerMenu.Employees;
 using supermarket.ViewModels.ManagerMenu.Products;
 using supermarket.ViewModels.ManagerMenu.StoreProducts;
 using supermarket.ViewModels.SignIn;
+using supermarket.Navigation.WindowVM;
 using System;
 
 namespace supermarket.ViewModels
@@ -18,7 +18,7 @@ namespace supermarket.ViewModels
      * Set navigating of Views as Sign In View, Manager Menu View, Cashier Menu View
      *  and Windows as (Manager Menu) Manager Employees Window, ..., ...
      */
-    internal class MainWindowVM : WindowVMAndVMNavigator
+    internal class MainWindowVM : WindowVMAndVMNavigator<Main>
     {
         // controllable ViewModels
         private SignInVM _signInVM;
@@ -32,38 +32,38 @@ namespace supermarket.ViewModels
             IsEnabled = true;
 
             // views navigating setup
-            _signInVM = new SignInVM(() => Navigate(ViewTypes.ManagerMenu), () => Navigate(ViewTypes.CashierMenu));
-            _managerMenuVM = new ManagerMenuVM(() => Navigate(ViewTypes.SignIn)); 
-            _cashierMenuVM = new CashierMenuVM(() => Navigate(ViewTypes.SignIn)); 
+            _signInVM = new SignInVM(() => Navigate(VMNavigationTypes.ManagerMenu), () => Navigate(VMNavigationTypes.CashierMenu));
+            _managerMenuVM = new ManagerMenuVM(() => Navigate(VMNavigationTypes.SignIn)); 
+            _cashierMenuVM = new CashierMenuVM(() => Navigate(VMNavigationTypes.SignIn)); 
             //
 
-            Navigate(ViewTypes.SignIn); // set SignIn View
+            Navigate(VMNavigationTypes.SignIn); // set SignIn View
 
-            SetWindowOpeningViewModel(new IWindowOpeningVM[] { _managerMenuVM, _cashierMenuVM });
+            SetWindowOpeningVM(new IWindowOpeningVM<Main>[] { _managerMenuVM, _cashierMenuVM });
         }
 
-        protected override INavigatableWindowVM CreateWindowViewModel(WindowTypes type)
+        protected override INavigatableWindowVM<Main> CreateWindowViewModel(Main type)
         {
-            INavigatableWindowVM _windowViewModel;
+            INavigatableWindowVM<Main> _windowViewModel;
             switch (type)
             {
-                case WindowTypes.ManagerEmployees:
+                case Main.ManagerEmployees:
                     _windowViewModel = new EmployeesWindowVM();
                     _windowViewModel.Window.Closed += (object sender, EventArgs e) => IsEnabled = true;
                     return _windowViewModel;
-                case WindowTypes.ManagerCustomers:
+                case Main.ManagerCustomers:
                     _windowViewModel = new CustomersWindowVM();
                     _windowViewModel.Window.Closed += (object sender, EventArgs e) => IsEnabled = true;
                     return _windowViewModel;
-                case WindowTypes.ManagerCategories:
+                case Main.ManagerCategories:
                     _windowViewModel = new CategoriesWindowVM();
                     _windowViewModel.Window.Closed += (object sender, EventArgs e) => IsEnabled = true;
                     return _windowViewModel;
-                case WindowTypes.ManagerProducts:
+                case Main.ManagerProducts:
                     _windowViewModel = new ProductsWindowVM();
                     _windowViewModel.Window.Closed += (object sender, EventArgs e) => IsEnabled = true;
                     return _windowViewModel;
-                case WindowTypes.ManagerStoreProducts:
+                case Main.ManagerStoreProducts:
                     _windowViewModel = new StoreProductsWindowVM();
                     _windowViewModel.Window.Closed += (object sender, EventArgs e) => IsEnabled = true;
                     return _windowViewModel;
@@ -72,15 +72,15 @@ namespace supermarket.ViewModels
             }
         }
 
-        protected override INavigatableVM CreateViewModel(ViewTypes type)
+        protected override INavigatableVM CreateViewModel(VMNavigationTypes type)
         {
             switch (type)
             {
-                case ViewTypes.SignIn:
+                case VMNavigationTypes.SignIn:
                     return _signInVM;
-                case ViewTypes.ManagerMenu:
+                case VMNavigationTypes.ManagerMenu:
                     return _managerMenuVM;
-                case ViewTypes.CashierMenu:
+                case VMNavigationTypes.CashierMenu:
                     return _cashierMenuVM;
                 default:
                     return null;

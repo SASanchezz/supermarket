@@ -1,14 +1,14 @@
-﻿using supermarket.Navigation.ViewsNavigation;
-using supermarket.Utils;
+﻿using supermarket.Utils;
 using System;
-using supermarket.Navigation.WindowsNavigation;
+using supermarket.Navigation.VM;
+using supermarket.Navigation.WindowVM;
 
 namespace supermarket.ViewModels.ManagerMenu
 {
     /*
      * Controls Manager Menu View
      */
-    internal class ManagerMenuVM : IWindowOpeningVM, INavigatableVM
+    internal class ManagerMenuVM : IWindowOpeningVM<Main>, INavigatableVM
     {
         private RelayCommand<object> _openEmployeesWindowCommand; // +
         private RelayCommand<object> _openProductsWindowCommand;
@@ -25,54 +25,56 @@ namespace supermarket.ViewModels.ManagerMenu
             _goToSignIn = goToSignIn;
         }
 
-        public Action<WindowTypes> OpenWindowViewModel { get; set; }
-        public ViewTypes ViewType => ViewTypes.ManagerMenu;
+        public Action<Main> OpenWindowViewModel { get; set; }
+
+        public VMNavigationTypes ViewType => VMNavigationTypes.ManagerMenu;
+
         public RelayCommand<object> OpenEmployeesWindowCommand
         {
             get
             {
-                return _openEmployeesWindowCommand ??= new RelayCommand<object>(_ => OpenEmployeesWindow());
+                return _openEmployeesWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(Main.ManagerEmployees));
             }
         }
+
         public RelayCommand<object> OpenProductsWindowCommand
         {
             get
             {
-                return _openProductsWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel?.Invoke(WindowTypes.ManagerProducts));
+                return _openProductsWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(Main.ManagerProducts));
             }
         }
+
         public RelayCommand<object> OpenCategoriesWindowCommand
         {
             get
             {
-                return _openCategoriesWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel?.Invoke(WindowTypes.ManagerCategories));
+                return _openCategoriesWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(Main.ManagerCategories));
             }
         }
+
         public RelayCommand<object> OpenClientsWindowCommand
         {
             get
             {
-                return _openClientsWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel?.Invoke(WindowTypes.ManagerCustomers));
+                return _openClientsWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(Main.ManagerCustomers));
             }
         }
+
         public RelayCommand<object> OpenStoreProductsWindowCommand
         {
             get
             {
-                return _openStoreProductsWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel?.Invoke(WindowTypes.ManagerStoreProducts));
+                return _openStoreProductsWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(Main.ManagerStoreProducts));
             }
         }
+
         public RelayCommand<object> GoToSignInCommand
         {
             get
             {
-                return _goToSignInCommand ??= new RelayCommand<object>(_ => _goToSignIn?.Invoke());
+                return _goToSignInCommand ??= new RelayCommand<object>(_ => _goToSignIn());
             }
-        }
-
-        private void OpenEmployeesWindow()
-        {
-            OpenWindowViewModel?.Invoke(WindowTypes.ManagerEmployees);
         }
     }
 }

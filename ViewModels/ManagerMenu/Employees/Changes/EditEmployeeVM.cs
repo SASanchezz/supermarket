@@ -42,6 +42,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
                 OnPropertyChanged(nameof(Id));
             }
         }
+
         public string Surname
         {
             get => _surname;
@@ -51,6 +52,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
                 OnPropertyChanged(nameof(Surname));
             }
         }
+
         public string Name
         {
             get => _name;
@@ -60,6 +62,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
                 OnPropertyChanged(nameof(Name));
             }
         }
+
         public string Patronymic
         {
             get => _patronymic;
@@ -69,6 +72,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
                 OnPropertyChanged(nameof(Patronymic));
             }
         }
+
         public string Role
         {
             get => _role;
@@ -78,6 +82,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
                 OnPropertyChanged(nameof(Role));
             }
         }
+
         public string Salary
         {
             get => _salary;
@@ -87,6 +92,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
                 OnPropertyChanged(nameof(Salary));
             }
         }
+
         public DateTime Date_of_birth
         {
             get => _date_of_birth;
@@ -96,6 +102,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
                 OnPropertyChanged(nameof(Date_of_birth));
             }
         }
+
         public DateTime Date_of_start
         {
             get => _date_of_start;
@@ -105,6 +112,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
                 OnPropertyChanged(nameof(Date_of_start));
             }
         }
+
         public string Phone_number
         {
             get => _phone_number;
@@ -114,6 +122,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
                 OnPropertyChanged(nameof(Phone_number));
             }
         }
+
         public string Password
         {
             get => _password;
@@ -123,6 +132,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
                 OnPropertyChanged(nameof(Password));
             }
         }
+
         public string City
         {
             get => _city;
@@ -132,6 +142,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
                 OnPropertyChanged(nameof(City));
             }
         }
+
         public string Street
         {
             get => _street;
@@ -141,6 +152,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
                 OnPropertyChanged(nameof(Street));
             }
         }
+
         public string Zipcode
         {
             get => _zipcode;
