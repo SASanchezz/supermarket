@@ -69,10 +69,11 @@
                           ItemsSource="{Binding Products}" 
                           SelectedItem="{Binding SelectedProduct, Mode=OneWayToSource}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="id"             Binding="{Binding Path=[0]}"    Width="*" IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="ID категорії"   Binding="{Binding Path=[1]}"    Width="2*" IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="id"             Binding="{Binding Path=[0]}"    Width="*"  IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Назва"          Binding="{Binding Path=[2]}"    Width="4*" IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Категорія"      Binding="{Binding Path=[5]}"    Width="2*" IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Опис"           Binding="{Binding Path=[3]}"    Width="8*" IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Виробник"       Binding="{Binding Path=[4]}"    Width="8*" IsReadOnly="True" CanUserSort="False"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
