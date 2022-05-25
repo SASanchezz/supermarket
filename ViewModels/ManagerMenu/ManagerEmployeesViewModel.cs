@@ -15,9 +15,12 @@ namespace supermarket.ViewModels.ManagerMenu
      */
     public class ManagerEmployeesViewModel : IWindowOpeningViewModel, INotifyPropertyChanged
     {
+        private const string _allString = "Всі";
         private List<string[]> _employees;
         private string[] _selectedEmployee;
-        private int _selectedRole;
+        private string _selectedRole;
+        private string[] _allRoles = Roles.roleNames;
+        
 
         private RelayCommand<object> _openAddEmployeeWindowCommand;
         private RelayCommand<object> _openEditEmployeeWindowCommand;
@@ -26,28 +29,28 @@ namespace supermarket.ViewModels.ManagerMenu
         public ManagerEmployeesViewModel()
         {
             UpdateEmployees();
-            SelectedRole = 0;
-            //int i = 0;
-            //foreach (var employee in _employees)
-            //{
-            //    employee[4] = Roles.roleNames[int.Parse(employee[4])];
-            //    ++i;
-            //}
+            SelectedRole = _allString;
+
+            Array.Resize(ref _allRoles, _allRoles.Length + 1);
+            _allRoles[_allRoles.GetUpperBound(0)] = _allString;
         }
 
-        public List<string[]> Employees 
-        { 
+        public List<string[]> Employees
+        {
             get
             {
                 return _employees;
-            }  
+            }
             set
             {
                 _employees = value;
                 // set word-roles
-                foreach (string[] employee in _employees)
+                if (_employees != null)
                 {
-                    employee[Empl.role] = Roles.roleNames[(int.Parse(employee[Empl.role]) - 1)];
+                    foreach (string[] employee in _employees)
+                    {
+                        employee[Empl.role] = Roles.roleNames[(int.Parse(employee[Empl.role]))];
+                    }
                 }
                 OnPropertyChanged(nameof(Employees));
             }
@@ -66,8 +69,8 @@ namespace supermarket.ViewModels.ManagerMenu
                 return _openEditEmployeeWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(WindowTypes.ManagerEditEmployee));
             }
         }
-        public RelayCommand<object> CloseCommand 
-        { 
+        public RelayCommand<object> CloseCommand
+        {
             get
             {
                 return _closeCommand ??= new RelayCommand<object>(_ => Close());
@@ -75,8 +78,8 @@ namespace supermarket.ViewModels.ManagerMenu
         }
         public Action<WindowTypes> OpenWindowViewModel { get; set; }
         public Action Close { get; set; }
-        public string[] SelectedEmployee 
-        { 
+        public string[] SelectedEmployee
+        {
             get
             {
                 return _selectedEmployee;
@@ -87,7 +90,7 @@ namespace supermarket.ViewModels.ManagerMenu
                 OnPropertyChanged();
             }
         }
-        public int SelectedRole
+        public string SelectedRole
         {
             get
             {
@@ -96,17 +99,19 @@ namespace supermarket.ViewModels.ManagerMenu
             set
             {
                 _selectedRole = value;
-                if (_selectedRole == 0)
+                if (_selectedRole == _allString)
                 {
                     UpdateEmployees();
                 }
                 else
                 {
-                    Employees = DbQueries.GetEmployeesByRole(_selectedRole);
+                    Employees = Empl.GetEmployeesByRole(Roles.roleKeys[_selectedRole]);
                 }
                 OnPropertyChanged();
             }
         }
+
+        public string[] AllRoles { get => _allRoles; }
 
         public void UpdateEmployees()
         {
