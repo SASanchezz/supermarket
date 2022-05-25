@@ -1,9 +1,10 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace supermarket.Navigation.WindowsNavigation
+namespace supermarket.Navigation.WindowVM
 {
-    internal abstract class WindowVMNavigator : IWindowVMNavigator, INotifyPropertyChanged
+    internal abstract class WindowVMNavigator<Type> : IWindowVMNavigator<Type>, INotifyPropertyChanged where Type : Enum
     {
         private bool _isEnabled;
 
@@ -20,7 +21,7 @@ namespace supermarket.Navigation.WindowsNavigation
             }
         }
 
-        protected void SetWindowOpeningViewModel(IWindowOpeningVM[] viewModels)
+        protected void SetWindowOpeningVM(IWindowOpeningVM<Type>[] viewModels)
         {
             for (int i = 0; i < viewModels.Length; i++)
             {
@@ -28,13 +29,13 @@ namespace supermarket.Navigation.WindowsNavigation
             }
         }
 
-        public void Navigate(WindowTypes type)
+        public void Navigate(Type type)
         {
             IsEnabled = false;
             CreateWindowViewModel(type);
         }
 
-        protected abstract INavigatableWindowVM CreateWindowViewModel(WindowTypes type);
+        protected abstract INavigatableWindowVM<Type> CreateWindowViewModel(Type type);
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

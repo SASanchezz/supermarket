@@ -1,4 +1,4 @@
-﻿using supermarket.Navigation.WindowsNavigation;
+﻿using supermarket.Navigation.WindowVM;
 using supermarket.Utils;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace supermarket.ViewModels.ManagerMenu.StoreProducts
 {
-    class StoreProductsVM : IWindowOpeningVM, INotifyPropertyChanged
+    class StoreProductsVM : IWindowOpeningVM<ManagerStoreProducts>, INotifyPropertyChanged
     {
         private List<string[]> _storeProducts;
         private string[] _selectedStoreProduct;
@@ -21,7 +21,8 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
             UpdateStoreProducts();
         }
 
-        public Action<WindowTypes> OpenWindowViewModel { get; set; }
+        public Action<ManagerStoreProducts> OpenWindowViewModel { get; set; }
+
         public List<string[]> StoreProducts
         {
             get
@@ -34,6 +35,7 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
                 OnPropertyChanged(nameof(StoreProducts));
             }
         }
+
         public string[] SelectedStoreProduct
         {
             get

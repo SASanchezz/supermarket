@@ -2,7 +2,7 @@
 using supermarket.Utils;
 using System;
 using System.Windows;
-using supermarket.Navigation.ViewsNavigation;
+using supermarket.Navigation.VM;
 
 namespace supermarket.ViewModels.SignIn
 {
@@ -23,7 +23,9 @@ namespace supermarket.ViewModels.SignIn
         }
 
         public string Login { get; set; }
+
         public string Password { get; set; }
+
         public RelayCommand<object> SignInCommand
         {
             get
@@ -31,7 +33,8 @@ namespace supermarket.ViewModels.SignIn
                 return _signInCommand ??= new RelayCommand<object>(_ => SignIn(), CanExecute);
             }
         }
-        public ViewTypes ViewType => ViewTypes.SignIn;
+
+        public VMNavigationTypes ViewType => VMNavigationTypes.SignIn;
 
         private void SignIn()
         {

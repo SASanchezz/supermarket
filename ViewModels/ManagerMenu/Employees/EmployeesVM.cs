@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using supermarket.Navigation.WindowsNavigation;
 using System.Windows;
 using supermarket.Data;
 using Empl = supermarket.Models.Employee;
+using supermarket.Navigation.WindowVM;
 
 namespace supermarket.ViewModels.ManagerMenu.Employees
 {
     /*
      * Controls ManagerEmployees View
      */
-    public class EmployeesVM : IWindowOpeningVM, INotifyPropertyChanged
+    public class EmployeesVM : IWindowOpeningVM<ManagerEmployees>, INotifyPropertyChanged
     {
         private List<string[]> _employees;
         private string[] _selectedEmployee;
@@ -26,13 +26,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
         public EmployeesVM()
         {
             UpdateEmployees();
-            SelectedRole = 0;
-            //int i = 0;
-            //foreach (var employee in _employees)
-            //{
-            //    employee[4] = Roles.roleNames[int.Parse(employee[4])];
-            //    ++i;
-            //}
+            //SelectedRole = 0;
         }
 
         public List<string[]> Employees
@@ -52,20 +46,23 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
                 OnPropertyChanged(nameof(Employees));
             }
         }
+
         public RelayCommand<object> OpenAddEmployeeWindowCommand
         {
             get
             {
-                return _openAddEmployeeWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(WindowTypes.ManagerAddEmployee));
+                return _openAddEmployeeWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(ManagerEmployees.AddEmployee));
             }
         }
+
         public RelayCommand<object> OpenEditEmployeeWindowCommand
         {
             get
             {
-                return _openEditEmployeeWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(WindowTypes.ManagerEditEmployee));
+                return _openEditEmployeeWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(ManagerEmployees.EditEmployee));
             }
         }
+
         public RelayCommand<object> CloseCommand
         {
             get
@@ -73,8 +70,10 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
                 return _closeCommand ??= new RelayCommand<object>(_ => Close());
             }
         }
-        public Action<WindowTypes> OpenWindowViewModel { get; set; }
+        public Action<ManagerEmployees> OpenWindowViewModel { get; set; }
+
         public Action Close { get; set; }
+
         public string[] SelectedEmployee
         {
             get
