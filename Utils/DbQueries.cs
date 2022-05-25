@@ -52,7 +52,7 @@ namespace supermarket.Utils
             } catch { }
             
             string sql =
-                "SELECT id_product, Product.category_number, product_name, characteristics, Category.category_name AS category_name" +
+                "SELECT id_product, Product.category_number, product_name, characteristics, manufacturer, Category.category_name AS category_name" +
                 " FROM Product LEFT JOIN Category" +
                 " ON Product.category_number = Category.category_number"
                 + filter + order;
