@@ -8,7 +8,7 @@ using supermarket.Data;
 
 namespace supermarket.Models
 {
-    public static class Product
+    internal static class Product
     {
         //Native
         public const int id_product = 0;

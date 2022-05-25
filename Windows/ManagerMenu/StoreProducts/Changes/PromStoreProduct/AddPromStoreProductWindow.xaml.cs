@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using supermarket.Utils;
 using strPrdct = supermarket.Data.DbMaps.StoreProductMap;
 
-namespace supermarket.Windows.ManagerMenu.StoreProduct
+namespace supermarket.Windows.ManagerMenu.StoreProduct.Changes.PromStoreProduct
 {
     public partial class AddPromStoreProductWindow : Window
     {

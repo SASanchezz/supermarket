@@ -23,6 +23,7 @@ namespace supermarket.Navigation
                 OnPropertyChanged(nameof(IsEnabled));
             }
         }
+
         public INavigatableVM CurrentViewModel
         {
             get
@@ -61,6 +62,7 @@ namespace supermarket.Navigation
         }
 
         protected abstract INavigatableWindowVM<Type> CreateWindowViewModel(Type type);
+
         protected abstract INavigatableVM CreateViewModel(VMNavigationTypes type);
 
         public event PropertyChangedEventHandler PropertyChanged;

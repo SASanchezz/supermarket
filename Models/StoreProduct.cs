@@ -8,7 +8,7 @@ using supermarket.Data;
 
 namespace supermarket.Models
 {
-    public static class StoreProduct
+    internal static class StoreProduct
     {
         //Native
         public const int UPC = 0;
@@ -19,7 +19,6 @@ namespace supermarket.Models
         public const int promotional_product = 5;
         //Joined
         public const int product_name = 6;
-
 
         public static List<string[]> GetAllEmployee()
         {

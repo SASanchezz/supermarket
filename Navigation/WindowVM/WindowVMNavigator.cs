@@ -21,14 +21,6 @@ namespace supermarket.Navigation.WindowVM
             }
         }
 
-        protected void SetWindowOpeningVM(IWindowOpeningVM<Type>[] viewModels)
-        {
-            for (int i = 0; i < viewModels.Length; i++)
-            {
-                viewModels[i].OpenWindowViewModel = Navigate;
-            }
-        }
-
         public void Navigate(Type type)
         {
             IsEnabled = false;
@@ -36,6 +28,14 @@ namespace supermarket.Navigation.WindowVM
         }
 
         protected abstract INavigatableWindowVM<Type> CreateWindowViewModel(Type type);
+
+        protected void SetWindowOpeningVM(IWindowOpeningVM<Type>[] viewModels)
+        {
+            for (int i = 0; i < viewModels.Length; i++)
+            {
+                viewModels[i].OpenWindowViewModel = Navigate;
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

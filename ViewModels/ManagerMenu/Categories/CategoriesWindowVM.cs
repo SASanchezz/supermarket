@@ -28,7 +28,7 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
 
         public Main WindowType => Main.ManagerCategories;
 
-        public CategoriesVM ViewModel { get => _viewModel; }
+        public CategoriesVM ViewModel => _viewModel; 
 
         protected override INavigatableWindowVM<ManagerCategories> CreateWindowViewModel(ManagerCategories type)
         {

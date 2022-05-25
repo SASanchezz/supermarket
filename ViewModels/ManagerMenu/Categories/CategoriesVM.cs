@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace supermarket.ViewModels.ManagerMenu.Categories
 {
-    class CategoriesVM : IWindowOpeningVM<ManagerCategories>, INotifyPropertyChanged
+    internal class CategoriesVM : IWindowOpeningVM<ManagerCategories>, INotifyPropertyChanged
     {
         private List<string[]> _categories;
         private string[] _selectedCategory;

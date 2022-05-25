@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace supermarket.Utils
 {
-    public class RelayCommand<T> : ICommand
+    internal class RelayCommand<T> : ICommand
     {
         #region Fields
         readonly Action<T> _execute;

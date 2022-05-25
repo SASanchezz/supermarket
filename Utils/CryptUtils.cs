@@ -7,7 +7,7 @@
 */
 namespace supermarket.Utils
 {
-    public static class CryptUtils
+    internal static class CryptUtils
     {
         public static string HashPassword(string password)
         {
