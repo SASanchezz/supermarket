@@ -59,7 +59,7 @@ namespace supermarket.ViewModels
         {
             get
             {
-                return _openProductsWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel?.Invoke(WindowTypes.ManagerStoreProducts));
+                return _openStoreProductsWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel?.Invoke(WindowTypes.ManagerStoreProducts));
             }
         }
         public RelayCommand<object> GoToSignInCommand
