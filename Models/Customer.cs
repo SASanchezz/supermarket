@@ -8,7 +8,7 @@ using supermarket.Data;
 
 namespace supermarket.Models
 {
-    public static class Customer
+    internal static class Customer
     {
         //Native
         public const int card_number = 0;
@@ -20,7 +20,6 @@ namespace supermarket.Models
         public const int street = 6;
         public const int zip_code = 7;
         public const int percent = 8;
-
 
         public static List<string[]> GetAllCustomers(double minPercent = -1, double maxPercent = 101)
         {

@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using strPrdct = supermarket.Data.DbMaps.StoreProductMap;
 
-namespace supermarket.Windows.ManagerMenu.StoreProduct
+namespace supermarket.Windows.ManagerMenu.StoreProduct.Changes.PromStoreProduct
 {
     public partial class ManagePromStoreProductWindow : Window
     {

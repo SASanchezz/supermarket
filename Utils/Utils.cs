@@ -1,6 +1,6 @@
 ﻿namespace supermarket.Utils
 {
-    class Utils
+    internal class Utils
     {
         public static string ParseOrder(int startFrom, params string[] sorts)
         {

@@ -27,7 +27,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
             Window.Show();
         }
 
-        public AddEmployeeVM ViewModel { get => _viewModel; }
+        public AddEmployeeVM ViewModel => _viewModel;
         public ManagerEmployees WindowType => ManagerEmployees.AddEmployee;
         public Window Window => _window;
 

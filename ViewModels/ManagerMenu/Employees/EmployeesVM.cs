@@ -13,7 +13,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
     /*
      * Controls ManagerEmployees View
      */
-    public class EmployeesVM : IWindowOpeningVM<ManagerEmployees>, INotifyPropertyChanged
+    internal class EmployeesVM : IWindowOpeningVM<ManagerEmployees>, INotifyPropertyChanged
     {
         private List<string[]> _employees;
         private string[] _selectedEmployee;
@@ -28,6 +28,10 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             UpdateEmployees();
             //SelectedRole = 0;
         }
+
+        public Action<ManagerEmployees> OpenWindowViewModel { get; set; }
+
+        public Action Close { get; set; }
 
         public List<string[]> Employees
         {
@@ -70,9 +74,6 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
                 return _closeCommand ??= new RelayCommand<object>(_ => Close());
             }
         }
-        public Action<ManagerEmployees> OpenWindowViewModel { get; set; }
-
-        public Action Close { get; set; }
 
         public string[] SelectedEmployee
         {

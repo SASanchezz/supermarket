@@ -163,7 +163,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
             }
         }
 
-        public static string[] EmployeeRoles { get => Roles.roleNames; }
+        public static string[] EmployeeRoles => Roles.roleNames; 
 
         public RelayCommand<object> UpdateCommand
         {
@@ -241,7 +241,6 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
                 && !string.IsNullOrWhiteSpace(Patronymic)
                 && !string.IsNullOrWhiteSpace(Salary)
                 && !string.IsNullOrWhiteSpace(Phone_number)
-                //&& !string.IsNullOrWhiteSpace(Password)
                 && !string.IsNullOrWhiteSpace(City)
                 && !string.IsNullOrWhiteSpace(Street)
                 && !string.IsNullOrWhiteSpace(Zipcode);

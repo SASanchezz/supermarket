@@ -9,7 +9,7 @@ using supermarket.Connections;
  */
 namespace supermarket.Utils
 {
-    public static class DbUtils
+    internal static class DbUtils
     {
 
         static MySqlConnection s_connection;

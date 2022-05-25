@@ -5,7 +5,7 @@ using System.Windows.Data;
 namespace supermarket.Utils.Convertes
 {
     [ValueConversion(typeof(string), typeof(string))]
-    public class DateStringToShortConverter : IValueConverter
+    internal class DateStringToShortConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -17,6 +17,5 @@ namespace supermarket.Utils.Convertes
         {
             throw new NotImplementedException();
         }
-
     }
 }

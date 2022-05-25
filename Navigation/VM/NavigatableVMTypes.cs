@@ -1,6 +1,6 @@
 ﻿namespace supermarket.Navigation.VM
 {
-    enum VMNavigationTypes
+    public enum VMNavigationTypes
     {
         SignIn,
         ManagerMenu,

@@ -3,12 +3,11 @@ using supermarket.Utils;
 
 namespace supermarket.Models
 {
-    public static class Category
+    internal static class Category
     {
         //Native
         public const int number = 0;
         public const int name = 1;
-
 
         public static List<string[]> GetAllCategories()
         {

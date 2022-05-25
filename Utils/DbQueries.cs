@@ -7,7 +7,7 @@ using prdct = supermarket.Data.DbMaps.ProductMap;
 */
 namespace supermarket.Utils
 {
-    public static class DbQueries
+    internal static class DbQueries
     {
         /*
          * Employees

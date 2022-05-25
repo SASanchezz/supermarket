@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace supermarket.Utils
 {
-    class IdUtils
+    internal class IdUtils
     {
         private readonly static Random random = new();
 
