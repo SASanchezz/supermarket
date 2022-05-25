@@ -43,6 +43,14 @@ namespace supermarket.Models
             return result.Count > 0 ? result[0] : null;
         }
 
+        public static List<string[]> GetEmployeesLikeSurname(string surnameSubstring)
+        {
+            string sql = string.Format("SELECT * FROM Employee WHERE empl_surname LIKE '%{0}%'", surnameSubstring);
+            List<string[]> result = DbUtils.FindAll(sql);
+
+            return result.Count > 0 ? result : null;
+        }
+
         public static List<string[]> GetEmployeesByRole(int employeeRole)
         {
             string sql = string.Format("SELECT * FROM Employee WHERE empl_role_id={0}", employeeRole);
