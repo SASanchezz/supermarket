@@ -10,6 +10,7 @@ namespace supermarket.Models
 {
     public static class Employee
     {
+        //Native
         public const int id = 0;
         public const int surname = 1;
         public const int name = 2;
