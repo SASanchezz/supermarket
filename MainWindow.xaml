@@ -3,20 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:views="clr-namespace:supermarket.Views"
-        xmlns:viewModels="clr-namespace:supermarket.ViewModels"
+        xmlns:signInViews="clr-namespace:supermarket.Views.SignIn"
+        xmlns:managerMenuViews="clr-namespace:supermarket.Views.ManagerMenu"
+        xmlns:windowVM="clr-namespace:supermarket.ViewModels"
+        xmlns:signInVM="clr-namespace:supermarket.ViewModels.SignIn"
+        xmlns:managerMenuVM="clr-namespace:supermarket.ViewModels.ManagerMenu"
         xmlns:local="clr-namespace:supermarket"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance Type=viewModels:MainWindowViewModel}"
+        d:DataContext="{d:DesignInstance Type=windowVM:MainWindowVM}"
         Title="MainWindow" Height="450" Width="800"
         Content="{Binding CurrentViewModel, Mode=OneWay}" IsEnabled="{Binding IsEnabled, Mode=OneWay}" ResizeMode="NoResize">
     
     <Window.Resources>
-        <DataTemplate DataType="{ x:Type viewModels:SignInViewModel}">
-            <views:SignInView/>
+        <DataTemplate DataType="{ x:Type signInVM:SignInVM}">
+            <signInViews:SignInView/>
         </DataTemplate>
-        <DataTemplate DataType="{ x:Type viewModels:ManagerMenuViewModel}">
-            <views:ManagerMenuView/>
+        <DataTemplate DataType="{ x:Type managerMenuVM:ManagerMenuVM}">
+            <managerMenuViews:ManagerMenuView/>
         </DataTemplate>
         <!--+ кассир-->
     </Window.Resources>

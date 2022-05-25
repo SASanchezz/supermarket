@@ -7,79 +7,79 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Views\MainWindow\ManagerMenuView.xaml.cs">
+    <Compile Update="Views\ManagerMenu\ManagerMenuView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\ManagerMenu\EmployeesViews\ManagerAddEmployeeView.xaml.cs">
+    <Compile Update="Views\ManagerMenu\Employees\Changes\AddEmployeeView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\ManagerMenu\EmployeesViews\ManagerEditEmployeeView.xaml.cs">
+    <Compile Update="Views\ManagerMenu\Employees\Changes\EditEmployeeView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\ManagerMenu\ManagerCategoriesView.xaml.cs">
+    <Compile Update="Views\ManagerMenu\Categories\CategoriesView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\ManagerMenu\ManagerCustomersView.xaml.cs">
+    <Compile Update="Views\ManagerMenu\Customers\CustomersView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\ManagerMenu\ManagerEmployeesView.xaml.cs">
+    <Compile Update="Views\ManagerMenu\Employees\EmployeesView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\ManagerMenu\ManagerProductsView.xaml.cs">
+    <Compile Update="Views\ManagerMenu\Products\ProductsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\ManagerMenu\ManagerStoreProductsView.xaml.cs">
+    <Compile Update="Views\ManagerMenu\StoreProducts\StoreProductsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\ManagerMenu\CategoryWindows\AddCategoryWindow.xaml.cs">
+    <Compile Update="Windows\ManagerMenu\Categories\Changes\AddCategoryWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\ManagerMenu\CategoryWindows\ManageCategoryWindow.xaml.cs">
+    <Compile Update="Windows\ManagerMenu\Categories\Changes\EditCategoryWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\ManagerMenu\CustomerWindows\AddClientWindow.xaml.cs">
+    <Compile Update="Windows\ManagerMenu\Customers\Changes\AddCustomerWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\ManagerMenu\ManagerCustomersWindow.xaml.cs">
+    <Compile Update="Windows\ManagerMenu\Customers\CustomersWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\ManagerMenu\CustomerWindows\ManageClientWindow.xaml.cs">
+    <Compile Update="Windows\ManagerMenu\Customers\Changes\EditCustomerWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\ManagerMenu\ProductWindows\AddProductWindow.xaml.cs">
+    <Compile Update="Windows\ManagerMenu\Products\Changes\AddProductWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\ManagerMenu\ManagerProductsWindow.xaml.cs">
+    <Compile Update="Windows\ManagerMenu\Products\ProductsWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\ManagerMenu\ProductWindows\ManageProductWindow.xaml.cs">
+    <Compile Update="Windows\ManagerMenu\Products\Changes\EditProductWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\ManagerMenu\StoreProduct\AddPromStoreProductWindow.xaml.cs">
+    <Compile Update="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\AddPromStoreProductWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\ManagerMenu\StoreProduct\AddStoreProductWindow.xaml.cs">
+    <Compile Update="Windows\ManagerMenu\StoreProducts\Changes\StoreProduct\AddStoreProductWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\ManagerMenu\ManagerStoreProductsWindow.xaml.cs">
+    <Compile Update="Windows\ManagerMenu\StoreProducts\StoreProductsWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\ManagerMenu\StoreProduct\ManagePromStoreProductWindow.xaml.cs">
+    <Compile Update="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\EditPromStoreProductWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\ManagerMenu\StoreProduct\ManageStoreProductWindow.xaml.cs">
+    <Compile Update="Windows\ManagerMenu\StoreProducts\Changes\StoreProduct\EditStoreProductWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\ManagerMenu\EmployeeWindows\ManagerAddEmployeeWindow.xaml.cs">
+    <Compile Update="Windows\ManagerMenu\Employees\Changes\AddEmployeeWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\ManagerMenu\ManagerEmployeesWindow.xaml.cs">
+    <Compile Update="Windows\ManagerMenu\Employees\EmployeesWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\ManagerMenu\EmployeeWindows\ManagerEditEmployeeWindow.xaml.cs">
+    <Compile Update="Windows\ManagerMenu\Employees\Changes\EditEmployeeWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\MainWindow\SignInView.xaml.cs">
+    <Compile Update="Views\SignIn\SignInView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -87,79 +87,79 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\MainWindow\ManagerMenuView.xaml">
+    <Page Update="Views\ManagerMenu\ManagerMenuView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\ManagerMenu\EmployeesViews\ManagerAddEmployeeView.xaml">
+    <Page Update="Views\ManagerMenu\Employees\Changes\AddEmployeeView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\ManagerMenu\EmployeesViews\ManagerEditEmployeeView.xaml">
+    <Page Update="Views\ManagerMenu\Employees\Changes\EditEmployeeView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\ManagerMenu\ManagerCategoriesView.xaml">
+    <Page Update="Views\ManagerMenu\Categories\CategoriesView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\ManagerMenu\ManagerCustomersView.xaml">
+    <Page Update="Views\ManagerMenu\Customers\CustomersView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\ManagerMenu\ManagerEmployeesView.xaml">
+    <Page Update="Views\ManagerMenu\Employees\EmployeesView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\ManagerMenu\ManagerProductsView.xaml">
+    <Page Update="Views\ManagerMenu\Products\ProductsView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\ManagerMenu\ManagerStoreProductsView.xaml">
+    <Page Update="Views\ManagerMenu\StoreProducts\StoreProductsView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Windows\ManagerMenu\CategoryWindows\AddCategoryWindow.xaml">
+    <Page Update="Windows\ManagerMenu\Categories\Changes\AddCategoryWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Windows\ManagerMenu\CategoryWindows\ManageCategoryWindow.xaml">
+    <Page Update="Windows\ManagerMenu\Categories\Changes\EditCategoryWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Windows\ManagerMenu\CustomerWindows\AddClientWindow.xaml">
+    <Page Update="Windows\ManagerMenu\Customers\Changes\AddCustomerWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Windows\ManagerMenu\ManagerCustomersWindow.xaml">
+    <Page Update="Windows\ManagerMenu\Customers\CustomersWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Windows\ManagerMenu\CustomerWindows\ManageClientWindow.xaml">
+    <Page Update="Windows\ManagerMenu\Customers\Changes\EditCustomerWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Windows\ManagerMenu\ProductWindows\AddProductWindow.xaml">
+    <Page Update="Windows\ManagerMenu\Products\Changes\AddProductWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Windows\ManagerMenu\ManagerProductsWindow.xaml">
+    <Page Update="Windows\ManagerMenu\Products\ProductsWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Windows\ManagerMenu\ProductWindows\ManageProductWindow.xaml">
+    <Page Update="Windows\ManagerMenu\Products\Changes\EditProductWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Windows\ManagerMenu\StoreProduct\AddPromStoreProductWindow.xaml">
+    <Page Update="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\AddPromStoreProductWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Windows\ManagerMenu\StoreProduct\AddStoreProductWindow.xaml">
+    <Page Update="Windows\ManagerMenu\StoreProducts\Changes\StoreProduct\AddStoreProductWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Windows\ManagerMenu\ManagerStoreProductsWindow.xaml">
+    <Page Update="Windows\ManagerMenu\StoreProducts\StoreProductsWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Windows\ManagerMenu\StoreProduct\ManagePromStoreProductWindow.xaml">
+    <Page Update="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\EditPromStoreProductWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Windows\ManagerMenu\StoreProduct\ManageStoreProductWindow.xaml">
+    <Page Update="Windows\ManagerMenu\StoreProducts\Changes\StoreProduct\EditStoreProductWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Windows\ManagerMenu\EmployeeWindows\ManagerAddEmployeeWindow.xaml">
+    <Page Update="Windows\ManagerMenu\Employees\Changes\AddEmployeeWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Windows\ManagerMenu\ManagerEmployeesWindow.xaml">
+    <Page Update="Windows\ManagerMenu\Employees\EmployeesWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Windows\ManagerMenu\EmployeeWindows\ManagerEditEmployeeWindow.xaml">
+    <Page Update="Windows\ManagerMenu\Employees\Changes\EditEmployeeWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\MainWindow\SignInView.xaml">
+    <Page Update="Views\SignIn\SignInView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
