@@ -21,7 +21,7 @@ namespace supermarket.Windows.ManagerMenu.StoreProduct.Changes.PromStoreProduct
     {
         public AddPromStoreProductWindow()
         {
-            //InitializeComponent();
+            InitializeComponent();
         }
 
         ///*
