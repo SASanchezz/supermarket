@@ -23,45 +23,45 @@ namespace supermarket.Windows.ManagerMenu.StoreProduct
             InitializeComponent();
         }
 
-        /*
-        * This method is realization for adding new product to database
-        */
-        public void AddClick(object sender, RoutedEventArgs e)
-        {
-            string upc = upcBox.Text;
-            string idProduct = idProductBox.Text;
-            string price = priceBox.Text;
-            string productNumber = productsNumberBox.Text;
+        ///*
+        //* This method is realization for adding new product to database
+        //*/
+        //public void AddClick(object sender, RoutedEventArgs e)
+        //{
+        //    string upc = upcBox.Text;
+        //    string idProduct = idProductBox.Text;
+        //    string price = priceBox.Text;
+        //    string productNumber = productsNumberBox.Text;
 
-            //Validate enetered data
-            string result = StoreProductValidator.ValidateNotProm(upc, idProduct, price, productNumber);
+        //    //Validate enetered data
+        //    string result = StoreProductValidator.ValidateNotProm(upc, idProduct, price, productNumber);
 
-            if (result.Length != 0)
-            {
-                MessageBox.Show(result);
-                return;
-            }
+        //    if (result.Length != 0)
+        //    {
+        //        MessageBox.Show(result);
+        //        return;
+        //    }
 
-            string sql = String.Format("INSERT INTO Store_Product " +
-                "(UPC, UPC_Prom, id_product, selling_price, products_number, promotional_product) " +
-                "VALUES ({0}, null, {1}, {2}, {3}, 0)",
-                upc, idProduct, price, productNumber);
+        //    string sql = String.Format("INSERT INTO Store_Product " +
+        //        "(UPC, UPC_Prom, id_product, selling_price, products_number, promotional_product) " +
+        //        "VALUES ({0}, null, {1}, {2}, {3}, 0)",
+        //        upc, idProduct, price, productNumber);
 
-            DbUtils.Execute(sql);
+        //    DbUtils.Execute(sql);
 
-            MainStoreProductWindow owner = (MainStoreProductWindow)Owner;
-            //Renew buttons in MainProductWindow (i.e. add new product window)
-            owner.DeleteOldButtons();
-            owner.SetButtons();
-            owner.Show();
-            Close();
-        }
+        //    MainStoreProductWindow owner = (MainStoreProductWindow)Owner;
+        //    //Renew buttons in MainProductWindow (i.e. add new product window)
+        //    owner.DeleteOldButtons();
+        //    owner.SetButtons();
+        //    owner.Show();
+        //    Close();
+        //}
 
-        public void ReturnClick(object sender, RoutedEventArgs e)
-        {
-            Owner.Show();
-            Close();
-        }
+        //public void ReturnClick(object sender, RoutedEventArgs e)
+        //{
+        //    Owner.Show();
+        //    Close();
+        //}
     }
 }
 

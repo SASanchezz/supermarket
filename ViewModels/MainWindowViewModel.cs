@@ -48,6 +48,18 @@ namespace supermarket.ViewModels
                     _windowViewModel = new ManagerCustomersWindowViewModel();
                     _windowViewModel.Window.Closed += (object sender, EventArgs e) => IsEnabled = true;
                     return _windowViewModel;
+                case WindowTypes.ManagerCategories:
+                    _windowViewModel = new ManagerCategoriesWindowViewModel();
+                    _windowViewModel.Window.Closed += (object sender, EventArgs e) => IsEnabled = true;
+                    return _windowViewModel;
+                case WindowTypes.ManagerProducts:
+                    _windowViewModel = new ManagerProductsWindowViewModel();
+                    _windowViewModel.Window.Closed += (object sender, EventArgs e) => IsEnabled = true;
+                    return _windowViewModel;
+                case WindowTypes.ManagerStoreProducts:
+                    _windowViewModel = new ManagerStoreProductsWindowViewModel();
+                    _windowViewModel.Window.Closed += (object sender, EventArgs e) => IsEnabled = true;
+                    return _windowViewModel;
                 default:
                     return null;
             }

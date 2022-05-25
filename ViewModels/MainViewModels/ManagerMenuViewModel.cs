@@ -38,14 +38,14 @@ namespace supermarket.ViewModels
         {
             get
             {
-                return _openProductsWindowCommand ??= new RelayCommand<object>(_ => OpenEmployeesWindow());
+                return _openProductsWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel?.Invoke(WindowTypes.ManagerProducts));
             }
         }
         public RelayCommand<object> OpenCategoriesWindowCommand
         {
             get
             {
-                return _openCategoriesWindowCommand ??= new RelayCommand<object>(_ => OpenEmployeesWindow());
+                return _openCategoriesWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel?.Invoke(WindowTypes.ManagerCategories));
             }
         }
         public RelayCommand<object> OpenClientsWindowCommand
@@ -59,7 +59,7 @@ namespace supermarket.ViewModels
         {
             get
             {
-                return _openStoreProductsWindowCommand ??= new RelayCommand<object>(_ => OpenEmployeesWindow());
+                return _openProductsWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel?.Invoke(WindowTypes.ManagerStoreProducts));
             }
         }
         public RelayCommand<object> GoToSignInCommand
