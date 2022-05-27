@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using supermarket.Utils;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using supermarket.Navigation.WindowVM;
 
 namespace supermarket.ViewModels.ManagerMenu.Customers
@@ -10,7 +8,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
     /*
      * Controls ManagerCustomers View
      */
-    internal class CustomersVM : IWindowOpeningVM<ManagerCustomers>, INotifyPropertyChanged
+    internal class CustomersVM : ViewModel, IWindowOpeningVM<ManagerCustomers>
     {
         private List<string[]> _customers;
         private string[] _selectedCustomer;
@@ -55,12 +53,6 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
         public void UpdateCustomers()
         {
             Customers = DbQueries.GetAllCustomers();
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

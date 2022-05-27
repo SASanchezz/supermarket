@@ -6,7 +6,7 @@ using supermarket.Models;
 
 namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
 {
-    internal class AddEmployeeVM
+    internal class AddEmployeeVM : ViewModel
     {
         private string _surname;
         private string _name;

@@ -13,7 +13,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
     /*
      * Controls ManagerEmployees View
      */
-    internal class EmployeesVM : IWindowOpeningVM<ManagerEmployees>, INotifyPropertyChanged
+    internal class EmployeesVM : ViewModel, IWindowOpeningVM<ManagerEmployees>, INotifyPropertyChanged
     {
         private List<string[]> _employees;
         private string[] _selectedEmployee;
