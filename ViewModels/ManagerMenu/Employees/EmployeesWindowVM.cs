@@ -47,9 +47,9 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
                 {
                     case ManagerEmployees.AddEmployee:
                     {
-                        var addWindowViewModel = new AddEmployeeWindowVM();
-                        SetDefaultClosedEventHandler(addWindowViewModel);
-                        return addWindowViewModel;
+                        var addWindowVM = new AddEmployeeWindowVM();
+                        SetDefaultClosedEventHandler(addWindowVM);
+                        return addWindowVM;
                     }
                     case ManagerEmployees.EditEmployee:
                     {
@@ -59,11 +59,11 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
                             throw new Exception("No selected item");
                         }
 
-                        var editWindowViewModel = new EditEmployeeWindowVM();
-                        SetDefaultClosedEventHandler(editWindowViewModel);
-                        editWindowViewModel.ViewModel.SetData(ViewModel.SelectedEmployee);
+                        var editWindowVM = new EditEmployeeWindowVM();
+                        SetDefaultClosedEventHandler(editWindowVM);
+                        editWindowVM.ViewModel.SetData(ViewModel.SelectedEmployee);
                         ViewModel.SelectedEmployee = null;
-                        return editWindowViewModel;
+                        return editWindowVM;
                     }
                     default:
                         return null;

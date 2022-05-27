@@ -61,13 +61,14 @@
                   Margin="150, 0, 0, 30"
                   Text="{Binding FilteredSurname, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
-        
+
         <ComboBox Grid.Row="0" 
                   Width="120"
                   Height="24" 
                   HorizontalAlignment="Left" 
                   Margin="150, 30, 0, 0"
-                  ItemsSource="{Binding AllRoles}" SelectedItem="{Binding SelectedRole, Mode=TwoWay}">
+                  ItemsSource="{Binding SelectiveRoles}" 
+                  SelectedItem="{Binding SelectedRole, Mode=TwoWay}">
         </ComboBox>
         
         <ScrollViewer Grid.Row="1">
