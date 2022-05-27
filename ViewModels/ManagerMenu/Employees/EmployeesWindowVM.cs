@@ -15,6 +15,9 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
         private EmployeesVM _viewModel;
         private Window _window;
 
+        private AddEmployeeWindowVM _addEmployeeWindowVM;
+        private EditEmployeeWindowVM _editEmployeeWindowVM;
+
         public EmployeesWindowVM()
         {
             IsEnabled = true;
@@ -24,9 +27,15 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
                 DataContext = this
             };
 
+            Window.Closed += (object sender, EventArgs e) =>
+            {
+                _addEmployeeWindowVM?.Window.Close();
+                _editEmployeeWindowVM?.Window.Close();
+            };
+
             _viewModel = new EmployeesVM();
-            // there is a button "Back"
-            _viewModel.Close = Window.Close;
+            // set Close() method to Action in ViewModel
+            _viewModel.Close = Window.Close;         
 
             SetWindowOpeningVM(new IWindowOpeningVM<ManagerEmployees>[] { _viewModel });
 
@@ -47,9 +56,9 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
                 {
                     case ManagerEmployees.AddEmployee:
                     {
-                        var addWindowVM = new AddEmployeeWindowVM();
-                        SetDefaultClosedEventHandler(addWindowVM);
-                        return addWindowVM;
+                        _addEmployeeWindowVM = new AddEmployeeWindowVM();
+                        SetDefaultClosedEventHandler(_addEmployeeWindowVM);
+                        return _addEmployeeWindowVM;
                     }
                     case ManagerEmployees.EditEmployee:
                     {
@@ -59,11 +68,11 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
                             throw new Exception("No selected item");
                         }
 
-                        var editWindowVM = new EditEmployeeWindowVM();
-                        SetDefaultClosedEventHandler(editWindowVM);
-                        editWindowVM.ViewModel.SetData(ViewModel.SelectedEmployee);
+                        _editEmployeeWindowVM = new EditEmployeeWindowVM();
+                        SetDefaultClosedEventHandler(_editEmployeeWindowVM);
+                        _editEmployeeWindowVM.ViewModel.SetData(ViewModel.SelectedEmployee);
                         ViewModel.SelectedEmployee = null;
-                        return editWindowVM;
+                        return _editEmployeeWindowVM;
                     }
                     default:
                         return null;

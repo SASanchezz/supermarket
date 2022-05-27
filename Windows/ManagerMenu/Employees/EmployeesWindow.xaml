@@ -6,10 +6,10 @@
         xmlns:views="clr-namespace:supermarket.Views.ManagerMenu.Employees"
         xmlns:VM="clr-namespace:supermarket.ViewModels.ManagerMenu.Employees"
         xmlns:local="clr-namespace:supermarket.ViewModels.ManagerMenu.Employees"
-        d:DataContext="{d:DesignInstance Type=VM:EmployeesWindowVM}"
         mc:Ignorable="d"
         Title="EmployeesWindow" Height="450" Width="800"
-        Content="{Binding ViewModel, Mode=OneWay}" IsEnabled="{Binding IsEnabled, Mode=OneWay}">
+        Content="{Binding ViewModel, Mode=OneWay}" 
+        IsEnabled="{Binding IsEnabled, Mode=OneWay}">
     <Window.Resources>
         <DataTemplate DataType="{ x:Type VM:EmployeesVM}">
             <views:EmployeesView/>

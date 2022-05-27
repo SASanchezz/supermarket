@@ -10,7 +10,9 @@
         xmlns:local="clr-namespace:supermarket"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
-        Content="{Binding CurrentViewModel, Mode=OneWay}" IsEnabled="{Binding IsEnabled, Mode=OneWay}" ResizeMode="NoResize">
+        Content="{Binding CurrentViewModel, Mode=OneWay}" 
+        IsEnabled="{Binding IsEnabled, Mode=OneWay}" 
+        ResizeMode="NoResize">
     
     <Window.Resources>
         <DataTemplate DataType="{ x:Type signInVM:SignInVM}">

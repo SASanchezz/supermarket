@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using supermarket.Utils;
 using supermarket.ViewModels;
 /*
@@ -13,7 +14,7 @@ namespace supermarket
             DbUtils.SetDbConnection();
 
             InitializeComponent();
-            DataContext = new MainWindowVM();
+            DataContext = new MainWindowVM(this);
         }
     }
 }
