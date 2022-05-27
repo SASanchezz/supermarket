@@ -47,7 +47,7 @@ namespace supermarket.Utils
                 filter = (sorts[1] == "") ? "" : string.Format(" WHERE Product.{0} in ({1})", sorts[0], sorts[1]);
 
                 //get asc\desc parameters for columns
-                order = Utils.ParseOrder(2, sorts); //2 - To pass filter options
+                //order = Utils.ParseOrder(2, sorts); //2 - To pass filter options
                 order = (order == "") ? "" : " ORDER BY " + order[..^2];
             } catch { }
             
@@ -81,7 +81,7 @@ namespace supermarket.Utils
             {
 
                 //get asc\desc parameters for columns
-                order = Utils.ParseOrder(0, sorts);
+                //order = Utils.ParseOrder(0, sorts);
                 order = (order == "") ? "" : " ORDER BY " + order[..^2];
             }
             catch { }
@@ -115,8 +115,8 @@ namespace supermarket.Utils
                 filter = (sorts[3] == "") ? filter : filter += string.Format(" AND Customer_Card.{0} {1}", sorts[2], sorts[3]);
 
                 //get asc\desc parameters for columns
-                order = Utils.ParseOrder(4, sorts);
-                order = (order == "") ? "" : " ORDER BY " + order[..^2];
+                //order = Utils.ParseOrder(4, sorts);
+                ////order = (order == "") ? "" : " ORDER BY " + order[..^2];
             }
             catch { }
 
