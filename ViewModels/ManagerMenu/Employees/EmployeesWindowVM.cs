@@ -46,15 +46,13 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
                 switch (type)
                 {
                     case ManagerEmployees.AddEmployee:
+                    {
                         var addWindowViewModel = new AddEmployeeWindowVM();
-                        addWindowViewModel.Window.Closed += (sender, e) =>
-                        {
-                            IsEnabled = true;
-                            ViewModel.UpdateEmployees();
-                        };
+                        SetDefaultClosedEventHandler(addWindowViewModel);
                         return addWindowViewModel;
-
+                    }
                     case ManagerEmployees.EditEmployee:
+                    {
                         if (_viewModel.SelectedEmployee == null)
                         {
                             IsEnabled = true;
@@ -62,15 +60,11 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
                         }
 
                         var editWindowViewModel = new EditEmployeeWindowVM();
-                        editWindowViewModel.Window.Closed += (sender, e) =>
-                        {
-                            IsEnabled = true;
-                            ViewModel.UpdateEmployees();
-                        };
+                        SetDefaultClosedEventHandler(editWindowViewModel);
                         editWindowViewModel.ViewModel.SetData(ViewModel.SelectedEmployee);
                         ViewModel.SelectedEmployee = null;
                         return editWindowViewModel;
-
+                    }
                     default:
                         return null;
                 }
@@ -80,6 +74,17 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
                 MessageBox.Show(ex.Message);
             }
             return null;
+        }
+
+        private void SetDefaultClosedEventHandler(INavigatableWindowVM<ManagerEmployees> windowVM)
+        {
+            string filteredSurname = ViewModel.FilteredSurname;
+            windowVM.Window.Closed += (sender, e) =>
+            {
+                IsEnabled = true;
+                ViewModel.UpdateEmployees();
+                ViewModel.FilteredSurname = filteredSurname;
+            };
         }
     }
 }
