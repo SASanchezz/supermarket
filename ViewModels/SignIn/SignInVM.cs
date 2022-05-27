@@ -38,17 +38,19 @@ namespace supermarket.ViewModels.SignIn
 
         private void SignIn()
         {
-            //string result = SignInValidator.Validate(Login, Password);
-            string result = SignInValidator.Validate("+380634412925", "admin");
-
-            if (result != "")
+            try
             {
-                MessageBox.Show(result);
-                return;
+                //SignInValidator.Validate(Login, Password);
+                SignInValidator.Validate("+380634412925", "admin");
+
+                // вот тут хуйню с проверкой менеджер это или кассир надо сообразить
+                _goToManageMenu?.Invoke();
+                //_goToCashierMenu?.Invoke();
             }
-            // вот тут хуйню с проверкой менеджер это или кассир надо сообразить
-            _goToManageMenu?.Invoke();
-            //_goToCashierMenu?.Invoke();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private bool CanExecute(object obj)

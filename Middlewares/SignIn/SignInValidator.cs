@@ -11,21 +11,19 @@ namespace supermarket.Middlewares.SignIn
 {
     public static class SignInValidator
     {
-        public static string Validate(string phone, string password)
+        public static void Validate(string phone, string password)
         {
             string sql = String.Format("SELECT * FROM Employee WHERE phone_number='{0}'", phone);
             List<string[]> result = DbUtils.FindAll(sql);
 
             if (!result.Any())
             {
-                return "Нема такого телефону";
+                throw new Exception("Нема такого телефону");
             }
             if (password.Length == 0 || !CryptUtils.Compare(password, result[0][9]))
             {
-                return "Неправильний пароль";
+                throw new Exception("Неправильний пароль");
             }
-
-            return ""; //Alright
         }
     }
 }
