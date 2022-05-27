@@ -5,10 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:supermarket.Views.ManagerMenu.Products"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             FontFamily="Montserrat">
 
-    <Grid Margin="10"
-          Background="LightGray">
+    <Grid Background="#F2F2F2">
         
         <Grid.RowDefinitions>
             <RowDefinition Height="64"/>
@@ -24,6 +24,7 @@
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Center" 
                 FontSize="12" 
+                FontWeight="DemiBold"
                 Margin="20,0,0,0"/>
         
         <Button Grid.Row="0"
@@ -33,6 +34,7 @@
                 HorizontalAlignment="Center"  
                 VerticalAlignment="Center" 
                 FontSize="12"
+                FontWeight="DemiBold"
                 Margin="0, 0, 400, 0"/>
 
         <Button Grid.Row="0"
@@ -41,6 +43,7 @@
                 HorizontalAlignment="Center"  
                 VerticalAlignment="Center" 
                 FontSize="12" 
+                FontWeight="DemiBold"
                 Margin="0, 0, 100, 0"/>
 
         <ComboBox Grid.Row="0"
@@ -58,9 +61,10 @@
                 Height="24" 
                 HorizontalAlignment="Right" 
                 VerticalAlignment="Center" 
-                FontSize="12"  
+                FontSize="12"
+                FontWeight="DemiBold"
                 Margin="0,0,20,0"
-                Background="LawnGreen"/>
+                Background="LightSkyBlue"/>
 
         <ScrollViewer Grid.Row="1">
             <StackPanel>
@@ -69,11 +73,11 @@
                           ItemsSource="{Binding Products}" 
                           SelectedItem="{Binding SelectedProduct, Mode=OneWayToSource}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="id"             Binding="{Binding Path=[0]}"    Width="*"  IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="Назва"          Binding="{Binding Path=[2]}"    Width="4*" IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="Категорія"      Binding="{Binding Path=[5]}"    Width="2*" IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="Опис"           Binding="{Binding Path=[3]}"    Width="8*" IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="Виробник"       Binding="{Binding Path=[4]}"    Width="8*" IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="id"             Binding="{Binding Path=[0]}"    Width="Auto"    IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Назва"          Binding="{Binding Path=[2]}"    Width="*"       IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Категорія"      Binding="{Binding Path=[5]}"    Width="2*"      IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Виробник"       Binding="{Binding Path=[4]}"    Width="2*"      IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Опис"           Binding="{Binding Path=[3]}"    Width="4*"      IsReadOnly="True" CanUserSort="False"/>     
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

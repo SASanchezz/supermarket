@@ -44,8 +44,8 @@ namespace supermarket.ViewModels.SignIn
                 SignInValidator.Validate("+380634412925", "admin");
 
                 // вот тут хуйню с проверкой менеджер это или кассир надо сообразить
-                _goToManageMenu?.Invoke();
-                //_goToCashierMenu?.Invoke();
+                _goToManageMenu();
+                //_goToCashierMenu();
             }
             catch (Exception ex)
             {

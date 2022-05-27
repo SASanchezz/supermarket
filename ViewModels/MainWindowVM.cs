@@ -10,6 +10,7 @@ using supermarket.ViewModels.ManagerMenu.StoreProducts;
 using supermarket.ViewModels.SignIn;
 using supermarket.Navigation.WindowVM;
 using System;
+using System.Windows;
 
 namespace supermarket.ViewModels
 {
@@ -22,12 +23,12 @@ namespace supermarket.ViewModels
     {
         // controllable ViewModels
         private SignInVM _signInVM;
-            // windows opening ViewModels
+        //// windows opening ViewModels
         private ManagerMenuVM _managerMenuVM;
         private CashierMenuVM _cashierMenuVM;
-            //
+        ////
         //
-        public MainWindowVM() 
+        public MainWindowVM(Window window) 
         {
             IsEnabled = true;
 
@@ -40,7 +41,12 @@ namespace supermarket.ViewModels
             Navigate(VMNavigationTypes.SignIn); // set SignIn View
 
             SetWindowOpeningVM(new IWindowOpeningVM<Main>[] { _managerMenuVM, _cashierMenuVM });
+
+            Window = window;
+            Window.Closed += (object sender, EventArgs e) => Environment.Exit(0);
         }
+
+        public Window Window { get; set; }
 
         protected override INavigatableWindowVM<Main> CreateWindowViewModel(Main type)
         {

@@ -18,6 +18,7 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
             {
                 DataContext = this
             };
+            //Window.Closed += (object sender, EventArgs e) => Environment.Exit(0);
 
             _viewModel = new StoreProductsVM();
 
