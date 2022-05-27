@@ -1,39 +1,14 @@
-﻿using supermarket.Navigation.WindowVM;
-using supermarket.Windows.ManagerMenu.StoreProducts;
-using System;
-using System.Windows;
+﻿using supermarket.Windows.ManagerMenu.StoreProducts;
 
 namespace supermarket.ViewModels.ManagerMenu.StoreProducts
 {
-    internal class StoreProductsWindowVM : WindowVMNavigator<ManagerStoreProducts>, INavigatableWindowVM<Main>
+    internal class StoreProductsWindowVM : WindowViewModel<StoreProductsWindow, StoreProductsVM>
     {
-        private Window _window;
-        private StoreProductsVM _viewModel;
-
         public StoreProductsWindowVM()
         {
-            IsEnabled = true;
-
-            _window = new StoreProductsWindow
-            {
-                DataContext = this
-            };
-            //Window.Closed += (object sender, EventArgs e) => Environment.Exit(0);
-
-            _viewModel = new StoreProductsVM();
+            //IsEnabled = true;
 
             Window.Show();
-        }
-
-        public Window Window => _window;
-
-        public Main WindowType => Main.ManagerStoreProducts; 
-
-        public StoreProductsVM ViewModel => _viewModel; 
-
-        protected override void CreateWindowViewModel(ManagerStoreProducts type)
-        {
-            throw new NotImplementedException();
         }
     }
 }

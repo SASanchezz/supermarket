@@ -9,32 +9,11 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
     /*
      * Controls ManagerAddEmployee Window
      */
-    internal class AddEmployeeWindowVM : INavigatableWindowVM<ManagerEmployees>, INotifyPropertyChanged
+    internal class AddEmployeeWindowVM : WindowViewModel<AddEmployeeWindow, AddEmployeeVM>
     {
-        private readonly AddEmployeeVM _viewModel;
-        private readonly Window _window;
-
         public AddEmployeeWindowVM()
         {
-            _window = new AddEmployeeWindow()
-            {
-                DataContext = this
-            };
-
-            _viewModel = new AddEmployeeVM();
-            _viewModel.Close = Window.Close;
-
-            Window.Show();
-        }
-
-        public AddEmployeeVM ViewModel => _viewModel;
-        public ManagerEmployees WindowType => ManagerEmployees.AddEmployee;
-        public Window Window => _window;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            ViewModel.Close = Window.Close;
         }
     }
 }

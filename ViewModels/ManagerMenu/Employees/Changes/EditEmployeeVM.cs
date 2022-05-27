@@ -13,7 +13,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
     /*
      * Controls ManagerEditEmployee View
      */
-    internal class EditEmployeeVM : INotifyPropertyChanged
+    internal class EditEmployeeVM : ViewModel
     {
         private string _id;
         private string _surname;

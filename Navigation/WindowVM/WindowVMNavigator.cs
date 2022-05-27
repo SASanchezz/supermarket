@@ -1,46 +1,45 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+using System.Collections.Generic;
 
 namespace supermarket.Navigation.WindowVM
 {
-    internal abstract class WindowVMNavigator<Type> : IWindowVMNavigator<Type>, INotifyPropertyChanged where Type : Enum
+    internal class WindowVMNavigator<Type> where Type : Enum 
     {
-        private bool _isEnabled;
+        private Dictionary<Type, Action> _ways;
 
-        public bool IsEnabled
+        public WindowVMNavigator(IWindowOpeningVM<Type>[] viewModels)
         {
-            get
-            {
-                return _isEnabled;
-            }
-            set
-            {
-                _isEnabled = value;
-                OnPropertyChanged(nameof(IsEnabled));
-            }
+            SetWindowOpeningVM(viewModels);
+            _ways = new Dictionary<Type, Action>();
         }
 
         public void Navigate(Type type)
         {
-            IsEnabled = false;
-            CreateWindowViewModel(type);
+            if (!_ways.ContainsKey(type))
+            {
+                throw new Exception("There is no way");
+            }
+            _ways[type]();
         }
 
-        protected abstract void CreateWindowViewModel(Type type);
+        public void SetWay(Type type, Action goToWindowViewModel)
+        {
+            if (_ways.ContainsKey(type))
+            {
+                _ways[type] = goToWindowViewModel;
+            }
+            else
+            {
+                _ways.Add(type, goToWindowViewModel);
+            }
+        }
 
-        protected void SetWindowOpeningVM(IWindowOpeningVM<Type>[] viewModels)
+        private void SetWindowOpeningVM(IWindowOpeningVM<Type>[] viewModels)
         {
             for (int i = 0; i < viewModels.Length; i++)
             {
                 viewModels[i].OpenWindowViewModel = Navigate;
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

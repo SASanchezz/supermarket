@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace supermarket.Navigation.VM
 {
-    internal abstract class VMNavigator : IVMNavigator, INotifyPropertyChanged
+    internal abstract class VMNavigator : INotifyPropertyChanged
     {
         private INavigatableVM _currentViewModel;
 

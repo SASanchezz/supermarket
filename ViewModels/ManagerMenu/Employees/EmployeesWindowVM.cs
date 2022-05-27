@@ -10,84 +10,78 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
      * Controls ManagerEmployees Window
      * Set navigating Windows as ManagerAddEmployee Window, ManagerEditEmployee Window
      */
-    internal class EmployeesWindowVM : WindowVMNavigator<ManagerEmployees>, INavigatableWindowVM<Main>
+    internal class EmployeesWindowVM : WindowViewModel<EmployeesWindow, EmployeesVM>
     {
-        private EmployeesVM _viewModel;
-        private Window _window;
+        private WindowVMNavigator<ManagerEmployees> _windowsNavigator;
 
         private AddEmployeeWindowVM _addEmployeeWindowVM;
         private EditEmployeeWindowVM _editEmployeeWindowVM;
 
         public EmployeesWindowVM()
         {
-            IsEnabled = true;
+            _addEmployeeWindowVM = new AddEmployeeWindowVM();
+            _editEmployeeWindowVM = new EditEmployeeWindowVM();
 
-            _window = new EmployeesWindow
-            {
-                DataContext = this
-            };
+            _windowsNavigator = new WindowVMNavigator<ManagerEmployees>(new IWindowOpeningVM<ManagerEmployees>[] { ViewModel });
+            
+            _windowsNavigator.SetWay(ManagerEmployees.AddEmployee,  GoToAddEmployee);
+            _windowsNavigator.SetWay(ManagerEmployees.EditEmployee, GoToEditEmployee);
 
             Window.Closed += (object sender, EventArgs e) =>
             {
-                _addEmployeeWindowVM?.Window.Close();
-                _editEmployeeWindowVM?.Window.Close();
+                _addEmployeeWindowVM.Window.Close();
+                _editEmployeeWindowVM.Window.Close();
             };
-
-            _viewModel = new EmployeesVM();
+            
             // set Close() method to Action in ViewModel
-            _viewModel.Close = Window.Close;         
-
-            SetWindowOpeningVM(new IWindowOpeningVM<ManagerEmployees>[] { _viewModel });
+            ViewModel.Close = Window.Close;
 
             Window.Show();
         }
 
-        public Main WindowType => Main.ManagerEmployees; 
+        private void GoToAddEmployee()
+        {
+            //SetDefaultClosedEventHandler(_addEmployeeWindowVM);
+            string filteredSurname = ViewModel.FilteredSurname;
+            _addEmployeeWindowVM.Window.Closed += (sender, e) =>
+            {
+                ViewModel.UpdateEmployees();
+                ViewModel.FilteredSurname = filteredSurname;
+            };
+            _addEmployeeWindowVM.Window.Show();
+        }
 
-        public Window Window => _window; 
-
-        public EmployeesVM ViewModel => _viewModel; 
-
-        protected override void CreateWindowViewModel(ManagerEmployees type)
+        private void GoToEditEmployee()
         {
             try
             {
-                switch (type)
+                if (ViewModel.SelectedEmployee == null)
                 {
-                    case ManagerEmployees.AddEmployee:
-                    {
-                        _addEmployeeWindowVM = new AddEmployeeWindowVM();
-                        SetDefaultClosedEventHandler(_addEmployeeWindowVM);
-                        return;
-                    }
-                    case ManagerEmployees.EditEmployee:
-                    {
-                        if (_viewModel.SelectedEmployee == null)
-                        {
-                            IsEnabled = true;
-                            throw new Exception("No selected item");
-                        }
-
-                        _editEmployeeWindowVM = new EditEmployeeWindowVM();
-                        SetDefaultClosedEventHandler(_editEmployeeWindowVM);
-                        _editEmployeeWindowVM.ViewModel.SetData(ViewModel.SelectedEmployee);
-                        ViewModel.SelectedEmployee = null;
-                        return;
-                    }
+                    throw new Exception("No selected item");
                 }
+                //SetDefaultClosedEventHandler(_addEmployeeWindowVM);
+                string filteredSurname = ViewModel.FilteredSurname;
+                _editEmployeeWindowVM.Window.Closed += (sender, e) =>
+                {
+                    ViewModel.UpdateEmployees();
+                    ViewModel.FilteredSurname = filteredSurname;
+                };
+                _editEmployeeWindowVM.ViewModel.SetData(ViewModel.SelectedEmployee);
+                ViewModel.SelectedEmployee = null;
+                _editEmployeeWindowVM.Window.Show();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+            
         }
 
-        private void SetDefaultClosedEventHandler(INavigatableWindowVM<ManagerEmployees> windowVM)
+        private void SetDefaultClosedEventHandler(WindowViewModel<Window, ViewModel> windowVM)
         {
             string filteredSurname = ViewModel.FilteredSurname;
             windowVM.Window.Closed += (sender, e) =>
             {
-                IsEnabled = true;
                 ViewModel.UpdateEmployees();
                 ViewModel.FilteredSurname = filteredSurname;
             };

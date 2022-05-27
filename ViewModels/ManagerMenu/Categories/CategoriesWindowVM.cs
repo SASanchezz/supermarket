@@ -1,38 +1,12 @@
-﻿using supermarket.Navigation.WindowVM;
-using supermarket.Windows.ManagerMenu.Categories;
-using System;
-using System.Windows;
+﻿using supermarket.Windows.ManagerMenu.Categories;
 
 namespace supermarket.ViewModels.ManagerMenu.Categories
 {
-    internal class CategoriesWindowVM : WindowVMNavigator<ManagerCategories>, INavigatableWindowVM<Main>
+    internal class CategoriesWindowVM : WindowViewModel<CategoriesWindow, CategoriesVM>
     {
-        private Window _window;
-        private CategoriesVM _viewModel;
-
         public CategoriesWindowVM()
         {
-            IsEnabled = true;
-
-            _window = new CategoriesWindow
-            {
-                DataContext = this
-            };
-
-            _viewModel = new CategoriesVM();
-
             Window.Show();
-        }
-
-        public Window Window => _window;
-
-        public Main WindowType => Main.ManagerCategories;
-
-        public CategoriesVM ViewModel => _viewModel; 
-
-        protected override void CreateWindowViewModel(ManagerCategories type)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -2,12 +2,10 @@
 using supermarket.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace supermarket.ViewModels.ManagerMenu.StoreProducts
 {
-    class StoreProductsVM : IWindowOpeningVM<ManagerStoreProducts>, INotifyPropertyChanged
+    class StoreProductsVM : ViewModel, IWindowOpeningVM<ManagerStoreProducts>
     {
         private List<string[]> _storeProducts;
         private string[] _selectedStoreProduct;
@@ -32,7 +30,7 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
             set
             {
                 _storeProducts = value;
-                OnPropertyChanged(nameof(StoreProducts));
+                OnPropertyChanged();
             }
         }
 
@@ -52,12 +50,6 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
         public void UpdateStoreProducts()
         {
             StoreProducts = DbQueries.GetAllStoreProducts();
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

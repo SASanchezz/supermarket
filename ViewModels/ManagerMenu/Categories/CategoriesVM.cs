@@ -2,12 +2,10 @@
 using supermarket.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace supermarket.ViewModels.ManagerMenu.Categories
 {
-    internal class CategoriesVM : IWindowOpeningVM<ManagerCategories>, INotifyPropertyChanged
+    internal class CategoriesVM : ViewModel, IWindowOpeningVM<ManagerCategories>
     {
         private List<string[]> _categories;
         private string[] _selectedCategory;
@@ -52,12 +50,6 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
         public void UpdateCustomers()
         {
             Categories = DbQueries.GetAllCategories();
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
