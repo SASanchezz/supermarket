@@ -48,7 +48,7 @@ namespace supermarket.ViewModels
 
         public Window Window { get; set; }
 
-        protected override INavigatableWindowVM<Main> CreateWindowViewModel(Main type)
+        protected override void CreateWindowViewModel(Main type)
         {
             INavigatableWindowVM<Main> _windowViewModel;
             switch (type)
@@ -56,25 +56,23 @@ namespace supermarket.ViewModels
                 case Main.ManagerEmployees:
                     _windowViewModel = new EmployeesWindowVM();
                     _windowViewModel.Window.Closed += (object sender, EventArgs e) => IsEnabled = true;
-                    return _windowViewModel;
+                    return;
                 case Main.ManagerCustomers:
                     _windowViewModel = new CustomersWindowVM();
                     _windowViewModel.Window.Closed += (object sender, EventArgs e) => IsEnabled = true;
-                    return _windowViewModel;
+                    return;
                 case Main.ManagerCategories:
                     _windowViewModel = new CategoriesWindowVM();
                     _windowViewModel.Window.Closed += (object sender, EventArgs e) => IsEnabled = true;
-                    return _windowViewModel;
+                    return;
                 case Main.ManagerProducts:
                     _windowViewModel = new ProductsWindowVM();
                     _windowViewModel.Window.Closed += (object sender, EventArgs e) => IsEnabled = true;
-                    return _windowViewModel;
+                    return;
                 case Main.ManagerStoreProducts:
                     _windowViewModel = new StoreProductsWindowVM();
                     _windowViewModel.Window.Closed += (object sender, EventArgs e) => IsEnabled = true;
-                    return _windowViewModel;
-                default:
-                    return null;
+                    return;
             }
         }
 

@@ -30,7 +30,7 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
 
         public CategoriesVM ViewModel => _viewModel; 
 
-        protected override INavigatableWindowVM<ManagerCategories> CreateWindowViewModel(ManagerCategories type)
+        protected override void CreateWindowViewModel(ManagerCategories type)
         {
             throw new NotImplementedException();
         }

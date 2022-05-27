@@ -61,7 +61,7 @@ namespace supermarket.Navigation
             }
         }
 
-        protected abstract INavigatableWindowVM<Type> CreateWindowViewModel(Type type);
+        protected abstract void CreateWindowViewModel(Type type);
 
         protected abstract INavigatableVM CreateViewModel(VMNavigationTypes type);
 

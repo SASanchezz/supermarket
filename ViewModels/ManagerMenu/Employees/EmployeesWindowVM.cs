@@ -48,7 +48,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
 
         public EmployeesVM ViewModel => _viewModel; 
 
-        protected override INavigatableWindowVM<ManagerEmployees> CreateWindowViewModel(ManagerEmployees type)
+        protected override void CreateWindowViewModel(ManagerEmployees type)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
                     {
                         _addEmployeeWindowVM = new AddEmployeeWindowVM();
                         SetDefaultClosedEventHandler(_addEmployeeWindowVM);
-                        return _addEmployeeWindowVM;
+                        return;
                     }
                     case ManagerEmployees.EditEmployee:
                     {
@@ -72,17 +72,14 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
                         SetDefaultClosedEventHandler(_editEmployeeWindowVM);
                         _editEmployeeWindowVM.ViewModel.SetData(ViewModel.SelectedEmployee);
                         ViewModel.SelectedEmployee = null;
-                        return _editEmployeeWindowVM;
+                        return;
                     }
-                    default:
-                        return null;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            return null;
         }
 
         private void SetDefaultClosedEventHandler(INavigatableWindowVM<ManagerEmployees> windowVM)
