@@ -27,7 +27,7 @@ namespace supermarket.Navigation.WindowVM
             CreateWindowViewModel(type);
         }
 
-        protected abstract INavigatableWindowVM<Type> CreateWindowViewModel(Type type);
+        protected abstract void CreateWindowViewModel(Type type);
 
         protected void SetWindowOpeningVM(IWindowOpeningVM<Type>[] viewModels)
         {
