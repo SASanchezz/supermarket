@@ -11,8 +11,8 @@ namespace supermarket
         public MainWindow()
         {
             DbUtils.SetDbConnection();
-            InitializeComponent();
 
+            InitializeComponent();
             DataContext = new MainWindowVM();
         }
     }

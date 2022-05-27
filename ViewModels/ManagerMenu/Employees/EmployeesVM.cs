@@ -17,8 +17,11 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
     {
         private List<string[]> _employees;
         private string[] _selectedEmployee;
+
         private string _filteredSurname;
-        private int _selectedRole;
+
+        private string[] _selectiveRoles;
+        private string _selectedRole;
 
         private RelayCommand<object> _openAddEmployeeWindowCommand;
         private RelayCommand<object> _openEditEmployeeWindowCommand;
@@ -27,7 +30,9 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
         public EmployeesVM()
         {
             UpdateEmployees();
-            //SelectedRole = 0;
+            SetSelectiveRoles();
+
+            SelectedRole = _selectiveRoles[0];
         }
 
         public Action<ManagerEmployees> OpenWindowViewModel { get; set; }
@@ -109,7 +114,9 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             }
         }
 
-        public int Surname
+        public string[] SelectiveRoles => _selectiveRoles;
+
+        public string SelectedRole
         {
             get
             {
@@ -118,13 +125,17 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             set
             {
                 _selectedRole = value;
-                if (_selectedRole == 0)
+                if (_selectedRole == SelectiveRoles[0])
                 {
                     UpdateEmployees();
+                    //FilteredSurname = FilteredSurname;
+                    OnPropertyChanged(nameof(FilteredSurname));
                 }
                 else
                 {
+                    UpdateEmployees();
                     Employees = DbQueries.GetEmployeesByRole(_selectedRole);
+                    OnPropertyChanged(nameof(FilteredSurname));
                 }
                 OnPropertyChanged();
             }
@@ -133,6 +144,16 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
         public void UpdateEmployees()
         {
             Employees = DbQueries.GetAllEmployee();
+        }
+
+        private void SetSelectiveRoles()
+        {
+            _selectiveRoles = new string[Data.Roles.roleNames.Length + 1];
+            _selectiveRoles.SetValue("Всі", 0);
+            for (int i = 0; i < Data.Roles.roleNames.Length; ++i)
+            {
+                _selectiveRoles.SetValue(Data.Roles.roleNames[i], i + 1);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -22,9 +22,11 @@ namespace supermarket.Utils
             string sql = string.Format("SELECT * FROM Employee WHERE id_employee='{0}'", employeeId);
             return DbUtils.FindAll(sql);
         }
-        public static List<string[]> GetEmployeesByRole(int employeeRole)
+        public static List<string[]> GetEmployeesByRole(string employeeRole)
         {
-            string sql = string.Format("SELECT * FROM Employee WHERE empl_role_id='{0}'", employeeRole);
+            string sql = string.Format("SELECT * FROM Employee WHERE empl_role_id IN " +
+                "(SELECT employee_role_id FROM Employee_Role WHERE employee_role_title='{0}')", 
+                employeeRole);
             return DbUtils.FindAll(sql);
         }
 

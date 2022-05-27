@@ -59,6 +59,7 @@ namespace supermarket.Models
 
             return result.Count > 0 ? result : null;
         }
+
         public static void DeleteEmployeeByID(string employeeId)
         {
             string sql = string.Format("DELETE FROM Employee WHERE id_employee='{0}'", employeeId);

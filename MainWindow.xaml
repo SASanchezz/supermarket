@@ -5,12 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:signInViews="clr-namespace:supermarket.Views.SignIn"
         xmlns:managerMenuViews="clr-namespace:supermarket.Views.ManagerMenu"
-        xmlns:windowVM="clr-namespace:supermarket.ViewModels"
         xmlns:signInVM="clr-namespace:supermarket.ViewModels.SignIn"
         xmlns:managerMenuVM="clr-namespace:supermarket.ViewModels.ManagerMenu"
         xmlns:local="clr-namespace:supermarket"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance Type=windowVM:MainWindowVM}"
         Title="MainWindow" Height="450" Width="800"
         Content="{Binding CurrentViewModel, Mode=OneWay}" IsEnabled="{Binding IsEnabled, Mode=OneWay}" ResizeMode="NoResize">
     
