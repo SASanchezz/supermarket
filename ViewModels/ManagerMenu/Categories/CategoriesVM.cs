@@ -1,4 +1,4 @@
-﻿using supermarket.Navigation.WindowVM;
+﻿using supermarket.Navigation.WindowViewModels;
 using supermarket.Utils;
 using System;
 using System.Collections.Generic;

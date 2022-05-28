@@ -1,4 +1,4 @@
-﻿using supermarket.Navigation.WindowVM;
+﻿using supermarket.Navigation.WindowViewModels;
 using supermarket.ViewModels.ManagerMenu.Employees.Changes;
 using supermarket.Windows.ManagerMenu.Employees;
 using System;

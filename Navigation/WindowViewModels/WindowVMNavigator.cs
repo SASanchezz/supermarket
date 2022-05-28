@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace supermarket.Navigation.WindowVM
+namespace supermarket.Navigation.WindowViewModels
 {
-    internal class WindowVMNavigator<Type> where Type : Enum 
+    internal class WindowVMNavigator<Type> where Type : Enum
     {
         private Dictionary<Type, Action> _ways;
 

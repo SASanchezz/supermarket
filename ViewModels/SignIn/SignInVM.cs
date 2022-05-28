@@ -2,7 +2,7 @@
 using supermarket.Utils;
 using System;
 using System.Windows;
-using supermarket.Navigation.VM;
+using supermarket.Navigation.ViewModels;
 
 namespace supermarket.ViewModels.SignIn
 {

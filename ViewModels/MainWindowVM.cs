@@ -1,5 +1,4 @@
-﻿using supermarket.Navigation.VM;
-using supermarket.ViewModels.CashierMenu;
+﻿using supermarket.ViewModels.CashierMenu;
 using supermarket.ViewModels.ManagerMenu;
 using supermarket.ViewModels.ManagerMenu.Categories;
 using supermarket.ViewModels.ManagerMenu.Customers;
@@ -7,9 +6,10 @@ using supermarket.ViewModels.ManagerMenu.Employees;
 using supermarket.ViewModels.ManagerMenu.Products;
 using supermarket.ViewModels.ManagerMenu.StoreProducts;
 using supermarket.ViewModels.SignIn;
-using supermarket.Navigation.WindowVM;
 using System;
 using System.Windows;
+using supermarket.Navigation.ViewModels;
+using supermarket.Navigation.WindowViewModels;
 
 namespace supermarket.ViewModels
 {

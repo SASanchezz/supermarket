@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using supermarket.Utils;
-using supermarket.Navigation.WindowVM;
+using supermarket.Navigation.WindowViewModels;
 
 namespace supermarket.ViewModels.ManagerMenu.Customers
 {
