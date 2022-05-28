@@ -7,13 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="ViewModels\ManagerMenu\Customers\Changes\**" />
-    <EmbeddedResource Remove="ViewModels\ManagerMenu\Customers\Changes\**" />
-    <None Remove="ViewModels\ManagerMenu\Customers\Changes\**" />
-    <Page Remove="ViewModels\ManagerMenu\Customers\Changes\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Remove="SignUpWindow.xaml.cs" />
   </ItemGroup>
 
