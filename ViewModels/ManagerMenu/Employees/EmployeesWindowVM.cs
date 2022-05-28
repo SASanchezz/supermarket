@@ -41,13 +41,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
 
         private void GoToAddEmployee()
         {
-            //SetDefaultClosedEventHandler(_addEmployeeWindowVM);
-            string filteredSurname = ViewModel.FilteredSurname;
-            _addEmployeeWindowVM.Window.Closed += (sender, e) =>
-            {
-                ViewModel.UpdateEmployees();
-                ViewModel.FilteredSurname = filteredSurname;
-            };
+            SetDefaultClosedEventHandler(_addEmployeeWindowVM);
             _addEmployeeWindowVM.Window.Show();
         }
 
@@ -59,13 +53,9 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
                 {
                     throw new Exception("No selected item");
                 }
-                //SetDefaultClosedEventHandler(_addEmployeeWindowVM);
-                string filteredSurname = ViewModel.FilteredSurname;
-                _editEmployeeWindowVM.Window.Closed += (sender, e) =>
-                {
-                    ViewModel.UpdateEmployees();
-                    ViewModel.FilteredSurname = filteredSurname;
-                };
+
+                SetDefaultClosedEventHandler(_addEmployeeWindowVM);
+
                 _editEmployeeWindowVM.ViewModel.SetData(ViewModel.SelectedEmployee);
                 ViewModel.SelectedEmployee = null;
                 _editEmployeeWindowVM.Window.Show();
@@ -73,11 +63,12 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            
+            }    
         }
 
-        private void SetDefaultClosedEventHandler(WindowViewModel<Window, ViewModel> windowVM)
+        private void SetDefaultClosedEventHandler<WindowType, VMType>(WindowViewModel<WindowType, VMType> windowVM) 
+            where WindowType : Window, new()
+            where VMType : ViewModel, new()
         {
             string filteredSurname = ViewModel.FilteredSurname;
             windowVM.Window.Closed += (sender, e) =>
