@@ -18,6 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Views\SignIn\sign-in.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Page Remove="SignUpWindow.xaml" />
   </ItemGroup>
 
@@ -29,6 +33,12 @@
     <Reference Include="MySql.Data">
       <HintPath>dependencies\MySql.Data.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Views\SignIn\sign-in.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

@@ -9,7 +9,7 @@
         xmlns:managerMenuVM="clr-namespace:supermarket.ViewModels.ManagerMenu"
         xmlns:local="clr-namespace:supermarket"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="500" Width="800"
         Content="{Binding CurrentViewModel, Mode=OneWay}" 
         IsEnabled="{Binding IsEnabled, Mode=OneWay}" 
         ResizeMode="NoResize">
