@@ -4,29 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="500" d:DesignWidth="800"
              FontFamily="Montserrat">
-    <Grid Background="#F2F2F2">
-        <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0, 0, 0, 10"
-                   Text="Вхід" FontSize="35" FontWeight="Bold"/>
+    
+    <Grid>
 
-        <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,10,0,0"
-                   Text="Телефон" Foreground="DimGray" FontSize="15"  FontWeight="DemiBold"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Height="28" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0,0,0,20"
-                 FontSize="14" FontWeight="Regular"
-                 Text="{Binding Login, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
-
-        <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,10,0,0" 
-                   Text="Пароль" Foreground="DimGray" FontSize="15" FontWeight="DemiBold"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Height="28" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0,0,0,20"
-                 FontSize="14" FontWeight="Regular"
-                 Text="{Binding Password, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
-
-        <Button Grid.Row="3" Grid.Column="1" Width="140" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"
-                Content="Увійти" FontSize="15" FontWeight="DemiBold"
-                Command="{Binding SignInCommand}"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="sign-in.png" Stretch="UniformToFill"></ImageBrush>
+        </Grid.Background>
 
         <Grid.RowDefinitions>
+            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -38,5 +26,77 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="1" 
+                   Grid.Column="0" 
+                   Text="Вхід"
+                   HorizontalAlignment="Left" 
+                   VerticalAlignment="Bottom" 
+                   FontSize="40"
+                   Foreground="#F7F0F5"
+                   Margin="40, 0, 0, 0"/>
+
+        <TextBlock Grid.Row="2" 
+                   Grid.Column="0" 
+                   Text="Логін:"
+                   HorizontalAlignment="Left" 
+                   VerticalAlignment="Top"
+                   Foreground="#5DA733" 
+                   FontSize="15"  
+                   FontWeight="DemiBold"
+                   Margin="40,12,0,0"/>
+        
+        <TextBox Grid.Row="2" 
+                 Grid.Column="0" 
+                 Height="28" 
+                 HorizontalAlignment="Stretch" 
+                 VerticalAlignment="Bottom"
+                 FontSize="14"
+                 FontWeight="Regular"
+                 Margin="40,0,0,20"
+                 Text="{Binding Login, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBlock Grid.Row="3" 
+                   Grid.Column="0" 
+                   Text="Пароль:"
+                   HorizontalAlignment="Left" 
+                   VerticalAlignment="Top"
+                   Foreground="#5DA733" 
+                   FontSize="15"  
+                   FontWeight="DemiBold"
+                   Margin="40,-3,0,0"/>
+        
+        <TextBox Grid.Row="3" 
+                 Grid.Column="0" 
+                 Height="28" 
+                 HorizontalAlignment="Stretch" 
+                 VerticalAlignment="Center" 
+                 FontSize="14" 
+                 FontWeight="Regular"
+                 Margin="40,0,0,20"
+                 Text="{Binding Password, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <Button Grid.Row="4" 
+                Grid.Column="0" 
+                Content="Увійти" 
+                Width="120" 
+                Height="30" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                FontSize="15" 
+                FontWeight="DemiBold"
+                Margin="40,-15,0,0"
+                Background="#989898"
+                Command="{Binding SignInCommand}">
+
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+
+        </Button>
+
     </Grid>
+    
 </UserControl>
