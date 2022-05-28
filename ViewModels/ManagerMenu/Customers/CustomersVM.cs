@@ -8,6 +8,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
     /*
      * Controls ManagerCustomers View
      */
+    //TODO
     internal class CustomersVM : ViewModel, IWindowOpeningVM<ManagerCustomers>
     {
         private List<string[]> _customers;
@@ -23,6 +24,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
         }
 
         public Action<ManagerCustomers> OpenWindowViewModel { get; set; }
+        public Action Close { get; set; }
 
         public List<string[]> Customers
         {
