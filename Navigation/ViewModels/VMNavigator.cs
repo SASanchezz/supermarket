@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace supermarket.Navigation.VM
+namespace supermarket.Navigation.ViewModels
 {
     internal abstract class VMNavigator : INotifyPropertyChanged
     {

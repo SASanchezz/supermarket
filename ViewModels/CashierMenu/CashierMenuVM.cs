@@ -1,5 +1,5 @@
-﻿using supermarket.Navigation.VM;
-using supermarket.Navigation.WindowVM;
+﻿using supermarket.Navigation.ViewModels;
+using supermarket.Navigation.WindowViewModels;
 using System;
 
 namespace supermarket.ViewModels.CashierMenu

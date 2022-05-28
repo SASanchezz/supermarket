@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace supermarket.Navigation.WindowVM
+namespace supermarket.Navigation.WindowViewModels
 {
     internal interface IWindowOpeningVM<Type> where Type : Enum
     {

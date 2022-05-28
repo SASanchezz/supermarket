@@ -1,7 +1,7 @@
 ﻿using supermarket.Utils;
 using System;
-using supermarket.Navigation.VM;
-using supermarket.Navigation.WindowVM;
+using supermarket.Navigation.ViewModels;
+using supermarket.Navigation.WindowViewModels;
 
 namespace supermarket.ViewModels.ManagerMenu
 {

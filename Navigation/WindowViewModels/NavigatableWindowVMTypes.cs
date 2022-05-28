@@ -1,4 +1,4 @@
-﻿namespace supermarket.Navigation.WindowVM
+﻿namespace supermarket.Navigation.WindowViewModels
 {
     public enum Main
     {

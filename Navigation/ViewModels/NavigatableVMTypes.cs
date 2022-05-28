@@ -1,4 +1,4 @@
-﻿namespace supermarket.Navigation.VM
+﻿namespace supermarket.Navigation.ViewModels
 {
     public enum VMNavigationTypes
     {
