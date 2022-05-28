@@ -25,6 +25,12 @@
     <Compile Update="Views\ManagerMenu\Employees\EmployeesView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\ManagerMenu\Products\Changes\AddProductView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ManagerMenu\Products\Changes\EditProductView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ManagerMenu\Products\ProductsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -103,6 +109,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\ManagerMenu\Employees\EmployeesView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ManagerMenu\Products\Changes\AddProductView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ManagerMenu\Products\Changes\EditProductView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\ManagerMenu\Products\ProductsView.xaml">
