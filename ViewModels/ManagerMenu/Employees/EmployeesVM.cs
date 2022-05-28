@@ -15,13 +15,16 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
      */
     internal class EmployeesVM : ViewModel, IWindowOpeningVM<ManagerEmployees>, INotifyPropertyChanged
     {
+        private const string AllString = "Всі";
+
         private List<string[]> _employees;
         private string[] _selectedEmployee;
 
-        private string _filteredSurname;
+        private string _filteredSurname = "";
+
 
         private string[] _selectiveRoles;
-        private string _selectedRole;
+        private string _selectedRole = AllString;
 
         private RelayCommand<object> _openAddEmployeeWindowCommand;
         private RelayCommand<object> _openEditEmployeeWindowCommand;
@@ -107,9 +110,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             {
                 _filteredSurname = value;
                 
-                {
-                    Employees = Empl.GetEmployeesLikeSurname(_filteredSurname);
-                }
+                UpdateEmployees();
                 OnPropertyChanged();
             }
         }
@@ -125,31 +126,21 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             set
             {
                 _selectedRole = value;
-                if (_selectedRole == SelectiveRoles[0])
-                {
-                    UpdateEmployees();
-                    //FilteredSurname = FilteredSurname;
-                    OnPropertyChanged(nameof(FilteredSurname));
-                }
-                else
-                {
-                    UpdateEmployees();
-                    Employees = DbQueries.GetEmployeesByRole(_selectedRole);
-                    OnPropertyChanged(nameof(FilteredSurname));
-                }
+                UpdateEmployees();
+                //OnPropertyChanged(nameof(FilteredSurname));
                 OnPropertyChanged();
             }
         }
 
         public void UpdateEmployees()
         {
-            Employees = DbQueries.GetAllEmployee();
+            Employees = Empl.GetAllEmployee(_selectedRole, _filteredSurname);
         }
 
         private void SetSelectiveRoles()
         {
             _selectiveRoles = new string[Data.Roles.roleNames.Length + 1];
-            _selectiveRoles.SetValue("Всі", 0);
+            _selectiveRoles.SetValue(AllString, 0);
             for (int i = 0; i < Data.Roles.roleNames.Length; ++i)
             {
                 _selectiveRoles.SetValue(Data.Roles.roleNames[i], i + 1);
