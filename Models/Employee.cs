@@ -26,10 +26,23 @@ namespace supermarket.Models
         public const int zipcode = 12;
 
         const string s_format = "yyyy-MM-dd HH:mm:ss";
+        private const string AllString = "Всі";
 
-        public static List<string[]> GetAllEmployee()
+        public static List<string[]> GetAllEmployee(string roleName = AllString, string surname = "")
         {
-            string sql = "SELECT * FROM Employee";
+            string whereClause = "WHERE 1 ";
+
+            whereClause = roleName == AllString ? whereClause : whereClause +=
+                string.Format("AND empl_role_id IN " +
+                "(SELECT employee_role_id " +
+                "FROM Employee_Role " +
+                "WHERE employee_role_title='{0}')", roleName);
+
+            whereClause = surname == "" ? whereClause : whereClause +=
+                string.Format("AND empl_surname LIKE '%{0}%'", surname);
+
+
+            string sql = "SELECT * FROM Employee " + whereClause;
             List<string[]> result = DbUtils.FindAll(sql);
 
             return result.Count > 0 ? result : null;
@@ -41,23 +54,6 @@ namespace supermarket.Models
             List<string[]> result = DbUtils.FindAll(sql);
 
             return result.Count > 0 ? result[0] : null;
-        }
-
-        public static List<string[]> GetEmployeesLikeSurname(string surnameSubstring)
-        {
-            string sql = string.Format("SELECT * FROM Employee WHERE empl_surname LIKE '%{0}%'", surnameSubstring);
-            List<string[]> result = DbUtils.FindAll(sql);
-
-            return result.Count > 0 ? result : null;
-        }
-
-        public static List<string[]> GetEmployeesByRole(int employeeRole)
-        {
-            string sql = string.Format("SELECT * FROM Employee WHERE empl_role_id={0}", employeeRole);
-
-            List<string[]> result = DbUtils.FindAll(sql);
-
-            return result.Count > 0 ? result : null;
         }
 
         public static void DeleteEmployeeByID(string employeeId)
