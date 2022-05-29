@@ -6,9 +6,6 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
     {
         public StoreProductsWindowVM()
         {
-            //IsEnabled = true;
-
-            Window.Show();
         }
     }
 }

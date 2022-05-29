@@ -15,6 +15,11 @@ namespace supermarket.ViewModels
             ViewModel = new ViewModelType();
 
             Window.DataContext = this;
+            Window.Closing += (sender, e) =>
+            {
+                e.Cancel = true;
+                Window.Hide();
+            };
         }
 
         public WindowType Window { get; protected set; }

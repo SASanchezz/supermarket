@@ -6,7 +6,7 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
     {
         public CategoriesWindowVM()
         {
-            Window.Show();
+
         }
     }
 }

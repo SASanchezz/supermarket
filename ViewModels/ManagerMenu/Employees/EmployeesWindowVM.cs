@@ -27,7 +27,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             _windowsNavigator.SetWay(ManagerEmployees.AddEmployee,  GoToAddEmployee);
             _windowsNavigator.SetWay(ManagerEmployees.EditEmployee, GoToEditEmployee);
 
-            Window.Closed += (object sender, EventArgs e) =>
+            Window.Closed += (sender, e) =>
             {
                 _addEmployeeWindowVM.Window.Close();
                 _editEmployeeWindowVM.Window.Close();
@@ -35,8 +35,6 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             
             // set Close() method to Action in ViewModel
             ViewModel.Close = Window.Close;
-
-            Window.Show();
         }
 
         private void GoToAddEmployee()
@@ -54,7 +52,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
                     throw new Exception("No selected item");
                 }
 
-                SetDefaultClosedEventHandler(_addEmployeeWindowVM);
+                SetDefaultClosedEventHandler(_editEmployeeWindowVM);
 
                 _editEmployeeWindowVM.ViewModel.SetData(ViewModel.SelectedEmployee);
                 ViewModel.SelectedEmployee = null;
@@ -71,10 +69,12 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             where VMType : ViewModel, new()
         {
             string filteredSurname = ViewModel.FilteredSurname;
+            string selectedRole = ViewModel.SelectedRole;
             windowVM.Window.Closed += (sender, e) =>
             {
-                ViewModel.UpdateEmployees();
                 ViewModel.FilteredSurname = filteredSurname;
+                ViewModel.SelectedRole = selectedRole;
+                ViewModel.UpdateEmployees();
             };
         }
     }
