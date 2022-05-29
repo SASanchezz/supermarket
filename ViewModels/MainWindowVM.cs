@@ -22,6 +22,12 @@ namespace supermarket.ViewModels
     {
         private WindowVMNavigator<Main> _windowsNavigator;
 
+        private EmployeesWindowVM _employeesWindowVM;    
+        private CustomersWindowVM _customersWindowVM;
+        private CategoriesWindowVM _categoriesWindowVM;
+        private ProductsWindowVM _productsWindowVM;
+        private StoreProductsWindowVM _storeProductsWindowVM;
+
         // controllable ViewModels
         private SignInVM _signInVM;
         //// windows opening ViewModels
@@ -34,25 +40,36 @@ namespace supermarket.ViewModels
         public MainWindowVM(Window window) 
         {
             _isEnabled = true;
+            Window = window;
+            Window.Closed += (object sender, EventArgs e) => Environment.Exit(0);
 
             // views navigating setup
             _signInVM = new SignInVM(() => Navigate(VMNavigationTypes.ManagerMenu), () => Navigate(VMNavigationTypes.CashierMenu));
-            _managerMenuVM = new ManagerMenuVM(() => Navigate(VMNavigationTypes.SignIn)); 
-            _cashierMenuVM = new CashierMenuVM(() => Navigate(VMNavigationTypes.SignIn)); 
+            _managerMenuVM = new ManagerMenuVM(() => Navigate(VMNavigationTypes.SignIn));
+            _cashierMenuVM = new CashierMenuVM(() => Navigate(VMNavigationTypes.SignIn));
             //
 
             Navigate(VMNavigationTypes.SignIn); // set SignIn View
 
-            Window = window;
-            Window.Closed += (object sender, EventArgs e) => Environment.Exit(0);
+            _employeesWindowVM = new EmployeesWindowVM();
+            _customersWindowVM = new CustomersWindowVM();
+            _categoriesWindowVM = new CategoriesWindowVM();
+            _productsWindowVM = new ProductsWindowVM();
+            _storeProductsWindowVM = new StoreProductsWindowVM();
+
+            SetVisibilitySystem(_employeesWindowVM);
+            SetVisibilitySystem(_customersWindowVM);
+            SetVisibilitySystem(_categoriesWindowVM);
+            SetVisibilitySystem(_productsWindowVM);
+            SetVisibilitySystem(_storeProductsWindowVM);
 
             _windowsNavigator = new WindowVMNavigator<Main>(new IWindowOpeningVM<Main>[] { _managerMenuVM, _cashierMenuVM });
 
-            _windowsNavigator.SetWay(Main.ManagerEmployees,     GoToManagerEmployees);
-            _windowsNavigator.SetWay(Main.ManagerCustomers,     GoToManagerCustomers);
-            _windowsNavigator.SetWay(Main.ManagerCategories,    GoToManagerCategories);
-            _windowsNavigator.SetWay(Main.ManagerProducts,      GoToManagerProducts);
-            _windowsNavigator.SetWay(Main.ManagerStoreProducts, GoToManagerStoreProducts);
+            _windowsNavigator.SetWay(Main.ManagerEmployees, () => _employeesWindowVM.Window.Show());
+            _windowsNavigator.SetWay(Main.ManagerCustomers, () => _customersWindowVM.Window.Show());
+            _windowsNavigator.SetWay(Main.ManagerCategories, () => _categoriesWindowVM.Window.Show());
+            _windowsNavigator.SetWay(Main.ManagerProducts, () => _productsWindowVM.Window.Show());
+            _windowsNavigator.SetWay(Main.ManagerStoreProducts, () => _storeProductsWindowVM.Window.Show());
         }
 
         public Window Window { get; private set; }
@@ -82,39 +99,11 @@ namespace supermarket.ViewModels
             }
         }
 
-        private void GoToManagerEmployees()
+        private void SetVisibilitySystem<WindowType, VMType>(WindowViewModel<WindowType, VMType> windowVM)
+            where WindowType : Window, new()
+            where VMType : ViewModel, new()
         {
-            IsEnabled = false;
-            var _windowViewModel = new EmployeesWindowVM();
-            _windowViewModel.Window.Closed += (object sender, EventArgs e) => IsEnabled = true;
-        }
-
-        private void GoToManagerCustomers()
-        {
-            IsEnabled = false;
-            var _windowViewModel = new CustomersWindowVM();
-            _windowViewModel.Window.Closed += (object sender, EventArgs e) => IsEnabled = true;
-        }
-
-        private void GoToManagerCategories()
-        {
-            IsEnabled = false;
-            var _windowViewModel = new CategoriesWindowVM();
-            _windowViewModel.Window.Closed += (object sender, EventArgs e) => IsEnabled = true;
-        }
-
-        private void GoToManagerProducts()
-        {
-            IsEnabled = false;
-            var _windowViewModel = new ProductsWindowVM();
-            _windowViewModel.Window.Closed += (object sender, EventArgs e) => IsEnabled = true;
-        }
-
-        private void GoToManagerStoreProducts()
-        {
-            IsEnabled = false;
-            var _windowViewModel = new StoreProductsWindowVM();
-            _windowViewModel.Window.Closed += (object sender, EventArgs e) => IsEnabled = true;
+            windowVM.Window.IsVisibleChanged += (sender, e) => IsEnabled = !IsEnabled;
         }
     }
 }

@@ -31,8 +31,6 @@ namespace supermarket.ViewModels.ManagerMenu.Products
 
             // set Close() method to Action in ViewModel
             ViewModel.Close = Window.Close;
-
-            Window.Show();
         }
 
         private void GoToAddProduct()

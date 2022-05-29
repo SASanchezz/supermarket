@@ -119,10 +119,16 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             }
             set
             {
-                _selectedRole = value;
-                UpdateEmployees();
-                //OnPropertyChanged(nameof(FilteredSurname));
+                if (value == null)
+                {
+                    _selectedRole = AllString;
+                } 
+                else
+                {
+                    _selectedRole = value;
+                }
                 OnPropertyChanged();
+                UpdateEmployees();
             }
         }
 
