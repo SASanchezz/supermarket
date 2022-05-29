@@ -24,8 +24,8 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
 
             _windowsNavigator = new WindowVMNavigator<ManagerEmployees>(new IWindowOpeningVM<ManagerEmployees>[] { ViewModel });
             
-            _windowsNavigator.SetWay(ManagerEmployees.AddEmployee,  GoToAddEmployee);
-            _windowsNavigator.SetWay(ManagerEmployees.EditEmployee, GoToEditEmployee);
+            _windowsNavigator.SetWay(ManagerEmployees.AddEmployee, _addEmployeeWindowVM.Window);
+            _windowsNavigator.SetWay(ManagerEmployees.EditEmployee, _editEmployeeWindowVM.Window);
 
             Window.Closed += (sender, e) =>
             {

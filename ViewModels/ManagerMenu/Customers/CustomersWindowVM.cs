@@ -23,8 +23,8 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
 
             _windowsNavigator = new WindowVMNavigator<ManagerCustomers>(new IWindowOpeningVM<ManagerCustomers>[] { ViewModel });
 
-            _windowsNavigator.SetWay(ManagerCustomers.AddCustomer, GoToAddCustomer);
-            _windowsNavigator.SetWay(ManagerCustomers.EditCustomer, GoToEditCustomer);
+            _windowsNavigator.SetWay(ManagerCustomers.AddCustomer, _addCustomerWindowVM.Window);
+            _windowsNavigator.SetWay(ManagerCustomers.EditCustomer, _editCustomerWindowVM.Window);
 
             Window.Closed += (object sender, EventArgs e) =>
             {

@@ -65,11 +65,11 @@ namespace supermarket.ViewModels
 
             _windowsNavigator = new WindowVMNavigator<Main>(new IWindowOpeningVM<Main>[] { _managerMenuVM, _cashierMenuVM });
 
-            _windowsNavigator.SetWay(Main.ManagerEmployees, () => _employeesWindowVM.Window.Show());
-            _windowsNavigator.SetWay(Main.ManagerCustomers, () => _customersWindowVM.Window.Show());
-            _windowsNavigator.SetWay(Main.ManagerCategories, () => _categoriesWindowVM.Window.Show());
-            _windowsNavigator.SetWay(Main.ManagerProducts, () => _productsWindowVM.Window.Show());
-            _windowsNavigator.SetWay(Main.ManagerStoreProducts, () => _storeProductsWindowVM.Window.Show());
+            _windowsNavigator.SetWay(Main.ManagerEmployees, _employeesWindowVM.Window);
+            _windowsNavigator.SetWay(Main.ManagerCustomers, _customersWindowVM.Window);
+            _windowsNavigator.SetWay(Main.ManagerCategories, _categoriesWindowVM.Window);
+            _windowsNavigator.SetWay(Main.ManagerProducts, _productsWindowVM.Window);
+            _windowsNavigator.SetWay(Main.ManagerStoreProducts, _storeProductsWindowVM.Window);
         }
 
         public Window Window { get; private set; }
