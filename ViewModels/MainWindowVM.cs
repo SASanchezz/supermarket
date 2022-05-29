@@ -18,9 +18,10 @@ namespace supermarket.ViewModels
      * Set navigating of Views as Sign In View, Manager Menu View, Cashier Menu View
      *  and Windows as (Manager Menu) Manager Employees Window, ..., ...
      */
-    internal class MainWindowVM : VMNavigator
+    internal class MainWindowVM : WindowViewModel<MainWindow>
     {
         private WindowVMNavigator<Main> _windowsNavigator;
+        private VMNavigator _viewsNavigator;
 
         private EmployeesWindowVM _employeesWindowVM;    
         private CustomersWindowVM _customersWindowVM;
@@ -35,21 +36,24 @@ namespace supermarket.ViewModels
         private CashierMenuVM _cashierMenuVM;
         ////
         //
-        private bool _isEnabled;
 
-        public MainWindowVM(Window window) 
+        private NavigatableViewModel _currentViewModel;
+
+        public MainWindowVM(MainWindow window) : base(window)
         {
-            _isEnabled = true;
-            Window = window;
-            Window.Closed += (object sender, EventArgs e) => Environment.Exit(0);
+            _signInVM = new SignInVM();
+            _managerMenuVM = new ManagerMenuVM();
+            _cashierMenuVM = new CashierMenuVM();
 
-            // views navigating setup
-            _signInVM = new SignInVM(() => Navigate(VMNavigationTypes.ManagerMenu), () => Navigate(VMNavigationTypes.CashierMenu));
-            _managerMenuVM = new ManagerMenuVM(() => Navigate(VMNavigationTypes.SignIn));
-            _cashierMenuVM = new CashierMenuVM(() => Navigate(VMNavigationTypes.SignIn));
+            // views navigation setup
+            _viewsNavigator = new VMNavigator((vm) => CurrentViewModel = vm);
+            
+            _viewsNavigator.SetWay(VMNavigationTypes.SignIn, _signInVM);
+            _viewsNavigator.SetWay(VMNavigationTypes.ManagerMenu, _managerMenuVM);
+            _viewsNavigator.SetWay(VMNavigationTypes.CashierMenu, _cashierMenuVM);
+
+            _viewsNavigator.Navigate(VMNavigationTypes.SignIn);
             //
-
-            Navigate(VMNavigationTypes.SignIn); // set SignIn View
 
             _employeesWindowVM = new EmployeesWindowVM();
             _customersWindowVM = new CustomersWindowVM();
@@ -57,12 +61,7 @@ namespace supermarket.ViewModels
             _productsWindowVM = new ProductsWindowVM();
             _storeProductsWindowVM = new StoreProductsWindowVM();
 
-            SetVisibilitySystem(_employeesWindowVM);
-            SetVisibilitySystem(_customersWindowVM);
-            SetVisibilitySystem(_categoriesWindowVM);
-            SetVisibilitySystem(_productsWindowVM);
-            SetVisibilitySystem(_storeProductsWindowVM);
-
+            // windows navigation setup
             _windowsNavigator = new WindowVMNavigator<Main>(new IWindowOpeningVM<Main>[] { _managerMenuVM, _cashierMenuVM });
 
             _windowsNavigator.SetWay(Main.ManagerEmployees, _employeesWindowVM.Window);
@@ -70,32 +69,27 @@ namespace supermarket.ViewModels
             _windowsNavigator.SetWay(Main.ManagerCategories, _categoriesWindowVM.Window);
             _windowsNavigator.SetWay(Main.ManagerProducts, _productsWindowVM.Window);
             _windowsNavigator.SetWay(Main.ManagerStoreProducts, _storeProductsWindowVM.Window);
+
+            SetVisibilitySystem(_employeesWindowVM);
+            SetVisibilitySystem(_customersWindowVM);
+            SetVisibilitySystem(_categoriesWindowVM);
+            SetVisibilitySystem(_productsWindowVM);
+            SetVisibilitySystem(_storeProductsWindowVM);
+            //
+
+            Window.Closed += (sender, e) => Environment.Exit(0);
         }
 
-        public Window Window { get; private set; }
-
-        public bool IsEnabled 
-        { 
-            get => _isEnabled; 
-            private set
-            {
-                _isEnabled = value;
-                OnPropertyChanged();
-            } 
-        }
-
-        protected override INavigatableVM CreateViewModel(VMNavigationTypes type)
+        public NavigatableViewModel CurrentViewModel
         {
-            switch (type)
+            get
             {
-                case VMNavigationTypes.SignIn:
-                    return _signInVM;
-                case VMNavigationTypes.ManagerMenu:
-                    return _managerMenuVM;
-                case VMNavigationTypes.CashierMenu:
-                    return _cashierMenuVM;
-                default:
-                    return null;
+                return _currentViewModel;
+            }
+            set
+            {
+                _currentViewModel = value;
+                OnPropertyChanged();
             }
         }
 

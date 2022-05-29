@@ -1,41 +1,94 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using supermarket.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Windows;
 
 namespace supermarket.Navigation.ViewModels
 {
-    internal abstract class VMNavigator : INotifyPropertyChanged
+    internal class VMNavigator
     {
-        private INavigatableVM _currentViewModel;
+        private List<Way> _ways;
+        private Action<NavigatableViewModel> _changeViewModel;
 
-        public INavigatableVM CurrentViewModel
+        public VMNavigator(Action<NavigatableViewModel> changeViewModel)
         {
-            get
-            {
-                return _currentViewModel;
-            }
-            private set
-            {
-                if (_currentViewModel == value)
-                    return;
-                _currentViewModel = value;
-                OnPropertyChanged();
-            }
+            _ways = new List<Way>();
+            _changeViewModel = changeViewModel;
         }
 
         public void Navigate(VMNavigationTypes type)
         {
-            if (CurrentViewModel != null && CurrentViewModel.ViewType.Equals(type))
-                return;
+            try
+            {
+                Way way = null;
+                for (int i = 0; i < _ways.Count; i++)
+                {
+                    if (_ways[i].Type == type)
+                    {
+                        way = _ways[i];
+                    }
+                }
+                
+                if (way == null)
+                {
+                    throw new Exception("There is no way");
+                }
 
-            CurrentViewModel = CreateViewModel(type);
+                way.Handler?.Invoke();
+                _changeViewModel(way.ViewModel);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
-        protected abstract INavigatableVM CreateViewModel(VMNavigationTypes type);
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public void SetWay(VMNavigationTypes type, NavigatableViewModel viewModel)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            for (int i = 0; i < _ways.Count; i++)
+            {
+                if (_ways[i].Type == type)
+                {
+                    throw new Exception("This way is already set");
+                }
+            }
+
+            viewModel.ChangeViewModel = Navigate;
+            _ways.Add(new Way(type, viewModel));
+        }
+
+        public void SetWay(VMNavigationTypes type, NavigatableViewModel viewModel, Action handler)
+        {
+            for (int i = 0; i < _ways.Count; i++)
+            {
+                if (_ways[i].Type == type)
+                {
+                    throw new Exception("This way is already set");
+                }
+            }
+
+            viewModel.ChangeViewModel = Navigate;
+            _ways.Add(new Way(type, viewModel, handler));
+        }
+
+        class Way
+        {
+            public Way(VMNavigationTypes type, NavigatableViewModel viewModel)
+            {
+                Type = type;
+                ViewModel = viewModel;
+            }
+
+            public Way(VMNavigationTypes type, NavigatableViewModel viewModel, Action handler) : this(type, viewModel)
+            {
+                Handler = handler;
+            }
+
+            public VMNavigationTypes Type { get; private set; }
+
+            public NavigatableViewModel ViewModel { get; private set; }
+
+            public Action Handler { get; private set; }
         }
     }
 }

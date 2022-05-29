@@ -64,11 +64,16 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
         {
             string filteredSurname = ViewModel.FilteredSurname;
             string selectedRole = ViewModel.SelectedRole;
-            windowVM.Window.Closed += (sender, e) =>
+            
+            windowVM.Window.IsVisibleChanged += (sender, e) =>
             {
-                ViewModel.FilteredSurname = filteredSurname;
-                ViewModel.SelectedRole = selectedRole;
-                ViewModel.UpdateEmployees();
+                if ((bool)e.NewValue.Equals(false))
+                {
+                    ViewModel.FilteredSurname = filteredSurname;
+                    ViewModel.SelectedRole = selectedRole;
+                    ViewModel.UpdateEmployees();
+                    //MessageBox.Show("Data updated");
+                }
             };
         }
 
