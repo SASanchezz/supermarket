@@ -1,5 +1,4 @@
-﻿using supermarket.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows;
 
@@ -7,32 +6,50 @@ namespace supermarket.Navigation.WindowViewModels
 {
     internal class WindowVMNavigator<Type> where Type : Enum
     {
-        private Dictionary<Type, Window> _ways;
+        private Dictionary<Type, Action> _ways;
 
         public WindowVMNavigator(IWindowOpeningVM<Type>[] viewModels)
         {
             SetWindowOpeningVM(viewModels);
-            _ways = new Dictionary<Type, Window>();
+            _ways = new Dictionary<Type, Action>();
         }
 
         public void Navigate(Type type)
         {
-            if (!_ways.ContainsKey(type))
+            try
             {
-                throw new Exception("There is no way");
+                if (!_ways.ContainsKey(type))
+                {
+                    throw new Exception("There is no way");
+                }
+                _ways[type]();
             }
-            _ways[type].Show();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
-        public void SetWay(Type type, Window windowViewModel)
+        public void SetWay(Type type, Window window)
         {
             if (_ways.ContainsKey(type))
             {
-                _ways[type] = windowViewModel;
+                throw new Exception("This way is already set");
+            }
+
+            _ways.Add(type, () => window.Show());
+        }
+
+        public void SetWay(Type type, Window window, Action handler)
+        {
+            if (_ways.ContainsKey(type))
+            {
+                throw new Exception("This way is already set");
             }
             else
             {
-                _ways.Add(type, windowViewModel);
+                Action action = handler + window.Show;
+                _ways.Add(type, action);
             }
         }
 

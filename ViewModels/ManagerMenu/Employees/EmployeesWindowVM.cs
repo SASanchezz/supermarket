@@ -22,10 +22,13 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             _addEmployeeWindowVM = new AddEmployeeWindowVM();
             _editEmployeeWindowVM = new EditEmployeeWindowVM();
 
+            SetVisibilitySystem(_addEmployeeWindowVM);
+            SetVisibilitySystem(_editEmployeeWindowVM);
+
             _windowsNavigator = new WindowVMNavigator<ManagerEmployees>(new IWindowOpeningVM<ManagerEmployees>[] { ViewModel });
             
-            _windowsNavigator.SetWay(ManagerEmployees.AddEmployee, _addEmployeeWindowVM.Window);
-            _windowsNavigator.SetWay(ManagerEmployees.EditEmployee, _editEmployeeWindowVM.Window);
+            _windowsNavigator.SetWay(ManagerEmployees.AddEmployee, _addEmployeeWindowVM.Window, GoToAddEmployee);
+            _windowsNavigator.SetWay(ManagerEmployees.EditEmployee, _editEmployeeWindowVM.Window, GoToEditEmployee);
 
             Window.Closed += (sender, e) =>
             {
@@ -40,28 +43,19 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
         private void GoToAddEmployee()
         {
             SetDefaultClosedEventHandler(_addEmployeeWindowVM);
-            _addEmployeeWindowVM.Window.Show();
         }
 
         private void GoToEditEmployee()
         {
-            try
+            if (ViewModel.SelectedEmployee == null)
             {
-                if (ViewModel.SelectedEmployee == null)
-                {
-                    throw new Exception("No selected item");
-                }
-
-                SetDefaultClosedEventHandler(_editEmployeeWindowVM);
-
-                _editEmployeeWindowVM.ViewModel.SetData(ViewModel.SelectedEmployee);
-                ViewModel.SelectedEmployee = null;
-                _editEmployeeWindowVM.Window.Show();
+                throw new Exception("No selected item");
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }    
+
+            SetDefaultClosedEventHandler(_editEmployeeWindowVM);
+
+            _editEmployeeWindowVM.ViewModel.SetData(ViewModel.SelectedEmployee);
+            ViewModel.SelectedEmployee = null;
         }
 
         private void SetDefaultClosedEventHandler<WindowType, VMType>(WindowViewModel<WindowType, VMType> windowVM) 
@@ -76,6 +70,13 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
                 ViewModel.SelectedRole = selectedRole;
                 ViewModel.UpdateEmployees();
             };
+        }
+
+        private void SetVisibilitySystem<WindowType, VMType>(WindowViewModel<WindowType, VMType> windowVM)
+            where WindowType : Window, new()
+            where VMType : ViewModel, new()
+        {
+            windowVM.Window.IsVisibleChanged += (sender, e) => IsEnabled = !IsEnabled;
         }
     }
 }
