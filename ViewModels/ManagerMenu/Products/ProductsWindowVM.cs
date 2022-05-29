@@ -20,8 +20,8 @@ namespace supermarket.ViewModels.ManagerMenu.Products
 
             _windowsNavigator = new WindowVMNavigator<ManagerProducts>(new IWindowOpeningVM<ManagerProducts>[] { ViewModel });
 
-            _windowsNavigator.SetWay(ManagerProducts.AddProduct, GoToAddProduct);
-            _windowsNavigator.SetWay(ManagerProducts.EditProduct, GoToEditProduct);
+            _windowsNavigator.SetWay(ManagerProducts.AddProduct, _addProductWindowVM.Window);
+            _windowsNavigator.SetWay(ManagerProducts.EditProduct, _editProductWindowVM.Window);
 
             Window.Closed += (object sender, EventArgs e) =>
             {

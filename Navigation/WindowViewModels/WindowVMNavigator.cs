@@ -1,16 +1,18 @@
-﻿using System;
+﻿using supermarket.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace supermarket.Navigation.WindowViewModels
 {
     internal class WindowVMNavigator<Type> where Type : Enum
     {
-        private Dictionary<Type, Action> _ways;
+        private Dictionary<Type, Window> _ways;
 
         public WindowVMNavigator(IWindowOpeningVM<Type>[] viewModels)
         {
             SetWindowOpeningVM(viewModels);
-            _ways = new Dictionary<Type, Action>();
+            _ways = new Dictionary<Type, Window>();
         }
 
         public void Navigate(Type type)
@@ -19,18 +21,18 @@ namespace supermarket.Navigation.WindowViewModels
             {
                 throw new Exception("There is no way");
             }
-            _ways[type]();
+            _ways[type].Show();
         }
 
-        public void SetWay(Type type, Action goToWindowViewModel)
+        public void SetWay(Type type, Window windowViewModel)
         {
             if (_ways.ContainsKey(type))
             {
-                _ways[type] = goToWindowViewModel;
+                _ways[type] = windowViewModel;
             }
             else
             {
-                _ways.Add(type, goToWindowViewModel);
+                _ways.Add(type, windowViewModel);
             }
         }
 
