@@ -9,18 +9,9 @@ namespace supermarket.ViewModels.SignIn
     /*
      * Controls Sign In View
      */
-    internal class SignInVM : INavigatableVM
+    internal class SignInVM : NavigatableViewModel
     {
         private RelayCommand<object> _signInCommand;
-
-        private Action _goToManageMenu;
-        private Action _goToCashierMenu;
-
-        public SignInVM(Action goToManageMenu, Action goToCashierMenu)
-        {
-            _goToManageMenu = goToManageMenu;
-            _goToCashierMenu = goToCashierMenu;
-        }
 
         public string Login { get; set; }
 
@@ -34,8 +25,6 @@ namespace supermarket.ViewModels.SignIn
             }
         }
 
-        public VMNavigationTypes ViewType => VMNavigationTypes.SignIn;
-
         private void SignIn()
         {
             try
@@ -44,7 +33,7 @@ namespace supermarket.ViewModels.SignIn
                 SignInValidator.Validate("+380634412925", "admin");
 
                 // вот тут хуйню с проверкой менеджер это или кассир надо сообразить
-                _goToManageMenu();
+                ChangeViewModel(VMNavigationTypes.ManagerMenu);
                 //_goToCashierMenu();
             }
             catch (Exception ex)

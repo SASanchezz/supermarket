@@ -7,17 +7,8 @@ namespace supermarket.ViewModels.CashierMenu
     /*
      * Controls Cashier Menu View
      */
-    internal class CashierMenuVM : IWindowOpeningVM<Main>, INavigatableVM
+    internal class CashierMenuVM : NavigatableViewModel, IWindowOpeningVM<Main>
     {
-        private Action _goToSignIn;
-
-        public CashierMenuVM(Action goToSignIn)
-        {
-            _goToSignIn = goToSignIn;
-        }
-
-        public VMNavigationTypes ViewType => VMNavigationTypes.CashierMenu;
-
         public Action<Main> OpenWindowViewModel { get; set; }
     }
 }
