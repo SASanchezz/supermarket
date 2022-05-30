@@ -7,6 +7,7 @@ using supermarket.Middlewares.Employee;
 using System.Runtime.CompilerServices;
 using Empl = supermarket.Models.Employee;
 using System.Windows;
+using supermarket.ViewModels.BaseClasses;
 
 namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
 {

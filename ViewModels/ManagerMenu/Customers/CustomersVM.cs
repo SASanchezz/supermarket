@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using supermarket.Utils;
 using supermarket.Navigation.WindowViewModels;
 using Cust = supermarket.Models.Customer;
+using supermarket.ViewModels.BaseClasses;
 
 namespace supermarket.ViewModels.ManagerMenu.Customers
 {

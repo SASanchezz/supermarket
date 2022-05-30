@@ -2,10 +2,10 @@
 using System.Runtime.CompilerServices;
 using System.Windows;
 
-namespace supermarket.ViewModels
+namespace supermarket.ViewModels.BaseClasses
 {
     internal abstract class WindowViewModel<WindowType, ViewModelType> : INotifyPropertyChanged
-        where WindowType : Window, new() 
+        where WindowType : Window, new()
         where ViewModelType : ViewModel, new()
     {
         private bool _isEnabled = true;

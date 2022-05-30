@@ -1,4 +1,4 @@
-﻿using supermarket.ViewModels;
+﻿using supermarket.ViewModels.BaseClasses;
 using System;
 
 namespace supermarket.Navigation.ViewModels
