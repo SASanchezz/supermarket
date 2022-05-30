@@ -7,6 +7,12 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\ManagerMenu\Customers\Changes\AddCustomerView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ManagerMenu\Customers\Changes\EditCustomerView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ManagerMenu\ManagerMenuView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -91,6 +97,12 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ManagerMenu\Customers\Changes\AddCustomerView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ManagerMenu\Customers\Changes\EditCustomerView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\ManagerMenu\ManagerMenuView.xaml">

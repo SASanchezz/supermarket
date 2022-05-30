@@ -6,10 +6,10 @@
         xmlns:views="clr-namespace:supermarket.Views.ManagerMenu.Customers"
         xmlns:VM="clr-namespace:supermarket.ViewModels.ManagerMenu.Customers"
         xmlns:local="clr-namespace:supermarket.Windows.ManagerMenu.Customers"
-        d:DataContext="{d:DesignInstance Type=VM:CustomersWindowVM}"
         mc:Ignorable="d"
         Title="MainClientWindow" Height="450" Width="800"
-        Content="{Binding ViewModel, Mode=OneWay}" IsEnabled="{Binding IsEnabled, Mode=OneWay}">
+        Content="{Binding ViewModel, Mode=OneWay}"
+        IsEnabled="{Binding IsEnabled, Mode=OneWay}">
     <Window.Resources>
         <DataTemplate DataType="{ x:Type VM:CustomersVM}">
             <views:CustomersView/>

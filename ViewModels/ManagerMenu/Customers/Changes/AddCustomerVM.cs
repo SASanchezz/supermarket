@@ -2,6 +2,7 @@
 using System;
 using supermarket.Middlewares.Customer;
 using supermarket.Models;
+using System.Windows;
 
 namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
 {
@@ -41,25 +42,19 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
         public string Percent { get => _percent; set => _percent = value; }
 
 
-        public RelayCommand<object> AddEmployeeCommand
+        public RelayCommand<object> AddCustomerCommand
         {
-            get
-            {
-                return _addCustomerCommand ??= new RelayCommand<object>(_ => AddCustomer(), CanExecute);
-            }
+            get => _addCustomerCommand ??= new RelayCommand<object>(_ => AddCustomer(), CanExecute);
         }
 
         public RelayCommand<object> CloseCommand
         {
-            get
-            {
-                return _closeCommand ??= new RelayCommand<object>(_ => Close());
-            }
+            get => _closeCommand ??= new RelayCommand<object>(_ => Close());
         }
 
         private void AddCustomer()
         {
-            /*
+            /*S
             * This method sign up new customer
             */
 
@@ -69,6 +64,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
 
             if (result.Length != 0)
             {
+                MessageBox.Show(result);
                 return;
             }
 

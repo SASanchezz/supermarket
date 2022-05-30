@@ -25,7 +25,8 @@
                 VerticalAlignment="Center" 
                 FontSize="12"
                 Margin="0,0,20,0"
-                Background="LawnGreen" />
+                Background="LawnGreen"
+                Command="{Binding OpenAddCustomerWindowCommand}"/>
 
         <TextBlock Text="Max" 
                    FontSize="12"
@@ -34,8 +35,9 @@
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center" 
                    Margin="0, 0, 0, 30"/>
-        
-        <Slider Width="224" 
+
+        <Slider Value="{Binding SliderMax, Mode=TwoWay}"
+                Width="224" 
                 Height="24" 
                 FontSize="12" 
                 HorizontalAlignment="Center" 
@@ -45,7 +47,7 @@
                 IsSnapToTickEnabled="True" 
                 Margin="50, 0, 0, 30"/>
 
-        <TextBox Text="{Binding ElementName=sliderMax, Path=Value}" 
+        <TextBox Text="{Binding SliderMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                  Width="40" 
                  Height="20" 
                  HorizontalAlignment="Center" 
@@ -60,8 +62,9 @@
                    VerticalAlignment="Center" 
                    FontSize="12" 
                    Margin="0, 30, 0, 0"/>
-        
-        <Slider Width="224" 
+
+        <Slider Value="{Binding SliderMin, Mode=TwoWay}"
+                Width="224" 
                 Height="24"
                 FontSize="12"
                 HorizontalAlignment="Center" 
@@ -70,14 +73,25 @@
                 TickFrequency="0.5" 
                 IsSnapToTickEnabled="True" 
                 Margin="50, 30, 0, 0"/>
-        
-        <TextBox Text="{Binding ElementName=sliderMin, Path=Value}"
+
+        <TextBox Text="{Binding SliderMin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  Width="40" 
                  Height="20" 
                  HorizontalAlignment="Center" 
                  VerticalAlignment="Center" 
                  TextAlignment="Right" 
                  Margin="320, 30, 0, 0" />
+
+        <Button Grid.Row="0"
+                Content="Редагувати"
+                Width="110" 
+                Height="24" 
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center" 
+                FontSize="12" 
+                FontWeight="DemiBold" 
+                Margin="150,0,20,0"
+                Command="{Binding OpenEditCustomerWindowCommand}"/>
 
         <ScrollViewer Grid.Row="1">
             <StackPanel>
@@ -107,7 +121,8 @@
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Center" 
                 FontSize="12" 
-                Margin="20,0,0,0"/>
+                Margin="20,0,0,0"
+                Command="{Binding CloseCommand}"/>
 
     </Grid>
     
