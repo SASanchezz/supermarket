@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using supermarket.Utils;
 using supermarket.Navigation.WindowViewModels;
+using Cust = supermarket.Models.Customer;
 
 namespace supermarket.ViewModels.ManagerMenu.Customers
 {
     /*
      * Controls ManagerCustomers View
      */
-    //TODO
     internal class CustomersVM : ViewModel, IWindowOpeningVM<ManagerCustomers>
     {
         private List<string[]> _customers;
         private string[] _selectedCustomer;
+
+        private double _sliderMax;
+        private double _sliderMin;
+
 
         private RelayCommand<object> _openAddCustomerWindowCommand;
         private RelayCommand<object> _openEditCustomerWindowCommand;
@@ -20,6 +24,8 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
 
         public CustomersVM()
         {
+            SliderMax = 100;
+            SliderMin = 0;
             UpdateCustomers();
         }
 
@@ -28,10 +34,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
 
         public List<string[]> Customers
         {
-            get
-            {
-                return _customers;
-            }
+            get => _customers;
             set
             {
                 _customers = value;
@@ -39,12 +42,24 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
             }
         }
 
+        public RelayCommand<object> OpenAddCustomerWindowCommand
+        {
+            get => _openAddCustomerWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(ManagerCustomers.AddCustomer));
+        }
+
+        public RelayCommand<object> OpenEditCustomerWindowCommand
+        {
+            get => _openEditCustomerWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(ManagerCustomers.EditCustomer));
+        }
+
+        public RelayCommand<object> CloseCommand
+        {
+            get => _closeCommand ??= new RelayCommand<object>(_ => Close());
+        }
+
         public string[] SelectedCustomer
         {
-            get
-            {
-                return _selectedCustomer;
-            }
+            get => _selectedCustomer;
             set
             {
                 _selectedCustomer = value;
@@ -52,9 +67,33 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
             }
         }
 
+        public double SliderMax
+        {
+            get => _sliderMax;
+            set
+            {
+                _sliderMax = value > _sliderMin ? value : _sliderMin;
+                _sliderMax = _sliderMax > 100 ? 100 : _sliderMax;
+                OnPropertyChanged(nameof(SliderMax));
+                UpdateCustomers();
+            }
+        }
+
+        public double SliderMin
+        {
+            get => _sliderMin;
+            set
+            {
+                _sliderMin = value < _sliderMax ? value : _sliderMax;
+                _sliderMin = _sliderMin < 0 ? 0 : _sliderMin;
+                OnPropertyChanged(nameof(SliderMin));
+                UpdateCustomers();
+            }
+        }
+
         public void UpdateCustomers()
         {
-            Customers = DbQueries.GetAllCustomers();
+            Customers = Cust.GetAllCustomers(_sliderMin, _sliderMax);
         }
     }
 }

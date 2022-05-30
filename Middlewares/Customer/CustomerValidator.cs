@@ -21,7 +21,7 @@ namespace supermarket.Middlewares.Customer
             {
                 return "Введіть корректний номер карти";
             }
-            if (Cust.GetCustomerByCardNumber(cardNumber).Any())
+            if (Cust.GetCustomerByCardNumber(cardNumber) != null)
             {
                 return "Клієнт з таким номером карти вже існує";
             }
@@ -42,7 +42,7 @@ namespace supermarket.Middlewares.Customer
             {
                 return "Введіть номер телефону < 13 символів";
             }
-            if (Cust.GetCustomerByPhone(phoneNumber).Any())
+            if (Cust.GetCustomerByPhone(phoneNumber) != null)
             {
                 return "Клієнт з таким номером телефону вже існує";
             }
@@ -64,6 +64,10 @@ namespace supermarket.Middlewares.Customer
             {
                 double.Parse(percent);
             } catch
+            {
+                return "Введіть корректний процент";
+            }
+            if (double.Parse(percent) is > 100 or < 0)
             {
                 return "Введіть корректний процент";
             }
@@ -132,6 +136,10 @@ namespace supermarket.Middlewares.Customer
                 double.Parse(percent);
             }
             catch
+            {
+                return "Введіть корректний процент";
+            }
+            if (double.Parse(percent) is > 100 or < 0)
             {
                 return "Введіть корректний процент";
             }

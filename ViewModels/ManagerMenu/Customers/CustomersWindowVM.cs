@@ -38,7 +38,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
 
         private void GoToAddCustomer()
         {
-            //SetDefaultClosedEventHandler(_addCustomerWindowVM);
+            SetDefaultClosedEventHandler(_addCustomerWindowVM);
             _addCustomerWindowVM.Window.Show();
         }
 
@@ -51,7 +51,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
                     throw new Exception("No selected item");
                 }
 
-                //SetDefaultClosedEventHandler(_addCustomerWindowVM);
+                SetDefaultClosedEventHandler(_editCustomerWindowVM);
 
                 _editCustomerWindowVM.ViewModel.SetData(ViewModel.SelectedCustomer);
                 ViewModel.SelectedCustomer = null;
@@ -63,18 +63,12 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
             }
         }
 
-        //TODO
 
-        //private void SetDefaultClosedEventHandler<WindowType, VMType>(WindowViewModel<WindowType, VMType> windowVM)
-        //    where WindowType : Window, new()
-        //    where VMType : ViewModel, new()
-        //{
-        //    string filteredSurname = ViewModel.FilteredSurname;
-        //    windowVM.Window.Closed += (sender, e) =>
-        //    {
-        //        ViewModel.UpdateEmployees();
-        //        ViewModel.FilteredSurname = filteredSurname;
-        //    };
-        //}
+        private void SetDefaultClosedEventHandler<WindowType, VMType>(WindowViewModel<WindowType, VMType> windowVM)
+            where WindowType : Window, new()
+            where VMType : ViewModel, new()
+        {
+            windowVM.Window.Closing += (sender, e) => ViewModel.UpdateCustomers();
+        }
     }
 }

@@ -131,30 +131,22 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
 
         public RelayCommand<object> UpdateCommand
         {
-            get
-            {
-                return _updateCommand ??= new RelayCommand<object>(_ => UpdateCustomer(), CanExecute);
-            }
+            get => _updateCommand ??= new RelayCommand<object>(_ => UpdateCustomer(), CanExecute);
         }
         public RelayCommand<object> DeleteCommand
         {
-            get
-            {
-                return _deleteCommand ??= new RelayCommand<object>(_ => DeleteCustomer());
-            }
+            get => _deleteCommand ??= new RelayCommand<object>(_ => DeleteCustomer());
         }
         public RelayCommand<object> CloseCommand
         {
-            get
-            {
-                return _closeCommand ??= new RelayCommand<object>(_ => Close());
-            }
+            get => _closeCommand ??= new RelayCommand<object>(_ => Close());
         }
         public Action Close { get; set; }
 
         public void SetData(string[] data)
         {
             InitCardNumber = data[Cust.card_number];
+            ChangedCardNumber = data[Cust.card_number];
             Name = data[Cust.name];
             Surname = data[Cust.surname];
             Patronymic = data[Cust.patronymic];

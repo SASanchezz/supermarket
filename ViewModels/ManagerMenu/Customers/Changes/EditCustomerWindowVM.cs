@@ -1,11 +1,11 @@
-﻿using supermarket.Windows.ManagerMenu.Employees.Changes;
+﻿using supermarket.Windows.ManagerMenu.Customers.Changes;
 
 namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
 {
     /*
      * Controls EditCustomer Window in Customer of ManagerMenu
      */
-    internal class EditCustomerWindowVM : WindowViewModel<EditEmployeeWindow, EditCustomerVM>
+    internal class EditCustomerWindowVM : WindowViewModel<EditCustomerWindow, EditCustomerVM>
     {
         public EditCustomerWindowVM()
         {
