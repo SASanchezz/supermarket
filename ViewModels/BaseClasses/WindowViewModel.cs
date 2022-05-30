@@ -51,13 +51,7 @@ namespace supermarket.ViewModels.BaseClasses
         protected WindowViewModel(WindowType window)
         {
             Window = window;
-
             Window.DataContext = this;
-            Window.Closing += (sender, e) =>
-            {
-                e.Cancel = true;
-                Window.Hide();
-            };
         }
 
         public WindowType Window { get; protected set; }

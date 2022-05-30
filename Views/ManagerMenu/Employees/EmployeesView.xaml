@@ -34,6 +34,17 @@
                 Command="{Binding CloseCommand}"/>
 
         <Button Grid.Row="0"
+                Content="Друк" 
+                Width="75" 
+                Height="24" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center" 
+                FontSize="12" 
+                FontWeight="DemiBold" 
+                Margin="480,0,0,0"
+                Command="{Binding PrintCommand}"/>
+
+        <Button Grid.Row="0"
                 Content="Додати нового користувача" 
                 Width="195" 
                 Height="24" 

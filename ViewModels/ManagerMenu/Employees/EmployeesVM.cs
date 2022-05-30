@@ -5,6 +5,8 @@ using supermarket.Data;
 using Empl = supermarket.Models.Employee;
 using supermarket.Navigation.WindowViewModels;
 using supermarket.ViewModels.BaseClasses;
+using supermarket.Printing;
+using System.Windows;
 
 namespace supermarket.ViewModels.ManagerMenu.Employees
 {
@@ -25,6 +27,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
 
         private RelayCommand<object> _openAddEmployeeWindowCommand;
         private RelayCommand<object> _openEditEmployeeWindowCommand;
+        private RelayCommand<object> _printCommand;
         private RelayCommand<object> _closeCommand;
 
         public EmployeesVM()
@@ -132,6 +135,35 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
                 UpdateEmployees();
             }
         }
+
+        public RelayCommand<object> PrintCommand
+        {
+            get
+            {
+                return _printCommand ??= new RelayCommand<object>(_ =>
+                {
+                    Printer.PrintDataGrid(Employees, new string[]
+                    {
+                        "Колонка1", 
+                        "Колонка2", 
+                        "Колонка3", 
+                        "Колонка4", 
+                        "Колонка5", 
+                        "Колонка6",
+                        "Колонка7",
+                        "Колонка8",
+                        "Колонка9",
+                        "Колонка10",
+                        "Колонка11",
+                        "Колонка12", 
+                        "Колонка13"
+                    });
+                });
+                
+                
+            }
+        }
+
 
         public void UpdateEmployees()
         {
