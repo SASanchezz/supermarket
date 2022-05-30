@@ -5,8 +5,6 @@ using supermarket.Data;
 using Empl = supermarket.Models.Employee;
 using supermarket.Navigation.WindowViewModels;
 using supermarket.ViewModels.BaseClasses;
-using supermarket.Printing;
-using System.Windows;
 
 namespace supermarket.ViewModels.ManagerMenu.Employees
 {
