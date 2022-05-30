@@ -5,6 +5,7 @@ using supermarket.Middlewares.Customer;
 using System.Runtime.CompilerServices;
 using Cust = supermarket.Models.Customer;
 using System.Windows;
+using supermarket.ViewModels.BaseClasses;
 
 namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
 {

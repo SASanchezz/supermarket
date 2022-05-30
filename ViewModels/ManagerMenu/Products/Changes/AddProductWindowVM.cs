@@ -1,4 +1,5 @@
-﻿using supermarket.Windows.ManagerMenu.Products.Changes;
+﻿using supermarket.ViewModels.BaseClasses;
+using supermarket.Windows.ManagerMenu.Products.Changes;
 using System;
 using System.Collections.Generic;
 using System.Linq;

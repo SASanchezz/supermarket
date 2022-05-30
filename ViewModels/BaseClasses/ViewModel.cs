@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace supermarket.ViewModels
+namespace supermarket.ViewModels.BaseClasses
 {
     internal abstract class ViewModel : INotifyPropertyChanged
     {

@@ -3,6 +3,7 @@ using System;
 using supermarket.Middlewares.Customer;
 using supermarket.Models;
 using System.Windows;
+using supermarket.ViewModels.BaseClasses;
 
 namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
 {

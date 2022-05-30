@@ -3,6 +3,8 @@ using supermarket.Navigation.WindowViewModels;
 using supermarket.ViewModels.ManagerMenu.Customers.Changes;
 using System;
 using System.Windows;
+using supermarket.ViewModels.BaseClasses;
+
 namespace supermarket.ViewModels.ManagerMenu.Customers
 {
     /* 

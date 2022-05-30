@@ -1,5 +1,6 @@
 ﻿using supermarket.Navigation.WindowViewModels;
 using supermarket.Utils;
+using supermarket.ViewModels.BaseClasses;
 using System;
 using System.Collections.Generic;
 

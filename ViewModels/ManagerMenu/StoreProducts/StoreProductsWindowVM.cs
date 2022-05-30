@@ -1,4 +1,5 @@
-﻿using supermarket.Windows.ManagerMenu.StoreProducts;
+﻿using supermarket.ViewModels.BaseClasses;
+using supermarket.Windows.ManagerMenu.StoreProducts;
 
 namespace supermarket.ViewModels.ManagerMenu.StoreProducts
 {

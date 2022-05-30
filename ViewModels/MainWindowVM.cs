@@ -10,6 +10,7 @@ using System;
 using System.Windows;
 using supermarket.Navigation.ViewModels;
 using supermarket.Navigation.WindowViewModels;
+using supermarket.ViewModels.BaseClasses;
 
 namespace supermarket.ViewModels
 {

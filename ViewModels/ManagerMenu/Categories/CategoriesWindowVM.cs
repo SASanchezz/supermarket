@@ -1,4 +1,5 @@
-﻿using supermarket.Windows.ManagerMenu.Categories;
+﻿using supermarket.ViewModels.BaseClasses;
+using supermarket.Windows.ManagerMenu.Categories;
 
 namespace supermarket.ViewModels.ManagerMenu.Categories
 {

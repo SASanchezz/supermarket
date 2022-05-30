@@ -1,4 +1,5 @@
-﻿using supermarket.Windows.ManagerMenu.Employees.Changes;
+﻿using supermarket.ViewModels.BaseClasses;
+using supermarket.Windows.ManagerMenu.Employees.Changes;
 
 namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
 {

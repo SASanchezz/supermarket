@@ -3,6 +3,7 @@ using supermarket.Utils;
 using System;
 using supermarket.Middlewares.SignUp;
 using supermarket.Models;
+using supermarket.ViewModels.BaseClasses;
 
 namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
 {
