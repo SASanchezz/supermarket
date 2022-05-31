@@ -19,19 +19,26 @@ namespace supermarket.Models
         //Joined
         public const int category_name = 5;
 
-        public static List<string[]> GetAllProducts()
-        {
-            return GetAllProducts(Array.Empty<string>());
-        }
+        private const string AllString = "Всі";
 
-        public static List<string[]> GetAllProducts(string[] categoryNames) // NOT id of category
+        public static List<string[]> GetAllProducts(string categoryName = AllString, string name = "") // NOT id of category
         {
-            string categoryFilter = categoryNames.Length == 0 ? "" : string.Format("WHERE Category.category_name IN ('{0}')", string.Join("',", categoryNames));
+            
+            string whereClause = "WHERE 1 ";
 
-            string sql =
-                "SELECT id_product, Product.category_number, product_name, characteristics, manufacturer, Category.category_name AS category_name " +
-                "FROM Product LEFT JOIN Category " +
-                "ON Product.category_number = Category.category_number " + categoryFilter;
+            whereClause = categoryName == AllString ? whereClause : whereClause +=
+                string.Format("AND Product.category_number IN " +
+                                "(SELECT category_number " +
+                                "FROM Category " +
+                                "WHERE category_name='{0}')", categoryName);
+
+            whereClause = name == "" ? whereClause : whereClause +=
+                string.Format("AND product_name LIKE '%{0}%'", name);
+
+
+            string sql = "SELECT id_product, Product.category_number, product_name, characteristics, manufacturer, Category.category_name AS category_name " +
+                "FROM (Product LEFT JOIN Category " +
+                "ON Product.category_number = Category.category_number) " + whereClause;
             List<string[]> result = DbUtils.FindAll(sql);
 
             return result.Count > 0 ? result : null;
@@ -50,22 +57,22 @@ namespace supermarket.Models
             DbUtils.Execute(sql);
         }
 
-        public static void AddProduct(string productId, string categoryNumber, string name, string characteristic)
+        public static void AddProduct(string productId, string categoryNumber, string name, string characteristic, string manufacturer)
         {
             string sql = String.Format("INSERT INTO Product " +
-                "(id_product, category_number, product_name, characteristics) " +
-                "VALUES ({0}, {1}, '{2}', '{3}')",
-                productId, categoryNumber, name, characteristic);
+                "(id_product, category_number, product_name, characteristics, manufacturer) " +
+                "VALUES ({0}, {1}, '{2}', '{3}', '{4}')",
+                productId, categoryNumber, name, characteristic, manufacturer);
 
             DbUtils.Execute(sql);
         }
 
-        public static void UpdateProduct(string initProductId, string changedProductId, string categoryNumber, string name, string characteristic)
+        public static void UpdateProduct(string initProductId, string changedProductId, string categoryNumber, string name, string characteristic, string manufacturer)
         {
             string sql = string.Format("UPDATE Product SET " +
-                "id_product={1}, category_number={2}, product_name='{3}', characteristics='{4}' " +
+                "id_product={1}, category_number={2}, product_name='{3}', characteristics='{4}', manufacturer='{5}' " +
                 "WHERE id_product={0}",
-                initProductId, changedProductId, categoryNumber, name, characteristic);
+                initProductId, changedProductId, categoryNumber, name, characteristic, manufacturer);
 
             DbUtils.Execute(sql);
         }

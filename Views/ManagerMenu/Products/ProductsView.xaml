@@ -28,33 +28,44 @@
                 Margin="20,0,0,0"
                 Command="{Binding CloseCommand}"/>
         
-        <Button Grid.Row="0"
-                Content="Назва↓" 
-                Width="64" 
-                Height="24"
-                HorizontalAlignment="Center"  
-                VerticalAlignment="Center" 
-                FontSize="12"
-                FontWeight="DemiBold"
-                Margin="0, 0, 400, 0"/>
+        <TextBox Grid.Row="0" 
+                  Width="120"
+                  Height="24" 
+                  HorizontalAlignment="Left" 
+                  Margin="150, 0, 0, 30"
+                  Text="{Binding FilteredName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <ComboBox Grid.Row="0" 
+                  Width="120"
+                  Height="24" 
+                  HorizontalAlignment="Left" 
+                  Margin="150, 30, 0, 0"
+                  ItemsSource="{Binding SelectiveCategories}" 
+                  SelectedItem="{Binding SelectedCategory, Mode=TwoWay}">
+        </ComboBox>
 
         <Button Grid.Row="0"
-                Content="Категорія↓" 
-                Width="64" Height="24"
-                HorizontalAlignment="Center"  
+                Content="Редагувати"
+                Width="110" 
+                Height="24" 
+                HorizontalAlignment="Center"
                 VerticalAlignment="Center" 
                 FontSize="12" 
-                FontWeight="DemiBold"
-                Margin="0, 0, 100, 0"/>
+                FontWeight="DemiBold" 
+                Margin="0,0,20,0"
+                Command="{Binding OpenEditEmployeeWindowCommand}"/>
 
-        <ComboBox Grid.Row="0"
-                  Text="All"  
-                  Width="64" 
-                  Height="24" 
-                  HorizontalAlignment="Center"
-                  VerticalAlignment="Center"  
-                  FontSize="12" 
-                  Margin="200,0,0,0"/>
+        <Button Grid.Row="0"
+                Content="Друк" 
+                Width="75" 
+                Height="24" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center" 
+                FontSize="12" 
+                FontWeight="DemiBold" 
+                Margin="480,0,0,0"
+                Command="{Binding PrintCommand}"/>
 
         <Button Grid.Row="0"
                 Content="Додати новий товар" 

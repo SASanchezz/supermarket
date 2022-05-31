@@ -1,5 +1,8 @@
 ﻿using supermarket.Navigation.WindowViewModels;
+using supermarket.Printing;
 using supermarket.Utils;
+using Categ = supermarket.Models.Category;
+using Prod = supermarket.Models.Product;
 using supermarket.ViewModels.BaseClasses;
 using System;
 using System.Collections.Generic;
@@ -8,18 +11,27 @@ using System.Runtime.CompilerServices;
 
 namespace supermarket.ViewModels.ManagerMenu.Products
 {
-    class ProductsVM : ViewModel, IWindowOpeningVM<ManagerProducts>, INotifyPropertyChanged
+    class ProductsVM : ViewModel, IWindowOpeningVM<ManagerProducts>
     {
+        private const string AllString = "Всі";
+
         private List<string[]> _products;
         private string[] _selectedProduct;
 
+        private string _filteredName = "";
+
+        private string[] _selectiveCategories;
+        private string _selectedCategory = AllString;
+
         private RelayCommand<object> _openAddProductWindowCommand;
         private RelayCommand<object> _openEditProductWindowCommand;
+        private RelayCommand<object> _printCommand;
         private RelayCommand<object> _closeCommand;
 
         public ProductsVM()
         {
             UpdateProducts();
+            SetSelectiveCategories();
         }
 
         public Action<ManagerProducts> OpenWindowViewModel { get; set; }
@@ -52,6 +64,44 @@ namespace supermarket.ViewModels.ManagerMenu.Products
             }
         }
 
+        public string FilteredName
+        {
+            get
+            {
+                return _filteredName;
+            }
+            set
+            {
+                _filteredName = value;
+
+                UpdateProducts();
+                OnPropertyChanged();
+            }
+        }
+
+        public string[] SelectiveCategories => _selectiveCategories;
+
+        public string SelectedCategory
+        {
+            get
+            {
+                return _selectedCategory;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    _selectedCategory = AllString;
+                }
+                else
+                {
+                    _selectedCategory = value;
+                }
+                OnPropertyChanged();
+                UpdateProducts();
+            }
+        }
+
         public RelayCommand<object> OpenAddProductWindowCommand
         {
             get
@@ -68,6 +118,25 @@ namespace supermarket.ViewModels.ManagerMenu.Products
             }
         }
 
+        public RelayCommand<object> PrintCommand
+        {
+            get
+            {
+                return _printCommand ??= new RelayCommand<object>(_ =>
+                {
+                    Printer.PrintDataGrid(Products, new string[]
+                    {
+                        "Колонка1",
+                        "Колонка2",
+                        "Колонка3",
+                        "Колонка4",
+                        "Колонка5",
+                    });
+                });
+            }
+        }
+
+
         public RelayCommand<object> CloseCommand
         {
             get
@@ -78,13 +147,18 @@ namespace supermarket.ViewModels.ManagerMenu.Products
 
         public void UpdateProducts()
         {
-            Products = DbQueries.GetAllProducts();
+            Products = Prod.GetAllProducts(_selectedCategory, _filteredName);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        private void SetSelectiveCategories() {
+
+            _selectiveCategories = new string[Categ.GetAllCategories().Count + 1];
+            _selectiveCategories.SetValue(AllString, 0);
+            for (int i = 0; i < Categ.GetAllCategories().Count; ++i)
+            {
+                _selectiveCategories[i + 1] = Categ.GetAllCategoriesNames()[i];
+            }
         }
     }
 }
+

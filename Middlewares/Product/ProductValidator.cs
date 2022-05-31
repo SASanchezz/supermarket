@@ -10,7 +10,7 @@ namespace supermarket.Middlewares.Product
     public static class ProductValidator
     {
 
-        public static string Validate(string productId, string name, string categoryNumber , string characteristics)
+        public static string Validate(string productId, string name, string characteristics, string manufacturer)
         {
             //If someone tries to add product with product_id, that already exists
             if (productId.Any(x => !char.IsDigit(x)))
@@ -32,10 +32,9 @@ namespace supermarket.Middlewares.Product
                 return "Введіть характеристику товару < 100 символів";
             }
 
-            //If someone tries to choose categoryNumber, that does not exist
-            if (!DbQueries.GetCategoryByID(categoryNumber).Any())
+            if (manufacturer.Length is > 50 or 0)
             {
-                return "Оберіть категорію зі списку";
+                return "Введіть виробника товару < 50 символів";
             }
 
             return ""; //Alright
