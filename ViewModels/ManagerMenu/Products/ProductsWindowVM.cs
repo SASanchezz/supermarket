@@ -19,12 +19,15 @@ namespace supermarket.ViewModels.ManagerMenu.Products
             _addProductWindowVM = new AddProductWindowVM();
             _editProductWindowVM = new EditProductWindowVM();
 
+            SetVisibilitySystem(_addProductWindowVM);
+            SetVisibilitySystem(_editProductWindowVM);
+
             _windowsNavigator = new WindowVMNavigator<ManagerProducts>(new IWindowOpeningVM<ManagerProducts>[] { ViewModel });
 
             _windowsNavigator.SetWay(ManagerProducts.AddProduct, _addProductWindowVM.Window);
             _windowsNavigator.SetWay(ManagerProducts.EditProduct, _editProductWindowVM.Window);
 
-            Window.Closed += (object sender, EventArgs e) =>
+            Window.Closed += (sender, e) =>
             {
                 _addProductWindowVM.Window.Close();
                 _editProductWindowVM.Window.Close();
@@ -36,30 +39,47 @@ namespace supermarket.ViewModels.ManagerMenu.Products
 
         private void GoToAddProduct()
         {
-            //SetDefaultClosedEventHandler(_addProductWindowVM);
-
-            _addProductWindowVM.Window.Show();
+            SetDefaultClosedEventHandler(_addProductWindowVM);
         }
 
         private void GoToEditProduct()
         {
-            try
+            if (ViewModel.SelectedProduct == null)
             {
-                if (ViewModel.SelectedProduct == null)
+                throw new Exception("No selected item");
+            }
+
+            SetDefaultClosedEventHandler(_editProductWindowVM);
+
+          //  _editProductWindowVM.ViewModel.SetData(ViewModel.SelectedProduct);
+            ViewModel.SelectedProduct = null;
+
+        }
+
+        private void SetDefaultClosedEventHandler<WindowType, VMType>(WindowViewModel<WindowType, VMType> windowVM)
+            where WindowType : Window, new()
+            where VMType : ViewModel, new()
+        {
+            string filteredName = ViewModel.FilteredName;
+            string selectedCategory = ViewModel.SelectedCategory;
+
+            windowVM.Window.IsVisibleChanged += (sender, e) =>
+            {
+                if ((bool)e.NewValue.Equals(false))
                 {
-                    throw new Exception("No selected item");
+                    ViewModel.FilteredName = filteredName;
+                    ViewModel.SelectedCategory = selectedCategory;
+                    ViewModel.UpdateProducts();
+                    //MessageBox.Show("Data updated");
                 }
-                //SetDefaultClosedEventHandler(_addProductWindowVM);
+            };
+        }
 
-                //_editProductWindowVM.ViewModel.SetData(ViewModel.SelectedProduct);
-                ViewModel.SelectedProduct = null;
-                _editProductWindowVM.Window.Show();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
+        private void SetVisibilitySystem<WindowType, VMType>(WindowViewModel<WindowType, VMType> windowVM)
+            where WindowType : Window, new()
+            where VMType : ViewModel, new()
+        {
+            windowVM.Window.IsVisibleChanged += (sender, e) => IsEnabled = !IsEnabled;
         }
 
     }
