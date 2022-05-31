@@ -23,10 +23,13 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
             _addCustomerWindowVM = new AddCustomerWindowVM();
             _editCustomerWindowVM = new EditCustomerWindowVM();
 
+            SetVisibilitySystem(_addCustomerWindowVM);
+            SetVisibilitySystem(_editCustomerWindowVM);
+
             _windowsNavigator = new WindowVMNavigator<ManagerCustomers>(new IWindowOpeningVM<ManagerCustomers>[] { ViewModel });
 
-            _windowsNavigator.SetWay(ManagerCustomers.AddCustomer, _addCustomerWindowVM.Window);
-            _windowsNavigator.SetWay(ManagerCustomers.EditCustomer, _editCustomerWindowVM.Window);
+            _windowsNavigator.SetWay(ManagerCustomers.AddCustomer, _addCustomerWindowVM.Window, GoToAddCustomer);
+            _windowsNavigator.SetWay(ManagerCustomers.EditCustomer, _editCustomerWindowVM.Window, GoToEditCustomer);
 
             Window.Closed += (object sender, EventArgs e) =>
             {
@@ -41,30 +44,28 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
         private void GoToAddCustomer()
         {
             SetDefaultClosedEventHandler(_addCustomerWindowVM);
-            _addCustomerWindowVM.Window.Show();
         }
 
         private void GoToEditCustomer()
         {
-            try
+            if (ViewModel.SelectedCustomer == null)
             {
-                if (ViewModel.SelectedCustomer == null)
-                {
-                    throw new Exception("No selected item");
-                }
-
-                SetDefaultClosedEventHandler(_editCustomerWindowVM);
-
-                _editCustomerWindowVM.ViewModel.SetData(ViewModel.SelectedCustomer);
-                ViewModel.SelectedCustomer = null;
-                _editCustomerWindowVM.Window.Show();
+                throw new Exception("No selected item");
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+
+            SetDefaultClosedEventHandler(_editCustomerWindowVM);
+
+            _editCustomerWindowVM.ViewModel.SetData(ViewModel.SelectedCustomer);
+            ViewModel.SelectedCustomer = null;
+            
         }
 
+        private void SetVisibilitySystem<WindowType, VMType>(WindowViewModel<WindowType, VMType> windowVM)
+            where WindowType : Window, new()
+            where VMType : ViewModel, new()
+        {
+            windowVM.Window.IsVisibleChanged += (sender, e) => IsEnabled = !IsEnabled;
+        }
 
         private void SetDefaultClosedEventHandler<WindowType, VMType>(WindowViewModel<WindowType, VMType> windowVM)
             where WindowType : Window, new()
