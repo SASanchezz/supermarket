@@ -6,7 +6,6 @@ using Empl = supermarket.Models.Employee;
 using supermarket.Navigation.WindowViewModels;
 using supermarket.ViewModels.BaseClasses;
 using supermarket.Printing;
-using System.Windows;
 
 namespace supermarket.ViewModels.ManagerMenu.Employees
 {
@@ -78,6 +77,14 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             }
         }
 
+        public RelayCommand<object> PrintCommand
+        {
+            get
+            {
+                return _printCommand ??= new RelayCommand<object>(_ => PrintEmployees());
+            }
+        }
+
         public RelayCommand<object> CloseCommand
         {
             get
@@ -136,38 +143,15 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             }
         }
 
-        public RelayCommand<object> PrintCommand
-        {
-            get
-            {
-                return _printCommand ??= new RelayCommand<object>(_ =>
-                {
-                    Printer.PrintDataGrid(Employees, new string[]
-                    {
-                        "Колонка1",
-                        "Колонка2",
-                        "Колонка3",
-                        "Колонка4",
-                        "Колонка5",
-                        "Колонка6",
-                        "Колонка7",
-                        "Колонка8",
-                        "Колонка9",
-                        "Колонка10",
-                        "Колонка11",
-                        "Колонка12",
-                        "Колонка13"
-                    });
-                });
-
-
-            }
-        }
-
-
         public void UpdateEmployees()
         {
             Employees = Empl.GetAllEmployee(_selectedRole, _filteredSurname);
+
+            for (int i = 0; i < Employees.Count; ++i)
+            {
+                Employees[i][6] = DateTime.Parse(Employees[i][6]).ToShortDateString();
+                Employees[i][7] = DateTime.Parse(Employees[i][7]).ToShortDateString();
+            }
         }
 
         private void SetSelectiveRoles()
@@ -178,6 +162,46 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             {
                 _selectiveRoles.SetValue(Data.Roles.roleNames[i], i + 1);
             }
+        }
+
+        private void PrintEmployees()
+        {
+            List<string[]> printerEmployees = new List<string[]>();
+
+            for (int i = 0; i < Employees.Count; ++i)
+            {
+                printerEmployees.Add(new string[Employees[0].Length - 1]);
+
+                for (int h = 0; ; ++h)
+                {
+                    if (h == 9)
+                    {
+                        break;
+                    }
+                    printerEmployees[i].SetValue(Employees[i][h], h);
+                }
+
+                for (int h = 9; h < Employees[0].Length - 1; ++h)
+                {
+                    printerEmployees[i].SetValue(Employees[i][h + 1], h);
+                }
+            }
+
+            Printer.PrintDataGrid(printerEmployees, new string[]
+            {
+                "id",
+                "Прізвище",
+                "Ім'я",
+                "По батькові",
+                "Посада",
+                "Зарплата",
+                "Дата народження",
+                "Дата початку роботи",
+                "Номер телефону",
+                "Місто",
+                "Вулиця",
+                "Поштовий індекс"
+            });
         }
     }
 }

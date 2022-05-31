@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace supermarket.Printing
 {
@@ -20,6 +21,7 @@ namespace supermarket.Printing
             if (printDialog.ShowDialog() == true)
             {
                 var table = new Table();
+
                 table.RowGroups.Add(new TableRowGroup());
 
                 var columnsNameRow = new TableRow();
@@ -48,12 +50,13 @@ namespace supermarket.Printing
                 }
 
                 var size = new Size(printDialog.PrintableAreaWidth, printDialog.PrintableAreaHeight);
-
                 var doc = new FlowDocument(table);
+
+                doc.FontFamily = new FontFamily("Calibri");
                 doc.PageWidth = size.Width;
                 doc.PageHeight = size.Height;
                 doc.ColumnWidth = 1024;
-                doc.FontSize = 6;
+                doc.FontSize = 14;
 
                 IDocumentPaginatorSource idpSource = doc;
 

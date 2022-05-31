@@ -4,15 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:supermarket.Views.ManagerMenu.Employees"
-             xmlns:converters="clr-namespace:supermarket.Utils.Convertes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              FontFamily="Montserrat">
-    
-    <UserControl.Resources>
-        <converters:DateStringToShortConverter x:Key="DateStringToShortConverter"/>
-    </UserControl.Resources>
-    
+
     <Grid Background="#F2F2F2">
 
         <Grid.RowDefinitions>
@@ -88,7 +83,8 @@
                 <DataGrid AutoGenerateColumns="False" 
                           SelectionMode="Single"
                           ItemsSource="{Binding Employees}" 
-                          SelectedItem="{Binding SelectedEmployee, Mode=OneWayToSource}">
+                          SelectedItem="{Binding SelectedEmployee, Mode=OneWayToSource}"
+                          x:Name="grid">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="id"                     Binding="{Binding Path=[0]}"    Width="Auto" IsReadOnly="True"/>
                         <DataGridTextColumn Header="Прізвище"               Binding="{Binding Path=[1]}"    Width="Auto" IsReadOnly="True"/>
@@ -96,8 +92,8 @@
                         <DataGridTextColumn Header="По батькові"            Binding="{Binding Path=[3]}"    Width="Auto" IsReadOnly="True"/>
                         <DataGridTextColumn Header="Посада"                 Binding="{Binding Path=[4]}"    Width="Auto" IsReadOnly="True"/>
                         <DataGridTextColumn Header="Зарплата"               Binding="{Binding Path=[5]}"    Width="Auto" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Дата народження"        Binding="{Binding Path=[6], Converter={StaticResource DateStringToShortConverter}}" Width="Auto" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Дата початку роботи"    Binding="{Binding Path=[7], Converter={StaticResource DateStringToShortConverter}}" Width="Auto" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Дата народження"        Binding="{Binding Path=[6]}"    Width="Auto" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Дата початку роботи"    Binding="{Binding Path=[7]}"    Width="Auto" IsReadOnly="True"/>
                         <DataGridTextColumn Header="Номер телефону"         Binding="{Binding Path=[8]}"    Width="Auto" IsReadOnly="True"/>
                         <!--<DataGridTextColumn Header="Пароль"                 Binding="{Binding Path=[9]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>-->
                         <DataGridTextColumn Header="Місто"                  Binding="{Binding Path=[10]}"   Width="Auto" IsReadOnly="True"/>
