@@ -17,7 +17,7 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
 
         public string IdProduct { get; set; }
 
-        public int CategoryNumber { get; set; }
+        public string CategoryName { get; set; }
 
         public string ProductName { get; set; }
 
@@ -55,7 +55,7 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
             }
 
             //Query to insert new product
-            Product.AddProduct(IdProduct, Categ.GetIDByName(CategoriesNames[CategoryNumber])[0], ProductName, 
+            Product.AddProduct(IdProduct, Categ.GetIDByName(CategoryName)[0], ProductName, 
                 Characteristics, Manufacturer);
 
             Close();

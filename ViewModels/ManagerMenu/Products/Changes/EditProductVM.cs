@@ -16,7 +16,8 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
         private string _init_id_product;
         private string _changed_id_product;
         private string _product_name;
-        private string _category_number;
+        private int     _category_number;
+        private string _category_name;
         private string _manufacturer;
         private string _characteristics;
 
@@ -54,12 +55,22 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
             }
         }
 
-        public string CategoryNumber
+        public int CategoryNumber
         {
             get => _category_number;
             set
             {
                 _category_number = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string CategoryName
+        {
+            get => _category_name;
+            set
+            {
+                _category_name = value;
                 OnPropertyChanged();
             }
         }
@@ -84,7 +95,7 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
             }
         }
 
-        public static string[] Categories => Categ.GetAllCategoriesNames();
+        public static string[] CategoriesNames => Categ.GetAllCategoriesNames();
 
         public RelayCommand<object> UpdateCommand
         {
@@ -115,14 +126,14 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
             InitIdProduct = data[Prod.id_product];
             ChangedIdProduct = data[Prod.id_product];
             ProductName = data[Prod.product_name];
-            CategoryNumber = data[Prod.category_number];
+            CategoryName = data[Prod.category_name];
             Characteristics = data[Prod.characteristics];
             Manufacturer = data[Prod.manufacturer];
         }
 
         private void UpdateProduct()
         {
-            string result = ProductValidator.Validate(ChangedIdProduct, ProductName, 
+            string result = ProductValidator.ValidateUpdate(InitIdProduct, ChangedIdProduct, ProductName, 
                 Characteristics, Manufacturer);
 
             if (result.Length != 0)
@@ -132,7 +143,7 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
             }
 
             Prod.UpdateProduct(InitIdProduct, ChangedIdProduct, 
-                CategoryNumber, ProductName, Characteristics, Manufacturer);
+                Categ.GetIDByName(CategoryName)[0], ProductName, Characteristics, Manufacturer);
 
             Close();
         }
@@ -146,10 +157,10 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
         private bool CanExecute(object obj)
         {
             return !string.IsNullOrWhiteSpace(ChangedIdProduct)
-                && !string.IsNullOrWhiteSpace(CategoryNumber)
                 && !string.IsNullOrWhiteSpace(ProductName)
                 && !string.IsNullOrWhiteSpace(Manufacturer)
                 && !string.IsNullOrWhiteSpace(Characteristics);
         }
+
     }
 }
