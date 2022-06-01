@@ -1,8 +1,6 @@
 ﻿using supermarket.Utils;
 using System;
-using System.ComponentModel;
 using supermarket.Middlewares.Customer;
-using System.Runtime.CompilerServices;
 using Cust = supermarket.Models.Customer;
 using System.Windows;
 using supermarket.ViewModels.BaseClasses;
@@ -36,7 +34,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
             set
             {
                 _init_card_number = value;
-                OnPropertyChanged(nameof(InitCardNumber));
+                OnPropertyChanged();
             }
         }
         public string ChangedCardNumber
@@ -45,7 +43,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
             set
             {
                 _changed_card_number = value;
-                OnPropertyChanged(nameof(ChangedCardNumber));
+                OnPropertyChanged();
             }
         }
 
@@ -55,7 +53,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
             set
             {
                 _surname = value;
-                OnPropertyChanged(nameof(Surname));
+                OnPropertyChanged();
             }
         }
 
@@ -65,7 +63,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
             set
             {
                 _name = value;
-                OnPropertyChanged(nameof(Name));
+                OnPropertyChanged();
             }
         }
 
@@ -75,7 +73,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
             set
             {
                 _patronymic = value;
-                OnPropertyChanged(nameof(Patronymic));
+                OnPropertyChanged();
             }
         }
 
@@ -85,7 +83,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
             set
             {
                 _phone_number = value;
-                OnPropertyChanged(nameof(Phone_number));
+                OnPropertyChanged();
             }
         }
         
@@ -95,7 +93,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
             set
             {
                 _city = value;
-                OnPropertyChanged(nameof(City));
+                OnPropertyChanged();
             }
         }
 
@@ -105,7 +103,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
             set
             {
                 _street = value;
-                OnPropertyChanged(nameof(Street));
+                OnPropertyChanged();
             }
         }
 
@@ -115,7 +113,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
             set
             {
                 _zipcode = value;
-                OnPropertyChanged(nameof(Zipcode));
+                OnPropertyChanged();
             }
         }
 
@@ -125,7 +123,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
             set
             {
                 _percent = value;
-                OnPropertyChanged(nameof(Percent));
+                OnPropertyChanged();
             }
         }
 
@@ -192,12 +190,6 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
                 && !string.IsNullOrWhiteSpace(Street)
                 && !string.IsNullOrWhiteSpace(Zipcode)
                 && !string.IsNullOrWhiteSpace(Percent);
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
