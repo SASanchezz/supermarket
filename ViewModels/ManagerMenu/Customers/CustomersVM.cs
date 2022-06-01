@@ -18,7 +18,6 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
         private double _sliderMax;
         private double _sliderMin;
 
-
         private RelayCommand<object> _openAddCustomerWindowCommand;
         private RelayCommand<object> _openEditCustomerWindowCommand;
         private RelayCommand<object> _closeCommand;
@@ -39,7 +38,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
             set
             {
                 _customers = value;
-                OnPropertyChanged(nameof(Customers));
+                OnPropertyChanged();
             }
         }
 
@@ -75,7 +74,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
             {
                 _sliderMax = value > _sliderMin ? value : _sliderMin;
                 _sliderMax = _sliderMax > 100 ? 100 : _sliderMax;
-                OnPropertyChanged(nameof(SliderMax));
+                OnPropertyChanged();
                 UpdateCustomers();
             }
         }
@@ -87,7 +86,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
             {
                 _sliderMin = value < _sliderMax ? value : _sliderMax;
                 _sliderMin = _sliderMin < 0 ? 0 : _sliderMin;
-                OnPropertyChanged(nameof(SliderMin));
+                OnPropertyChanged();
                 UpdateCustomers();
             }
         }

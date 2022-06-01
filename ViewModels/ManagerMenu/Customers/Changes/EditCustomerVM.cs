@@ -12,12 +12,12 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
      */
     internal class EditCustomerVM : ViewModel
     {
-        private string _init_card_number;
-        private string _changed_card_number;
+        private string _initCardNumber;
+        private string _changedCardNumber;
         private string _surname;
         private string _name;
         private string _patronymic;
-        private string _phone_number;
+        private string _phoneNumber;
         private string _city;
         private string _street;
         private string _zipcode;
@@ -30,19 +30,19 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
 
         public string InitCardNumber
         {
-            get => _init_card_number;
+            get => _initCardNumber;
             set
             {
-                _init_card_number = value;
+                _initCardNumber = value;
                 OnPropertyChanged();
             }
         }
         public string ChangedCardNumber
         {
-            get => _changed_card_number;
+            get => _changedCardNumber;
             set
             {
-                _changed_card_number = value;
+                _changedCardNumber = value;
                 OnPropertyChanged();
             }
         }
@@ -77,12 +77,12 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
             }
         }
 
-        public string Phone_number
+        public string PhoneNumber
         {
-            get => _phone_number;
+            get => _phoneNumber;
             set
             {
-                _phone_number = value;
+                _phoneNumber = value;
                 OnPropertyChanged();
             }
         }
@@ -127,19 +127,21 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
             }
         }
 
-
         public RelayCommand<object> UpdateCommand
         {
             get => _updateCommand ??= new RelayCommand<object>(_ => UpdateCustomer(), CanExecute);
         }
+        
         public RelayCommand<object> DeleteCommand
         {
             get => _deleteCommand ??= new RelayCommand<object>(_ => DeleteCustomer());
         }
+        
         public RelayCommand<object> CloseCommand
         {
             get => _closeCommand ??= new RelayCommand<object>(_ => Close());
         }
+        
         public Action Close { get; set; }
 
         public void SetData(string[] data)
@@ -149,7 +151,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
             Name = data[Cust.name];
             Surname = data[Cust.surname];
             Patronymic = data[Cust.patronymic];
-            Phone_number = data[Cust.phone_number];
+            PhoneNumber = data[Cust.phone_number];
             City = data[Cust.city];
             Street = data[Cust.street];
             Zipcode = data[Cust.zipcode];
@@ -159,17 +161,16 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
         private void UpdateCustomer()
         {
             string result = CustomerValidator.ValidateUpdate(InitCardNumber, ChangedCardNumber, Surname, Name, Patronymic,
-                Phone_number, City, Street, Zipcode, Percent);
+                PhoneNumber, City, Street, Zipcode, Percent);
 
             if (result.Length != 0)
             {
                 MessageBox.Show(result);
                 return;
             }
-
-
+            
             Cust.UpdateCustomer(InitCardNumber, ChangedCardNumber, Surname, Name, Patronymic,
-                Phone_number, City, Street, Zipcode, Percent);
+                PhoneNumber, City, Street, Zipcode, Percent);
 
             Close();
         }
@@ -185,7 +186,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
             return !string.IsNullOrWhiteSpace(ChangedCardNumber)
                 && !string.IsNullOrWhiteSpace(Name)
                 && !string.IsNullOrWhiteSpace(Surname)
-                && !string.IsNullOrWhiteSpace(Phone_number)
+                && !string.IsNullOrWhiteSpace(PhoneNumber)
                 && !string.IsNullOrWhiteSpace(City)
                 && !string.IsNullOrWhiteSpace(Street)
                 && !string.IsNullOrWhiteSpace(Zipcode)

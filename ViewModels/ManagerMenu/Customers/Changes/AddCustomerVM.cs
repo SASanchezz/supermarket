@@ -9,39 +9,28 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
 {
     internal class AddCustomerVM : ViewModel
     {
-        private string _card_number;
-        private string _surname;
-        private string _name;
-        private string _patronymic;
-        private string _phone_number;
-        private string _city;
-        private string _street;
-        private string _zipcode;
-        private string _percent;
-
         private RelayCommand<object> _addCustomerCommand;
         private RelayCommand<object> _closeCommand;
 
         public Action Close { get; set; }
 
-        public string CardNumber { get => _card_number; set => _card_number = value; }
+        public string CardNumber { get; set; }
 
-        public string Surname { get => _surname; set => _surname = value; }
+        public string Surname { get; set; }
 
-        public string Name { get => _name; set => _name = value; }
+        public string Name { get; set; }
 
-        public string Patronymic { get => _patronymic; set => _patronymic = value; }
+        public string Patronymic { get; set; }
 
-        public string Phone_number { get => _phone_number; set => _phone_number = value; }
+        public string PhoneNumber { get; set; }
 
-        public string City { get => _city; set => _city = value; }
+        public string City { get; set; }
 
-        public string Street { get => _street; set => _street = value; }
+        public string Street { get; set; }
 
-        public string Zipcode { get => _zipcode; set => _zipcode = value; }
+        public string Zipcode { get; set; }
 
-        public string Percent { get => _percent; set => _percent = value; }
-
+        public string Percent { get; set; }
 
         public RelayCommand<object> AddCustomerCommand
         {
@@ -60,8 +49,8 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
             */
 
             ////Validates entered information
-            string result = CustomerValidator.ValidateInsert(_card_number, _surname, _name, _patronymic,
-                _phone_number, _city, _street, _zipcode, _percent);
+            string result = CustomerValidator.ValidateInsert(CardNumber, Surname, Name, Patronymic,
+                PhoneNumber, City, Street, Zipcode, Percent);
 
             if (result.Length != 0)
             {
@@ -70,8 +59,8 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
             }
 
             //Query to insert new employee
-            Customer.AddCustomer(_card_number, _surname, _name, _patronymic,
-                _phone_number, _city, _street, _zipcode, _percent);
+            Customer.AddCustomer(CardNumber, Surname, Name, Patronymic,
+                PhoneNumber, City, Street, Zipcode, Percent);
 
             Close();
         }
@@ -81,7 +70,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
             return !string.IsNullOrWhiteSpace(CardNumber)
                 && !string.IsNullOrWhiteSpace(Name)
                 && !string.IsNullOrWhiteSpace(Surname)
-                && !string.IsNullOrWhiteSpace(Phone_number)
+                && !string.IsNullOrWhiteSpace(PhoneNumber)
                 && !string.IsNullOrWhiteSpace(City)
                 && !string.IsNullOrWhiteSpace(Street)
                 && !string.IsNullOrWhiteSpace(Zipcode)

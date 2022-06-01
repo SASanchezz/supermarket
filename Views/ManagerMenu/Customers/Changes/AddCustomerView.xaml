@@ -30,7 +30,7 @@
 
         <TextBlock Grid.Row="2" Grid.Column="0" Text="номер телефону" Foreground="DimGray" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="0,0,0,0"/>
         <TextBox x:Name="phoneNumberBox" Grid.Row="2" Grid.Column="0" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,0"
-                 Text="{Binding Phone_number, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding PhoneNumber, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBlock Grid.Row="2" Grid.Column="1" Text="місто" Foreground="DimGray" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="0,0,0,0"/>
         <TextBox x:Name="cityBox" Grid.Row="2" Grid.Column="1" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,0"
