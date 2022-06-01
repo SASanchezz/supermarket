@@ -11,27 +11,21 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
 {
     internal class AddProductVM : ViewModel
     {
-        private string _id_product;
-        private int _category_number;
-        private string _product_name;
-        private string _manufacturer;
-        private string _characteristics;
-
         private RelayCommand<object> _addProductCommand;
         private RelayCommand<object> _closeCommand;
         public Action Close { get; set; }
 
-        public string IdProduct { get => _id_product; set => _id_product = value; }
+        public string IdProduct { get; set; }
 
-        public int CategoryNumber { get => _category_number; set => _category_number = value; }
+        public int CategoryNumber { get; set; }
 
-        public string ProductName { get => _product_name; set => _product_name = value; }
+        public string ProductName { get; set; }
 
-        public string Characteristics { get => _characteristics; set => _characteristics = value; }
+        public string Characteristics { get; set; }
 
-        public string Manufacturer { get => _manufacturer; set => _manufacturer = value; }
+        public string Manufacturer { get; set; }
 
-        public static string[] CategoriesNames { get => Categ.GetAllCategoriesNames(); }
+        public static string[] CategoriesNames => Categ.GetAllCategoriesNames();
 
         public RelayCommand<object> AddProductCommand
         {
@@ -50,10 +44,9 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
         }
         private void AddProduct()
         {
-
             ////Validates entered information
-            string result = ProductValidator.Validate(_id_product, _product_name, 
-                _characteristics, _manufacturer);
+            string result = ProductValidator.Validate(IdProduct, ProductName, 
+                Characteristics, Manufacturer);
 
             if (result.Length != 0)
             {
@@ -62,8 +55,8 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
             }
 
             //Query to insert new product
-            Product.AddProduct(_id_product, Categ.GetIDByName(CategoriesNames[_category_number])[0], _product_name, 
-                _characteristics, _manufacturer);
+            Product.AddProduct(IdProduct, Categ.GetIDByName(CategoriesNames[CategoryNumber])[0], ProductName, 
+                Characteristics, Manufacturer);
 
             Close();
         }
