@@ -66,6 +66,7 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
             return !string.IsNullOrWhiteSpace(IdProduct)
                 && !string.IsNullOrWhiteSpace(ProductName)
                 && !string.IsNullOrWhiteSpace(Characteristics)
+                && !string.IsNullOrWhiteSpace(CategoryName)
                 && !string.IsNullOrWhiteSpace(Manufacturer);
         }
     }
