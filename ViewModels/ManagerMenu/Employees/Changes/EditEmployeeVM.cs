@@ -1,10 +1,7 @@
 ﻿using supermarket.Utils;
 using System;
-using System.ComponentModel;
 using supermarket.Data;
-using supermarket.Models;
 using supermarket.Middlewares.Employee;
-using System.Runtime.CompilerServices;
 using Empl = supermarket.Models.Employee;
 using System.Windows;
 using supermarket.ViewModels.BaseClasses;
@@ -22,9 +19,9 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
         private string _patronymic;
         private string _role;
         private string _salary;
-        private DateTime _date_of_birth;
-        private DateTime _date_of_start;
-        private string _phone_number;
+        private DateTime _dateOfBirth;
+        private DateTime _dateOfStart;
+        private string _phoneNumber;
         private string _password;
         private string _city;
         private string _street;
@@ -40,7 +37,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
             set
             {
                 _id = value;
-                OnPropertyChanged(nameof(Id));
+                OnPropertyChanged();
             }
         }
 
@@ -50,7 +47,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
             set
             {
                 _surname = value;
-                OnPropertyChanged(nameof(Surname));
+                OnPropertyChanged();
             }
         }
 
@@ -60,7 +57,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
             set
             {
                 _name = value;
-                OnPropertyChanged(nameof(Name));
+                OnPropertyChanged();
             }
         }
 
@@ -70,7 +67,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
             set
             {
                 _patronymic = value;
-                OnPropertyChanged(nameof(Patronymic));
+                OnPropertyChanged();
             }
         }
 
@@ -80,7 +77,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
             set
             {
                 _role = value;
-                OnPropertyChanged(nameof(Role));
+                OnPropertyChanged();
             }
         }
 
@@ -90,37 +87,37 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
             set
             {
                 _salary = value;
-                OnPropertyChanged(nameof(Salary));
+                OnPropertyChanged();
             }
         }
 
-        public DateTime Date_of_birth
+        public DateTime DateOfBirth
         {
-            get => _date_of_birth;
+            get => _dateOfBirth;
             set
             {
-                _date_of_birth = value;
-                OnPropertyChanged(nameof(Date_of_birth));
+                _dateOfBirth = value;
+                OnPropertyChanged();
             }
         }
 
-        public DateTime Date_of_start
+        public DateTime DateOfStart
         {
-            get => _date_of_start;
+            get => _dateOfStart;
             set
             {
-                _date_of_start = value;
-                OnPropertyChanged(nameof(Date_of_start));
+                _dateOfStart = value;
+                OnPropertyChanged();
             }
         }
 
-        public string Phone_number
+        public string PhoneNumber
         {
-            get => _phone_number;
+            get => _phoneNumber;
             set
             {
-                _phone_number = value;
-                OnPropertyChanged(nameof(Phone_number));
+                _phoneNumber = value;
+                OnPropertyChanged();
             }
         }
 
@@ -130,7 +127,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
             set
             {
                 _password = value;
-                OnPropertyChanged(nameof(Password));
+                OnPropertyChanged();
             }
         }
 
@@ -140,7 +137,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
             set
             {
                 _city = value;
-                OnPropertyChanged(nameof(City));
+                OnPropertyChanged();
             }
         }
 
@@ -150,7 +147,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
             set
             {
                 _street = value;
-                OnPropertyChanged(nameof(Street));
+                OnPropertyChanged();
             }
         }
 
@@ -160,7 +157,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
             set
             {
                 _zipcode = value;
-                OnPropertyChanged(nameof(Zipcode));
+                OnPropertyChanged();
             }
         }
 
@@ -197,9 +194,9 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
             Patronymic = data[Empl.patronymic];
             Role = data[Empl.role];
             Salary = data[Empl.salary];
-            Date_of_birth = DateTime.Parse(data[Empl.date_of_birth]);
-            Date_of_start = DateTime.Parse(data[Empl.date_of_start]);
-            Phone_number = data[Empl.phone_number];
+            DateOfBirth = DateTime.Parse(data[Empl.date_of_birth]);
+            DateOfStart = DateTime.Parse(data[Empl.date_of_start]);
+            PhoneNumber = data[Empl.phone_number];
             Password = ""; //data[9];
             City = data[Empl.city];
             Street = data[Empl.street];
@@ -209,7 +206,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
         private void UpdateEmployee()
         {
             string result = UpdateDataValidator.Validate(Id, Surname, Name, Patronymic, Role,
-                Salary, Date_of_birth, Date_of_start, Phone_number,
+                Salary, DateOfBirth, DateOfStart, PhoneNumber,
                 City, Street, Zipcode, Password);
 
             if (result.Length != 0)
@@ -223,7 +220,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
             Password = Password == "" ? employee[Empl.password] : CryptUtils.HashPassword(Password);
 
             Empl.UpdateEmployee(Id, Surname, Name, Patronymic, Role,
-            Salary, Date_of_birth, Date_of_start, Phone_number,
+            Salary, DateOfBirth, DateOfStart, PhoneNumber,
             Password, City, Street, Zipcode);
 
             Close();
@@ -241,16 +238,10 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
                 && !string.IsNullOrWhiteSpace(Surname)
                 && !string.IsNullOrWhiteSpace(Patronymic)
                 && !string.IsNullOrWhiteSpace(Salary)
-                && !string.IsNullOrWhiteSpace(Phone_number)
+                && !string.IsNullOrWhiteSpace(PhoneNumber)
                 && !string.IsNullOrWhiteSpace(City)
                 && !string.IsNullOrWhiteSpace(Street)
                 && !string.IsNullOrWhiteSpace(Zipcode);
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
