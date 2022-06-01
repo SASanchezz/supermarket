@@ -9,6 +9,7 @@ namespace supermarket.Printing
 {
     internal static class Printer
     {
+        // изменение
         public static void PrintDataGrid(List<string[]> list, string[] columnNames)
         {
             if (list[0].Length != columnNames.Length)
