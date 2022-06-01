@@ -37,7 +37,7 @@
                   VerticalContentAlignment="Center" 
                   FontSize="14" 
                   Margin="0,0,0,15"
-                  Text="{Binding IdProduct, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                  Text="{Binding ChangedIdProduct, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBlock Grid.Row="0" 
                    Grid.Column="1" 
@@ -75,7 +75,7 @@
                   HorizontalAlignment="Center" 
                   VerticalAlignment="Bottom" 
                   Margin="0,0,0,15"
-                  SelectedItem="{Binding CategoryNumber, Mode=TwoWay}" 
+                  SelectedItem="{Binding CategoryName, Mode=TwoWay}" 
                   ItemsSource="{Binding CategoriesNames}">
         </ComboBox>
 
@@ -136,6 +136,7 @@
                 FontSize="12"  
                 Margin="0,0,0,50"
                 Command="{Binding UpdateCommand}" />
+        
         <Button Content="ВИДАЛИТИ" 
                 Grid.Row="3"
                 Grid.Column="0" 
