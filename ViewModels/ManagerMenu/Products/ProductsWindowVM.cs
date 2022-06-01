@@ -33,8 +33,8 @@ namespace supermarket.ViewModels.ManagerMenu.Products
         {
             var windowsNavigator = new WindowVMNavigator<ManagerProducts>(new IWindowOpeningVM<ManagerProducts>[] { ViewModel });
 
-            windowsNavigator.SetWay(ManagerProducts.AddProduct, _addProductWindowVM.Window);
-            windowsNavigator.SetWay(ManagerProducts.EditProduct, _editProductWindowVM.Window);
+            windowsNavigator.SetWay(ManagerProducts.AddProduct, _addProductWindowVM.Window, GoToAddProduct);
+            windowsNavigator.SetWay(ManagerProducts.EditProduct, _editProductWindowVM.Window, GoToEditProduct);
             
             SetVisibilitySystem(_addProductWindowVM);
             SetVisibilitySystem(_editProductWindowVM);
@@ -53,8 +53,7 @@ namespace supermarket.ViewModels.ManagerMenu.Products
             }
 
             SetDefaultClosedEventHandler(_editProductWindowVM);
-
-          //  _editProductWindowVM.ViewModel.SetData(ViewModel.SelectedProduct);
+            _editProductWindowVM.ViewModel.SetData(ViewModel.SelectedProduct);
             ViewModel.SelectedProduct = null;
         }
 

@@ -54,7 +54,7 @@
                 FontSize="12" 
                 FontWeight="DemiBold" 
                 Margin="0,0,20,0"
-                Command="{Binding OpenEditEmployeeWindowCommand}"/>
+                Command="{Binding OpenEditProductWindowCommand}"/>
 
         <Button Grid.Row="0"
                 Content="Друк" 
