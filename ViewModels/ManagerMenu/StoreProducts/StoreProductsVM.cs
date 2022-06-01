@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace supermarket.ViewModels.ManagerMenu.StoreProducts
 {
-    class StoreProductsVM : ViewModel, IWindowOpeningVM<ManagerStoreProducts>
+    internal class StoreProductsVM : ViewModel, IWindowOpeningVM<ManagerStoreProducts>
     {
         private List<string[]> _storeProducts;
         private string[] _selectedStoreProduct;
@@ -24,10 +24,7 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
 
         public List<string[]> StoreProducts
         {
-            get
-            {
-                return _storeProducts;
-            }
+            get => _storeProducts;
             set
             {
                 _storeProducts = value;
@@ -37,10 +34,7 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
 
         public string[] SelectedStoreProduct
         {
-            get
-            {
-                return _selectedStoreProduct;
-            }
+            get => _selectedStoreProduct;
             set
             {
                 _selectedStoreProduct = value;
