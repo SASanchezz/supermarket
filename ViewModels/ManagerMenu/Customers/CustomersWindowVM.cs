@@ -13,8 +13,6 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
      */
     internal class CustomersWindowVM : WindowViewModel<CustomersWindow, CustomersVM>
     {
-        private WindowVMNavigator<ManagerCustomers> _windowsNavigator;
-
         private AddCustomerWindowVM _addCustomerWindowVM;
         private EditCustomerWindowVM _editCustomerWindowVM;
 
@@ -23,15 +21,9 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
             _addCustomerWindowVM = new AddCustomerWindowVM();
             _editCustomerWindowVM = new EditCustomerWindowVM();
 
-            SetVisibilitySystem(_addCustomerWindowVM);
-            SetVisibilitySystem(_editCustomerWindowVM);
+            SetWindowsNavigation();
 
-            _windowsNavigator = new WindowVMNavigator<ManagerCustomers>(new IWindowOpeningVM<ManagerCustomers>[] { ViewModel });
-
-            _windowsNavigator.SetWay(ManagerCustomers.AddCustomer, _addCustomerWindowVM.Window, GoToAddCustomer);
-            _windowsNavigator.SetWay(ManagerCustomers.EditCustomer, _editCustomerWindowVM.Window, GoToEditCustomer);
-
-            Window.Closed += (object sender, EventArgs e) =>
+            Window.Closed += (sender, e) =>
             {
                 _addCustomerWindowVM.Window.Close();
                 _editCustomerWindowVM.Window.Close();
@@ -39,6 +31,17 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
 
             // set Close() method to Action in ViewModel
             ViewModel.Close = Window.Close;
+        }
+
+        private void SetWindowsNavigation()
+        {
+            var windowsNavigator = new WindowVMNavigator<ManagerCustomers>(new IWindowOpeningVM<ManagerCustomers>[] { ViewModel });
+
+            windowsNavigator.SetWay(ManagerCustomers.AddCustomer, _addCustomerWindowVM.Window, GoToAddCustomer);
+            windowsNavigator.SetWay(ManagerCustomers.EditCustomer, _editCustomerWindowVM.Window, GoToEditCustomer);
+            
+            SetVisibilitySystem(_addCustomerWindowVM);
+            SetVisibilitySystem(_editCustomerWindowVM);
         }
 
         private void GoToAddCustomer()
@@ -57,19 +60,18 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
 
             _editCustomerWindowVM.ViewModel.SetData(ViewModel.SelectedCustomer);
             ViewModel.SelectedCustomer = null;
-            
         }
 
-        private void SetVisibilitySystem<WindowType, VMType>(WindowViewModel<WindowType, VMType> windowVM)
-            where WindowType : Window, new()
-            where VMType : ViewModel, new()
+        private void SetVisibilitySystem<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
+            where TWindow : Window, new()
+            where TViewModel : ViewModel, new()
         {
             windowVM.Window.IsVisibleChanged += (sender, e) => IsEnabled = !IsEnabled;
         }
 
-        private void SetDefaultClosedEventHandler<WindowType, VMType>(WindowViewModel<WindowType, VMType> windowVM)
-            where WindowType : Window, new()
-            where VMType : ViewModel, new()
+        private void SetDefaultClosedEventHandler<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
+            where TWindow : Window, new()
+            where TViewModel : ViewModel, new()
         {
             windowVM.Window.Closing += (sender, e) => ViewModel.UpdateCustomers();
         }
