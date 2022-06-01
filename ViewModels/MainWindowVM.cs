@@ -21,9 +21,6 @@ namespace supermarket.ViewModels
      */
     internal class MainWindowVM : WindowViewModel<MainWindow>
     {
-        private WindowVMNavigator<Main> _windowsNavigator;
-        private VMNavigator _viewsNavigator;
-
         private EmployeesWindowVM _employeesWindowVM;    
         private CustomersWindowVM _customersWindowVM;
         private CategoriesWindowVM _categoriesWindowVM;
@@ -42,51 +39,25 @@ namespace supermarket.ViewModels
 
         public MainWindowVM(MainWindow window) : base(window)
         {
-            _signInVM = new SignInVM();
-            _managerMenuVM = new ManagerMenuVM();
-            _cashierMenuVM = new CashierMenuVM();
-
-            // views navigation setup
-            _viewsNavigator = new VMNavigator((vm) => CurrentViewModel = vm);
-            
-            _viewsNavigator.SetWay(VMNavigationTypes.SignIn, _signInVM);
-            _viewsNavigator.SetWay(VMNavigationTypes.ManagerMenu, _managerMenuVM);
-            _viewsNavigator.SetWay(VMNavigationTypes.CashierMenu, _cashierMenuVM);
-
-            _viewsNavigator.Navigate(VMNavigationTypes.SignIn);
-            //
-
             _employeesWindowVM = new EmployeesWindowVM();
             _customersWindowVM = new CustomersWindowVM();
             _categoriesWindowVM = new CategoriesWindowVM();
             _productsWindowVM = new ProductsWindowVM();
             _storeProductsWindowVM = new StoreProductsWindowVM();
-
-            // windows navigation setup
-            _windowsNavigator = new WindowVMNavigator<Main>(new IWindowOpeningVM<Main>[] { _managerMenuVM, _cashierMenuVM });
-
-            _windowsNavigator.SetWay(Main.ManagerEmployees, _employeesWindowVM.Window);
-            _windowsNavigator.SetWay(Main.ManagerCustomers, _customersWindowVM.Window);
-            _windowsNavigator.SetWay(Main.ManagerCategories, _categoriesWindowVM.Window);
-            _windowsNavigator.SetWay(Main.ManagerProducts, _productsWindowVM.Window);
-            _windowsNavigator.SetWay(Main.ManagerStoreProducts, _storeProductsWindowVM.Window);
-
-            SetVisibilitySystem(_employeesWindowVM);
-            SetVisibilitySystem(_customersWindowVM);
-            SetVisibilitySystem(_categoriesWindowVM);
-            SetVisibilitySystem(_productsWindowVM);
-            SetVisibilitySystem(_storeProductsWindowVM);
-            //
+            
+            _signInVM = new SignInVM();
+            _managerMenuVM = new ManagerMenuVM();
+            _cashierMenuVM = new CashierMenuVM();
+            
+            SetWindowsNavigation();
+            SetViewsNavigation();
 
             Window.Closed += (sender, e) => Environment.Exit(0);
         }
 
         public NavigatableViewModel CurrentViewModel
         {
-            get
-            {
-                return _currentViewModel;
-            }
+            get => _currentViewModel;
             set
             {
                 _currentViewModel = value;
@@ -94,9 +65,37 @@ namespace supermarket.ViewModels
             }
         }
 
-        private void SetVisibilitySystem<WindowType, VMType>(WindowViewModel<WindowType, VMType> windowVM)
-            where WindowType : Window, new()
-            where VMType : ViewModel, new()
+        private void SetWindowsNavigation()
+        {
+            var windowsNavigator = new WindowVMNavigator<Main>(new IWindowOpeningVM<Main>[] { _managerMenuVM, _cashierMenuVM });
+
+            windowsNavigator.SetWay(Main.ManagerEmployees, _employeesWindowVM.Window);
+            windowsNavigator.SetWay(Main.ManagerCustomers, _customersWindowVM.Window);
+            windowsNavigator.SetWay(Main.ManagerCategories, _categoriesWindowVM.Window);
+            windowsNavigator.SetWay(Main.ManagerProducts, _productsWindowVM.Window);
+            windowsNavigator.SetWay(Main.ManagerStoreProducts, _storeProductsWindowVM.Window);
+
+            SetVisibilitySystem(_employeesWindowVM);
+            SetVisibilitySystem(_customersWindowVM);
+            SetVisibilitySystem(_categoriesWindowVM);
+            SetVisibilitySystem(_productsWindowVM);
+            SetVisibilitySystem(_storeProductsWindowVM);
+        }
+
+        private void SetViewsNavigation()
+        {
+            var viewsNavigator = new VMNavigator((vm) => CurrentViewModel = vm);
+            
+            viewsNavigator.SetWay(VMNavigationTypes.SignIn, _signInVM);
+            viewsNavigator.SetWay(VMNavigationTypes.ManagerMenu, _managerMenuVM);
+            viewsNavigator.SetWay(VMNavigationTypes.CashierMenu, _cashierMenuVM);
+
+            viewsNavigator.Navigate(VMNavigationTypes.SignIn);
+        }
+
+        private void SetVisibilitySystem<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
+            where TWindow : Window, new()
+            where TViewModel : ViewModel, new()
         {
             windowVM.Window.IsVisibleChanged += (sender, e) => IsEnabled = !IsEnabled;
         }
