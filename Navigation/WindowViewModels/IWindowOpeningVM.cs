@@ -2,8 +2,8 @@
 
 namespace supermarket.Navigation.WindowViewModels
 {
-    internal interface IWindowOpeningVM<Type> where Type : Enum
+    internal interface IWindowOpeningVM<TEnum> where TEnum : Enum
     {
-        public Action<Type> OpenWindowViewModel { get; set; }
+        public Action<TEnum> OpenWindowViewModel { get; set; }
     }
 }

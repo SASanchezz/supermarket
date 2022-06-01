@@ -20,22 +20,16 @@ namespace supermarket.Navigation.ViewModels
         {
             try
             {
-                Way way = null;
-                for (int i = 0; i < _ways.Count; i++)
+                foreach (var way in _ways)
                 {
-                    if (_ways[i].Type == type)
-                    {
-                        way = _ways[i];
-                    }
+                    if (way.Type != type) continue;
+                    
+                    way.Handler?.Invoke();
+                    _changeViewModel(way.ViewModel);
+                    return;
                 }
                 
-                if (way == null)
-                {
-                    throw new Exception("There is no way");
-                }
-
-                way.Handler?.Invoke();
-                _changeViewModel(way.ViewModel);
+                throw new Exception("There is no way");
             }
             catch (Exception ex)
             {
@@ -45,9 +39,9 @@ namespace supermarket.Navigation.ViewModels
 
         public void SetWay(VMNavigationTypes type, NavigatableViewModel viewModel)
         {
-            for (int i = 0; i < _ways.Count; i++)
+            foreach (var way in _ways)
             {
-                if (_ways[i].Type == type)
+                if (way.Type == type)
                 {
                     throw new Exception("This way is already set");
                 }
@@ -59,9 +53,9 @@ namespace supermarket.Navigation.ViewModels
 
         public void SetWay(VMNavigationTypes type, NavigatableViewModel viewModel, Action handler)
         {
-            for (int i = 0; i < _ways.Count; i++)
+            foreach (var way in _ways)
             {
-                if (_ways[i].Type == type)
+                if (way.Type == type)
                 {
                     throw new Exception("This way is already set");
                 }
@@ -71,7 +65,7 @@ namespace supermarket.Navigation.ViewModels
             _ways.Add(new Way(type, viewModel, handler));
         }
 
-        class Way
+        private class Way
         {
             public Way(VMNavigationTypes type, NavigatableViewModel viewModel)
             {
