@@ -4,15 +4,15 @@ using System.Windows;
 
 namespace supermarket.ViewModels.BaseClasses
 {
-    internal abstract class WindowViewModel<WindowType, ViewModelType> : INotifyPropertyChanged
-        where WindowType : Window, new()
-        where ViewModelType : ViewModel, new()
+    internal abstract class WindowViewModel<TWindow, TViewModel> : INotifyPropertyChanged
+        where TWindow : Window, new()
+        where TViewModel : ViewModel, new()
     {
         private bool _isEnabled = true;
         protected WindowViewModel()
         {
-            Window = new WindowType();
-            ViewModel = new ViewModelType();
+            Window = new TWindow();
+            ViewModel = new TViewModel();
 
             Window.DataContext = this;
             Window.Closing += (sender, e) =>
@@ -22,9 +22,9 @@ namespace supermarket.ViewModels.BaseClasses
             };
         }
 
-        public WindowType Window { get; protected set; }
+        public TWindow Window { get; protected set; }
 
-        public ViewModelType ViewModel { get; protected set; }
+        public TViewModel ViewModel { get; protected set; }
 
         public bool IsEnabled
         {
@@ -43,18 +43,18 @@ namespace supermarket.ViewModels.BaseClasses
         }
     }
 
-    internal abstract class WindowViewModel<WindowType> : INotifyPropertyChanged
-        where WindowType : Window, new()
+    internal abstract class WindowViewModel<TWindow> : INotifyPropertyChanged
+        where TWindow : Window, new()
     {
         private bool _isEnabled = true;
 
-        protected WindowViewModel(WindowType window)
+        protected WindowViewModel(TWindow window)
         {
             Window = window;
             Window.DataContext = this;
         }
 
-        public WindowType Window { get; protected set; }
+        public TWindow Window { get; protected set; }
 
         public bool IsEnabled
         {
