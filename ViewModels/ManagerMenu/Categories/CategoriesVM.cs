@@ -17,17 +17,14 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
 
         public CategoriesVM()
         {
-            UpdateCustomers();
+            UpdateCategories();
         }
 
         public Action<ManagerCategories> OpenWindowViewModel { get; set; }
 
         public List<string[]> Categories
         {
-            get
-            {
-                return _categories;
-            }
+            get => _categories;
             set
             {
                 _categories = value;
@@ -37,10 +34,7 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
 
         public string[] SelectedCustomer
         {
-            get
-            {
-                return _selectedCategory;
-            }
+            get => _selectedCategory;
             set
             {
                 _selectedCategory = value;
@@ -48,7 +42,7 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
             }
         }
 
-        public void UpdateCustomers()
+        private void UpdateCategories()
         {
             Categories = DbQueries.GetAllCategories();
         }
