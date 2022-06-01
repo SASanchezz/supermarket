@@ -4,17 +4,17 @@ using System.Windows;
 
 namespace supermarket.Navigation.WindowViewModels
 {
-    internal class WindowVMNavigator<Type> where Type : Enum
+    internal class WindowVMNavigator<TEnum> where TEnum : Enum
     {
-        private Dictionary<Type, Action> _ways;
+        private Dictionary<TEnum, Action> _ways;
 
-        public WindowVMNavigator(IWindowOpeningVM<Type>[] viewModels)
+        public WindowVMNavigator(IWindowOpeningVM<TEnum>[] viewModels)
         {
             SetWindowOpeningVM(viewModels);
-            _ways = new Dictionary<Type, Action>();
+            _ways = new Dictionary<TEnum, Action>();
         }
 
-        public void Navigate(Type type)
+        public void Navigate(TEnum type)
         {
             try
             {
@@ -30,34 +30,32 @@ namespace supermarket.Navigation.WindowViewModels
             }
         }
 
-        public void SetWay(Type type, Window window)
+        public void SetWay(TEnum type, Window window)
         {
             if (_ways.ContainsKey(type))
             {
                 throw new Exception("This way is already set");
             }
 
-            _ways.Add(type, () => window.Show());
+            _ways.Add(type, window.Show);
         }
 
-        public void SetWay(Type type, Window window, Action handler)
+        public void SetWay(TEnum type, Window window, Action handler)
         {
             if (_ways.ContainsKey(type))
             {
                 throw new Exception("This way is already set");
             }
-            else
-            {
-                Action action = handler + window.Show;
-                _ways.Add(type, action);
-            }
+
+            Action action = handler + window.Show;
+            _ways.Add(type, action);
         }
 
-        private void SetWindowOpeningVM(IWindowOpeningVM<Type>[] viewModels)
+        private void SetWindowOpeningVM(IWindowOpeningVM<TEnum>[] viewModels)
         {
-            for (int i = 0; i < viewModels.Length; i++)
+            foreach (var viewModel in viewModels)
             {
-                viewModels[i].OpenWindowViewModel = Navigate;
+                viewModel.OpenWindowViewModel = Navigate;
             }
         }
     }
