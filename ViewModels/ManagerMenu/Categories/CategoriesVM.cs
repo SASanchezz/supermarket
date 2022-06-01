@@ -42,7 +42,7 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
             }
         }
 
-        private void UpdateCategories()
+        public void UpdateCategories()
         {
             Categories = DbQueries.GetAllCategories();
         }
