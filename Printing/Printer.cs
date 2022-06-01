@@ -7,7 +7,7 @@ using System.Windows.Media;
 
 namespace supermarket.Printing
 {
-    static internal class Printer
+    internal static class Printer
     {
         public static void PrintDataGrid(List<string[]> list, string[] columnNames)
         {
@@ -18,50 +18,45 @@ namespace supermarket.Printing
 
             var printDialog = new PrintDialog();
 
-            if (printDialog.ShowDialog() == true)
+            if (printDialog.ShowDialog() != true) return;
+            
+            var table = new Table();
+            table.RowGroups.Add(new TableRowGroup());
+
+            var columnsNameRow = new TableRow();
+            foreach (var name in columnNames)
             {
-                var table = new Table();
+                var column = new TableColumn();
+                table.Columns.Add(column);
 
-                table.RowGroups.Add(new TableRowGroup());
-
-                var columnsNameRow = new TableRow();
-                for (int i = 0; i < columnNames.Length; ++i)
-                {
-                    var column = new TableColumn();
-                    table.Columns.Add(column);
-
-                    var cell = new TableCell(new Paragraph(new Run(columnNames[i])));
-                    columnsNameRow.Cells.Add(cell);
-                }
-
-                table.RowGroups[0].Rows.Add(columnsNameRow);
-
-                for (int i = 0; i < list.Count; ++i)
-                {
-                    var row = new TableRow();
-                    for (int l = 0; l < columnNames.Length; ++l)
-                    {
-                        var cell = new TableCell(new Paragraph(new Run(list[i][l].ToString())));
-                        row.Cells.Add(cell);
-
-                    }
-
-                    table.RowGroups[0].Rows.Add(row);
-                }
-
-                var size = new Size(printDialog.PrintableAreaWidth, printDialog.PrintableAreaHeight);
-                var doc = new FlowDocument(table);
-
-                doc.FontFamily = new FontFamily("Calibri");
-                doc.PageWidth = size.Width;
-                doc.PageHeight = size.Height;
-                doc.ColumnWidth = 1024;
-                doc.FontSize = 14;
-
-                IDocumentPaginatorSource idpSource = doc;
-
-                printDialog.PrintDocument(idpSource.DocumentPaginator, "");
+                var cell = new TableCell(new Paragraph(new Run(name)));
+                columnsNameRow.Cells.Add(cell);
             }
+            table.RowGroups[0].Rows.Add(columnsNameRow);
+
+            foreach (var element in list)
+            {
+                var row = new TableRow();
+                for (int l = 0; l < columnNames.Length; ++l)
+                {
+                    var cell = new TableCell(new Paragraph(new Run(element[l].ToString())));
+                    row.Cells.Add(cell);
+                }
+                table.RowGroups[0].Rows.Add(row);
+            }
+
+            var size = new Size(printDialog.PrintableAreaWidth, printDialog.PrintableAreaHeight);
+            var doc = new FlowDocument(table)
+            {
+                FontFamily = new FontFamily("Calibri"),
+                PageWidth = size.Width,
+                PageHeight = size.Height,
+                ColumnWidth = 1024,
+                FontSize = 14
+            };
+
+            IDocumentPaginatorSource idpSource = doc;
+            printDialog.PrintDocument(idpSource.DocumentPaginator, "");
         }
     }
 }
