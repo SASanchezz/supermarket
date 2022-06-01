@@ -87,7 +87,7 @@ namespace supermarket.ViewModels.ManagerMenu.Products
             }
         }
 
-        public RelayCommand<object> OpenEditEmployeeWindowCommand
+        public RelayCommand<object> OpenEditProductWindowCommand
         {
             get
             {
