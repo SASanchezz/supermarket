@@ -6,7 +6,7 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
     /*
     * Controls AddProduct Window in Products of ManagerMenu
     */
-    class AddProductWindowVM : WindowViewModel<AddProductWindow, AddProductVM>
+    internal class AddProductWindowVM : WindowViewModel<AddProductWindow, AddProductVM>
     {
         public AddProductWindowVM()
         {
