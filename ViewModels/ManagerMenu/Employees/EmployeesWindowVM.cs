@@ -13,8 +13,6 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
      */
     internal class EmployeesWindowVM : WindowViewModel<EmployeesWindow, EmployeesVM>
     {
-        private WindowVMNavigator<ManagerEmployees> _windowsNavigator;
-
         private AddEmployeeWindowVM _addEmployeeWindowVM;
         private EditEmployeeWindowVM _editEmployeeWindowVM;
 
@@ -23,13 +21,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             _addEmployeeWindowVM = new AddEmployeeWindowVM();
             _editEmployeeWindowVM = new EditEmployeeWindowVM();
 
-            SetVisibilitySystem(_addEmployeeWindowVM);
-            SetVisibilitySystem(_editEmployeeWindowVM);
-
-            _windowsNavigator = new WindowVMNavigator<ManagerEmployees>(new IWindowOpeningVM<ManagerEmployees>[] { ViewModel });
-            
-            _windowsNavigator.SetWay(ManagerEmployees.AddEmployee, _addEmployeeWindowVM.Window, GoToAddEmployee);
-            _windowsNavigator.SetWay(ManagerEmployees.EditEmployee, _editEmployeeWindowVM.Window, GoToEditEmployee);
+            SetWindowsNavigation();
 
             Window.Closed += (sender, e) =>
             {
@@ -39,6 +31,17 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             
             // set Close() method to Action in ViewModel
             ViewModel.Close = Window.Close;
+        }
+
+        private void SetWindowsNavigation()
+        {
+            var windowsNavigator = new WindowVMNavigator<ManagerEmployees>(new IWindowOpeningVM<ManagerEmployees>[] { ViewModel });
+            
+            windowsNavigator.SetWay(ManagerEmployees.AddEmployee, _addEmployeeWindowVM.Window, GoToAddEmployee);
+            windowsNavigator.SetWay(ManagerEmployees.EditEmployee, _editEmployeeWindowVM.Window, GoToEditEmployee);
+            
+            SetVisibilitySystem(_addEmployeeWindowVM);
+            SetVisibilitySystem(_editEmployeeWindowVM);
         }
 
         private void GoToAddEmployee()
@@ -59,28 +62,26 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             ViewModel.SelectedEmployee = null;
         }
 
-        private void SetDefaultClosedEventHandler<WindowType, VMType>(WindowViewModel<WindowType, VMType> windowVM) 
-            where WindowType : Window, new()
-            where VMType : ViewModel, new()
+        private void SetDefaultClosedEventHandler<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM) 
+            where TWindow : Window, new()
+            where TViewModel : ViewModel, new()
         {
             string filteredSurname = ViewModel.FilteredSurname;
             string selectedRole = ViewModel.SelectedRole;
             
             windowVM.Window.IsVisibleChanged += (sender, e) =>
             {
-                if ((bool)e.NewValue.Equals(false))
-                {
-                    ViewModel.FilteredSurname = filteredSurname;
-                    ViewModel.SelectedRole = selectedRole;
-                    ViewModel.UpdateEmployees();
-                    //MessageBox.Show("Data updated");
-                }
+                if ((bool)e.NewValue) return;
+                
+                ViewModel.FilteredSurname = filteredSurname;
+                ViewModel.SelectedRole = selectedRole;
+                ViewModel.UpdateEmployees();
             };
         }
 
-        private void SetVisibilitySystem<WindowType, VMType>(WindowViewModel<WindowType, VMType> windowVM)
-            where WindowType : Window, new()
-            where VMType : ViewModel, new()
+        private void SetVisibilitySystem<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
+            where TWindow : Window, new()
+            where TViewModel : ViewModel, new()
         {
             windowVM.Window.IsVisibleChanged += (sender, e) => IsEnabled = !IsEnabled;
         }

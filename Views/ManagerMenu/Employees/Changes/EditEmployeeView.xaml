@@ -38,17 +38,17 @@
         <TextBlock Text="Дата народження" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0"
                    Foreground="DimGray" FontSize="18"/>
         <DatePicker Grid.Row="2" Grid.Column="1" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Margin="0,0,0,15"
-                    SelectedDate="{Binding Date_of_birth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14"/>
+                    SelectedDate="{Binding DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14"/>
 
         <TextBlock Text="Дата початку роботи" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0"
                    Foreground="DimGray" FontSize="18"/>
         <DatePicker Grid.Row="3" Grid.Column="1" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Margin="0,0,0,15"
-                    SelectedDate="{Binding Date_of_start, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14"/>
+                    SelectedDate="{Binding DateOfStart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14"/>
 
         <TextBlock Text="Телефон" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0"
                    Foreground="DimGray" FontSize="18"/>
         <TextBox Grid.Row="4" Grid.Column="1" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Margin="0,0,0,15"
-                 Text="{Binding Phone_number, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14"/>
+                 Text="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14"/>
 
         <TextBlock Text="Місто" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0"
                    Foreground="DimGray" FontSize="18"/>

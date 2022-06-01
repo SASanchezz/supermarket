@@ -21,7 +21,6 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
 
         private string _filteredSurname = "";
 
-        private string[] _selectiveRoles;
         private string _selectedRole = AllString;
 
         private RelayCommand<object> _openAddEmployeeWindowCommand;
@@ -41,17 +40,14 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
 
         public List<string[]> Employees
         {
-            get
-            {
-                return _employees;
-            }
+            get => _employees;
             set
             {
                 _employees = value;
                 // set word-roles
                 if (_employees != null)
                 {
-                    foreach (string[] employee in _employees)
+                    foreach (var employee in _employees)
                     {
                         employee[Empl.role] = Roles.roleNames[int.Parse(employee[Empl.role])];
                     }
@@ -95,10 +91,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
 
         public string[] SelectedEmployee
         {
-            get
-            {
-                return _selectedEmployee;
-            }
+            get => _selectedEmployee;
             set
             {
                 _selectedEmployee = value;
@@ -107,10 +100,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
         }
         public string FilteredSurname
         {
-            get
-            {
-                return _filteredSurname;
-            }
+            get => _filteredSurname;
             set
             {
                 _filteredSurname = value;
@@ -120,24 +110,14 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             }
         }
 
-        public string[] SelectiveRoles => _selectiveRoles;
+        public string[] SelectiveRoles { get; private set; }
 
         public string SelectedRole
         {
-            get
-            {
-                return _selectedRole;
-            }
+            get => _selectedRole;
             set
             {
-                if (value == null)
-                {
-                    _selectedRole = AllString;
-                } 
-                else
-                {
-                    _selectedRole = value;
-                }
+                _selectedRole = value ?? AllString;
                 OnPropertyChanged();
                 UpdateEmployees();
             }
@@ -147,26 +127,28 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
         {
             Employees = Empl.GetAllEmployee(_selectedRole, _filteredSurname);
 
-            for (int i = 0; i < Employees.Count; ++i)
+            if (Employees == null) return;
+
+            foreach (var employee in Employees)
             {
-                Employees[i][6] = DateTime.Parse(Employees[i][6]).ToShortDateString();
-                Employees[i][7] = DateTime.Parse(Employees[i][7]).ToShortDateString();
+                employee[6] = DateTime.Parse(employee[6]).ToShortDateString();
+                employee[7] = DateTime.Parse(employee[7]).ToShortDateString();
             }
         }
 
         private void SetSelectiveRoles()
         {
-            _selectiveRoles = new string[Data.Roles.roleNames.Length + 1];
-            _selectiveRoles.SetValue(AllString, 0);
+            SelectiveRoles = new string[Data.Roles.roleNames.Length + 1];
+            SelectiveRoles.SetValue(AllString, 0);
             for (int i = 0; i < Data.Roles.roleNames.Length; ++i)
             {
-                _selectiveRoles.SetValue(Data.Roles.roleNames[i], i + 1);
+                SelectiveRoles.SetValue(Data.Roles.roleNames[i], i + 1);
             }
         }
 
         private void PrintEmployees()
         {
-            List<string[]> printerEmployees = new List<string[]>();
+            var printerEmployees = new List<string[]>();
 
             for (int i = 0; i < Employees.Count; ++i)
             {
@@ -174,10 +156,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
 
                 for (int h = 0; ; ++h)
                 {
-                    if (h == 9)
-                    {
-                        break;
-                    }
+                    if (h == 9) break; 
                     printerEmployees[i].SetValue(Employees[i][h], h);
                 }
 
