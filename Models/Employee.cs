@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using supermarket.Utils;
 using supermarket.Data;
 
@@ -33,13 +30,13 @@ namespace supermarket.Models
             string whereClause = "WHERE 1 ";
 
             whereClause = roleName == AllString ? whereClause : whereClause +=
-                string.Format("AND empl_role_id IN " +
-                "(SELECT employee_role_id " +
-                "FROM Employee_Role " +
-                "WHERE employee_role_title='{0}')", roleName);
+                "AND empl_role_id IN " + 
+                    "(SELECT employee_role_id " + 
+                    "FROM Employee_Role " +
+                    $"WHERE employee_role_title='{roleName}')";
 
             whereClause = surname == "" ? whereClause : whereClause +=
-                string.Format("AND empl_surname LIKE '%{0}%'", surname);
+                $"AND empl_surname LIKE '%{surname}%'";
 
 
             string sql = "SELECT * FROM Employee " + whereClause;
@@ -48,23 +45,23 @@ namespace supermarket.Models
             return result.Count > 0 ? result : null;
         }
 
-        public static string[] GetEmployeeByID(string employeeId)
+        public static string[] GetEmployeeById(string employeeId)
         {
-            string sql = string.Format("SELECT * FROM Employee WHERE id_employee='{0}'", employeeId);
+            string sql = $"SELECT * FROM Employee WHERE id_employee='{employeeId}'";
             List<string[]> result = DbUtils.FindAll(sql);
 
             return result.Count > 0 ? result[0] : null;
         }
 
-        public static void DeleteEmployeeByID(string employeeId)
+        public static void DeleteEmployeeById(string employeeId)
         {
-            string sql = string.Format("DELETE FROM Employee WHERE id_employee='{0}'", employeeId);
+            string sql = $"DELETE FROM Employee WHERE id_employee='{employeeId}'";
             DbUtils.Execute(sql);
         }
 
         public static string[] GetEmployeeByPhone(string phoneNumber)
         {
-            string sql = string.Format("SELECT * FROM Employee WHERE phone_number='{0}'", phoneNumber);
+            string sql = $"SELECT * FROM Employee WHERE phone_number='{phoneNumber}'";
             List<string[]> result = DbUtils.FindAll(sql);
 
             return result.Count > 0 ? result[0] : null;
@@ -74,14 +71,11 @@ namespace supermarket.Models
             string salary, DateTime dateBirth, DateTime dateStart, string phoneNumber,
             string password, string city, string street, string zipcode)
         {
-            string sql = String.Format("INSERT INTO Employee " +
-                "(empl_surname, empl_name, empl_patronymic, empl_role_id, salary, " +
-                "date_of_birth, date_of_start, phone_number, password, city, street, zip_code) " +
-                "VALUES ('{0}', '{1}', '{2}', {3}, {4}, " +
-                "'{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}')",
-                surname, name, patronymic, Roles.roleKeys[role], float.Parse(salary),
-                dateBirth.ToString(s_format), dateStart.ToString(s_format),
-                phoneNumber, CryptUtils.HashPassword(password), city, street, zipcode);
+            string sql = "INSERT INTO Employee " + "(empl_surname, empl_name, empl_patronymic, empl_role_id, salary, " +
+                         "date_of_birth, date_of_start, phone_number, password, city, street, zip_code) " +
+                         $"VALUES ('{surname}', '{name}', '{patronymic}', {Roles.roleKeys[role]}, {float.Parse(salary)}, " +
+                         $"'{dateBirth.ToString(s_format)}', '{dateStart.ToString(s_format)}', '{phoneNumber}', " +
+                         $"'{CryptUtils.HashPassword(password)}', '{city}', '{street}', '{zipcode}')";
 
             DbUtils.Execute(sql);
         }
@@ -90,13 +84,14 @@ namespace supermarket.Models
             string salary, DateTime dateBirth, DateTime dateStart, string phoneNumber,
             string password, string city, string street, string zipcode)
         {
-            string sql = string.Format("UPDATE Employee SET " +
-                "empl_surname='{1}', empl_name='{2}', empl_patronymic='{3}', empl_role_id={4}, salary={5}," +
-                "date_of_birth='{6}', date_of_start='{7}', phone_number='{8}', password='{9}', city='{10}', street='{11}', zip_code='{12}'" +
-                "WHERE id_employee='{0}'",
-                id, surname, name, patronymic, Roles.roleKeys[role], float.Parse(salary),
-                Convert.ToDateTime(dateBirth).ToString(s_format), Convert.ToDateTime(dateStart).ToString(s_format),
-                phoneNumber, password, city, street, zipcode);
+            string sql = "UPDATE Employee " +
+                         $"SET empl_surname='{surname}', empl_name='{name}', empl_patronymic='{patronymic}', " +
+                         $"empl_role_id={Roles.roleKeys[role]}, salary={float.Parse(salary)}, " +
+                         $"date_of_birth='{Convert.ToDateTime(dateBirth).ToString(s_format)}', " +
+                         $"date_of_start='{Convert.ToDateTime(dateStart).ToString(s_format)}', " +
+                         $"phone_number='{phoneNumber}', password='{password}', city='{city}', " +
+                         $"street='{street}', zip_code='{zipcode}'" +
+                         $"WHERE id_employee='{id}'";
 
             DbUtils.Execute(sql);
         }

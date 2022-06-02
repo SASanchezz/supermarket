@@ -60,7 +60,7 @@
                 HorizontalAlignment="Left" 
                 FontSize="12"  
                 Margin="50,0,0,50"
-                Command="{Binding DeleteCommand}"/>
+                Command="{Binding DeleteCategoryCommand}"/>
         
         <Button Content="Змінити" 
                 Grid.Row="1" 
@@ -72,7 +72,7 @@
                 HorizontalAlignment="Right" 
                 FontSize="12"  
                 Margin="0,0,50,50"
-                Command="{Binding UpdateCommand}"/>
+                Command="{Binding UpdateCategoryCommand}"/>
 
         <Button Content="←Назад" 
                 Grid.Row="0" 

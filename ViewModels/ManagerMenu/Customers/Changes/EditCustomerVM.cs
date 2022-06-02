@@ -23,10 +23,12 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
         private string _zipcode;
         private string _percent;
 
-        private RelayCommand<object> _updateCommand;
-        private RelayCommand<object> _deleteCommand;
-        private RelayCommand<object> _closeCommand;
-
+        public EditCustomerVM()
+        {
+            UpdateCustomerCommand = new RelayCommand<object>(_ => UpdateCustomer(), CanExecute);
+            DeleteCustomerCommand = new RelayCommand<object>(_ => DeleteCustomer());
+            CloseCommand = new RelayCommand<object>(_ => Close());
+        }
 
         public string InitCardNumber
         {
@@ -127,20 +129,11 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
             }
         }
 
-        public RelayCommand<object> UpdateCommand
-        {
-            get => _updateCommand ??= new RelayCommand<object>(_ => UpdateCustomer(), CanExecute);
-        }
+        public RelayCommand<object> UpdateCustomerCommand { get; }
         
-        public RelayCommand<object> DeleteCommand
-        {
-            get => _deleteCommand ??= new RelayCommand<object>(_ => DeleteCustomer());
-        }
+        public RelayCommand<object> DeleteCustomerCommand { get; }
         
-        public RelayCommand<object> CloseCommand
-        {
-            get => _closeCommand ??= new RelayCommand<object>(_ => Close());
-        }
+        public RelayCommand<object> CloseCommand { get; }
         
         public Action Close { get; set; }
 

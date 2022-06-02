@@ -16,14 +16,17 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
         private string _init_id_product;
         private string _changed_id_product;
         private string _product_name;
-        private int     _category_number;
+        private int    _category_number;
         private string _category_name;
         private string _manufacturer;
         private string _characteristics;
 
-        private RelayCommand<object> _deleteCommand;
-        private RelayCommand<object> _updateCommand;
-        private RelayCommand<object> _closeCommand;
+        public EditProductVM()
+        {
+            UpdateProductCommand = new RelayCommand<object>(_ => UpdateProduct(), CanExecute);
+            DeleteProductCommand = new RelayCommand<object>(_ => DeleteProduct());
+            CloseCommand = new RelayCommand<object>(_ => Close());
+        }
 
         public string InitIdProduct
         {
@@ -97,28 +100,12 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
 
         public static string[] CategoriesNames => Categ.GetAllCategoriesNames();
 
-        public RelayCommand<object> UpdateCommand
-        {
-            get
-            {
-                return _updateCommand ??= new RelayCommand<object>(_ => UpdateProduct(), CanExecute);
-            }
-        }
-        public RelayCommand<object> DeleteCommand
-        {
-            get
-            {
-                return _deleteCommand ??= new RelayCommand<object>(_ => DeleteProduct());
-            }
-        }
+        public RelayCommand<object> UpdateProductCommand { get; }
+        
+        public RelayCommand<object> DeleteProductCommand { get; }
 
-        public RelayCommand<object> CloseCommand
-        {
-            get
-            {
-                return _closeCommand ??= new RelayCommand<object>(_ => Close());
-            }
-        }
+        public RelayCommand<object> CloseCommand { get; }
+        
         public Action Close { get; set; }
 
         public void SetData(string[] data)

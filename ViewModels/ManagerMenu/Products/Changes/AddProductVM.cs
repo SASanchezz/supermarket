@@ -11,8 +11,11 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
 {
     internal class AddProductVM : ViewModel
     {
-        private RelayCommand<object> _addProductCommand;
-        private RelayCommand<object> _closeCommand;
+        public AddProductVM()
+        {
+            AddProductCommand = new RelayCommand<object>(_ => AddProduct(), CanExecute);
+            CloseCommand = new RelayCommand<object>(_ => Close());
+        }
         public Action Close { get; set; }
 
         public string IdProduct { get; set; }
@@ -27,21 +30,10 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
 
         public static string[] CategoriesNames => Categ.GetAllCategoriesNames();
 
-        public RelayCommand<object> AddProductCommand
-        {
-            get
-            {
-                return _addProductCommand ??= new RelayCommand<object>(_ => AddProduct(), CanExecute);
-            }
-        }
+        public RelayCommand<object> AddProductCommand { get; }
 
-        public RelayCommand<object> CloseCommand
-        {
-            get
-            {
-                return _closeCommand ??= new RelayCommand<object>(_ => Close());
-            }
-        }
+        public RelayCommand<object> CloseCommand { get; }
+        
         private void AddProduct()
         {
             ////Validates entered information

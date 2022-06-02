@@ -23,14 +23,13 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
 
         private string _selectedRole = AllString;
 
-        private RelayCommand<object> _openAddEmployeeWindowCommand;
-        private RelayCommand<object> _openEditEmployeeWindowCommand;
-        private RelayCommand<object> _printCommand;
-        private RelayCommand<object> _closeCommand;
-
         public EmployeesVM()
         {
-            //UpdateEmployees();
+            OpenAddEmployeeWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(ManagerEmployees.AddEmployee));
+            OpenEditEmployeeWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(ManagerEmployees.EditEmployee));
+            PrintEmployeesCommand = new RelayCommand<object>(_ => PrintEmployees());
+            CloseCommand = new RelayCommand<object>(_ => Close());
+                
             SetSelectiveRoles();
         }
 
@@ -57,37 +56,13 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             }
         }
 
-        public RelayCommand<object> OpenAddEmployeeWindowCommand
-        {
-            get
-            {
-                return _openAddEmployeeWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(ManagerEmployees.AddEmployee));
-            }
-        }
+        public RelayCommand<object> OpenAddEmployeeWindowCommand { get; }
 
-        public RelayCommand<object> OpenEditEmployeeWindowCommand
-        {
-            get
-            {
-                return _openEditEmployeeWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(ManagerEmployees.EditEmployee));
-            }
-        }
+        public RelayCommand<object> OpenEditEmployeeWindowCommand { get; }
 
-        public RelayCommand<object> PrintCommand
-        {
-            get
-            {
-                return _printCommand ??= new RelayCommand<object>(_ => PrintEmployees());
-            }
-        }
+        public RelayCommand<object> PrintEmployeesCommand { get; }
 
-        public RelayCommand<object> CloseCommand
-        {
-            get
-            {
-                return _closeCommand ??= new RelayCommand<object>(_ => Close());
-            }
-        }
+        public RelayCommand<object> CloseCommand { get; }
 
         public string[] SelectedEmployee
         {

@@ -1,5 +1,4 @@
-﻿using supermarket.Data;
-using supermarket.Utils;
+﻿using supermarket.Utils;
 using System;
 using supermarket.Middlewares.SignUp;
 using supermarket.Models;
@@ -9,8 +8,11 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
 {
     internal class AddEmployeeVM : ViewModel
     {
-        private RelayCommand<object> _addEmployeeCommand;
-        private RelayCommand<object> _closeCommand;
+        public AddEmployeeVM()
+        {
+            AddEmployeeCommand = new RelayCommand<object>(_ => AddEmployee(), CanExecute);
+            CloseCommand = new RelayCommand<object>(_ => Close());
+        }
 
         public Action Close { get; set; }
 
@@ -40,21 +42,9 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
 
         public static string[] Roles => Data.Roles.roleNames;
 
-        public RelayCommand<object> AddEmployeeCommand
-        {
-            get
-            {
-                return _addEmployeeCommand ??= new RelayCommand<object>(_ => AddEmployee(), CanExecute);
-            }
-        }
+        public RelayCommand<object> AddEmployeeCommand { get; }
 
-        public RelayCommand<object> CloseCommand
-        {
-            get
-            {
-                return _closeCommand ??= new RelayCommand<object>(_ => Close());
-            }
-        }
+        public RelayCommand<object> CloseCommand { get; }
 
         private void AddEmployee()
         {

@@ -9,8 +9,11 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
 {
     internal class AddCustomerVM : ViewModel
     {
-        private RelayCommand<object> _addCustomerCommand;
-        private RelayCommand<object> _closeCommand;
+        public AddCustomerVM()
+        {
+            AddCustomerCommand = new RelayCommand<object>(_ => AddCustomer(), CanExecute);
+            CloseCommand = new RelayCommand<object>(_ => Close());
+        }
 
         public Action Close { get; set; }
 
@@ -32,15 +35,9 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
 
         public string Percent { get; set; }
 
-        public RelayCommand<object> AddCustomerCommand
-        {
-            get => _addCustomerCommand ??= new RelayCommand<object>(_ => AddCustomer(), CanExecute);
-        }
+        public RelayCommand<object> AddCustomerCommand { get; }
 
-        public RelayCommand<object> CloseCommand
-        {
-            get => _closeCommand ??= new RelayCommand<object>(_ => Close());
-        }
+        public RelayCommand<object> CloseCommand { get; }
 
         private void AddCustomer()
         {

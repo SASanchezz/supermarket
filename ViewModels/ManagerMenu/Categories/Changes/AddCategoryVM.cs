@@ -15,7 +15,7 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
             CloseCommand = new RelayCommand<object>(_ => Close());
         }
         
-        public string Id { get; set; }
+        public string Number { get; set; }
 
         public string Name { get; set; }
         
@@ -28,7 +28,7 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
         private void AddCategory()
         {
             ////Validates entered information
-            string result = CategoryValidator.ValidateInsert(Id, Name);
+            string result = CategoryValidator.ValidateInsert(Number, Name);
 
             if (result.Length != 0)
             {
@@ -37,7 +37,7 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
             }
 
             //Query to insert new category
-            Category.AddCategory(Id, Name);
+            Category.AddCategory(Number, Name);
             
             // добавить обнуление свойств
             
@@ -46,7 +46,7 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
         
         private bool CanExecute(object obj)
         {
-            return !string.IsNullOrWhiteSpace(Id)
+            return !string.IsNullOrWhiteSpace(Number)
                    && !string.IsNullOrWhiteSpace(Name);
         }
     }
