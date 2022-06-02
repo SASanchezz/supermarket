@@ -9,7 +9,8 @@
         mc:Ignorable="d"
         Title="ManageCategoryWindow" Height="450" Width="800"
         Content="{Binding ViewModel, Mode=OneWay}" 
-        IsEnabled="{Binding IsEnabled, Mode=OneWay}">
+        IsEnabled="{Binding IsEnabled, Mode=OneWay}"
+        ResizeMode="NoResize">
         
         <Window.Resources>
                 <DataTemplate DataType="{ x:Type VM:EditCategoryVM}">

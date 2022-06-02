@@ -11,19 +11,16 @@ namespace supermarket.ViewModels.SignIn
      */
     internal class SignInVM : NavigatableViewModel
     {
-        private RelayCommand<object> _signInCommand;
-
+        public SignInVM()
+        {
+            SignInCommand = new RelayCommand<object>(_ => SignIn(), CanExecute);
+        }
+        
         public string Login { get; set; }
 
         public string Password { get; set; }
 
-        public RelayCommand<object> SignInCommand
-        {
-            get
-            {
-                return _signInCommand ??= new RelayCommand<object>(_ => SignIn(), CanExecute);
-            }
-        }
+        public RelayCommand<object> SignInCommand { get; }
 
         private void SignIn()
         {

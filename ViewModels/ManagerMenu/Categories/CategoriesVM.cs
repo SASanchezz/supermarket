@@ -3,7 +3,7 @@ using supermarket.Utils;
 using supermarket.ViewModels.BaseClasses;
 using System;
 using System.Collections.Generic;
-using System.Windows;
+using supermarket.Printing;
 
 namespace supermarket.ViewModels.ManagerMenu.Categories
 {
@@ -16,6 +16,7 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
         {
             OpenAddCategoryWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(ManagerCategories.AddCategory));
             OpenEditCategoryWindowCommand= new RelayCommand<object>(_ => OpenWindowViewModel(ManagerCategories.EditCategory));
+            PrintCategoriesCommand = new RelayCommand<object>(_ => PrintCategories());
             CloseCommand = new RelayCommand<object>(_ => Close());
         }
 
@@ -46,12 +47,23 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
         public RelayCommand<object> OpenAddCategoryWindowCommand { get; }
 
         public RelayCommand<object> OpenEditCategoryWindowCommand { get; }
+        
+        public RelayCommand<object> PrintCategoriesCommand { get; }
 
         public RelayCommand<object> CloseCommand { get; }
 
         public void UpdateCategories()
         {
             Categories = DbQueries.GetAllCategories();
+        }
+        
+        private void PrintCategories()
+        {
+            Printer.PrintDataGrid(Categories, new string[]
+            {
+                "Номер",
+                "Назва"
+            });
         }
     }
 }

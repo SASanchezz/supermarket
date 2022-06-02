@@ -11,10 +11,6 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
         private List<string[]> _storeProducts;
         private string[] _selectedStoreProduct;
 
-        private RelayCommand<object> _openAddStoreProductWindowCommand;
-        private RelayCommand<object> _openEditStoreProductWindowCommand;
-        private RelayCommand<object> _closeCommand;
-
         public StoreProductsVM()
         {
             UpdateStoreProducts();

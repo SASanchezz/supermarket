@@ -27,9 +27,12 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
         private string _street;
         private string _zipcode;
 
-        private RelayCommand<object> _updateCommand;
-        private RelayCommand<object> _deleteCommand;
-        private RelayCommand<object> _closeCommand;
+        public EditEmployeeVM()
+        {
+            UpdateEmployeeCommand = new RelayCommand<object>(_ => UpdateEmployee(), CanExecute);
+            DeleteEmployeeCommand = new RelayCommand<object>(_ => DeleteEmployee());
+            CloseCommand = new RelayCommand<object>(_ => Close());
+        }
 
         public string Id
         {
@@ -163,27 +166,12 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
 
         public static string[] EmployeeRoles => Roles.roleNames; 
 
-        public RelayCommand<object> UpdateCommand
-        {
-            get
-            {
-                return _updateCommand ??= new RelayCommand<object>(_ => UpdateEmployee(), CanExecute);
-            }
-        }
-        public RelayCommand<object> DeleteCommand
-        {
-            get
-            {
-                return _deleteCommand ??= new RelayCommand<object>(_ => DeleteEmployee());
-            }
-        }
-        public RelayCommand<object> CloseCommand
-        {
-            get
-            {
-                return _closeCommand ??= new RelayCommand<object>(_ => Close());
-            }
-        }
+        public RelayCommand<object> UpdateEmployeeCommand { get; }
+        
+        public RelayCommand<object> DeleteEmployeeCommand { get; }
+        
+        public RelayCommand<object> CloseCommand { get; }
+        
         public Action Close { get; set; }
 
         public void SetData(string[] data)
@@ -228,7 +216,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
 
         private void DeleteEmployee()
         {
-            Empl.DeleteEmployeeByID(Id);
+            Empl.DeleteEmployeeById(Id);
             Close();
         }
 

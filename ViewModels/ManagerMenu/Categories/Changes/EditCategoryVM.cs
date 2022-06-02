@@ -15,8 +15,8 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
 
         public EditCategoryVM()
         {
-            UpdateCommand = new RelayCommand<object>(_ => UpdateCategory(), CanExecute);
-            DeleteCommand = new RelayCommand<object>(_ => DeleteCategory());
+            UpdateCategoryCommand = new RelayCommand<object>(_ => UpdateCategory(), CanExecute);
+            DeleteCategoryCommand = new RelayCommand<object>(_ => DeleteCategory());
             CloseCommand = new RelayCommand<object>(_ => Close());
         }
         
@@ -42,9 +42,9 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
 
         public Action Close { get; set; }
         
-        public RelayCommand<object> UpdateCommand { get; }
+        public RelayCommand<object> UpdateCategoryCommand { get; }
         
-        public RelayCommand<object> DeleteCommand { get; }
+        public RelayCommand<object> DeleteCategoryCommand { get; }
 
         public RelayCommand<object> CloseCommand { get; }
         

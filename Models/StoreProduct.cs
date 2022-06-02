@@ -43,14 +43,14 @@ namespace supermarket.Models
         }
         public static string[] GetStoreProductByUPC(string UPC)
         {
-            string sql = string.Format("SELECT * FROM Store_Product WHERE UPC ='{0}'", UPC);
+            string sql = $"SELECT * FROM Store_Product WHERE UPC ='{UPC}'";
             List<string[]> result = DbUtils.FindAll(sql);
 
             return result.Count > 0 ? result[0] : null;
         }
         public static string[] GetStoreProductByPromUPC(string UPC_Prom)
         {
-            string sql = string.Format("SELECT * FROM Store_Product WHERE UPC_Prom ='{0}'", UPC_Prom);
+            string sql = $"SELECT * FROM Store_Product WHERE UPC_Prom ='{UPC_Prom}'";
             List<string[]> result = DbUtils.FindAll(sql);
 
             return result.Count > 0 ? result[0] : null;
@@ -58,16 +58,15 @@ namespace supermarket.Models
 
         public static void DeleteStoreProductByUPC(string UPC)
         {
-            string sql = string.Format("DELETE FROM Store_Product WHERE UPC = '{0}'", UPC);
+            string sql = $"DELETE FROM Store_Product WHERE UPC = '{UPC}'";
             DbUtils.Execute(sql);
         }
 
         public static void AddNonPromStoreProduct(string upc, string idProduct, double price, string productNumber)
         {
-            string sql = string.Format("INSERT INTO Store_Product " +
-                "(UPC, UPC_Prom, id_product, selling_price, products_number, promotional_product) " +
-                "VALUES ({0}, null, {1}, {2}, {3}, 0)",
-                upc, idProduct, price, productNumber);
+            string sql = "INSERT INTO Store_Product " +
+                         "(UPC, UPC_Prom, id_product, selling_price, products_number, promotional_product) " +
+                         $"VALUES ({upc}, null, {idProduct}, {price}, {productNumber}, 0)";
 
             DbUtils.Execute(sql);
         }
@@ -76,42 +75,38 @@ namespace supermarket.Models
         {
             string[] fatherStoreProduct = GetStoreProductByUPC(upc);
 
-            string sqlInsert = string.Format("INSERT INTO Store_Product " +
-                "(UPC, UPC_Prom, id_product, selling_price, products_number, promotional_product) " +
-                "VALUES ({0}, null, {1}, {2}, {3}, 1)",
-                upcProm,
-                fatherStoreProduct[id_product],
-                double.Parse(fatherStoreProduct[selling_price]) * 0.8,
-                fatherStoreProduct[products_number]);
+            string sqlInsert = "INSERT INTO Store_Product " +
+                               "(UPC, UPC_Prom, id_product, selling_price, products_number, promotional_product) " +
+                               $"VALUES ({upcProm}, null, {fatherStoreProduct[id_product]}, " +
+                               $"{double.Parse(fatherStoreProduct[selling_price]) * 0.8}, " +
+                               $"{fatherStoreProduct[products_number]}, 1)";
 
             DbUtils.Execute(sqlInsert);
 
-            string sqlUpdate = string.Format("UPDATE Store_Product " +
-                "SET UPC_Prom = '{1}' " +
-                "WHERE (UPC = '{0}')",
-                upc, upcProm);
+            string sqlUpdate = "UPDATE Store_Product " +
+                               $"SET UPC_Prom = '{upcProm}' " +
+                               $"WHERE (UPC = '{upc}')";
 
             DbUtils.Execute(sqlUpdate);
         }
 
         public static void UpdateNonPromStoreProduct(string initUpc, string changedUpc, string idProduct, double price, string productNumber)
         {
-            string sql = string.Format("UPDATE Store_Product SET " +
-                "UPC='{1}', id_product={2}, selling_price={3}, products_number={4} " +
-                "WHERE UPC='{0}'",
-                initUpc, changedUpc, idProduct, price, productNumber);
+            string sql = "UPDATE Store_Product " +
+                         $"SET UPC='{changedUpc}', id_product={idProduct}, " +
+                         $"selling_price={price}, products_number={productNumber} " +
+                         $"WHERE UPC='{initUpc}'";
+            
             DbUtils.Execute(sql);
 
             string[] fatherStoreProduct = GetStoreProductByUPC(changedUpc);
-            string sqlProm = string.Format("UPDATE Store_Product SET " +
-                "id_product={1}, selling_price={2}, products_number={3} " +
-                "WHERE UPC='{0}'",
-                fatherStoreProduct[UPC_prom], idProduct, price*0.8, productNumber);
+            string sqlProm = "UPDATE Store_Product " +
+                             $"SET id_product={idProduct}, selling_price={price*0.8}, products_number={productNumber} " +
+                             $"WHERE UPC='{fatherStoreProduct[UPC_prom]}'";
+            
             DbUtils.Execute(sqlProm);
         }
-
-
-
+        
         public static void UpdatePromStoreProduct(string changedUpcParent, string initUpcProm, string changedUpcProm)
         {
             string[] oldFatherStoreProduct = GetStoreProductByPromUPC(initUpcProm);
@@ -121,25 +116,27 @@ namespace supermarket.Models
             // Set Prom_UPC null on current father store product
             if (changedUpcParent != oldFatherStoreProduct[UPC])
             {
-                string sqlSetNull = string.Format("UPDATE Store_Product SET " +
-                "UPC_Prom=null " +
-                "WHERE UPC_Prom='{0}'", initUpcProm);
+                string sqlSetNull = "UPDATE Store_Product " +
+                                    "SET UPC_Prom=null " + 
+                                    $"WHERE UPC_Prom='{initUpcProm}'";
+                
                 DbUtils.Execute(sqlSetNull);
             }
 
             // Update father product table
-            string sqlFather = string.Format("UPDATE Store_Product SET " +
-                "UPC_Prom='{1}' " +
-                "WHERE UPC='{0}'",
-                changedUpcParent, changedUpcProm);
+            string sqlFather = "UPDATE Store_Product " +
+                               $"SET UPC_Prom='{changedUpcParent}' " +
+                               $"WHERE UPC='{changedUpcProm}'";
+            
             DbUtils.Execute(sqlFather);
 
             // Update promotion product table
-            string sqlProm = string.Format("UPDATE Store_Product SET " +
-                "UPC='{1}', id_product={2}, selling_price={3}, products_number={4} " +
-                "WHERE UPC='{0}'",
-                initUpcProm, changedUpcProm, newFatherStoreProduct[id_product], double.Parse(newFatherStoreProduct[selling_price]) * 0.8,
-                newFatherStoreProduct[products_number]);
+            string sqlProm = "UPDATE Store_Product " +
+                             $"SET UPC='{changedUpcProm}', id_product={newFatherStoreProduct[id_product]}, " +
+                             $"selling_price={double.Parse(newFatherStoreProduct[selling_price]) * 0.8}, " +
+                             $"products_number={newFatherStoreProduct[products_number]} " +
+                             $"WHERE UPC='{initUpcProm}'";
+            
             DbUtils.Execute(sqlProm);
         }
     }

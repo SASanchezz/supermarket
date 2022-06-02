@@ -72,10 +72,10 @@
 
         <Button Content="Оновити" Grid.Row="5" Grid.Column="2" Width="128" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,5" 
                 FontSize="12"
-                Command="{Binding UpdateCommand}"/>
+                Command="{Binding UpdateEmployeeCommand}"/>
         <Button Content="ВИДАЛИТИ" Grid.Row="5" Grid.Column="0" Width="128" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,5" 
                 FontSize="12" Background="DarkRed" Foreground="White"
-                Command="{Binding DeleteCommand}"/>
+                Command="{Binding DeleteEmployeeCommand}"/>
 
         <Button Content="←Назад" Grid.Row="0" Width="64" Height="24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" 
                 FontSize="12"

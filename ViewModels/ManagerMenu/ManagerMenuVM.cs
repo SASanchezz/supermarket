@@ -10,62 +10,28 @@ namespace supermarket.ViewModels.ManagerMenu
      */
     internal class ManagerMenuVM : NavigatableViewModel, IWindowOpeningVM<Main>
     {
-        private RelayCommand<object> _openEmployeesWindowCommand; // +
-        private RelayCommand<object> _openProductsWindowCommand;
-        private RelayCommand<object> _openCategoriesWindowCommand;
-        private RelayCommand<object> _openClientsWindowCommand;
-        private RelayCommand<object> _openStoreProductsWindowCommand;
-
-        private RelayCommand<object> _goToSignInCommand; // +
+        public ManagerMenuVM()
+        {
+            OpenEmployeesWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(Main.ManagerEmployees));
+            OpenProductsWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(Main.ManagerProducts));
+            OpenCategoriesWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(Main.ManagerCategories));
+            OpenClientsWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(Main.ManagerCustomers));
+            OpenStoreProductsWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(Main.ManagerStoreProducts));
+            GoToSignInCommand = new RelayCommand<object>(_ => ChangeViewModel(VMNavigationTypes.SignIn));
+        }
 
         public Action<Main> OpenWindowViewModel { get; set; }
 
-        public RelayCommand<object> OpenEmployeesWindowCommand
-        {
-            get
-            {
-                return _openEmployeesWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(Main.ManagerEmployees));
-            }
-        }
+        public RelayCommand<object> OpenEmployeesWindowCommand { get; }
 
-        public RelayCommand<object> OpenProductsWindowCommand
-        {
-            get
-            {
-                return _openProductsWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(Main.ManagerProducts));
-            }
-        }
+        public RelayCommand<object> OpenProductsWindowCommand { get; }
 
-        public RelayCommand<object> OpenCategoriesWindowCommand
-        {
-            get
-            {
-                return _openCategoriesWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(Main.ManagerCategories));
-            }
-        }
+        public RelayCommand<object> OpenCategoriesWindowCommand { get; }
 
-        public RelayCommand<object> OpenClientsWindowCommand
-        {
-            get
-            {
-                return _openClientsWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(Main.ManagerCustomers));
-            }
-        }
+        public RelayCommand<object> OpenClientsWindowCommand { get; }
 
-        public RelayCommand<object> OpenStoreProductsWindowCommand
-        {
-            get
-            {
-                return _openStoreProductsWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(Main.ManagerStoreProducts));
-            }
-        }
+        public RelayCommand<object> OpenStoreProductsWindowCommand { get; }
 
-        public RelayCommand<object> GoToSignInCommand
-        {
-            get
-            {
-                return _goToSignInCommand ??= new RelayCommand<object>(_ => ChangeViewModel(VMNavigationTypes.SignIn));
-            }
-        }
+        public RelayCommand<object> GoToSignInCommand { get; }
     }
 }

@@ -36,10 +36,12 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
 
         private void SetWindowsNavigation()
         {
-            var windowsNavigator = new WindowVMNavigator<ManagerEmployees>(new IWindowOpeningVM<ManagerEmployees>[] { ViewModel });
+            var windowsNavigator = 
+                new WindowVMNavigator<ManagerEmployees>(new IWindowOpeningVM<ManagerEmployees>[] { ViewModel });
             
             windowsNavigator.SetWay(ManagerEmployees.AddEmployee, _addEmployeeWindowVM.Window);
-            windowsNavigator.SetWay(ManagerEmployees.EditEmployee, _editEmployeeWindowVM.Window, OnOpeningEditEmployeeHandler);
+            windowsNavigator.SetWay(ManagerEmployees.EditEmployee, _editEmployeeWindowVM.Window, 
+                OnOpeningEditEmployeeHandler);
             
             SetVisibilitySystem(_addEmployeeWindowVM);
             SetVisibilitySystem(_editEmployeeWindowVM);

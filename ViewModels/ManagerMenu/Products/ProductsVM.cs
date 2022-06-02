@@ -19,14 +19,12 @@ namespace supermarket.ViewModels.ManagerMenu.Products
         private string _filteredName = "";
         private string _selectedCategory = AllString;
 
-        private RelayCommand<object> _openAddProductWindowCommand;
-        private RelayCommand<object> _openEditProductWindowCommand;
-        private RelayCommand<object> _printCommand;
-        private RelayCommand<object> _closeCommand;
-
         public ProductsVM()
         {
-            //UpdateProducts();
+            OpenAddProductWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(ManagerProducts.AddProduct));
+            OpenEditProductWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(ManagerProducts.EditProduct));
+            PrintProductsCommand = new RelayCommand<object>(_ => PrintProducts());
+            CloseCommand = new RelayCommand<object>(_ => Close());
             SetSelectiveCategories();
         }
 
@@ -79,47 +77,13 @@ namespace supermarket.ViewModels.ManagerMenu.Products
             }
         }
 
-        public RelayCommand<object> OpenAddProductWindowCommand
-        {
-            get
-            {
-                return _openAddProductWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(ManagerProducts.AddProduct));
-            }
-        }
+        public RelayCommand<object> OpenAddProductWindowCommand { get; }
 
-        public RelayCommand<object> OpenEditProductWindowCommand
-        {
-            get
-            {
-                return _openEditProductWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(ManagerProducts.EditProduct));
-            }
-        }
+        public RelayCommand<object> OpenEditProductWindowCommand { get; }
 
-        public RelayCommand<object> PrintCommand
-        {
-            get
-            {
-                return _printCommand ??= new RelayCommand<object>(_ =>
-                {
-                    Printer.PrintDataGrid(Products, new string[]
-                    {
-                        "Колонка1",
-                        "Колонка2",
-                        "Колонка3",
-                        "Колонка4",
-                        "Колонка5",
-                    });
-                });
-            }
-        }
+        public RelayCommand<object> PrintProductsCommand { get; }
         
-        public RelayCommand<object> CloseCommand
-        {
-            get
-            {
-                return _closeCommand ??= new RelayCommand<object>(_ => Close());
-            }
-        }
+        public RelayCommand<object> CloseCommand { get; }
 
         public void UpdateProducts()
         {
@@ -134,6 +98,11 @@ namespace supermarket.ViewModels.ManagerMenu.Products
             {
                 SelectiveCategories[i + 1] = Categ.GetAllCategoriesNames()[i];
             }
+        }
+
+        private void PrintProducts()
+        {
+            
         }
     }
 }

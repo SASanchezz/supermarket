@@ -32,7 +32,8 @@ namespace supermarket.ViewModels.ManagerMenu.Products
 
         private void SetWindowsNavigation()
         {
-            var windowsNavigator = new WindowVMNavigator<ManagerProducts>(new IWindowOpeningVM<ManagerProducts>[] { ViewModel });
+            var windowsNavigator = 
+                new WindowVMNavigator<ManagerProducts>(new IWindowOpeningVM<ManagerProducts>[] { ViewModel });
 
             windowsNavigator.SetWay(ManagerProducts.AddProduct, _addProductWindowVM.Window);
             windowsNavigator.SetWay(ManagerProducts.EditProduct, _editProductWindowVM.Window, OnOpeningEditProductHandler);

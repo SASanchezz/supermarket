@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:supermarket.Views.ManagerMenu.Products.Changes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid x:Name="MainGrid" Background="LightGray" Margin="10">
+    <Grid Background="LightGray">
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
             <RowDefinition/>
@@ -112,7 +112,7 @@
         <TextBox Grid.Row="1" 
                  Grid.Column="1"
                  Grid.RowSpan="2"
-                 Grid.ColumnSpan="3" 
+                 Grid.ColumnSpan="2" 
                  TextWrapping="Wrap"
                  Width="400" 
                  Height="150" 
@@ -123,9 +123,7 @@
                  FontSize="14" 
                  Margin="0,50,0,0"
                  Text="{Binding Characteristics, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-
-
-
+        
         <Button Content="Оновити" 
                 Grid.Row="3" 
                 Grid.Column="2" 
@@ -135,7 +133,7 @@
                 HorizontalAlignment="Center" 
                 FontSize="12"  
                 Margin="0,0,0,50"
-                Command="{Binding UpdateCommand}" />
+                Command="{Binding UpdateProductCommand}" />
         
         <Button Content="ВИДАЛИТИ" 
                 Grid.Row="3"
@@ -148,7 +146,7 @@
                 HorizontalAlignment="Center" 
                 FontSize="12"  
                 Margin="0,0,0,50"
-                Command="{Binding DeleteCommand}"/>
+                Command="{Binding DeleteProductCommand}"/>
 
         <Button Content="←Назад"
                 Grid.Row="0" 

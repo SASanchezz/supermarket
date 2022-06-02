@@ -65,7 +65,7 @@
                 FontSize="12" 
                 FontWeight="DemiBold" 
                 Margin="480,0,0,0"
-                Command="{Binding PrintCommand}"/>
+                Command="{Binding PrintProductsCommand}"/>
 
         <Button Grid.Row="0"
                 Content="Додати новий товар" 
