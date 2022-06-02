@@ -3,6 +3,7 @@ using supermarket.Utils;
 using supermarket.ViewModels.BaseClasses;
 using System;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace supermarket.ViewModels.ManagerMenu.Categories
 {
@@ -17,10 +18,12 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
 
         public CategoriesVM()
         {
-            UpdateCategories();
-        }
 
+        }
+        
         public Action<ManagerCategories> OpenWindowViewModel { get; set; }
+        
+        public Action Close { get; set; }
 
         public List<string[]> Categories
         {
@@ -28,11 +31,11 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
             set
             {
                 _categories = value;
-                OnPropertyChanged(nameof(Categories));
+                OnPropertyChanged();
             }
         }
 
-        public string[] SelectedCustomer
+        public string[] SelectedCategory
         {
             get => _selectedCategory;
             set
@@ -42,6 +45,22 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
             }
         }
 
+        public RelayCommand<object> AddCategoryCommand 
+        {
+            get
+            {
+                return _openAddCategoryWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(ManagerCategories.AddCategory));
+            }
+        }
+        
+        public RelayCommand<object> EditCategoryCommand
+        {
+            get
+            {
+                return _openEditCategoryWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(ManagerCategories.EditCategory));
+            }
+        }
+        
         public void UpdateCategories()
         {
             Categories = DbQueries.GetAllCategories();
