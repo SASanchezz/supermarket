@@ -17,12 +17,12 @@ using strPrdct = supermarket.Data.DbMaps.StoreProductMap;
 
 namespace supermarket.Windows.ManagerMenu.StoreProduct.Changes.PromStoreProduct
 {
-    public partial class ManagePromStoreProductWindow : Window
+    public partial class EditPromStoreProductWindow : Window
     {
         //private const string _DEFAULT_UPC = "999999999909";
         //private string _promStoreProductId;
         //private string[] _fatherStoreProduct;
-        public ManagePromStoreProductWindow(string promStoreProductId)
+        public EditPromStoreProductWindow()
         {
             //_promStoreProductId = promStoreProductId;
             //_fatherStoreProduct = DbQueries.GetStoreProductByPromUpc(_promStoreProductId)[0]; //Find not prom product with such upc_prom

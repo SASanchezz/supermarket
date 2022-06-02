@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\**" />
+    <EmbeddedResource Remove="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\**" />
+    <None Remove="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\**" />
+    <Page Remove="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="SignUpWindow.xaml.cs" />
   </ItemGroup>
 
