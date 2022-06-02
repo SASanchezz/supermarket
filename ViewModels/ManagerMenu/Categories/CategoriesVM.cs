@@ -18,7 +18,7 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
             OpenEditCategoryWindowCommand= new RelayCommand<object>(_ => OpenWindowViewModel(ManagerCategories.EditCategory));
             CloseCommand = new RelayCommand<object>(_ => Close());
         }
-
+        
         public Action<ManagerCategories> OpenWindowViewModel { get; set; }
         
         public Action Close { get; set; }

@@ -52,7 +52,7 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
             _editCategoryWindowVM.ViewModel.SetData(ViewModel.SelectedCategory);
             ViewModel.SelectedCategory = null;
         }
-        
+
         private void SetUpdatingSystem()
         {
             Window.IsVisibleChanged += (sender, e) =>
