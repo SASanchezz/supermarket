@@ -23,7 +23,8 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontSize="12" 
-                Margin="20,0,0,0"/>
+                Margin="20,0,0,0"
+                Command="{Binding CloseCommand}"/>
 
         <Button Grid.Row="0"
                 Content="Редагувати" 
@@ -33,7 +34,7 @@
                 VerticalAlignment="Center" 
                 FontSize="12" 
                 Margin="150, 0, 0, 0"
-                Command="{Binding EditCategoryCommand}"/>
+                Command="{Binding OpenEditCategoryWindowCommand}"/>
 
         <Button Grid.Row="0"
                 Content="Додати нову категорію" 
@@ -44,7 +45,7 @@
                 FontSize="12" 
                 Margin="0,0,20,0"
                 Background="LawnGreen" 
-                Command="{Binding AddCategoryCommand}"/>
+                Command="{Binding OpenAddCategoryWindowCommand}"/>
 
         <ScrollViewer Grid.Row="1">
             <StackPanel>

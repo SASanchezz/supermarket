@@ -16,9 +16,9 @@ namespace supermarket.Models
 
             return result.Count > 0 ? result : null;
         }
-        public static string[] GetCategoryByID(string categoryNumber)
+        public static string[] GetCategoryByNumber(string categoryNumber)
         {
-            string sql = string.Format("SELECT * FROM Category WHERE category_number='{0}'", categoryNumber);
+            string sql = $"SELECT * FROM Category WHERE category_number='{categoryNumber}'";
             List<string[]> result = DbUtils.FindAll(sql);
 
             return result.Count > 0 ? result[0] : null;
@@ -28,7 +28,7 @@ namespace supermarket.Models
         {
             string sql = "SELECT category_name FROM Category ORDER BY category_name";
             List<string[]> list = DbUtils.FindAll(sql);
-            string[] result = new string[list.Count];
+            var result = new string[list.Count];
             for (int i = 0; i < result.Length; ++i)
             {
                 result[i] = list[i][0];
@@ -39,37 +39,33 @@ namespace supermarket.Models
 
         public static string[] GetIDByName(string categoryName)
         {
-            string sql = string.Format("SELECT category_number FROM Category WHERE category_name='{0}'", categoryName);
+            string sql = $"SELECT category_number FROM Category WHERE category_name='{categoryName}'";
             List<string[]> result = DbUtils.FindAll(sql);
 
             return result.Count > 0 ? result[0] : null;
         }
 
-        public static void DeleteCategoryByID(string categoryNumber)
+        public static void DeleteCategoryByNumber(string categoryNumber)
         {
-            string sql = string.Format("DELETE FROM Product WHERE category_number={0}", categoryNumber);
+            string sql = $"DELETE FROM Category WHERE category_number={categoryNumber}";
             DbUtils.Execute(sql);
         }
 
         public static void AddCategory(string categoryNumber, string categoryName)
         {
-            string sql = string.Format("INSERT INTO Category " +
-                "(category_number, category_name) " +
-                "VALUES ({0}, '{1}')",
-                categoryNumber, categoryName);
+            string sql = "INSERT INTO Category (category_number, category_name) " +
+                         $"VALUES ({categoryNumber}, '{categoryName}')";
 
             DbUtils.Execute(sql);
         }
 
         public static void UpdateCategory(string initCategoryNumber, string changedCategoryNumber, string categoryName)
         {
-            string sql = string.Format("UPDATE Category SET" +
-                "category_number={1}, category_name='{2}' ",
-                "WHERE category_number = {0})",
-                initCategoryNumber, changedCategoryNumber, categoryName);
+            string sql = "UPDATE Category " +
+                         $"SET category_number={changedCategoryNumber}, category_name='{categoryName}' " +
+                         $"WHERE category_number={initCategoryNumber}";
 
             DbUtils.Execute(sql);
         }
-       
     }
 }

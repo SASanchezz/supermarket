@@ -1,4 +1,5 @@
 using System;
+using System.Windows;
 using supermarket.Middlewares.Category;
 using supermarket.Models;
 using supermarket.Utils;
@@ -8,8 +9,11 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
 {
     internal class AddCategoryVM : ViewModel
     {
-        private RelayCommand<object> _addCategoryCommand;
-        private RelayCommand<object> _closeCommand;
+        public AddCategoryVM()
+        {
+            AddCategoryCommand = new RelayCommand<object>(_ => AddCategory(), CanExecute);
+            CloseCommand = new RelayCommand<object>(_ => Close());
+        }
         
         public string Id { get; set; }
 
@@ -17,30 +21,18 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
         
         public Action Close { get; set; }
         
-        public RelayCommand<object> AddCategoryCommand
-        {
-            get
-            {
-                return _addCategoryCommand ??= new RelayCommand<object>(_ => AddCategory(), CanExecute);
-            }
-        }
+        public RelayCommand<object> AddCategoryCommand { get; }
 
-        public RelayCommand<object> CloseCommand
-        {
-            get
-            {
-                return _closeCommand ??= new RelayCommand<object>(_ => Close());
-            }
-        }
+        public RelayCommand<object> CloseCommand { get; }
         
         private void AddCategory()
         {
             ////Validates entered information
-            string result = CategoryValidator.Validate(Id, Name);
+            string result = CategoryValidator.ValidateInsert(Id, Name);
 
             if (result.Length != 0)
             {
-                //MessageBox.Show(result);
+                MessageBox.Show(result);
                 return;
             }
 

@@ -1,7 +1,6 @@
 using System;
 using System.Windows;
 using supermarket.Middlewares.Category;
-using supermarket.Middlewares.Employee;
 using supermarket.Utils;
 using supermarket.ViewModels.BaseClasses;
 using Cat = supermarket.Models.Category;
@@ -10,21 +9,23 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
 {
     internal class EditCategoryVM : ViewModel
     {
-        private string _changedChangedId;
+        private string _initNumber;
+        private string _changedNumber;
         private string _name;
 
-        private string _initId;
-        
-        private RelayCommand<object> _updateCommand;
-        private RelayCommand<object> _deleteCommand;
-        private RelayCommand<object> _closeCommand;
-
-        public string ChangedId
+        public EditCategoryVM()
         {
-            get => _changedChangedId;
+            UpdateCommand = new RelayCommand<object>(_ => UpdateCategory(), CanExecute);
+            DeleteCommand = new RelayCommand<object>(_ => DeleteCategory());
+            CloseCommand = new RelayCommand<object>(_ => Close());
+        }
+        
+        public string ChangedNumber
+        {
+            get => _changedNumber;
             set
             {
-                _changedChangedId = value;
+                _changedNumber = value;
                 OnPropertyChanged();
             }
         }
@@ -41,39 +42,22 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
 
         public Action Close { get; set; }
         
-        public RelayCommand<object> UpdateCommand
-        {
-            get
-            {
-                return _updateCommand ??= new RelayCommand<object>(_ => UpdateCategory(), CanExecute);
-            }
-        }
+        public RelayCommand<object> UpdateCommand { get; }
         
-        public RelayCommand<object> DeleteCommand
-        {
-            get
-            {
-                return _deleteCommand ??= new RelayCommand<object>(_ => DeleteCategory(), CanExecute);
-            }
-        }
+        public RelayCommand<object> DeleteCommand { get; }
 
-        public RelayCommand<object> CloseCommand
-        {
-            get
-            {
-                return _closeCommand ??= new RelayCommand<object>(_ => Close());
-            }
-        }
+        public RelayCommand<object> CloseCommand { get; }
+        
         public void SetData(string[] data)
         {
-            _initId = data[Cat.number];
-            ChangedId = _initId;
+            _initNumber = data[Cat.number];
+            ChangedNumber = _initNumber;
             Name = data[Cat.name];
         }
         
         private void UpdateCategory()
         {
-            string result = CategoryValidator.Validate(ChangedId, Name);
+            string result = CategoryValidator.ValidateUpdate(_initNumber ,ChangedNumber, Name);
             
             if (result.Length != 0)
             {
@@ -81,20 +65,20 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
                 return;
             }
             
-            Cat.UpdateCategory(_initId, ChangedId, Name);
+            Cat.UpdateCategory(_initNumber, ChangedNumber, Name);
             
             Close();
         }
         
         private void DeleteCategory()
         {
-            Cat.DeleteCategoryByID(_initId);
+            Cat.DeleteCategoryByNumber(_initNumber);
             Close();
         }
         
         private bool CanExecute(object obj)
         {
-            return !string.IsNullOrWhiteSpace(ChangedId)
+            return !string.IsNullOrWhiteSpace(ChangedNumber)
                    && !string.IsNullOrWhiteSpace(Name);
         }
     }
