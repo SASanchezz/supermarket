@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace supermarket.Windows.ManagerMenu.StoreProduct.Changes.StoreProduct
+namespace supermarket.Windows.ManagerMenu.StoreProducts.Changes.Prom
 {
     public partial class AddStoreProductWindow : Window
     {

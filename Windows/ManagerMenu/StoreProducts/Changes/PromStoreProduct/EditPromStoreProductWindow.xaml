@@ -1,9 +1,9 @@
-﻿<Window x:Class="supermarket.Windows.ManagerMenu.StoreProduct.Changes.PromStoreProduct.ManagePromStoreProductWindow" Background="LightSlateGray"
+﻿<Window x:Class="supermarket.Windows.ManagerMenu.StoreProduct.Changes.EditPromStoreProduct" Background="LightSlateGray"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:supermarket.Windows.ManagerMenu.StoreProduct"
+        xmlns:local="clr-namespace:supermarket.Windows.ManagerMenu.StoreProducts.Changes.PromStoreProduct"
         mc:Ignorable="d"
         Title="ManagePromStoreProductWindow" Height="450" Width="800">
     <Grid x:Name="MainGrid" Background="LightGray" Margin="10">
