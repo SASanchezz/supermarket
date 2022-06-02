@@ -20,7 +20,8 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
         {
             _addEmployeeWindowVM = new AddEmployeeWindowVM();
             _editEmployeeWindowVM = new EditEmployeeWindowVM();
-
+            
+            SetUpdatingSystem();
             SetWindowsNavigation();
 
             Window.Closed += (sender, e) =>
@@ -37,44 +38,44 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
         {
             var windowsNavigator = new WindowVMNavigator<ManagerEmployees>(new IWindowOpeningVM<ManagerEmployees>[] { ViewModel });
             
-            windowsNavigator.SetWay(ManagerEmployees.AddEmployee, _addEmployeeWindowVM.Window, GoToAddEmployee);
-            windowsNavigator.SetWay(ManagerEmployees.EditEmployee, _editEmployeeWindowVM.Window, GoToEditEmployee);
+            windowsNavigator.SetWay(ManagerEmployees.AddEmployee, _addEmployeeWindowVM.Window);
+            windowsNavigator.SetWay(ManagerEmployees.EditEmployee, _editEmployeeWindowVM.Window, OnOpeningEditEmployeeHandler);
             
             SetVisibilitySystem(_addEmployeeWindowVM);
             SetVisibilitySystem(_editEmployeeWindowVM);
         }
 
-        private void GoToAddEmployee()
-        {
-            SetDefaultClosedEventHandler(_addEmployeeWindowVM);
-        }
-
-        private void GoToEditEmployee()
+        private void OnOpeningEditEmployeeHandler()
         {
             if (ViewModel.SelectedEmployee == null)
             {
                 throw new Exception("No selected item");
             }
 
-            SetDefaultClosedEventHandler(_editEmployeeWindowVM);
-
             _editEmployeeWindowVM.ViewModel.SetData(ViewModel.SelectedEmployee);
             ViewModel.SelectedEmployee = null;
         }
 
-        private void SetDefaultClosedEventHandler<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM) 
+        private void SetUpdatingSystem()
+        {
+            Window.IsVisibleChanged += (sender, e) =>
+            {
+                if (!(bool)e.NewValue) return; // window is hiden
+                // window is shown
+                ViewModel.UpdateEmployees();
+            };
+            SetUpdatingAfterHiden(_addEmployeeWindowVM);
+            SetUpdatingAfterHiden(_editEmployeeWindowVM);
+        }
+        
+        private void SetUpdatingAfterHiden<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM) 
             where TWindow : Window, new()
             where TViewModel : ViewModel, new()
         {
-            string filteredSurname = ViewModel.FilteredSurname;
-            string selectedRole = ViewModel.SelectedRole;
-            
             windowVM.Window.IsVisibleChanged += (sender, e) =>
             {
-                if ((bool)e.NewValue) return;
-                
-                ViewModel.FilteredSurname = filteredSurname;
-                ViewModel.SelectedRole = selectedRole;
+                if ((bool)e.NewValue) return; // window is shown
+                // window is hiden
                 ViewModel.UpdateEmployees();
             };
         }

@@ -17,6 +17,7 @@ namespace supermarket.ViewModels.ManagerMenu.Products
             _addProductWindowVM = new AddProductWindowVM();
             _editProductWindowVM = new EditProductWindowVM();
 
+            SetUpdatingSystem();
             SetWindowsNavigation();
             
             Window.Closed += (sender, e) =>
@@ -33,45 +34,45 @@ namespace supermarket.ViewModels.ManagerMenu.Products
         {
             var windowsNavigator = new WindowVMNavigator<ManagerProducts>(new IWindowOpeningVM<ManagerProducts>[] { ViewModel });
 
-            windowsNavigator.SetWay(ManagerProducts.AddProduct, _addProductWindowVM.Window, GoToAddProduct);
-            windowsNavigator.SetWay(ManagerProducts.EditProduct, _editProductWindowVM.Window, GoToEditProduct);
+            windowsNavigator.SetWay(ManagerProducts.AddProduct, _addProductWindowVM.Window);
+            windowsNavigator.SetWay(ManagerProducts.EditProduct, _editProductWindowVM.Window, OnOpeningEditProductHandler);
             
             SetVisibilitySystem(_addProductWindowVM);
             SetVisibilitySystem(_editProductWindowVM);
         }
 
-        private void GoToAddProduct()
-        {
-            SetDefaultClosedEventHandler(_addProductWindowVM);
-        }
-
-        private void GoToEditProduct()
+        private void OnOpeningEditProductHandler()
         {
             if (ViewModel.SelectedProduct == null)
             {
                 throw new Exception("No selected item");
             }
-
-            SetDefaultClosedEventHandler(_editProductWindowVM);
+            
             _editProductWindowVM.ViewModel.SetData(ViewModel.SelectedProduct);
             ViewModel.SelectedProduct = null;
         }
 
-        private void SetDefaultClosedEventHandler<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
+        private void SetUpdatingSystem()
+        {
+            Window.IsVisibleChanged += (sender, e) =>
+            {
+                if (!(bool)e.NewValue) return; // window is hiden
+                // window is shown
+                ViewModel.UpdateProducts();
+            };
+            SetUpdatingAfterHiden(_addProductWindowVM);
+            SetUpdatingAfterHiden(_editProductWindowVM);
+        }
+        
+        private void SetUpdatingAfterHiden<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
             where TWindow : Window, new()
             where TViewModel : ViewModel, new()
         {
-            string filteredName = ViewModel.FilteredName;
-            string selectedCategory = ViewModel.SelectedCategory;
-
             windowVM.Window.IsVisibleChanged += (sender, e) =>
             {
-                if ((bool)e.NewValue) return;
-                
-                ViewModel.FilteredName = filteredName;
-                ViewModel.SelectedCategory = selectedCategory;
+                if ((bool)e.NewValue) return; // window is shown
+                // window is hiden
                 ViewModel.UpdateProducts();
-                //MessageBox.Show("Data updated");
             };
         }
 

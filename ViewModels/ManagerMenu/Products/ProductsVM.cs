@@ -26,7 +26,7 @@ namespace supermarket.ViewModels.ManagerMenu.Products
 
         public ProductsVM()
         {
-            UpdateProducts();
+            //UpdateProducts();
             SetSelectiveCategories();
         }
 

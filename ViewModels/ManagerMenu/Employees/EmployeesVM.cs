@@ -30,7 +30,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
 
         public EmployeesVM()
         {
-            UpdateEmployees();
+            //UpdateEmployees();
             SetSelectiveRoles();
         }
 

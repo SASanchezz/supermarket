@@ -21,6 +21,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
             _addCustomerWindowVM = new AddCustomerWindowVM();
             _editCustomerWindowVM = new EditCustomerWindowVM();
 
+            SetUpdatingSystem();
             SetWindowsNavigation();
 
             Window.Closed += (sender, e) =>
@@ -37,43 +38,53 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
         {
             var windowsNavigator = new WindowVMNavigator<ManagerCustomers>(new IWindowOpeningVM<ManagerCustomers>[] { ViewModel });
 
-            windowsNavigator.SetWay(ManagerCustomers.AddCustomer, _addCustomerWindowVM.Window, GoToAddCustomer);
-            windowsNavigator.SetWay(ManagerCustomers.EditCustomer, _editCustomerWindowVM.Window, GoToEditCustomer);
+            windowsNavigator.SetWay(ManagerCustomers.AddCustomer, _addCustomerWindowVM.Window);
+            windowsNavigator.SetWay(ManagerCustomers.EditCustomer, _editCustomerWindowVM.Window, OnOpeningEditCustomerHandler);
             
             SetVisibilitySystem(_addCustomerWindowVM);
             SetVisibilitySystem(_editCustomerWindowVM);
         }
-
-        private void GoToAddCustomer()
-        {
-            SetDefaultClosedEventHandler(_addCustomerWindowVM);
-        }
-
-        private void GoToEditCustomer()
+        
+        private void OnOpeningEditCustomerHandler()
         {
             if (ViewModel.SelectedCustomer == null)
             {
                 throw new Exception("No selected item");
             }
 
-            SetDefaultClosedEventHandler(_editCustomerWindowVM);
-
             _editCustomerWindowVM.ViewModel.SetData(ViewModel.SelectedCustomer);
             ViewModel.SelectedCustomer = null;
         }
 
+        private void SetUpdatingSystem()
+        {
+            Window.IsVisibleChanged += (sender, e) =>
+            {
+                if (!(bool)e.NewValue) return; // window is hiden
+                // window is shown
+                ViewModel.UpdateCustomers();
+            };
+            SetUpdatingAfterHiden(_addCustomerWindowVM);
+            SetUpdatingAfterHiden(_editCustomerWindowVM);
+        }
+        
+        private void SetUpdatingAfterHiden<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM) 
+            where TWindow : Window, new()
+            where TViewModel : ViewModel, new()
+        {
+            windowVM.Window.IsVisibleChanged += (sender, e) =>
+            {
+                if ((bool)e.NewValue) return; // window is shown
+                // window is hiden
+                ViewModel.UpdateCustomers();
+            };
+        }
+        
         private void SetVisibilitySystem<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
             where TWindow : Window, new()
             where TViewModel : ViewModel, new()
         {
             windowVM.Window.IsVisibleChanged += (sender, e) => IsEnabled = !IsEnabled;
-        }
-
-        private void SetDefaultClosedEventHandler<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
-            where TWindow : Window, new()
-            where TViewModel : ViewModel, new()
-        {
-            windowVM.Window.Closing += (sender, e) => ViewModel.UpdateCustomers();
         }
     }
 }
