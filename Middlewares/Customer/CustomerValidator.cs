@@ -91,7 +91,7 @@ namespace supermarket.Middlewares.Customer
             {
                 return "Введіть корректний номер карти";
             }
-            if (oldCardNumber != changedCardNumber && Cust.GetCustomerByCardNumber(changedCardNumber).Any())
+            if (oldCardNumber != changedCardNumber && Cust.GetCustomerByCardNumber(changedCardNumber) != null)
             {
                 return "Клієнт з таким номером карти вже існує";
             }
@@ -113,7 +113,7 @@ namespace supermarket.Middlewares.Customer
                 return "Введіть номер телефону < 13 символів";
             }
             if (Cust.GetCustomerByCardNumber(oldCardNumber)[Cust.phone_number] != phoneNumber 
-                && Cust.GetCustomerByPhone(phoneNumber).Any())
+                && Cust.GetCustomerByPhone(phoneNumber) != null)
             {
                 return "Клієнт з таким номером телефону вже існує";
             }
