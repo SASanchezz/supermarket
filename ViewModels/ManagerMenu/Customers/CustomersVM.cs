@@ -26,7 +26,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
         {
             SliderMax = 100;
             SliderMin = 0;
-            UpdateCustomers();
+            //UpdateCustomers();
         }
 
         public Action<ManagerCustomers> OpenWindowViewModel { get; set; }
