@@ -12,15 +12,13 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
         private List<string[]> _categories;
         private string[] _selectedCategory;
 
-        private RelayCommand<object> _openAddCategoryWindowCommand;
-        private RelayCommand<object> _openEditCategoryWindowCommand;
-        private RelayCommand<object> _closeCommand;
-
         public CategoriesVM()
         {
-
+            OpenAddCategoryWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(ManagerCategories.AddCategory));
+            OpenEditCategoryWindowCommand= new RelayCommand<object>(_ => OpenWindowViewModel(ManagerCategories.EditCategory));
+            CloseCommand = new RelayCommand<object>(_ => Close());
         }
-        
+
         public Action<ManagerCategories> OpenWindowViewModel { get; set; }
         
         public Action Close { get; set; }
@@ -45,22 +43,12 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
             }
         }
 
-        public RelayCommand<object> AddCategoryCommand 
-        {
-            get
-            {
-                return _openAddCategoryWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(ManagerCategories.AddCategory));
-            }
-        }
-        
-        public RelayCommand<object> EditCategoryCommand
-        {
-            get
-            {
-                return _openEditCategoryWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(ManagerCategories.EditCategory));
-            }
-        }
-        
+        public RelayCommand<object> OpenAddCategoryWindowCommand { get; }
+
+        public RelayCommand<object> OpenEditCategoryWindowCommand { get; }
+
+        public RelayCommand<object> CloseCommand { get; }
+
         public void UpdateCategories()
         {
             Categories = DbQueries.GetAllCategories();

@@ -20,7 +20,7 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
             SetUpdatingSystem();
             SetWindowsNavigation();
             
-            Window.Closed += (sender, e) =>
+            Window.Closing += (sender, e) =>
             {
                 _addCategoryWindowVM.Window.Close();
                 _editCategoryWindowVM.Window.Close();
@@ -32,16 +32,17 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
         
         private void SetWindowsNavigation()
         {
-            var windowsNavigator = new WindowVMNavigator<ManagerCategories>(new IWindowOpeningVM<ManagerCategories>[] { ViewModel });
+            var windowsNavigator = 
+                new WindowVMNavigator<ManagerCategories>(new IWindowOpeningVM<ManagerCategories>[] { ViewModel });
             
             windowsNavigator.SetWay(ManagerCategories.AddCategory, _addCategoryWindowVM.Window);
-            windowsNavigator.SetWay(ManagerCategories.EditCategory, _editCategoryWindowVM.Window, OnOpeningEditEmployeeHandler);
+            windowsNavigator.SetWay(ManagerCategories.EditCategory, _editCategoryWindowVM.Window, OnOpeningEditCategoryHandler);
             
             SetVisibilitySystem(_addCategoryWindowVM);
             SetVisibilitySystem(_editCategoryWindowVM);
         }
 
-        private void OnOpeningEditEmployeeHandler()
+        private void OnOpeningEditCategoryHandler()
         {
             if (ViewModel.SelectedCategory == null)
             {
@@ -51,6 +52,7 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
             _editCategoryWindowVM.ViewModel.SetData(ViewModel.SelectedCategory);
             ViewModel.SelectedCategory = null;
         }
+        
         private void SetUpdatingSystem()
         {
             Window.IsVisibleChanged += (sender, e) =>
