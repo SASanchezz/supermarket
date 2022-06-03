@@ -24,7 +24,7 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
         private RelayCommand<object> _open_Prom_EditStoreProductWindowCommand;
 
         private RelayCommand<object> _closeCommand;
-
+        
         public StoreProductsVM()
         {
             UpdateStoreProducts();
