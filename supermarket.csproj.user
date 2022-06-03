@@ -132,6 +132,18 @@
     <Page Update="Views\ManagerMenu\Products\ProductsView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\ManagerMenu\StoreProducts\Changes\NonProm\AddStoreProductView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ManagerMenu\StoreProducts\Changes\NonProm\EditStoreProductView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ManagerMenu\StoreProducts\Changes\Prom\AddStoreProductView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ManagerMenu\StoreProducts\Changes\Prom\EditStoreProductView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\ManagerMenu\StoreProducts\StoreProductsView.xaml">
       <SubType>Designer</SubType>
     </Page>
