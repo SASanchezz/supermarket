@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\**" />
+    <EmbeddedResource Remove="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\**" />
+    <None Remove="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\**" />
+    <Page Remove="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="SignUpWindow.xaml.cs" />
   </ItemGroup>
 
@@ -32,6 +39,32 @@
     <Content Include="Views\SignIn\sign-in.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\ManagerMenu\StoreProducts\Changes\NonProm\AddStoreProductView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ManagerMenu\StoreProducts\Changes\NonProm\EditStoreProductView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\ManagerMenu\StoreProducts\Changes\NonProm\AddStoreProductView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ManagerMenu\StoreProducts\Changes\NonProm\EditStoreProductView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ManagerMenu\StoreProducts\Changes\Prom\AddStoreProductView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Views\ManagerMenu\StoreProducts\Changes\Prom\EditStoreProductView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
   </ItemGroup>
 
 </Project>

@@ -15,13 +15,13 @@ using System.Windows.Shapes;
 using strPrdct = supermarket.Data.DbMaps.StoreProductMap;
 using supermarket.Middlewares.StoreProduct;
 
-namespace supermarket.Windows.ManagerMenu.StoreProduct.Changes.StoreProduct
+namespace supermarket.Windows.ManagerMenu.StoreProducts.Changes.NonProm
 {
-    public partial class ManageStoreProductWindow : Window
+    public partial class EditStoreProductWindow : Window
     {
         //private const string _DEFAULT_UPC = "999999999909";
         //private string _storeProductId;
-        public ManageStoreProductWindow(string storeProductId)
+        public EditStoreProductWindow()
         {
             //_storeProductId = storeProductId;
             InitializeComponent();

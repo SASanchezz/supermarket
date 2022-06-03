@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using supermarket.Utils;
 using supermarket.Data;
 
@@ -10,6 +6,8 @@ namespace supermarket.Models
 {
     internal static class StoreProduct
     {
+        private const string AllString = "Всі";
+
         //Native
         public const int UPC = 0;
         public const int UPC_prom = 1;
@@ -28,14 +26,16 @@ namespace supermarket.Models
             return result.Count > 0 ? result : null;
         }
 
-        public static List<string[]> GetAllStoreProducts(int promotional = -1)
+        public static List<string[]> GetAllStoreProducts(string isPromotional = AllString, string subUPC = "")
         {
-            string promotionalFilter = promotional == -1 ? "" : string.Format("WHERE promotional={0}", string.Join("',", promotional));
+            string whereClause = "WHERE 1";
+            whereClause = isPromotional == AllString ? whereClause : whereClause += string.Format(" AND promotional_product={0}", Proms.promKeys[isPromotional]);
+            whereClause = subUPC == "" ? whereClause : whereClause += string.Format(" AND UPC LIKE '%{0}%'", subUPC);
 
             string sql = string.Format("SELECT UPC, UPC_prom, Store_Product.id_product, selling_price, products_number, promotional_product, Product.product_name" +
                 " FROM Store_Product" +
                 " LEFT JOIN Product" +
-                " ON Store_Product.id_product  = Product.id_product " + promotionalFilter);
+                " ON Store_Product.id_product  = Product.id_product " + whereClause);
 
             List<string[]> result = DbUtils.FindAll(sql);
 

@@ -24,25 +24,8 @@
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Center" 
                 FontSize="12" 
-                Margin="20,0,0,0"/>
-
-        <Button  Grid.Row="0" 
-                 Content="Назва↓" 
-                 Width="64" 
-                 Height="24"
-                 HorizontalAlignment="Center" 
-                 VerticalAlignment="Center" 
-                 FontSize="12"
-                 Margin="0, 0, 400, 0"/>
-
-        <Button  Grid.Row="0" 
-                 Content="Кількість↓" 
-                 Width="64" 
-                 Height="24" 
-                 HorizontalAlignment="Center" 
-                 VerticalAlignment="Center" 
-                 FontSize="12"
-                 Margin="0, 0, 100, 0"/>
+                Margin="20,0,0,0"
+                Command="{Binding CloseCommand}"/>
 
         <Button Grid.Row="0" 
                 Content="Додати неакційний UPC"  
@@ -52,7 +35,8 @@
                 VerticalAlignment="Center" 
                 FontSize="12" 
                 Margin="0,0,20,30" 
-                Background="LawnGreen"/>
+                Background="LawnGreen"
+                Command="{Binding Open_nonProm_AddStoreProductWindowCommand}"/>
 
         <Button Grid.Row="0" 
                 Content="Додати акційний UPC" 
@@ -62,8 +46,17 @@
                 VerticalAlignment="Center"  
                 FontSize="12" 
                 Margin="0,30,20,0" 
-                Background="LawnGreen"/>
+                Background="LawnGreen"
+                Command="{Binding Open_Prom_AddStoreProductWindowCommand}"/>
 
+        <TextBox Grid.Row="0" 
+                  Width="120"
+                  Height="24" 
+                  HorizontalAlignment="Left" 
+                  Margin="150, 0, 0, 0"
+                  Text="{Binding SubUPC, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+        
         <ComboBox Grid.Row="0"
                   Text="All" 
                   Width="64" 
@@ -71,7 +64,9 @@
                   HorizontalAlignment="Center"
                   VerticalAlignment="Center"  
                   FontSize="12" 
-                  Margin="200,0,0,0"/>
+                  Margin="200,0,0,0"
+                  ItemsSource="{Binding SelectiveProms}" 
+                  SelectedItem="{Binding SelectedProm, Mode=TwoWay}"/>
 
         <ScrollViewer Grid.Row="1">
             <StackPanel>
@@ -82,9 +77,9 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="UPC"                Binding="{Binding Path=[0]}"    Width="*" IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="UPC Акції"          Binding="{Binding Path=[1]}"    Width="*" IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="ID продукту"        Binding="{Binding Path=[2]}"    Width="*" IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Назва продукту"     Binding="{Binding Path=[6]}"    Width="*" IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Ціна"               Binding="{Binding Path=[3]}"    Width="*" IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="Кількість"          Binding="{Binding Path=[4]}"    Width="*" IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Кількість"          Binding="{Binding Path=[4]}"    Width="*" IsReadOnly="True" CanUserSort="True"/>
                         <DataGridTextColumn Header="Акційний продукт"   Binding="{Binding Path=[5]}"    Width="*" IsReadOnly="True" CanUserSort="False"/>
                     </DataGrid.Columns>
                 </DataGrid>

@@ -70,7 +70,7 @@
     <Compile Update="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\AddPromStoreProductWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\ManagerMenu\StoreProducts\Changes\StoreProduct\AddStoreProductWindow.xaml.cs">
+    <Compile Update="Windows\ManagerMenu\StoreProducts\Changes\NonProm\AddStoreProductWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Windows\ManagerMenu\StoreProducts\StoreProductsWindow.xaml.cs">
@@ -79,7 +79,7 @@
     <Compile Update="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\EditPromStoreProductWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\ManagerMenu\StoreProducts\Changes\StoreProduct\EditStoreProductWindow.xaml.cs">
+    <Compile Update="Windows\ManagerMenu\StoreProducts\Changes\NonProm\EditStoreProductWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Windows\ManagerMenu\Employees\Changes\AddEmployeeWindow.xaml.cs">
@@ -132,6 +132,18 @@
     <Page Update="Views\ManagerMenu\Products\ProductsView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\ManagerMenu\StoreProducts\Changes\NonProm\AddStoreProductView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ManagerMenu\StoreProducts\Changes\NonProm\EditStoreProductView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ManagerMenu\StoreProducts\Changes\Prom\AddStoreProductView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ManagerMenu\StoreProducts\Changes\Prom\EditStoreProductView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\ManagerMenu\StoreProducts\StoreProductsView.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -162,7 +174,7 @@
     <Page Update="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\AddPromStoreProductWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Windows\ManagerMenu\StoreProducts\Changes\StoreProduct\AddStoreProductWindow.xaml">
+    <Page Update="Windows\ManagerMenu\StoreProducts\Changes\NonProm\AddStoreProductWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\ManagerMenu\StoreProducts\StoreProductsWindow.xaml">
@@ -171,7 +183,7 @@
     <Page Update="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\EditPromStoreProductWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Windows\ManagerMenu\StoreProducts\Changes\StoreProduct\EditStoreProductWindow.xaml">
+    <Page Update="Windows\ManagerMenu\StoreProducts\Changes\NonProm\EditStoreProductWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\ManagerMenu\Employees\Changes\AddEmployeeWindow.xaml">
