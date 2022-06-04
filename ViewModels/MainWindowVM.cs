@@ -11,6 +11,8 @@ using System.Windows;
 using supermarket.Navigation.ViewModels;
 using supermarket.Navigation.WindowViewModels;
 using supermarket.ViewModels.BaseClasses;
+using supermarket.ViewModels.ManagerMenu.Receipts;
+using supermarket.Windows.ManagerMenu.Receipts;
 
 namespace supermarket.ViewModels
 {
@@ -26,6 +28,7 @@ namespace supermarket.ViewModels
         private CategoriesWindowVM _categoriesWindowVM;
         private ProductsWindowVM _productsWindowVM;
         private StoreProductsWindowVM _storeProductsWindowVM;
+        private ReceiptsWindowVM _receiptsWindowVM;
 
         // controllable ViewModels
         private SignInVM _signInVM;
@@ -44,6 +47,7 @@ namespace supermarket.ViewModels
             _categoriesWindowVM = new CategoriesWindowVM();
             _productsWindowVM = new ProductsWindowVM();
             _storeProductsWindowVM = new StoreProductsWindowVM();
+            _receiptsWindowVM = new ReceiptsWindowVM();
             
             _signInVM = new SignInVM();
             _managerMenuVM = new ManagerMenuVM();
@@ -74,12 +78,14 @@ namespace supermarket.ViewModels
             windowsNavigator.SetWay(Main.ManagerCategories, _categoriesWindowVM.Window);
             windowsNavigator.SetWay(Main.ManagerProducts, _productsWindowVM.Window);
             windowsNavigator.SetWay(Main.ManagerStoreProducts, _storeProductsWindowVM.Window);
+            windowsNavigator.SetWay(Main.ManagerReceipts, _receiptsWindowVM.Window);
 
             SetVisibilitySystem(_employeesWindowVM);
             SetVisibilitySystem(_customersWindowVM);
             SetVisibilitySystem(_categoriesWindowVM);
             SetVisibilitySystem(_productsWindowVM);
             SetVisibilitySystem(_storeProductsWindowVM);
+            SetVisibilitySystem(_receiptsWindowVM);
         }
 
         private void SetViewsNavigation()

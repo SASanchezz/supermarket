@@ -67,4 +67,10 @@
     </Page>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\ManagerMenu\Receipts\Changes" />
+    <Folder Include="Views\ManagerMenu\Receipts\Changes" />
+    <Folder Include="Windows\ManagerMenu\Receipts\Changes" />
+  </ItemGroup>
+
 </Project>

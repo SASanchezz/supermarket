@@ -18,12 +18,12 @@ namespace supermarket.Models
 
         public static List<string[]> GetAllCustomers(double minPercent = -1, double maxPercent = 101)
         {
-
             string sql = $"SELECT * FROM Customer_Card WHERE percent>={minPercent} AND percent<={maxPercent}";
             List<string[]> result = DbUtils.FindAll(sql);
 
             return result.Count > 0 ? result : null;
         }
+        
         public static string[] GetCustomerByCardNumber(string cardNumber)
         {
             string sql = $"SELECT * FROM Customer_Card WHERE card_number ='{cardNumber}'";
@@ -31,6 +31,7 @@ namespace supermarket.Models
 
             return result.Count > 0 ? result[0] : null;
         }
+        
         public static string[] GetCustomerByPhone(string phone)
         {
             string sql = $"SELECT * FROM Customer_Card WHERE phone_number ='{phone}'";
