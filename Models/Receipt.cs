@@ -20,7 +20,7 @@ namespace supermarket.Models
         
         //private static DateTime _minPrintDate = DateTime.Today.AddYears(-3); to validator
         
-        public static List<string[]> GetAllReceipts(DateTime minPrintDate, DateTime maxPrintDate)
+        public static List<string[]> GetAllReceipts(string idCashier, DateTime minPrintDate, DateTime maxPrintDate)
         {
             const string dateFormat = "yyyy-MM-dd";
             string minPrintDateString = minPrintDate.ToString(dateFormat);
@@ -30,6 +30,11 @@ namespace supermarket.Models
                          "vat, empl_name, empl_surname, empl_patronymic " +
                          "FROM Receipt LEFT JOIN Employee ON Receipt.id_employee=Employee.id_employee " +
                          $"WHERE DATE(print_date) >= '{minPrintDateString}' AND DATE(print_date) <= '{maxPrintDateString}'";
+
+            if (idCashier != "")
+            {
+                sql += $" AND Receipt.id_employee = {idCashier}";
+            }
             
             List<string[]> result = DbUtils.FindAll(sql);
             
