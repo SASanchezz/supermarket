@@ -18,6 +18,11 @@ namespace supermarket.Middlewares.Category
             {
                 return "Категорія з таким номером вже існує";
             }
+            
+            if (Cat.GetAllCategoriesNames().Contains(categoryName))
+            {
+                return "Категорія з таким ім'ям вже існує";
+            }
 
             if (categoryName.Length is > 50 or 0)
             {
@@ -36,7 +41,12 @@ namespace supermarket.Middlewares.Category
             
             if (initCategoryNumber != changedCategoryNumber && Cat.GetCategoryByNumber(changedCategoryNumber) != null)
             {
-                return "Клієнт з таким номером карти вже існує";
+                return "Категорія з таким номером вже існує";
+            }
+            
+            if (Cat.GetAllCategoriesNames().Contains(categoryName))
+            {
+                return "Категорія з таким ім'ям вже існує";
             }
             
             if (categoryName.Length is > 50 or 0)
