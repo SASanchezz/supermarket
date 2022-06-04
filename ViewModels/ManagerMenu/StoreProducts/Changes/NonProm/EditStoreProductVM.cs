@@ -228,7 +228,7 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.NonProm
 
         private void DeleteEmployee()
         {
-            Empl.DeleteEmployeeByID(Id);
+            //Empl.DeleteEmployeeByID(Id);
             Close();
         }
 
