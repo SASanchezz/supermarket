@@ -35,16 +35,32 @@
             UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
         
+        <TextBlock Grid.Row="0" 
+                 Grid.Column="2"
+                 Text="id касира"
+                 VerticalAlignment="Top"
+                 HorizontalAlignment="Left"
+                 Margin="30,25,0,0"/>
+        
+        <TextBox Grid.Row="0" 
+                 Grid.Column="2"
+                 Width="130"
+                 Height="25"
+                 VerticalAlignment="Bottom"
+                 HorizontalAlignment="Center"
+                 Margin="0,0,0,20"
+                 Text="{Binding FilteredIdCashier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        
         <Button Grid.Row="0" 
-                Grid.Column="2"
+                Grid.Column="3"
                 Content="Подивитися деталі"
                 Width="140" 
                 Height="24" 
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center" 
+                VerticalAlignment="Bottom" 
                 FontSize="12" 
                 FontWeight="DemiBold" 
-                Margin="0,0,0,0"
+                Margin="0,0,0,15"
                 Command="{Binding OpenDetailsReceiptWindowCommand}"/>
 
         <Button Grid.Row="0" 
@@ -53,10 +69,10 @@
                 Width="75" 
                 Height="24" 
                 HorizontalAlignment="Center" 
-                VerticalAlignment="Center" 
+                VerticalAlignment="Top" 
                 FontSize="12" 
                 FontWeight="DemiBold" 
-                Margin="0,0,0,0"
+                Margin="0,15,0,0"
                 Command="{Binding PrintReceiptsCommand}"/>
 
         <Button Grid.Row="0" 
@@ -79,13 +95,13 @@
                           ItemsSource="{Binding Receipts}" 
                           SelectedItem="{Binding SelectedReceipt, Mode=OneWayToSource}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Номер"             Binding="{Binding Path=[0]}"    Width="Auto"    IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="id касира"          Binding="{Binding Path=[1]}"    Width="Auto"       IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="ПІБ касира"          Binding="{Binding Path=[6]}"    Width="Auto"       IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="Номер карти клієнта"      Binding="{Binding Path=[2]}"    Width="Auto"      IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="Дата"        Binding="{Binding Path=[3]}"    Width="Auto"      IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="Сума"           Binding="{Binding Path=[4]}"    Width="Auto"      IsReadOnly="True" CanUserSort="False"/>     
-                        <DataGridTextColumn Header="ПДВ"           Binding="{Binding Path=[5]}"    Width="Auto"      IsReadOnly="True" CanUserSort="False"/>     
+                        <DataGridTextColumn Header="Номер"                  Binding="{Binding Path=[0]}"    Width="*"  IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="id касира"              Binding="{Binding Path=[1]}"    Width="*"  IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="ПІБ касира"             Binding="{Binding Path=[6]}"    Width="4*"  IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Номер карти клієнта"    Binding="{Binding Path=[2]}"    Width="3*"  IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Дата"                   Binding="{Binding Path=[3]}"    Width="2*"  IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Сума"                   Binding="{Binding Path=[4]}"    Width="*"  IsReadOnly="True" CanUserSort="False"/>     
+                        <DataGridTextColumn Header="ПДВ"                    Binding="{Binding Path=[5]}"    Width="*"  IsReadOnly="True" CanUserSort="False"/>     
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

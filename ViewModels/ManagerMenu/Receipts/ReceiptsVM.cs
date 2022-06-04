@@ -11,15 +11,14 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
     internal class ReceiptsVM : ViewModel
     {
         private List<string[]> _receipts;
+        private string _filteredIdCashier = "";
         
         private DateTime _minPrintDate;
         private DateTime _maxPrintDate;
         
         public ReceiptsVM()
         {
-            MinPrintDate = DateTime.Now.AddYears(-3);
-            MaxPrintDate = DateTime.Now;
-            UpdateReceipts();
+            CloseCommand = new RelayCommand<object>(_ => Close());
         }
         
         public List<string[]> Receipts
@@ -31,6 +30,8 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
                 OnPropertyChanged();
             }
         }
+        
+        public Action Close { get; set; }
         
         public RelayCommand<object> OpenDetailsReceiptWindowCommand { get; }
         
@@ -46,6 +47,7 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
             set
             {
                 _minPrintDate = value;
+                UpdateReceipts();
                 OnPropertyChanged();
             }
         }
@@ -55,28 +57,45 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
             set
             {
                 _maxPrintDate = value;
+                UpdateReceipts();
+                OnPropertyChanged();
+            }
+        }
+
+        public string FilteredIdCashier
+        {
+            get => _filteredIdCashier;
+            set
+            {
+                _filteredIdCashier = value;
+                UpdateReceipts();
                 OnPropertyChanged();
             }
         }
         
         public void UpdateReceipts()
         {
-            _receipts = Rec.GetAllReceipts(MinPrintDate, MaxPrintDate);
-
-            if (Receipts == null)
+            if (FilteredIdCashier != "")
             {
-                MessageBox.Show("no receipts");
-                return;
-            };
+                int filteredIdCashier;
+                if (!int.TryParse(FilteredIdCashier, out filteredIdCashier)) return;
+            }
+            
+            Receipts = Rec.GetAllReceipts(FilteredIdCashier, MinPrintDate, MaxPrintDate);
+
+            if (Receipts == null) return;
         
             foreach (var receipt in Receipts)
             {
                 receipt[Rec.name_employee] += " " + receipt[Rec.surname_employee]
                                                   + " " + receipt[Rec.patronymic_employee];
             }
-
         }
-        
-        //public void DefaultMinPrintDate()
+
+        public void SetDefaultPrintDates()
+        {
+            MinPrintDate = DateTime.Now.AddYears(-3);
+            MaxPrintDate = DateTime.Now;
+        }
     }
 }

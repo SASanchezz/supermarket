@@ -9,8 +9,7 @@
         mc:Ignorable="d"
         Title="ReceiptsWindow" Height="500" Width="900"
         Content="{Binding ViewModel, Mode=OneWay}" 
-        IsEnabled="{Binding IsEnabled, Mode=OneWay}" 
-        ResizeMode="NoResize">
+        IsEnabled="{Binding IsEnabled, Mode=OneWay}">
     <Window.Resources>
         <DataTemplate DataType="{ x:Type viewModels:ReceiptsVM}">
             <views:ReceiptsView/>
