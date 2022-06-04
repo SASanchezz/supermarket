@@ -1,0 +1,106 @@
+<UserControl x:Class="supermarket.Views.ManagerMenu.Receipts.ReceiptsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:supermarket.Views.ManagerMenu.Receipts"
+             mc:Ignorable="d"
+             d:DesignHeight="500" d:DesignWidth="900">
+    <Grid Background="#F2F2F2">
+        
+        <Rectangle Fill="Azure" Grid.ColumnSpan="5" Grid.Column="0"/>
+
+        <Button Grid.Row="0" 
+                Grid.Column="0"
+                Content="← Назад" 
+                Width="64"
+                Height="24"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center" 
+                FontSize="12" 
+                FontWeight="DemiBold"
+                Margin="20,0,0,0"
+                Command="{Binding CloseCommand}"/>
+
+        <StackPanel Grid.Row="0" 
+                    Grid.Column="1" 
+                    Orientation="Vertical"
+                    VerticalAlignment="Center"
+                    Width="150">
+            <TextBlock Text="З"/>
+            <DatePicker SelectedDate="{Binding MinPrintDate, Mode=TwoWay, 
+            UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="До"/>
+            <DatePicker SelectedDate="{Binding MaxPrintDate, Mode=TwoWay, 
+            UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+        
+        <Button Grid.Row="0" 
+                Grid.Column="2"
+                Content="Подивитися деталі"
+                Width="140" 
+                Height="24" 
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center" 
+                FontSize="12" 
+                FontWeight="DemiBold" 
+                Margin="0,0,0,0"
+                Command="{Binding OpenDetailsReceiptWindowCommand}"/>
+
+        <Button Grid.Row="0" 
+                Grid.Column="3"
+                Content="Друк" 
+                Width="75" 
+                Height="24" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                FontSize="12" 
+                FontWeight="DemiBold" 
+                Margin="0,0,0,0"
+                Command="{Binding PrintReceiptsCommand}"/>
+
+        <Button Grid.Row="0" 
+                Grid.Column="4"
+                Content="Порахувати суму" 
+                Width="164" 
+                Height="24" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                FontSize="12"
+                FontWeight="DemiBold"
+                Margin="0,0,0,0"
+                Background="LightSkyBlue"
+                Command="{Binding CountReceiptsSumCommand}"/>
+
+        <ScrollViewer Grid.Row="1" Grid.ColumnSpan="5" Grid.Column="0">
+            <StackPanel>
+                <DataGrid AutoGenerateColumns="False" 
+                          SelectionMode="Single"
+                          ItemsSource="{Binding Receipts}" 
+                          SelectedItem="{Binding SelectedReceipt, Mode=OneWayToSource}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Номер"             Binding="{Binding Path=[0]}"    Width="Auto"    IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="id касира"          Binding="{Binding Path=[1]}"    Width="Auto"       IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="ПІБ касира"          Binding="{Binding Path=[6]}"    Width="Auto"       IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Номер карти клієнта"      Binding="{Binding Path=[2]}"    Width="Auto"      IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Дата"        Binding="{Binding Path=[3]}"    Width="Auto"      IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Сума"           Binding="{Binding Path=[4]}"    Width="Auto"      IsReadOnly="True" CanUserSort="False"/>     
+                        <DataGridTextColumn Header="ПДВ"           Binding="{Binding Path=[5]}"    Width="Auto"      IsReadOnly="True" CanUserSort="False"/>     
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </ScrollViewer>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="94"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+    </Grid>
+</UserControl>
