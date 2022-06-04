@@ -17,6 +17,7 @@ namespace supermarket.ViewModels.ManagerMenu
             OpenCategoriesWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(Main.ManagerCategories));
             OpenClientsWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(Main.ManagerCustomers));
             OpenStoreProductsWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(Main.ManagerStoreProducts));
+            OpenReceiptsWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(Main.ManagerReceipts));
             GoToSignInCommand = new RelayCommand<object>(_ => ChangeViewModel(VMNavigationTypes.SignIn));
         }
 
@@ -31,6 +32,8 @@ namespace supermarket.ViewModels.ManagerMenu
         public RelayCommand<object> OpenClientsWindowCommand { get; }
 
         public RelayCommand<object> OpenStoreProductsWindowCommand { get; }
+        
+        public RelayCommand<object> OpenReceiptsWindowCommand { get; }
 
         public RelayCommand<object> GoToSignInCommand { get; }
     }

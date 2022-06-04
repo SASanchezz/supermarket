@@ -7,6 +7,7 @@
         ManagerStoreProducts,
         ManagerCategories,
         ManagerCustomers,
+        ManagerReceipts,
 
         CashierChecks,
         CashierProducts,

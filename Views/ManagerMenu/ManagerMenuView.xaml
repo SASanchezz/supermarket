@@ -30,13 +30,19 @@
         <Button Content="Панель товарів магазину" FontSize="12"
                 Grid.Row="6" Grid.Column="1" Width="180" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"
                 Command="{Binding OpenStoreProductsWindowCommand}"/>
+        
+        <Button Content="Панель чеків" FontSize="12"
+                Grid.Row="7" Grid.Column="1" Width="180" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"
+                Command="{Binding OpenReceiptsWindowCommand}"/>
 
         <Button Content="Назад" FontSize="12"
                 Grid.Row="0" Grid.Column="0" Width="70" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10, 0, 0, 0"
                 Command="{Binding GoToSignInCommand}"/>
+        
 
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
+            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
