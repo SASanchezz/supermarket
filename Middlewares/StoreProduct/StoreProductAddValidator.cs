@@ -1,24 +1,17 @@
-﻿using supermarket.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using strPrdct = supermarket.Data.DbMaps.StoreProductMap;
+﻿using System.Linq;
+using StrProduct = supermarket.Models.StoreProduct;
 
 namespace supermarket.Middlewares.StoreProduct
 {
-    class StoreProductValidator
+    class StoreProductAddValidator
     {
-        private const string _DEFAULT_UPC = "999999999909";
-
         public static string ValidateNotProm(string UPC, string idProduct, string sellingPrice, string productNumber)
         {
             if (UPC.Any(x => !char.IsDigit(x)) || UPC.Length > 12)
             {
                 return "Невалідний UPC";
             }
-            if (DbQueries.GetStoreProductByID(UPC).Any())
+            if (StrProduct.GetStoreProductByUPC(UPC) != null)
             {
                 return "Товар з таким UPC вже існує";
             }
@@ -30,10 +23,16 @@ namespace supermarket.Middlewares.StoreProduct
             {
                 return "Невалідний id продукту";
             }
-            if (!DbQueries.GetProductByID(idProduct).Any())
+            if (Models.Product.GetProductByID(idProduct) == null)
             {
                 return "Такого товару не існує";
             }
+
+            if(StrProduct.GetAllStoreProductsOfProduct(idProduct) != null)
+            {
+                return "Для даного товару вже існує товар в магазині";
+            }
+
             try
             {
                 double.Parse(sellingPrice);
@@ -41,6 +40,7 @@ namespace supermarket.Middlewares.StoreProduct
             {
                 return "Введена некоректна ціна";
             }
+            if (double.Parse(sellingPrice) < 0) return "Введена некоректна ціна";
 
             try
             {
@@ -51,31 +51,39 @@ namespace supermarket.Middlewares.StoreProduct
                 return "Введена некоректна кількість товару";
             }
 
+            if (int.Parse(productNumber) < 0) return "Введена некоректна кількість товару";
+
             return ""; //Alright
         }
 
         public static string ValidateProm(string UPCFather, string UPCProm)
         {
 
-            if (UPCFather.Any(x => !char.IsDigit(x)) || UPCProm.Length > 12)
+            if (UPCFather.Any(x => !char.IsDigit(x)) || UPCFather.Length > 12)
             {
-                return "Невалідний UPC";
+                return "Невалідний батьківський UPC";
+            }
+            if (UPCProm.Any(x => !char.IsDigit(x)) || UPCProm.Length > 12)
+            {
+                return "Невалідний акційний UPC";
             }
 
-            if (DbQueries.GetStoreProductByID(UPCProm).Any())
+            if (StrProduct.GetStoreProductByUPC(UPCFather)[StrProduct.promotional_product] == "True")
+            {
+                return "Ваш неакційний товар є акційним";
+            }
+
+            if (StrProduct.GetStoreProductByUPC(UPCProm) != null)
             {
                 return "Акційний товар з таким UPC вже існує";
             }
 
-            if (UPCFather == _DEFAULT_UPC) return ""; //Alright
-            //Don't check other conditions because it has no sense, father upc wasn't changed
-            if (!DbQueries.GetStoreProductByID(UPCFather).Any())
+            if (StrProduct.GetStoreProductByUPC(UPCFather) == null)
             {
                 return "UPC неакційного товару не існує";
             }
             //If such UPCFather already has UPC_Prom
-            string[] storeProduct = DbQueries.GetStoreProductByID(UPCFather)[0];
-            if (UPCProm != _DEFAULT_UPC && storeProduct[(int)strPrdct.UPC_prom] != null)
+            if (StrProduct.GetStoreProductByUPC(UPCFather)[StrProduct.UPC_prom] != null)
             {
                 return "Цей товар вже має акційний товар";
             }

@@ -4,7 +4,7 @@ using supermarket.Windows.ManagerMenu.StoreProducts.Changes.NonProm;
 namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.NonProm
 {
     /*
-     * Controls EditEmployee Window in Employees of ManagerMenu
+     * Controls EditStoreProduct Window in StoreProducts of ManagerMenu
      */
     internal class EditStoreProductWindowVM : WindowViewModel<EditStoreProductWindow, EditStoreProductVM>
     {
