@@ -18,9 +18,19 @@ namespace supermarket.Models
         //Joined
         public const int product_name = 6;
 
-        public static List<string[]> GetAllEmployee()
+        public static List<string[]> GetAllStoreProducts()
         {
-            string sql = "SELECT * FROM Employee";
+            string sql = "SELECT * FROM Store_Product";
+            List<string[]> result = DbUtils.FindAll(sql);
+
+            return result.Count > 0 ? result : null;
+        }
+        public static List<string[]> GetAllStoreProductsOfProduct(string productId = "")
+        {
+            string whereClause = "WHERE 1";
+            whereClause = productId == "" ? whereClause : whereClause += string.Format(" AND id_product={0}", productId);
+
+            string sql = "SELECT * FROM Store_Product " + whereClause;
             List<string[]> result = DbUtils.FindAll(sql);
 
             return result.Count > 0 ? result : null;
@@ -56,6 +66,29 @@ namespace supermarket.Models
             return result.Count > 0 ? result[0] : null;
         }
 
+        public static List<string[]> GetFatherStoreProductLikeSubUPC(string subString = "")
+        {
+            string whereClause = "WHERE promotional_product = 0 ";
+
+            whereClause = subString == "" ? whereClause : whereClause +=
+                $"AND UPC LIKE '%{subString}%' OR Product.product_name LIKE '%{subString}%'";
+
+
+            string sql = "SELECT UPC, UPC_prom, Store_Product.id_product, selling_price, products_number, promotional_product, Product.product_name " +
+                "FROM (Store_Product LEFT JOIN Product " +
+                "ON Store_Product.id_product = Product.id_product) " + whereClause;
+            List<string[]> result = DbUtils.FindAll(sql);
+
+            if (result.Count > 0) return result;
+
+            sql = "SELECT UPC, UPC_prom, Store_Product.id_product, selling_price, products_number, promotional_product, Product.product_name " +
+                "FROM (Store_Product LEFT JOIN Product " +
+                "ON Store_Product.id_product = Product.id_product) ";
+            result = DbUtils.FindAll(sql);
+
+            return result.Count > 0 ? result : null;
+        }
+
         public static void DeleteStoreProductByUPC(string UPC)
         {
             string sql = $"DELETE FROM Store_Product WHERE UPC = '{UPC}'";
@@ -71,9 +104,9 @@ namespace supermarket.Models
             DbUtils.Execute(sql);
         }
 
-        public static void AddPromStoreProduct(string upc, string upcProm)
+        public static void AddPromStoreProduct(string FatherUPC, string upcProm)
         {
-            string[] fatherStoreProduct = GetStoreProductByUPC(upc);
+            string[] fatherStoreProduct = GetStoreProductByUPC(FatherUPC);
 
             string sqlInsert = "INSERT INTO Store_Product " +
                                "(UPC, UPC_Prom, id_product, selling_price, products_number, promotional_product) " +
@@ -85,7 +118,7 @@ namespace supermarket.Models
 
             string sqlUpdate = "UPDATE Store_Product " +
                                $"SET UPC_Prom = '{upcProm}' " +
-                               $"WHERE (UPC = '{upc}')";
+                               $"WHERE (UPC = '{FatherUPC}')";
 
             DbUtils.Execute(sqlUpdate);
         }
@@ -107,10 +140,10 @@ namespace supermarket.Models
             DbUtils.Execute(sqlProm);
         }
         
-        public static void UpdatePromStoreProduct(string changedUpcParent, string initUpcProm, string changedUpcProm)
+        public static void UpdatePromStoreProduct(string initUpcProm, string changedUpcProm, string changedUpcParent)
         {
             string[] oldFatherStoreProduct = GetStoreProductByPromUPC(initUpcProm);
-            string[] newFatherStoreProduct = GetStoreProductByUPC(initUpcProm);
+            string[] newFatherStoreProduct = GetStoreProductByUPC(changedUpcParent);
 
 
             // Set Prom_UPC null on current father store product
@@ -118,7 +151,7 @@ namespace supermarket.Models
             {
                 string sqlSetNull = "UPDATE Store_Product " +
                                     "SET UPC_Prom=null " + 
-                                    $"WHERE UPC_Prom='{initUpcProm}'";
+                                    $"WHERE UPC='{oldFatherStoreProduct[UPC]}'";
                 
                 DbUtils.Execute(sqlSetNull);
             }

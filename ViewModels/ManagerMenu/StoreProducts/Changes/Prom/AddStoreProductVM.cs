@@ -1,73 +1,75 @@
-﻿using supermarket.Data;
-using supermarket.Utils;
+﻿using supermarket.Utils;
 using System;
 using supermarket.Middlewares.SignUp;
 using supermarket.Models;
 using supermarket.ViewModels.BaseClasses;
+using supermarket.Middlewares.StoreProduct;
+using System.Collections.Generic;
 
 namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
 {
     internal class AddStoreProductVM : ViewModel
     {
-        private RelayCommand<object> _addEmployeeCommand;
+        private string _UPCProm = "";
+        private string _UPCFather = "";
+
+        private RelayCommand<object> _addStoreProductCommand;
         private RelayCommand<object> _closeCommand;
 
         public Action Close { get; set; }
 
-        public string Surname { get; set; }
+        public string UPCProm
+        {
+            get => _UPCProm;
+            set
+            {
+                _UPCProm = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public string Name { get; set; }
+        public string UPCFather
+        {
+            get => _UPCFather;
+            set
+            {
+                _UPCFather = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(SelectiveFatherUPC));
+            }
+        }
 
-        public string Patronymic { get; set; }
-
-        public string Role { get; set; }
-
-        public string Salary { get; set; }
-
-        public DateTime DateOfBirth { get; set; }
-
-        public DateTime DateOfStart { get; set; }
-
-        public string PhoneNumber { get; set; }
-
-        public string Password { get; set; }
-
-        public string City { get; set; }
-
-        public string Street { get; set; }
-
-        public string Zipcode { get; set; }
-
-        public static string[] Roles => Data.Roles.roleNames;
-
-        public RelayCommand<object> AddEmployeeCommand
+        public List<string> SelectiveFatherUPC
         {
             get
             {
-                return _addEmployeeCommand ??= new RelayCommand<object>(_ => AddEmployee(), CanExecute);
+                List<string[]> UPCs = StoreProduct.GetFatherStoreProductLikeSubUPC(_UPCFather);
+                if (UPCs == null) return new List<string>(0);
+                List<string> resultUPCs = new(UPCs.Count);
+                for (int i = 0; i < UPCs.Count; i++)
+                {
+                    resultUPCs.Add(UPCs[i][StoreProduct.UPC] + "  --  " + UPCs[i][StoreProduct.product_name]);
+                }
+
+                return resultUPCs;
             }
+            set { }
+        }
+
+        public RelayCommand<object> AddStoreProductCommand
+        {
+            get => _addStoreProductCommand ??= new RelayCommand<object>(_ => AddStoreProduct(), CanExecute);
         }
 
         public RelayCommand<object> CloseCommand
         {
-            get
-            {
-                return _closeCommand ??= new RelayCommand<object>(_ => Close());
-            }
+            get => _closeCommand ??= new RelayCommand<object>(_ => Close());
         }
 
-        private void AddEmployee()
+        private void AddStoreProduct()
         {
-            // сюда саша
-            // Yes honey
-            /*
-            * This method sign up new user
-            */
-
             ////Validates entered information
-            string result = SignUpValidator.Validate(Surname, Name, Patronymic, Role,
-                Salary, DateOfBirth, DateOfStart, PhoneNumber,
-                City, Street, Zipcode, Password);
+            string result = StoreProductAddValidator.ValidateProm(UPCFather.Split(' ')[0], UPCProm);
 
             if (result.Length != 0)
             {
@@ -76,26 +78,18 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
             }
 
             //Query to insert new employee
-            Employee.AddEmployee(Surname, Name, Patronymic, Role,
-                Salary, DateOfBirth, DateOfStart, PhoneNumber,
-                City, Street, Zipcode, Password);
+            StoreProduct.AddPromStoreProduct(UPCFather.Split(' ')[0], UPCProm);
 
-            // добавить обнуление свойств
+            UPCFather = "";
+            UPCProm = "";
 
             Close();
         }
 
         private bool CanExecute(object obj)
         {
-            return !string.IsNullOrWhiteSpace(Name)
-                && !string.IsNullOrWhiteSpace(Surname)
-                && !string.IsNullOrWhiteSpace(Patronymic)
-                && !string.IsNullOrWhiteSpace(Salary)
-                && !string.IsNullOrWhiteSpace(PhoneNumber)
-                && !string.IsNullOrWhiteSpace(Password)
-                && !string.IsNullOrWhiteSpace(City)
-                && !string.IsNullOrWhiteSpace(Street)
-                && !string.IsNullOrWhiteSpace(Zipcode);
+            return !string.IsNullOrWhiteSpace(UPCFather)
+                && !string.IsNullOrWhiteSpace(UPCProm);
         }
     }
 }

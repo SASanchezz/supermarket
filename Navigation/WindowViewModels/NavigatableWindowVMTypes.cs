@@ -43,8 +43,7 @@
     public enum ManagerStoreProducts
     {
         AddPromStoreProduct,
-        EditPromStoreProduct,
+        EditStoreProduct,
         AddNonPromStoreProduct,
-        EditNonPromStoreProduct,
     }
 }

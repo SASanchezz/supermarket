@@ -20,8 +20,7 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
         private RelayCommand<object> _open_nonProm_AddStoreProductWindowCommand;
         private RelayCommand<object> _open_Prom_AddStoreProductWindowCommand;
 
-        private RelayCommand<object> _open_nonProm_EditStoreProductWindowCommand;
-        private RelayCommand<object> _open_Prom_EditStoreProductWindowCommand;
+        private RelayCommand<object> _openEditStoreProductWindowCommand;
 
         private RelayCommand<object> _closeCommand;
 
@@ -53,14 +52,11 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
             get => _open_Prom_AddStoreProductWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(ManagerStoreProducts.AddPromStoreProduct));
         }
 
-        public RelayCommand<object> Open_nonProm_EditEmployeeWindowCommand
+        public RelayCommand<object> OpenEditStoreProductWindowCommand
         {
-            get => _open_nonProm_EditStoreProductWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(ManagerStoreProducts.EditNonPromStoreProduct));
+            get => _openEditStoreProductWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(ManagerStoreProducts.EditStoreProduct));
         }
-        public RelayCommand<object> Open_Prom_EditEmployeeWindowCommand
-        {
-            get => _open_Prom_EditStoreProductWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(ManagerStoreProducts.EditPromStoreProduct));
-        }
+
 
         //public RelayCommand<object> PrintCommand
         //{
