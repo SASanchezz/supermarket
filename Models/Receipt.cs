@@ -41,5 +41,10 @@ namespace supermarket.Models
             return result.Count > 0 ? result : null;
         }
         
+        public static void DeleteReceiptByReceiptNumber(string receiptNumber)
+        {
+            string sql = $"DELETE FROM Receipt WHERE receipt_number ={receiptNumber}";
+            DbUtils.Execute(sql);
+        }
     }
 }

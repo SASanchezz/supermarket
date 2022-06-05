@@ -1,0 +1,18 @@
+<Window x:Class="supermarket.Windows.ManagerMenu.Receipts.Changes.DetailsReceiptWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:viewModels="clr-namespace:supermarket.ViewModels.ManagerMenu.Receipts.Changes"
+        xmlns:views="clr-namespace:supermarket.Views.ManagerMenu.Receipts.Changes"
+        xmlns:local="clr-namespace:supermarket.Windows.ManagerMenu.Receipts.Changes"
+        mc:Ignorable="d"
+        Title="DetailsReceiptWindow" Height="450" Width="800"
+        Content="{Binding ViewModel, Mode=OneWay}" 
+        IsEnabled="{Binding IsEnabled, Mode=OneWay}">
+    <Window.Resources>
+        <DataTemplate DataType="{ x:Type viewModels:DetailsReceiptVM}">
+            <views:DetailsReceiptView/>
+        </DataTemplate>
+    </Window.Resources>
+</Window>

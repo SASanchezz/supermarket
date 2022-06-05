@@ -46,4 +46,9 @@
         EditStoreProduct,
         AddNonPromStoreProduct,
     }
+    
+    public enum ManagerReceipts
+    {
+        DetailsReceipt
+    }
 }
