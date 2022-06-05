@@ -1,16 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
+using supermarket.Navigation.WindowViewModels;
 using supermarket.Utils;
 using supermarket.ViewModels.BaseClasses;
 using Rec = supermarket.Models.Receipt;
 
 namespace supermarket.ViewModels.ManagerMenu.Receipts
 {
-    internal class ReceiptsVM : ViewModel
+    internal class ReceiptsVM : ViewModel, IWindowOpeningVM<ManagerReceipts>
     {
         private List<string[]> _receipts;
+        private string[] _selectedReceipt;
         private string _filteredIdCashier = "";
         
         private DateTime _minPrintDate;
@@ -19,6 +19,8 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
         public ReceiptsVM()
         {
             CloseCommand = new RelayCommand<object>(_ => Close());
+            OpenDetailsReceiptWindowCommand =
+                new RelayCommand<object>(_ => OpenWindowViewModel(ManagerReceipts.DetailsReceipt));
         }
         
         public List<string[]> Receipts
@@ -27,6 +29,16 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
             set
             {
                 _receipts = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string[] SelectedReceipt
+        {
+            get => _selectedReceipt;
+            set
+            {
+                _selectedReceipt = value;
                 OnPropertyChanged();
             }
         }
@@ -77,8 +89,14 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
         {
             if (FilteredIdCashier != "")
             {
-                int filteredIdCashier;
-                if (!int.TryParse(FilteredIdCashier, out filteredIdCashier)) return;
+                try
+                {
+                    int.Parse(FilteredIdCashier);
+                }
+                catch
+                {
+                    return;
+                }
             }
             
             Receipts = Rec.GetAllReceipts(FilteredIdCashier, MinPrintDate, MaxPrintDate);
@@ -97,5 +115,7 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
             MinPrintDate = DateTime.Now.AddYears(-3);
             MaxPrintDate = DateTime.Now;
         }
+
+        public Action<ManagerReceipts> OpenWindowViewModel { get; set; }
     }
 }
