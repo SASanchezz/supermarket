@@ -25,9 +25,6 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
                 _addCategoryWindowVM.Window.Close();
                 _editCategoryWindowVM.Window.Close();
             };
-            
-            // set Close() method to Action in ViewModel
-            ViewModel.Close = Window.Close;
         }
         
         private void SetWindowsNavigation()
@@ -36,13 +33,14 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
                 new WindowVMNavigator<ManagerCategories>(new IWindowOpeningVM<ManagerCategories>[] { ViewModel });
             
             windowsNavigator.SetWay(ManagerCategories.AddCategory, _addCategoryWindowVM.Window);
-            windowsNavigator.SetWay(ManagerCategories.EditCategory, _editCategoryWindowVM.Window, OnOpeningEditCategoryHandler);
+            windowsNavigator.SetWay(ManagerCategories.EditCategory, _editCategoryWindowVM.Window, 
+                OnOpeningEditCategory);
             
-            SetVisibilitySystem(_addCategoryWindowVM);
-            SetVisibilitySystem(_editCategoryWindowVM);
+            SetEnabilitySystem(_addCategoryWindowVM);
+            SetEnabilitySystem(_editCategoryWindowVM);
         }
 
-        private void OnOpeningEditCategoryHandler()
+        private void OnOpeningEditCategory()
         {
             if (ViewModel.SelectedCategory == null)
             {
@@ -50,14 +48,15 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
             }
 
             _editCategoryWindowVM.ViewModel.SetData(ViewModel.SelectedCategory);
-            ViewModel.SelectedCategory = null;
         }
 
         private void SetUpdatingSystem()
         {
             Window.IsVisibleChanged += (sender, e) =>
             {
-                if (!(bool)e.NewValue) return; // window is hiden
+                // window is hiden
+                if (!(bool)e.NewValue) return;
+            
                 // window is shown
                 ViewModel.UpdateCategories();
             };
@@ -71,13 +70,14 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
         {
             windowVM.Window.IsVisibleChanged += (sender, e) =>
             {
-                if ((bool)e.NewValue) return; // window is shown
+                // window is shown
+                if ((bool)e.NewValue) return; 
                 // window is hiden
                 ViewModel.UpdateCategories();
             };
         }
 
-        private void SetVisibilitySystem<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
+        private void SetEnabilitySystem<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
             where TWindow : Window, new()
             where TViewModel : ViewModel, new()
         {

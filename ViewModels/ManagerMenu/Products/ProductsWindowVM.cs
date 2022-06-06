@@ -25,9 +25,6 @@ namespace supermarket.ViewModels.ManagerMenu.Products
                 _addProductWindowVM.Window.Close();
                 _editProductWindowVM.Window.Close();
             };
-
-            // set Close() method to Action in ViewModel
-            ViewModel.Close = Window.Close;
         }
 
         private void SetWindowsNavigation()
@@ -36,13 +33,13 @@ namespace supermarket.ViewModels.ManagerMenu.Products
                 new WindowVMNavigator<ManagerProducts>(new IWindowOpeningVM<ManagerProducts>[] { ViewModel });
 
             windowsNavigator.SetWay(ManagerProducts.AddProduct, _addProductWindowVM.Window);
-            windowsNavigator.SetWay(ManagerProducts.EditProduct, _editProductWindowVM.Window, OnOpeningEditProductHandler);
+            windowsNavigator.SetWay(ManagerProducts.EditProduct, _editProductWindowVM.Window, OnOpeningEditProduct);
             
-            SetVisibilitySystem(_addProductWindowVM);
-            SetVisibilitySystem(_editProductWindowVM);
+            SetEnabilitySystem(_addProductWindowVM);
+            SetEnabilitySystem(_editProductWindowVM);
         }
 
-        private void OnOpeningEditProductHandler()
+        private void OnOpeningEditProduct()
         {
             if (ViewModel.SelectedProduct == null)
             {
@@ -50,7 +47,6 @@ namespace supermarket.ViewModels.ManagerMenu.Products
             }
             
             _editProductWindowVM.ViewModel.SetData(ViewModel.SelectedProduct);
-            ViewModel.SelectedProduct = null;
         }
 
         private void SetUpdatingSystem()
@@ -77,7 +73,7 @@ namespace supermarket.ViewModels.ManagerMenu.Products
             };
         }
 
-        private void SetVisibilitySystem<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
+        private void SetEnabilitySystem<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
             where TWindow : Window, new()
             where TViewModel : ViewModel, new()
         {

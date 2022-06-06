@@ -11,14 +11,20 @@ namespace supermarket.ViewModels.BaseClasses
         private bool _isEnabled = true;
         protected WindowViewModel()
         {
-            Window = new TWindow();
-            ViewModel = new TViewModel();
+            Window = new TWindow
+            {
+                DataContext = this
+            };
 
-            Window.DataContext = this;
             Window.Closing += (sender, e) =>
             {
                 e.Cancel = true;
                 Window.Hide();
+            };
+            
+            ViewModel = new TViewModel
+            {
+                CloseWindow = Window.Close
             };
         }
 
@@ -37,7 +43,7 @@ namespace supermarket.ViewModels.BaseClasses
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
@@ -52,6 +58,25 @@ namespace supermarket.ViewModels.BaseClasses
         {
             Window = window;
             Window.DataContext = this;
+            Window.Closing += (sender, e) =>
+            {
+                e.Cancel = true;
+                Window.Hide();
+            };
+        }
+        
+        protected WindowViewModel()
+        {
+            Window = new TWindow
+            {
+                DataContext = this
+            };
+            
+            Window.Closing += (sender, e) =>
+            {
+                e.Cancel = true;
+                Window.Hide();
+            };
         }
 
         public TWindow Window { get; protected set; }
@@ -67,7 +92,7 @@ namespace supermarket.ViewModels.BaseClasses
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

@@ -24,14 +24,12 @@ namespace supermarket.ViewModels.ManagerMenu.Products
             OpenAddProductWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(ManagerProducts.AddProduct));
             OpenEditProductWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(ManagerProducts.EditProduct));
             PrintProductsCommand = new RelayCommand<object>(_ => PrintProducts());
-            CloseCommand = new RelayCommand<object>(_ => Close());
+            CloseCommand = new RelayCommand<object>(_ => CloseWindow());
             SetSelectiveCategories();
         }
 
         public Action<ManagerProducts> OpenWindowViewModel { get; set; }
-
-        public Action Close { get; set; }
-
+        
         public List<string[]> Products
         {
             get => _products;

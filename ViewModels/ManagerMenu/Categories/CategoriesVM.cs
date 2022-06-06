@@ -17,12 +17,10 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
             OpenAddCategoryWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(ManagerCategories.AddCategory));
             OpenEditCategoryWindowCommand= new RelayCommand<object>(_ => OpenWindowViewModel(ManagerCategories.EditCategory));
             PrintCategoriesCommand = new RelayCommand<object>(_ => PrintCategories());
-            CloseCommand = new RelayCommand<object>(_ => Close());
+            CloseCommand = new RelayCommand<object>(_ => CloseWindow());
         }
         
         public Action<ManagerCategories> OpenWindowViewModel { get; set; }
-        
-        public Action Close { get; set; }
 
         public List<string[]> Categories
         {
@@ -56,7 +54,7 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
         {
             Categories = DbQueries.GetAllCategories();
         }
-        
+
         private void PrintCategories()
         {
             Printer.PrintDataGrid(Categories, new string[]

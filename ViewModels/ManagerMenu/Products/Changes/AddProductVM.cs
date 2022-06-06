@@ -14,9 +14,8 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
         public AddProductVM()
         {
             AddProductCommand = new RelayCommand<object>(_ => AddProduct(), CanExecute);
-            CloseCommand = new RelayCommand<object>(_ => Close());
+            CloseCommand = new RelayCommand<object>(_ => CloseWindow());
         }
-        public Action Close { get; set; }
 
         public string IdProduct { get; set; }
 
@@ -50,7 +49,7 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
             Product.AddProduct(IdProduct, Categ.GetIDByName(CategoryName)[0], ProductName, 
                 Characteristics, Manufacturer);
 
-            Close();
+            CloseWindow();
         }
 
         private bool CanExecute(object obj)

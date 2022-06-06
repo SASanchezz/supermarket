@@ -5,9 +5,6 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
 {
     internal class AddCategoryWindowVM : WindowViewModel<AddCategoryWindow, AddCategoryVM>
     {
-        public AddCategoryWindowVM()
-        {
-            ViewModel.Close = Window.Close;
-        }
+        
     }
 }

@@ -16,7 +16,6 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
             _detailsReceiptWindowVM = new DetailsReceiptWindowVM();
             SetUpdatingSystem();
             SetWindowsNavigation();
-            ViewModel.Close = Window.Close;
         }
         
         private void SetUpdatingSystem()

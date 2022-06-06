@@ -25,7 +25,7 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
         {
             UpdateProductCommand = new RelayCommand<object>(_ => UpdateProduct(), CanExecute);
             DeleteProductCommand = new RelayCommand<object>(_ => DeleteProduct());
-            CloseCommand = new RelayCommand<object>(_ => Close());
+            CloseCommand = new RelayCommand<object>(_ => CloseWindow());
         }
 
         public string InitIdProduct
@@ -105,8 +105,6 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
         public RelayCommand<object> DeleteProductCommand { get; }
 
         public RelayCommand<object> CloseCommand { get; }
-        
-        public Action Close { get; set; }
 
         public void SetData(string[] data)
         {
@@ -132,13 +130,13 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
             Prod.UpdateProduct(InitIdProduct, ChangedIdProduct, 
                 Categ.GetIDByName(CategoryName)[0], ProductName, Characteristics, Manufacturer);
 
-            Close();
+            CloseWindow();
         }
 
         private void DeleteProduct()
         {
             Prod.DeleteProductByID(InitIdProduct);
-            Close();
+            CloseWindow();
         }
 
         private bool CanExecute(object obj)

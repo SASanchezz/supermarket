@@ -17,7 +17,7 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
         {
             UpdateCategoryCommand = new RelayCommand<object>(_ => UpdateCategory(), CanExecute);
             DeleteCategoryCommand = new RelayCommand<object>(_ => DeleteCategory());
-            CloseCommand = new RelayCommand<object>(_ => Close());
+            CloseCommand = new RelayCommand<object>(_ => CloseWindow());
         }
         
         public string ChangedNumber
@@ -40,8 +40,6 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
             }
         }
 
-        public Action Close { get; set; }
-        
         public RelayCommand<object> UpdateCategoryCommand { get; }
         
         public RelayCommand<object> DeleteCategoryCommand { get; }
@@ -67,13 +65,13 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
             
             Cat.UpdateCategory(_initNumber, ChangedNumber, Name);
             
-            Close();
+            CloseWindow();
         }
         
         private void DeleteCategory()
         {
             Cat.DeleteCategoryByNumber(_initNumber);
-            Close();
+            CloseWindow();
         }
         
         private bool CanExecute(object obj)

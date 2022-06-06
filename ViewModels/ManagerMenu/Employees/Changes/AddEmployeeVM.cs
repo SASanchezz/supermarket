@@ -11,10 +11,8 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
         public AddEmployeeVM()
         {
             AddEmployeeCommand = new RelayCommand<object>(_ => AddEmployee(), CanExecute);
-            CloseCommand = new RelayCommand<object>(_ => Close());
+            CloseCommand = new RelayCommand<object>(_ => CloseWindow());
         }
-
-        public Action Close { get; set; }
 
         public string Surname { get; set; }
 
@@ -72,7 +70,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
             
             // добавить обнуление свойств
             
-            Close();
+            CloseWindow();
         }
 
         private bool CanExecute(object obj)

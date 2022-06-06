@@ -1,11 +1,10 @@
 ﻿using supermarket.Utils;
 using System;
-using supermarket.Data;
 using supermarket.Middlewares.StoreProduct;
 using System.Windows;
-using supermarket.ViewModels.BaseClasses;
 using supermarket.Models;
 using System.Collections.Generic;
+using supermarket.Navigation.ViewModels;
 using StrProduct = supermarket.Models.StoreProduct;
 
 namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.NonProm
@@ -13,7 +12,7 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.NonProm
     /*
      * Controls ManagerEditEmployee View
      */
-    internal class EditStoreProductVM : ViewModel
+    internal class EditStoreProductVM : NavigatableViewModel<EditStoreProductViewsTypes>
     {
         private string _initUpc;
         private string _changedUpc;
@@ -92,12 +91,10 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.NonProm
         }
         public RelayCommand<object> CloseCommand
         {
-            get => _closeCommand ??= new RelayCommand<object>(_ => Close());
+            get => _closeCommand ??= new RelayCommand<object>(_ => CloseWindow());
         }
 
-        public Action Close { get; set; }
-
-        public void SetData(string[] data)
+        public override void SetData(string[] data)
         {
             string[] productInfo = Product.GetProductByID(data[StrProduct.id_product]);
 
@@ -120,13 +117,13 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.NonProm
 
             StrProduct.UpdateNonPromStoreProduct(_initUpc, _changedUpc, _subProduct.Split(' ')[0], double.Parse(_price), _amount);
 
-            Close();
+            CloseWindow();
         }
 
         private void DeleteStoreProduct()
         {
             StrProduct.DeleteStoreProductByUPC(_initUpc);
-            Close();
+            CloseWindow();
         }
 
         private bool CanExecute(object obj)

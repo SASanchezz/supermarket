@@ -9,7 +9,7 @@ namespace supermarket.ViewModels.SignIn
     /*
      * Controls Sign In View
      */
-    internal class SignInVM : NavigatableViewModel
+    internal class SignInVM : NavigatableViewModel<MainViewsTypes>
     {
         public SignInVM()
         {
@@ -30,7 +30,7 @@ namespace supermarket.ViewModels.SignIn
                 SignInValidator.Validate("+380634412925", "admin");
 
                 // вот тут хуйню с проверкой менеджер это или кассир надо сообразить
-                ChangeViewModel(VMNavigationTypes.ManagerMenu);
+                ChangeViewModel(MainViewsTypes.ManagerMenu);
                 //_goToCashierMenu();
             }
             catch (Exception ex)
