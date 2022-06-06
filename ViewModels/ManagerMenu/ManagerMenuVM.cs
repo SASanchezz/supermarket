@@ -8,7 +8,7 @@ namespace supermarket.ViewModels.ManagerMenu
     /*
      * Controls Manager Menu View
      */
-    internal class ManagerMenuVM : NavigatableViewModel, IWindowOpeningVM<Main>
+    internal class ManagerMenuVM : NavigatableViewModel<MainViewsTypes>, IWindowOpeningVM<Main>
     {
         public ManagerMenuVM()
         {
@@ -18,7 +18,7 @@ namespace supermarket.ViewModels.ManagerMenu
             OpenClientsWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(Main.ManagerCustomers));
             OpenStoreProductsWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(Main.ManagerStoreProducts));
             OpenReceiptsWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(Main.ManagerReceipts));
-            GoToSignInCommand = new RelayCommand<object>(_ => ChangeViewModel(VMNavigationTypes.SignIn));
+            GoToSignInCommand = new RelayCommand<object>(_ => ChangeViewModel(MainViewsTypes.SignIn));
         }
 
         public Action<Main> OpenWindowViewModel { get; set; }

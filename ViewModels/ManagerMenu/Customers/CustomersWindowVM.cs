@@ -29,9 +29,6 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
                 _addCustomerWindowVM.Window.Close();
                 _editCustomerWindowVM.Window.Close();
             };
-
-            // set Close() method to Action in ViewModel
-            ViewModel.Close = Window.Close;
         }
 
         private void SetWindowsNavigation()
@@ -43,8 +40,8 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
             windowsNavigator.SetWay(ManagerCustomers.EditCustomer, _editCustomerWindowVM.Window, 
                 OnOpeningEditCustomerHandler);
             
-            SetVisibilitySystem(_addCustomerWindowVM);
-            SetVisibilitySystem(_editCustomerWindowVM);
+            SetEnabilitySystem(_addCustomerWindowVM);
+            SetEnabilitySystem(_editCustomerWindowVM);
         }
         
         private void OnOpeningEditCustomerHandler()
@@ -55,16 +52,16 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
             }
 
             _editCustomerWindowVM.ViewModel.SetData(ViewModel.SelectedCustomer);
-            ViewModel.SelectedCustomer = null;
         }
 
         private void SetUpdatingSystem()
         {
             Window.IsVisibleChanged += (sender, e) =>
             {
-                if (!(bool)e.NewValue) return; // window is hiden
+                // window is hiden
+                if (!(bool)e.NewValue) return;
                 // window is shown
-                ViewModel.UpdateCustomers();
+                ViewModel.Reset();
             };
             SetUpdatingAfterHiden(_addCustomerWindowVM);
             SetUpdatingAfterHiden(_editCustomerWindowVM);
@@ -82,7 +79,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
             };
         }
         
-        private void SetVisibilitySystem<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
+        private void SetEnabilitySystem<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
             where TWindow : Window, new()
             where TViewModel : ViewModel, new()
         {

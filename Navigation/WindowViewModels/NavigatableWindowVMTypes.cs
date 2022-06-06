@@ -8,6 +8,7 @@
         ManagerCategories,
         ManagerCustomers,
         ManagerReceipts,
+        ManagerSales,
 
         CashierChecks,
         CashierProducts,
@@ -43,8 +44,9 @@
     public enum ManagerStoreProducts
     {
         AddPromStoreProduct,
-        EditStoreProduct,
         AddNonPromStoreProduct,
+        
+        EditStoreProduct
     }
     
     public enum ManagerReceipts

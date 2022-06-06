@@ -31,8 +31,6 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
 
         public Action<ManagerStoreProducts> OpenWindowViewModel { get; set; }
 
-        public Action Close { get; set; }
-
         public List<string[]> StoreProducts
         {
             get => _storeProducts;
@@ -68,7 +66,7 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
 
         public RelayCommand<object> CloseCommand
         {
-            get => _closeCommand ??= new RelayCommand<object>(_ => Close());
+            get => _closeCommand ??= new RelayCommand<object>(_ => CloseWindow());
         }
 
         public string[] SelectedStoreProduct

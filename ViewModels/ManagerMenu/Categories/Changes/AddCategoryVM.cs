@@ -12,15 +12,13 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
         public AddCategoryVM()
         {
             AddCategoryCommand = new RelayCommand<object>(_ => AddCategory(), CanExecute);
-            CloseCommand = new RelayCommand<object>(_ => Close());
+            CloseCommand = new RelayCommand<object>(_ => CloseWindow());
         }
         
         public string Number { get; set; }
 
         public string Name { get; set; }
-        
-        public Action Close { get; set; }
-        
+
         public RelayCommand<object> AddCategoryCommand { get; }
 
         public RelayCommand<object> CloseCommand { get; }
@@ -41,7 +39,7 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
             
             // добавить обнуление свойств
             
-            Close();
+            CloseWindow();
         }
         
         private bool CanExecute(object obj)

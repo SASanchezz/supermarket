@@ -31,7 +31,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
         {
             UpdateEmployeeCommand = new RelayCommand<object>(_ => UpdateEmployee(), CanExecute);
             DeleteEmployeeCommand = new RelayCommand<object>(_ => DeleteEmployee());
-            CloseCommand = new RelayCommand<object>(_ => Close());
+            CloseCommand = new RelayCommand<object>(_ => CloseWindow());
         }
 
         public string Id
@@ -171,8 +171,6 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
         public RelayCommand<object> DeleteEmployeeCommand { get; }
         
         public RelayCommand<object> CloseCommand { get; }
-        
-        public Action Close { get; set; }
 
         public void SetData(string[] data)
         {
@@ -211,13 +209,13 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
             Salary, DateOfBirth, DateOfStart, PhoneNumber,
             Password, City, Street, Zipcode);
 
-            Close();
+            CloseWindow();
         }
 
         private void DeleteEmployee()
         {
             Empl.DeleteEmployeeById(Id);
-            Close();
+            CloseWindow();
         }
 
         private bool CanExecute(object obj)

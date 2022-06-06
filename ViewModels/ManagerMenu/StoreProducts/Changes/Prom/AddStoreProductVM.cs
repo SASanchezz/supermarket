@@ -16,8 +16,6 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
         private RelayCommand<object> _addStoreProductCommand;
         private RelayCommand<object> _closeCommand;
 
-        public Action Close { get; set; }
-
         public string UPCProm
         {
             get => _UPCProm;
@@ -63,7 +61,7 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
 
         public RelayCommand<object> CloseCommand
         {
-            get => _closeCommand ??= new RelayCommand<object>(_ => Close());
+            get => _closeCommand ??= new RelayCommand<object>(_ => CloseWindow());
         }
 
         private void AddStoreProduct()
@@ -83,7 +81,7 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
             UPCFather = "";
             UPCProm = "";
 
-            Close();
+            CloseWindow();
         }
 
         private bool CanExecute(object obj)

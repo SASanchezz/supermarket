@@ -28,14 +28,12 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             OpenAddEmployeeWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(ManagerEmployees.AddEmployee));
             OpenEditEmployeeWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(ManagerEmployees.EditEmployee));
             PrintEmployeesCommand = new RelayCommand<object>(_ => PrintEmployees());
-            CloseCommand = new RelayCommand<object>(_ => Close());
+            CloseCommand = new RelayCommand<object>(_ => CloseWindow());
                 
             SetSelectiveRoles();
         }
 
         public Action<ManagerEmployees> OpenWindowViewModel { get; set; }
-
-        public Action Close { get; set; }
 
         public List<string[]> Employees
         {

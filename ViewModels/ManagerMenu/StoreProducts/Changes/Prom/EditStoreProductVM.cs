@@ -3,15 +3,15 @@ using System;
 using supermarket.Middlewares.StoreProduct;
 using StrProduct = supermarket.Models.StoreProduct;
 using System.Windows;
-using supermarket.ViewModels.BaseClasses;
 using System.Collections.Generic;
+using supermarket.Navigation.ViewModels;
 
 namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
 {
     /*
      * Controls ManagerEditEmployee View
      */
-    internal class EditStoreProductVM : ViewModel
+    internal class EditStoreProductVM : NavigatableViewModel<EditStoreProductViewsTypes>
     {
         private string _initUPCProm = "";
         private string _changedUPCProm = "";
@@ -69,11 +69,10 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
         }
         public RelayCommand<object> CloseCommand
         {
-            get => _closeCommand ??= new RelayCommand<object>(_ => Close());
+            get => _closeCommand ??= new RelayCommand<object>(_ => CloseWindow());
         }
-        public Action Close { get; set; }
 
-        public void SetData(string[] data)
+        public override void SetData(string[] data)
         {
             _initUPCProm = data[StrProduct.UPC_prom];
             ChangedUPCProm = data[StrProduct.UPC_prom];
@@ -92,13 +91,13 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
 
             StrProduct.UpdatePromStoreProduct(_initUPCProm, _changedUPCProm, _UPCFather);
 
-            Close();
+            CloseWindow();
         }
 
         private void DeleteStoreProduct()
         {
             StrProduct.DeleteStoreProductByUPC(_initUPCProm);
-            Close();
+            CloseWindow();
         }
 
         private bool CanExecute(object obj)

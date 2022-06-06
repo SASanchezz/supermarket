@@ -8,9 +8,6 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
      */
     internal class AddCustomerWindowVM : WindowViewModel<AddCustomerWindow, AddCustomerVM>
     {
-        public AddCustomerWindowVM()
-        {
-            ViewModel.Close = Window.Close;
-        }
+        
     }
 }

@@ -29,9 +29,6 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
                 _addEmployeeWindowVM.Window.Close();
                 _editEmployeeWindowVM.Window.Close();
             };
-            
-            // set Close() method to Action in ViewModel
-            ViewModel.Close = Window.Close;
         }
 
         private void SetWindowsNavigation()
@@ -43,8 +40,8 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             windowsNavigator.SetWay(ManagerEmployees.EditEmployee, _editEmployeeWindowVM.Window, 
                 OnOpeningEditEmployee);
             
-            SetVisibilitySystem(_addEmployeeWindowVM);
-            SetVisibilitySystem(_editEmployeeWindowVM);
+            SetEnabilitySystem(_addEmployeeWindowVM);
+            SetEnabilitySystem(_editEmployeeWindowVM);
         }
 
         private void OnOpeningEditEmployee()
@@ -82,7 +79,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             };
         }
 
-        private void SetVisibilitySystem<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
+        private void SetEnabilitySystem<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
             where TWindow : Window, new()
             where TViewModel : ViewModel, new()
         {

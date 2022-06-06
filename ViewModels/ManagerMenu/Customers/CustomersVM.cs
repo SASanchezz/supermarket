@@ -20,17 +20,19 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
 
         public CustomersVM()
         {
-            OpenAddCustomerWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(ManagerCustomers.AddCustomer));
-            OpenEditCustomerWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(ManagerCustomers.EditCustomer));
-            CloseCommand = new RelayCommand<object>(_ => Close());
+            OpenAddCustomerWindowCommand = 
+                new RelayCommand<object>(_ => OpenWindowViewModel(ManagerCustomers.AddCustomer));
+            
+            OpenEditCustomerWindowCommand = 
+                new RelayCommand<object>(_ => OpenWindowViewModel(ManagerCustomers.EditCustomer));
+            
+            CloseCommand = new RelayCommand<object>(_ => CloseWindow());
+            
             SliderMax = 100;
             SliderMin = 0;
-            //UpdateCustomers();
         }
 
         public Action<ManagerCustomers> OpenWindowViewModel { get; set; }
-        
-        public Action Close { get; set; }
 
         public List<string[]> Customers
         {
@@ -85,6 +87,13 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
         public void UpdateCustomers()
         {
             Customers = Cust.GetAllCustomers(_sliderMin, _sliderMax);
+        }
+
+        public void Reset()
+        {
+            SliderMin = 0;
+            SliderMax = 100;
+            UpdateCustomers();
         }
     }
 }

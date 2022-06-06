@@ -1,28 +1,27 @@
-﻿using supermarket.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows;
 
 namespace supermarket.Navigation.ViewModels
 {
-    internal class VMNavigator
+    internal class VMNavigator<TEnum> where TEnum : Enum
     {
-        private List<Way> _ways;
-        private Action<NavigatableViewModel> _changeViewModel;
+        private List<Way<TEnum>> _ways;
+        private Action<NavigatableViewModel<TEnum>> _changeViewModel;
 
-        public VMNavigator(Action<NavigatableViewModel> changeViewModel)
+        public VMNavigator(Action<NavigatableViewModel<TEnum>> changeViewModel)
         {
-            _ways = new List<Way>();
+            _ways = new List<Way<TEnum>>();
             _changeViewModel = changeViewModel;
         }
 
-        public void Navigate(VMNavigationTypes type)
+        public void Navigate(TEnum type)
         {
             try
             {
                 foreach (var way in _ways)
                 {
-                    if (way.Type != type) continue;
+                    if (!way.Type.Equals(type)) continue;
                     
                     way.Handler?.Invoke();
                     _changeViewModel(way.ViewModel);
@@ -37,50 +36,50 @@ namespace supermarket.Navigation.ViewModels
             }
         }
 
-        public void SetWay(VMNavigationTypes type, NavigatableViewModel viewModel)
+        public void SetWay(TEnum type, NavigatableViewModel<TEnum> viewModel)
         {
             foreach (var way in _ways)
             {
-                if (way.Type == type)
+                if (way.Type.Equals(type))
                 {
                     throw new Exception("This way is already set");
                 }
             }
 
             viewModel.ChangeViewModel = Navigate;
-            _ways.Add(new Way(type, viewModel));
+            _ways.Add(new Way<TEnum>(type, viewModel));
         }
 
-        public void SetWay(VMNavigationTypes type, NavigatableViewModel viewModel, Action handler)
+        public void SetWay(TEnum type, NavigatableViewModel<TEnum> viewModel, Action handler)
         {
             foreach (var way in _ways)
             {
-                if (way.Type == type)
+                if (way.Type.Equals(type))
                 {
                     throw new Exception("This way is already set");
                 }
             }
 
             viewModel.ChangeViewModel = Navigate;
-            _ways.Add(new Way(type, viewModel, handler));
+            _ways.Add(new Way<TEnum>(type, viewModel, handler));
         }
 
-        private class Way
+        private class Way<T> where T : Enum
         {
-            public Way(VMNavigationTypes type, NavigatableViewModel viewModel)
+            public Way(T type, NavigatableViewModel<T> viewModel)
             {
                 Type = type;
                 ViewModel = viewModel;
             }
 
-            public Way(VMNavigationTypes type, NavigatableViewModel viewModel, Action handler) : this(type, viewModel)
+            public Way(T type, NavigatableViewModel<T> viewModel, Action handler) : this(type, viewModel)
             {
                 Handler = handler;
             }
 
-            public VMNavigationTypes Type { get; private set; }
+            public T Type { get; private set; }
 
-            public NavigatableViewModel ViewModel { get; private set; }
+            public NavigatableViewModel<T> ViewModel { get; private set; }
 
             public Action Handler { get; private set; }
         }

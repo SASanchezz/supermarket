@@ -18,7 +18,7 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
         
         public ReceiptsVM()
         {
-            CloseCommand = new RelayCommand<object>(_ => Close());
+            CloseCommand = new RelayCommand<object>(_ => CloseWindow());
             OpenDetailsReceiptWindowCommand =
                 new RelayCommand<object>(_ => OpenWindowViewModel(ManagerReceipts.DetailsReceipt));
         }
@@ -43,7 +43,6 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
             }
         }
         
-        public Action Close { get; set; }
         
         public RelayCommand<object> OpenDetailsReceiptWindowCommand { get; }
         

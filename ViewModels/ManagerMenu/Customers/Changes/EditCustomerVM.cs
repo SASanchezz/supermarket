@@ -27,7 +27,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
         {
             UpdateCustomerCommand = new RelayCommand<object>(_ => UpdateCustomer(), CanExecute);
             DeleteCustomerCommand = new RelayCommand<object>(_ => DeleteCustomer());
-            CloseCommand = new RelayCommand<object>(_ => Close());
+            CloseCommand = new RelayCommand<object>(_ => CloseWindow());
         }
 
         public string InitCardNumber
@@ -134,8 +134,6 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
         public RelayCommand<object> DeleteCustomerCommand { get; }
         
         public RelayCommand<object> CloseCommand { get; }
-        
-        public Action Close { get; set; }
 
         public void SetData(string[] data)
         {
@@ -165,13 +163,13 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
             Cust.UpdateCustomer(InitCardNumber, ChangedCardNumber, Surname, Name, Patronymic,
                 PhoneNumber, City, Street, Zipcode, Percent);
 
-            Close();
+            CloseWindow();
         }
 
         private void DeleteCustomer()
         {
             Cust.DeleteCustomerByCardNumber(InitCardNumber);
-            Close();
+            CloseWindow();
         }
 
         private bool CanExecute(object obj)

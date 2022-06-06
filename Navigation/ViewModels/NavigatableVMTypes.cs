@@ -1,9 +1,15 @@
 ﻿namespace supermarket.Navigation.ViewModels
 {
-    public enum VMNavigationTypes
+    public enum MainViewsTypes
     {
         SignIn,
         ManagerMenu,
         CashierMenu
+    }
+    
+    public enum EditStoreProductViewsTypes
+    {
+        EditPromStoreProduct,
+        EditNonPromStoreProduct
     }
 }

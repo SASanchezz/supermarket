@@ -20,7 +20,7 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts.Changes
         private void DeleteReceipt()
         {
             Rec.DeleteReceiptByReceiptNumber(ReceiptNumber);
-            Close();
+            CloseWindow();
         }
 
         public List<string[]> Sales { get; private set; }
@@ -35,9 +35,7 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts.Changes
                 UpdateSales();
             }
         }
-        
-        public Action Close { get; set; }
-        
+
         public RelayCommand<object> DeleteReceiptCommand { get; }
 
         public void SetData(string[] receiptData)

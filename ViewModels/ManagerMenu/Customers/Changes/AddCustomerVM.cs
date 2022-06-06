@@ -12,10 +12,8 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
         public AddCustomerVM()
         {
             AddCustomerCommand = new RelayCommand<object>(_ => AddCustomer(), CanExecute);
-            CloseCommand = new RelayCommand<object>(_ => Close());
+            CloseCommand = new RelayCommand<object>(_ => CloseWindow());
         }
-
-        public Action Close { get; set; }
 
         public string CardNumber { get; set; }
 
@@ -59,7 +57,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
             Customer.AddCustomer(CardNumber, Surname, Name, Patronymic,
                 PhoneNumber, City, Street, Zipcode, Percent);
 
-            Close();
+            CloseWindow();
         }
 
         private bool CanExecute(object obj)

@@ -11,6 +11,12 @@
     <EmbeddedResource Remove="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\**" />
     <None Remove="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\**" />
     <Page Remove="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\**" />
+    <Page Update="Windows\ManagerMenu\StoreProducts\Changes\EditStoreProductWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Update="Windows\ManagerMenu\StoreProducts\Changes\EditStoreProductWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
