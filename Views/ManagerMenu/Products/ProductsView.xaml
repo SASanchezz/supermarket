@@ -33,7 +33,7 @@
                   Height="24" 
                   HorizontalAlignment="Left" 
                   Margin="150, 0, 0, 30"
-                  Text="{Binding FilteredName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                  Text="{Binding FilteredName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
 
         <ComboBox Grid.Row="0" 

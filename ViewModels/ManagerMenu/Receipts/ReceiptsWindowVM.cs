@@ -24,12 +24,9 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
             {
                 if (!(bool)e.NewValue) return; // window is hiden
                 // window is shown
-                ViewModel.UpdateReceipts();
-                ViewModel.SetDefaultPrintDates();
-                ViewModel.FilteredIdCashier = "";
+                ViewModel.Reset();
             };
             SetUpdatingAfterHiden(_detailsReceiptWindowVM);
-            // SetUpdatingAfterHiden(_editEmployeeWindowVM);
         }
         
         private void SetUpdatingAfterHiden<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM) 

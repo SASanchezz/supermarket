@@ -32,7 +32,8 @@ namespace supermarket.Middlewares.Category
             return ""; //Alright
         }
 
-        public static string ValidateUpdate(string initCategoryNumber, string changedCategoryNumber, string categoryName)
+        public static string ValidateUpdate(string initCategoryNumber, string initCategoryName, 
+            string changedCategoryNumber, string changedCategoryName)
         {
             if (changedCategoryNumber.Any(x => !char.IsDigit(x)))
             {
@@ -44,12 +45,12 @@ namespace supermarket.Middlewares.Category
                 return "Категорія з таким номером вже існує";
             }
             
-            if (Cat.GetAllCategoriesNames().Contains(categoryName))
+            if (initCategoryName != changedCategoryName && Cat.GetAllCategoriesNames().Contains(changedCategoryName))
             {
                 return "Категорія з таким ім'ям вже існує";
             }
             
-            if (categoryName.Length is > 50 or 0)
+            if (changedCategoryName.Length is > 50 or 0)
             {
                 return "Введіть назву категорії < 50 символів";
             }
