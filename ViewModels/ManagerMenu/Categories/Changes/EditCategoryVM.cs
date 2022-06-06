@@ -1,4 +1,3 @@
-using System;
 using System.Windows;
 using supermarket.Middlewares.Category;
 using supermarket.Utils;
@@ -10,8 +9,9 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
     internal class EditCategoryVM : ViewModel
     {
         private string _initNumber;
+        private string _initName;
         private string _changedNumber;
-        private string _name;
+        private string _changedName;
 
         public EditCategoryVM()
         {
@@ -30,12 +30,12 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
             }
         }
 
-        public string Name
+        public string ChangedName
         {
-            get => _name;
+            get => _changedName;
             set
             {
-                _name = value;
+                _changedName = value;
                 OnPropertyChanged();
             }
         }
@@ -49,13 +49,14 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
         public void SetData(string[] data)
         {
             _initNumber = data[Cat.number];
+            _initName = data[Cat.name];
             ChangedNumber = _initNumber;
-            Name = data[Cat.name];
+            ChangedName = data[Cat.name];
         }
         
         private void UpdateCategory()
         {
-            string result = CategoryValidator.ValidateUpdate(_initNumber ,ChangedNumber, Name);
+            string result = CategoryValidator.ValidateUpdate(_initNumber, _initName,ChangedNumber, ChangedName);
             
             if (result.Length != 0)
             {
@@ -63,7 +64,7 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
                 return;
             }
             
-            Cat.UpdateCategory(_initNumber, ChangedNumber, Name);
+            Cat.UpdateCategory(_initNumber, ChangedNumber, ChangedName);
             
             CloseWindow();
         }
@@ -77,7 +78,7 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
         private bool CanExecute(object obj)
         {
             return !string.IsNullOrWhiteSpace(ChangedNumber)
-                   && !string.IsNullOrWhiteSpace(Name);
+                   && !string.IsNullOrWhiteSpace(ChangedName);
         }
     }
 }

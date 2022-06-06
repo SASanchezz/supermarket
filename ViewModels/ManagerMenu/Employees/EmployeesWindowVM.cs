@@ -52,7 +52,6 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             }
 
             _editEmployeeWindowVM.ViewModel.SetData(ViewModel.SelectedEmployee);
-            ViewModel.SelectedEmployee = null;
         }
 
         private void SetUpdatingSystem()
@@ -61,7 +60,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             {
                 if (!(bool)e.NewValue) return; // window is hiden
                 // window is shown
-                ViewModel.UpdateEmployees();
+                ViewModel.Reset();
             };
             SetUpdatingAfterHiden(_addEmployeeWindowVM);
             SetUpdatingAfterHiden(_editEmployeeWindowVM);

@@ -109,6 +109,12 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             }
         }
 
+        public void Reset()
+        {
+            SelectedRole = null;
+            FilteredSurname = null;
+        }
+
         private void SetSelectiveRoles()
         {
             SelectiveRoles = new string[Data.Roles.roleNames.Length + 1];

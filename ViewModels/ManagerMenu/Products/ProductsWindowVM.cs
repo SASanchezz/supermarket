@@ -55,7 +55,7 @@ namespace supermarket.ViewModels.ManagerMenu.Products
             {
                 if (!(bool)e.NewValue) return; // window is hiden
                 // window is shown
-                ViewModel.UpdateProducts();
+                ViewModel.Reset();
             };
             SetUpdatingAfterHiden(_addProductWindowVM);
             SetUpdatingAfterHiden(_editProductWindowVM);

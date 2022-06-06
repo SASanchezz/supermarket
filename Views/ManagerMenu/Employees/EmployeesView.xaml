@@ -66,7 +66,7 @@
                   Height="24" 
                   HorizontalAlignment="Left" 
                   Margin="150, 0, 0, 30"
-                  Text="{Binding FilteredSurname, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                  Text="{Binding FilteredSurname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
 
         <ComboBox Grid.Row="0" 
@@ -75,7 +75,7 @@
                   HorizontalAlignment="Left" 
                   Margin="150, 30, 0, 0"
                   ItemsSource="{Binding SelectiveRoles}" 
-                  SelectedItem="{Binding SelectedRole, Mode=TwoWay}">
+                  SelectedItem="{Binding SelectedRole, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         </ComboBox>
         
         <ScrollViewer Grid.Row="1">
@@ -83,8 +83,7 @@
                 <DataGrid AutoGenerateColumns="False" 
                           SelectionMode="Single"
                           ItemsSource="{Binding Employees}" 
-                          SelectedItem="{Binding SelectedEmployee, Mode=OneWayToSource}"
-                          x:Name="grid">
+                          SelectedItem="{Binding SelectedEmployee, Mode=OneWayToSource}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="id"                     Binding="{Binding Path=[0]}"    Width="Auto" IsReadOnly="True"/>
                         <DataGridTextColumn Header="Прізвище"               Binding="{Binding Path=[1]}"    Width="Auto" IsReadOnly="True"/>

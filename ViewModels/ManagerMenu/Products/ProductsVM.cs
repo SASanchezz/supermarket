@@ -88,6 +88,12 @@ namespace supermarket.ViewModels.ManagerMenu.Products
             Products = Prod.GetAllProducts(_selectedCategory, _filteredName);
         }
 
+        public void Reset()
+        {
+            SelectedCategory = null;
+            FilteredName = null;
+        }
+
         private void SetSelectiveCategories() {
 
             SelectiveCategories = new string[Categ.GetAllCategories().Count + 1];

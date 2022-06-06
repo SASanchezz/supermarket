@@ -109,10 +109,11 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
             }
         }
 
-        public void SetDefaultPrintDates()
+        public void Reset()
         {
             MinPrintDate = DateTime.Now.AddYears(-3);
             MaxPrintDate = DateTime.Now;
+            FilteredIdCashier = null;
         }
 
         public Action<ManagerReceipts> OpenWindowViewModel { get; set; }
