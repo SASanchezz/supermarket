@@ -79,9 +79,6 @@
     <Compile Update="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\EditPromStoreProductWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Windows\ManagerMenu\StoreProducts\Changes\NonProm\EditStoreProductWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Windows\ManagerMenu\Employees\Changes\AddEmployeeWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -181,9 +178,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\EditPromStoreProductWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Windows\ManagerMenu\StoreProducts\Changes\NonProm\EditStoreProductWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\ManagerMenu\Employees\Changes\AddEmployeeWindow.xaml">

@@ -24,6 +24,7 @@ namespace supermarket.Models
 
         const string s_format = "yyyy-MM-dd HH:mm:ss";
         private const string AllString = "Всі";
+        private const int AllPosition = -1;
 
         public static List<string[]> GetAllEmployee(string roleName = AllString, string surname = "")
         {
@@ -65,6 +66,28 @@ namespace supermarket.Models
             List<string[]> result = DbUtils.FindAll(sql);
 
             return result.Count > 0 ? result[0] : null;
+        }
+
+        public static List<string[]> GetEmployeeLikeIdOrSNP(string IdOrSNP = "", int position = AllPosition) // SNP - Surname Name Patronymic
+        {
+            string whereClause = "WHERE 1 ";
+
+            whereClause = IdOrSNP == "" ? whereClause : whereClause +=
+                $"AND id_employee LIKE '%{IdOrSNP}%' OR empl_surname LIKE '%{IdOrSNP}%' OR empl_name LIKE '%{IdOrSNP}%' OR empl_patronymic LIKE '%{IdOrSNP}%'";
+
+            whereClause = position == AllPosition ? whereClause : whereClause +=
+                string.Format("AND empl_role_id = {0}", position);
+
+
+            string sql = "SELECT * FROM Employee " + whereClause;
+            List<string[]> result = DbUtils.FindAll(sql);
+
+            if (result.Count > 0) return result;
+
+            sql = "SELECT * FROM Employee";
+            result = DbUtils.FindAll(sql);
+
+            return result.Count > 0 ? result : null;
         }
 
         public static void AddEmployee(string surname, string name, string patronymic, string role,
