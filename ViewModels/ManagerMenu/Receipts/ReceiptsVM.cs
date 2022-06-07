@@ -4,6 +4,7 @@ using supermarket.Navigation.WindowViewModels;
 using supermarket.Utils;
 using supermarket.ViewModels.BaseClasses;
 using Rec = supermarket.Models.Receipt;
+using Employee = supermarket.Models.Employee;
 
 namespace supermarket.ViewModels.ManagerMenu.Receipts
 {
@@ -42,8 +43,18 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
                 OnPropertyChanged();
             }
         }
-        
-        
+
+        public List<string[]> ReceiptsSum
+        {
+            get => _receipts;
+            set
+            {
+                _receipts = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         public RelayCommand<object> OpenDetailsReceiptWindowCommand { get; }
         
         public RelayCommand<object> PrintReceiptsCommand { get; }
@@ -81,16 +92,34 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
                 _filteredIdCashier = value;
                 UpdateReceipts();
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(SelectiveCashiers));
             }
         }
-        
+
+        public List<string> SelectiveCashiers
+        {
+            get
+            {
+                List<string[]> employees = Employee.GetEmployeeLikeIdOrSNP(FilteredIdCashier);
+                if (employees == null) return new List<string>(0);
+                List<string> resultProducts = new(employees.Count);
+                for (int i = 0; i < employees.Count; i++)
+                {
+                    resultProducts.Add(employees[i][Employee.id] + "  --  " + employees[i][Employee.surname]);
+                }
+
+                return resultProducts;
+            }
+            set { }
+        }
+
         public void UpdateReceipts()
         {
             if (FilteredIdCashier != "")
             {
                 try
                 {
-                    int.Parse(FilteredIdCashier);
+                    int.Parse(FilteredIdCashier.Split(' ')[0]);
                 }
                 catch
                 {
@@ -98,7 +127,7 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
                 }
             }
             
-            Receipts = Rec.GetAllReceipts(FilteredIdCashier, MinPrintDate, MaxPrintDate);
+            Receipts = Rec.GetAllReceipts(FilteredIdCashier.Split(' ')[0], MinPrintDate, MaxPrintDate);
 
             if (Receipts == null) return;
         
@@ -113,7 +142,7 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
         {
             MinPrintDate = DateTime.Now.AddYears(-3);
             MaxPrintDate = DateTime.Now;
-            FilteredIdCashier = null;
+            FilteredIdCashier = "";
         }
 
         public Action<ManagerReceipts> OpenWindowViewModel { get; set; }
