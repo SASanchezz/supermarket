@@ -20,7 +20,7 @@ namespace supermarket.Models
 
         public static List<string[]> GetAllCustomers(double minPercent = -1, double maxPercent = 101)
         {
-            string sql = $"SELECT * FROM Customer_Card WHERE percent>={minPercent} AND percent<={maxPercent}";
+            string sql = $"SELECT * FROM Customer_Card WHERE percent>={minPercent:0.0} AND percent<={maxPercent:0.0}";
             List<string[]> result = DbUtils.FindAll(sql);
 
             return result.Count > 0 ? result : null;
