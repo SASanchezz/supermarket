@@ -34,6 +34,10 @@
         <Button Content="Панель чеків" FontSize="12"
                 Grid.Row="7" Grid.Column="1" Width="180" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"
                 Command="{Binding OpenReceiptsWindowCommand}"/>
+        
+        <Button Content="Панель продажів" FontSize="12"
+                Grid.Row="8" Grid.Column="1" Width="180" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"
+                Command="{Binding OpenSalesWindowCommand}"/>
 
         <Button Content="Назад" FontSize="12"
                 Grid.Row="0" Grid.Column="0" Width="70" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10, 0, 0, 0"
@@ -42,6 +46,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
+            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>

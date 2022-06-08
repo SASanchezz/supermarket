@@ -103,9 +103,9 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
                 List<string[]> employees = Employee.GetEmployeeLikeIdOrSNP(FilteredIdCashier);
                 if (employees == null) return new List<string>(0);
                 List<string> resultProducts = new(employees.Count);
-                for (int i = 0; i < employees.Count; i++)
+                foreach (var employee in employees)
                 {
-                    resultProducts.Add(employees[i][Employee.id] + "  --  " + employees[i][Employee.surname]);
+                    resultProducts.Add(employee[Employee.id] + "  --  " + employee[Employee.surname]);
                 }
 
                 return resultProducts;

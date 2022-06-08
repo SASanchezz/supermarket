@@ -58,7 +58,7 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts.Changes
                     newSale[h] = oldSale[h];
                 }
                 
-                newSale[5] = (double.Parse(newSale[4]) / double.Parse(newSale[3])).ToString();
+                newSale[5] = (double.Parse(newSale[3]) * double.Parse(newSale[4])).ToString();
                 Sales[i] = newSale;
             }
         }
