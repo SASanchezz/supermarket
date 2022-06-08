@@ -5,15 +5,16 @@ using supermarket.Utils;
 using supermarket.ViewModels.BaseClasses;
 using Rec = supermarket.Models.Receipt;
 using Employee = supermarket.Models.Employee;
+using supermarket.Data;
 
 namespace supermarket.ViewModels.ManagerMenu.Receipts
 {
     internal class ReceiptsVM : ViewModel, IWindowOpeningVM<ManagerReceipts>
     {
+        private const string AllString = "Âñ³";
         private List<string[]> _receipts;
         private string[] _selectedReceipt;
-        private string _filteredIdCashier = "";
-        
+        private string _filteredIdCashier = AllString;
         private DateTime _minPrintDate;
         private DateTime _maxPrintDate;
         
@@ -22,6 +23,8 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
             CloseCommand = new RelayCommand<object>(_ => CloseWindow());
             OpenDetailsReceiptWindowCommand =
                 new RelayCommand<object>(_ => OpenWindowViewModel(ManagerReceipts.DetailsReceipt));
+
+            CountReceiptsSumCommand = new RelayCommand<object>(_ => OnPropertyChanged(nameof(ReceiptsSum)));
         }
         
         public List<string[]> Receipts
@@ -44,14 +47,10 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
             }
         }
 
-        public List<string[]> ReceiptsSum
+        public double ReceiptsSum
         {
-            get => _receipts;
-            set
-            {
-                _receipts = value;
-                OnPropertyChanged();
-            }
+            get => Models.Receipt.GetAllReceiptsSum(FilteredIdCashier.Split(' ')[0], MinPrintDate, MaxPrintDate);
+            set { }
         }
 
 
@@ -100,22 +99,23 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
         {
             get
             {
-                List<string[]> employees = Employee.GetEmployeeLikeIdOrSNP(FilteredIdCashier);
+                List<string[]> employees = Employee.GetCashierLikeIdOrSNP(FilteredIdCashier);
                 if (employees == null) return new List<string>(0);
-                List<string> resultProducts = new(employees.Count);
+                List<string> resultReceipt = new(employees.Count+1);
+                resultReceipt.Add(AllString);
                 foreach (var employee in employees)
                 {
-                    resultProducts.Add(employee[Employee.id] + "  --  " + employee[Employee.surname]);
+                    resultReceipt.Add(employee[Employee.id] + "  --  " + employee[Employee.surname]);
                 }
 
-                return resultProducts;
+                return resultReceipt;
             }
             set { }
         }
 
         public void UpdateReceipts()
         {
-            if (FilteredIdCashier != "")
+            if (FilteredIdCashier != AllString)
             {
                 try
                 {
@@ -136,13 +136,14 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
                 receipt[Rec.name_employee] += " " + receipt[Rec.surname_employee]
                                                   + " " + receipt[Rec.patronymic_employee];
             }
+            OnPropertyChanged(nameof(ReceiptsSum));
         }
 
         public void Reset()
         {
             MinPrintDate = DateTime.Now.AddYears(-3);
             MaxPrintDate = DateTime.Now;
-            FilteredIdCashier = "";
+            FilteredIdCashier = AllString;
         }
 
         public Action<ManagerReceipts> OpenWindowViewModel { get; set; }
