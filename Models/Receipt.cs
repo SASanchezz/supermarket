@@ -17,9 +17,10 @@ namespace supermarket.Models
         public const int name_employee = 6;
         public const int surname_employee = 7;
         public const int patronymic_employee = 8;
-        
+
         //private static DateTime _minPrintDate = DateTime.Today.AddYears(-3); to validator
-        
+        private const string AllString = "Âñ³";
+
         public static List<string[]> GetAllReceipts(string idCashier, DateTime minPrintDate, DateTime maxPrintDate)
         {
             const string dateFormat = "yyyy-MM-dd";
@@ -31,16 +32,38 @@ namespace supermarket.Models
                          "FROM Receipt LEFT JOIN Employee ON Receipt.id_employee=Employee.id_employee " +
                          $"WHERE DATE(print_date) >= '{minPrintDateString}' AND DATE(print_date) <= '{maxPrintDateString}'";
 
-            if (idCashier != "")
+            if (idCashier != AllString)
             {
-                sql += $" AND Receipt.id_employee = {idCashier}";
+                sql += $" AND Receipt.id_employee LIKE '%{idCashier}%'";
             }
             
             List<string[]> result = DbUtils.FindAll(sql);
             
             return result.Count > 0 ? result : null;
         }
-        
+
+        public static double GetAllReceiptsSum(string idCashier, DateTime minPrintDate, DateTime maxPrintDate)
+        {
+            const string dateFormat = "yyyy-MM-dd";
+            string minPrintDateString = minPrintDate.ToString(dateFormat);
+            string maxPrintDateString = maxPrintDate.ToString(dateFormat);
+
+            string whereClause = $"WHERE DATE(print_date) >= '{minPrintDateString}' AND DATE(print_date) <= '{maxPrintDateString}' ";
+
+            whereClause = idCashier == AllString ? whereClause : whereClause += $"AND Receipt.id_employee LIKE '%{idCashier}%' ";
+
+            string sql = "SELECT SUM(sum_total) " +
+                         "FROM Receipt LEFT JOIN Employee ON Receipt.id_employee=Employee.id_employee " + whereClause;
+
+
+
+
+
+            List<string[]> result = DbUtils.FindAll(sql);
+
+            return result.Count > 0 ? double.Parse(result[0][0]) : 0;
+        }
+
         public static void DeleteReceiptByReceiptNumber(string receiptNumber)
         {
             string sql = $"DELETE FROM Receipt WHERE receipt_number ={receiptNumber}";

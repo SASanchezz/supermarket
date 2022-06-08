@@ -81,15 +81,16 @@
 
         <Button Grid.Row="0" 
                 Grid.Column="4"
-                Content="Порахувати суму" 
-                Width="164" 
+                Content="Сума" 
+                Width="140" 
                 Height="24" 
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Top" 
-                FontSize="12"
+                FontSize="16"
                 FontWeight="DemiBold"
                 Margin="0,15,0,0"
                 Background="LightSkyBlue"
+                HorizontalContentAlignment="Right"
                 Command="{Binding CountReceiptsSumCommand}"/>
 
         <TextBlock Grid.Row="0" 
@@ -102,6 +103,7 @@
                 FontSize="12" 
                 FontWeight="DemiBold" 
                 Margin="0,0,0,15"
+                Background="LightSkyBlue"
                 Text = "{Binding ReceiptsSum, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <ScrollViewer Grid.Row="1" Grid.ColumnSpan="5" Grid.Column="0">

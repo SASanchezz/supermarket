@@ -68,23 +68,24 @@ namespace supermarket.Models
             return result.Count > 0 ? result[0] : null;
         }
 
-        public static List<string[]> GetEmployeeLikeIdOrSNP(string IdOrSNP = "", int position = AllPosition) // SNP - Surname Name Patronymic
+        public static List<string[]> GetCashierLikeIdOrSNP(string IdOrSNP = AllString) // SNP - Surname Name Patronymic
         {
-            string whereClause = "WHERE 1 ";
+            string whereClause = "WHERE Employee_Role.employee_role_title = 'Касир' ";
 
-            whereClause = IdOrSNP == "" ? whereClause : whereClause +=
-                $"AND id_employee LIKE '%{IdOrSNP}%' OR empl_surname LIKE '%{IdOrSNP}%' OR empl_name LIKE '%{IdOrSNP}%' OR empl_patronymic LIKE '%{IdOrSNP}%'";
-
-            whereClause = position == AllPosition ? whereClause : whereClause +=
-                string.Format("AND empl_role_id = {0}", position);
+            whereClause = IdOrSNP == AllString ? whereClause : whereClause +=
+                $"AND (id_employee LIKE '%{IdOrSNP}%' OR empl_surname LIKE '%{IdOrSNP}%' OR empl_name LIKE '%{IdOrSNP}%' OR empl_patronymic LIKE '%{IdOrSNP}%') ";
 
 
-            string sql = "SELECT * FROM Employee " + whereClause;
+            string sql = "SELECT * FROM Employee LEFT JOIN Employee_Role " +
+                            "ON Employee_Role.employee_role_id = Employee.empl_role_id " + whereClause;
             List<string[]> result = DbUtils.FindAll(sql);
 
             if (result.Count > 0) return result;
 
-            sql = "SELECT * FROM Employee";
+            sql = "SELECT * FROM Employee LEFT JOIN Employee_Role " +
+                            "ON Employee_Role.employee_role_id = Employee.empl_role_id " +
+                            "WHERE Employee_Role.employee_role_title = 'Касир' ";
+
             result = DbUtils.FindAll(sql);
 
             return result.Count > 0 ? result : null;
