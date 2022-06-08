@@ -45,9 +45,9 @@
                         <DataGridTextColumn Header="UPC"          Binding="{Binding Path=[0]}" Width="*"  IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Номер товару" Binding="{Binding Path=[1]}" Width="*"  IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Назва товару" Binding="{Binding Path=[2]}" Width="2*" IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="Кількість"    Binding="{Binding Path=[5]}" Width="*"  IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="Ціна"         Binding="{Binding Path=[3]}" Width="*"  IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="Сума"         Binding="{Binding Path=[4]}" Width="*"  IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Кількість"    Binding="{Binding Path=[3]}" Width="*"  IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Ціна"         Binding="{Binding Path=[4]}" Width="*"  IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Сума"         Binding="{Binding Path=[5]}" Width="*"  IsReadOnly="True" CanUserSort="False"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
