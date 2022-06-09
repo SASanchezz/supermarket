@@ -58,24 +58,35 @@
         </TextBox>
 
         <Button Grid.Row="0"
+                Content="Друк"
+                Width="110" 
+                Height="24" 
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top" 
+                FontSize="12" 
+                FontWeight="DemiBold" 
+                Margin="0,5,250,0"
+                Command="{Binding PrintStoreProductsCommand}"/>
+        
+        <Button Grid.Row="0"
                 Content="Редагувати"
                 Width="110" 
                 Height="24" 
-                HorizontalAlignment="Center"
+                HorizontalAlignment="Right"
                 VerticalAlignment="Center" 
                 FontSize="12" 
                 FontWeight="DemiBold" 
-                Margin="0,0,20,0"
-                Command="{Binding OpenEditStoreProductWindowCommand}"/>
+                Margin="0,30,250,0"
+                Command="{Binding PrintStoreProductsCommand}"/>
 
         <ComboBox Grid.Row="0"
                   Text="All" 
                   Width="64" 
                   Height="24" 
-                  HorizontalAlignment="Center"
+                  HorizontalAlignment="Left"
                   VerticalAlignment="Center"  
                   FontSize="12" 
-                  Margin="200,0,0,0"
+                  Margin="300,0,0,0"
                   ItemsSource="{Binding SelectiveProms}" 
                   SelectedItem="{Binding SelectedProm, Mode=TwoWay}"/>
 

@@ -40,7 +40,17 @@ namespace supermarket.Printing
                 var row = new TableRow();
                 for (int l = 0; l < columnNames.Length; ++l)
                 {
-                    var cell = new TableCell(new Paragraph(new Run(element[l].ToString())));
+                    TableCell cell;
+
+                    if (string.IsNullOrEmpty(element[l]))
+                    {
+                        cell = new TableCell(new Paragraph(new Run("")));
+                    }
+                    else
+                    {
+                        cell = new TableCell(new Paragraph(new Run(element[l].ToString())));
+                    }
+
                     row.Cells.Add(cell);
                 }
                 table.RowGroups[0].Rows.Add(row);
@@ -55,7 +65,7 @@ namespace supermarket.Printing
                 ColumnWidth = 1024,
                 FontSize = 14
             };
-
+            
             IDocumentPaginatorSource idpSource = doc;
             printDialog.PrintDocument(idpSource.DocumentPaginator, "");
         }

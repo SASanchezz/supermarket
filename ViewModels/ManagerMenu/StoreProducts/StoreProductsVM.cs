@@ -5,6 +5,7 @@ using supermarket.Data;
 using System;
 using System.Collections.Generic;
 using StrProduct = supermarket.Models.StoreProduct;
+using supermarket.Printing;
 
 namespace supermarket.ViewModels.ManagerMenu.StoreProducts
 {
@@ -21,6 +22,8 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
         private RelayCommand<object> _open_Prom_AddStoreProductWindowCommand;
 
         private RelayCommand<object> _openEditStoreProductWindowCommand;
+
+        private RelayCommand<object> _printStoreProductsCommand;
 
         private RelayCommand<object> _closeCommand;
 
@@ -45,6 +48,7 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
         {
             get => _open_nonProm_AddStoreProductWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(ManagerStoreProducts.AddNonPromStoreProduct));
         }
+
         public RelayCommand<object> Open_Prom_AddStoreProductWindowCommand
         {
             get => _open_Prom_AddStoreProductWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(ManagerStoreProducts.AddPromStoreProduct));
@@ -55,14 +59,13 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
             get => _openEditStoreProductWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(ManagerStoreProducts.EditStoreProduct));
         }
 
-
-        //public RelayCommand<object> PrintCommand
-        //{
-        //    get
-        //    {
-        //        return _printCommand ??= new RelayCommand<object>(_ => PrintEmployees());
-        //    }
-        //}
+        public RelayCommand<object> PrintStoreProductsCommand
+        {
+            get
+            {
+                return _printStoreProductsCommand ??= new RelayCommand<object>(_ => PrintStoreProducts());
+            }
+        }
 
         public RelayCommand<object> CloseCommand
         {
@@ -119,6 +122,39 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
             StoreProducts = StrProduct.GetAllStoreProducts(_selectedProm , _subUPC);
         }
 
+        private void PrintStoreProducts()
+        {
+            var printerStoreProducts = new List<string[]>();
 
+            for (int i = 0; i < StoreProducts.Count; ++i)
+            {
+                printerStoreProducts.Add(new string[StoreProducts[0].Length - 1]);
+
+                for (int h = 0; ; ++h)
+                {
+                    if (h == 2)
+                    {
+                        printerStoreProducts[i].SetValue(StoreProducts[i][6], h);
+                        break;
+                    }
+                    printerStoreProducts[i].SetValue(StoreProducts[i][h], h);
+                }
+
+                for (int h = 3; h < StoreProducts[0].Length - 1; ++h)
+                {
+                    printerStoreProducts[i].SetValue(StoreProducts[i][h], h);
+                }
+            }
+
+            Printer.PrintDataGrid(printerStoreProducts, new string[]
+            {
+                "UPC",
+                "UPC Акції",
+                "Назва продукту",
+                "Ціна",
+                "Кількість",
+                "Акційний продукт"
+            });
+        }
     }
 }

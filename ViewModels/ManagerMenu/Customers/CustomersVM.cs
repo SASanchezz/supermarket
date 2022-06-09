@@ -4,6 +4,7 @@ using supermarket.Utils;
 using supermarket.Navigation.WindowViewModels;
 using Cust = supermarket.Models.Customer;
 using supermarket.ViewModels.BaseClasses;
+using supermarket.Printing;
 
 namespace supermarket.ViewModels.ManagerMenu.Customers
 {
@@ -25,7 +26,9 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
             
             OpenEditCustomerWindowCommand = 
                 new RelayCommand<object>(_ => OpenWindowViewModel(ManagerCustomers.EditCustomer));
-            
+
+            PrintCustomersCommand = new RelayCommand<object>(_ => PrintCustomers());
+
             CloseCommand = new RelayCommand<object>(_ => CloseWindow());
             
             SliderMax = 100;
@@ -47,6 +50,8 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
         public RelayCommand<object> OpenAddCustomerWindowCommand { get; }
 
         public RelayCommand<object> OpenEditCustomerWindowCommand { get; }
+
+        public RelayCommand<object> PrintCustomersCommand { get; }
 
         public RelayCommand<object> CloseCommand { get; }
 
@@ -94,6 +99,34 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
             SliderMin = 0;
             SliderMax = 100;
             UpdateCustomers();
+        }
+
+        private void PrintCustomers()
+        {
+            var printerCustomers = new List<string[]>();
+
+            for (int i = 0; i < Customers.Count; ++i)
+            {
+                printerCustomers.Add(new string[Customers[0].Length]);
+
+                for (int h = 0; h < Customers[0].Length; ++h)
+                {
+                    printerCustomers[i].SetValue(Customers[i][h], h);
+                }
+            }
+
+            Printer.PrintDataGrid(Customers, new string[]
+            {
+                "Номер карти",
+                "Прізвище",
+                "Ім'я",
+                "По батькові",
+                "Номер телефону",
+                "Місто",
+                "Вулиця",
+                "Поштовий індекс",
+                "Відсоток"
+            });
         }
     }
 }

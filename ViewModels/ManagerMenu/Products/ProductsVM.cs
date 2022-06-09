@@ -106,7 +106,37 @@ namespace supermarket.ViewModels.ManagerMenu.Products
 
         private void PrintProducts()
         {
-            
+            var printerProducts = new List<string[]>();
+
+            for (int i = 0; i < Products.Count; ++i)
+            {
+                printerProducts.Add(new string[Products[0].Length]);
+
+                for (int h = 0; ; ++h)
+                { 
+                    if (h == 2)
+                    {
+                        printerProducts[i].SetValue(Products[i][5], h);
+                        break;
+                    }
+                    printerProducts[i].SetValue(Products[i][h], h);
+                }
+
+                for (int h = 2; h < Products[0].Length - 1; ++h)
+                {
+                    printerProducts[i].SetValue(Products[i][h], h + 1);
+                }
+            }
+
+            Printer.PrintDataGrid(printerProducts, new string[]
+            {
+                "id",
+                "Номер категорії",
+                "Категорія",
+                "Назва",
+                "Опис",
+                "Виробник"
+            });
         }
     }
 }

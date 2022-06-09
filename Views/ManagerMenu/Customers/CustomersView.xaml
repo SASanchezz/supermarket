@@ -83,6 +83,17 @@
                  Margin="320, 30, 0, 0" />
 
         <Button Grid.Row="0"
+                Content="Друк"
+                Width="110" 
+                Height="24" 
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top" 
+                FontSize="12" 
+                FontWeight="DemiBold" 
+                Margin="120,5,20,0"
+                Command="{Binding PrintCustomersCommand}"/>
+        
+        <Button Grid.Row="0"
                 Content="Редагувати"
                 Width="110" 
                 Height="24" 
@@ -90,7 +101,7 @@
                 VerticalAlignment="Center" 
                 FontSize="12" 
                 FontWeight="DemiBold" 
-                Margin="150,0,20,0"
+                Margin="120,25,20,0"
                 Command="{Binding OpenEditCustomerWindowCommand}"/>
 
         <ScrollViewer Grid.Row="1">

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using supermarket.Models;
+using supermarket.Printing;
+using supermarket.Utils;
 using supermarket.ViewModels.BaseClasses;
 
 namespace supermarket.ViewModels.ManagerMenu.Sales
@@ -13,9 +15,10 @@ namespace supermarket.ViewModels.ManagerMenu.Sales
 
         public SalesVM()
         {
-            
+            PrintSalesCommand = new RelayCommand<object>(_ => PrintSales());
         }
 
+        public RelayCommand<object> PrintSalesCommand { get; }
         private void DeleteReceipt()
         {
             //Sale.DeleteReceiptByReceiptNumber(ReceiptNumber);
@@ -77,6 +80,32 @@ namespace supermarket.ViewModels.ManagerMenu.Sales
                 newSale[6] = oldSale[5];
                 Sales[i] = newSale;
             }
+        }
+
+        private void PrintSales()
+        {
+            var printerSales = new List<string[]>();
+
+            for (int i = 0; i < Sales.Count; ++i)
+            {
+                printerSales.Add(new string[Sales[0].Length]);
+
+                for (int h = 0; h < Sales[0].Length; ++h)
+                {
+                    printerSales[i].SetValue(Sales[i][h], h);
+                }
+            }
+
+            Printer.PrintDataGrid(printerSales, new string[]
+            {
+                "UPC",
+                "id товару",
+                "Назва товару",
+                "Ціна",
+                "Кількість",
+                "Сума",
+                "Дата продажу"
+            });
         }
     }
 }

@@ -52,7 +52,7 @@ namespace supermarket.Models
 
             whereClause = idCashier == AllString ? whereClause : whereClause += $"AND Receipt.id_employee LIKE '%{idCashier}%' ";
 
-            string sql = "SELECT COALESCE(SUM(sum_total), 0) + 0 " +
+            string sql = "SELECT COALESCE(SUM(sum_total), 0) " +
                          "FROM Receipt LEFT JOIN Employee ON Receipt.id_employee=Employee.id_employee " + whereClause;
 
 
@@ -61,7 +61,7 @@ namespace supermarket.Models
 
             List<string[]> result = DbUtils.FindAll(sql);
 
-            return result.Count > 0 ? Double.Parse(result[0][0]) : 0;
+            return result.Count > 0 ? double.Parse(result[0][0]) : 0;
         }
 
         public static void DeleteReceiptByReceiptNumber(string receiptNumber)
