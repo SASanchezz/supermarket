@@ -66,21 +66,13 @@ namespace supermarket.ViewModels.ManagerMenu.Products
         {
             Window.IsVisibleChanged += (sender, e) =>
             {
-                if (!(bool)e.NewValue) return; // window is hiden
+                // window is hiden
+                if (!(bool)e.NewValue) 
+                {
+                    return; 
+                }
                 // window is shown
                 ViewModel.Reset();
-            };
-        }
-        
-        private void SetUpdatingAfterHiden<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
-            where TWindow : Window, new()
-            where TViewModel : ViewModel, new()
-        {
-            windowVM.Window.IsVisibleChanged += (sender, e) =>
-            {
-                if ((bool)e.NewValue) return; // window is shown
-                // window is hiden
-                ViewModel.UpdateProducts();
             };
         }
 

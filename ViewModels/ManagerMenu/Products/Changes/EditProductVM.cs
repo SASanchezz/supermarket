@@ -16,7 +16,6 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
         private string _init_id_product;
         private string _changed_id_product;
         private string _product_name;
-        private int    _category_number;
         private string _category_name;
         private string _manufacturer;
         private string _characteristics;
@@ -54,16 +53,6 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
             set
             {
                 _product_name = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public int CategoryNumber
-        {
-            get => _category_number;
-            set
-            {
-                _category_number = value;
                 OnPropertyChanged();
             }
         }

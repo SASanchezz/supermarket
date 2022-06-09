@@ -39,7 +39,7 @@
                   VerticalContentAlignment="Center" 
                   FontSize="14" 
                   Margin="0,0,0,15"
-                  Text="{Binding IdProduct, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                  Text="{Binding IdProduct, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBlock Grid.Row="0" 
                    Grid.Column="1" 
@@ -59,7 +59,7 @@
                   VerticalContentAlignment="Center" 
                   FontSize="14" 
                   Margin="0,0,0,15"
-                  Text="{Binding ProductName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                  Text="{Binding ProductName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBlock Grid.Row="0" 
                    Grid.Column="2" 
@@ -77,7 +77,7 @@
                   HorizontalAlignment="Center" 
                   VerticalAlignment="Bottom" 
                   Margin="0,0,0,15"
-                  SelectedItem="{Binding CategoryName, Mode=OneWayToSource}" 
+                  SelectedItem="{Binding CategoryName, Mode=TwoWay}" 
                   ItemsSource="{Binding CategoriesNames}">
         </ComboBox>
 
@@ -99,7 +99,7 @@
                  VerticalContentAlignment="Center" 
                  FontSize="14" 
                  Margin="0,0,0,15"
-                 Text="{Binding Manufacturer, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Manufacturer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBlock Grid.Row="1"
                    Grid.Column="1"
@@ -124,7 +124,7 @@
                  VerticalContentAlignment="Top" 
                  FontSize="14" 
                  Margin="0,50,0,0"
-                 Text="{Binding Characteristics, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Characteristics, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Button Content="Додати новий запис" 
                 Grid.Row="3" 
@@ -140,6 +140,7 @@
 
         <Button Content="←Назад" 
                 Grid.Row="0" 
+                Grid.Column="0"
                 HorizontalAlignment="Left"
                 Width="64" 
                 Height="24"

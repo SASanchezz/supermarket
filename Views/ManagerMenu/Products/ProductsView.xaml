@@ -42,7 +42,7 @@
                   HorizontalAlignment="Left" 
                   Margin="150, 30, 0, 0"
                   ItemsSource="{Binding SelectiveCategories}" 
-                  SelectedItem="{Binding SelectedCategory, Mode=TwoWay}">
+                  SelectedItem="{Binding SelectedCategory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         </ComboBox>
 
         <Button Grid.Row="0"
