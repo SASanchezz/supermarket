@@ -36,8 +36,8 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
             windowsNavigator.SetWay(ManagerCategories.EditCategory, _editCategoryWindowVM.Window, 
                 OnOpeningEditCategory);
             
-            SetEnabilitySystem(_addCategoryWindowVM);
-            SetEnabilitySystem(_editCategoryWindowVM);
+            SetChangingEnabilityByOpeningAnotherWindow(_addCategoryWindowVM);
+            SetChangingEnabilityByOpeningAnotherWindow(_editCategoryWindowVM);
         }
 
         private void OnOpeningEditCategory()
@@ -60,28 +60,25 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
                 // window is shown
                 ViewModel.UpdateCategories();
             };
-            SetUpdatingAfterHiden(_addCategoryWindowVM);
-            SetUpdatingAfterHiden(_editCategoryWindowVM);
+            
+            Window.IsEnabledChanged += (sender, e) =>
+            { 
+                // window is enabled
+                if ((bool)e.NewValue)
+                {
+                    ViewModel.UpdateCategories();
+                }
+            };
         }
-        
-        private void SetUpdatingAfterHiden<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM) 
+
+        private void SetChangingEnabilityByOpeningAnotherWindow<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
             where TWindow : Window, new()
             where TViewModel : ViewModel, new()
         {
             windowVM.Window.IsVisibleChanged += (sender, e) =>
             {
-                // window is shown
-                if ((bool)e.NewValue) return; 
-                // window is hiden
-                ViewModel.UpdateCategories();
+                IsEnabled = !IsEnabled;
             };
-        }
-
-        private void SetEnabilitySystem<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
-            where TWindow : Window, new()
-            where TViewModel : ViewModel, new()
-        {
-            windowVM.Window.IsVisibleChanged += (sender, e) => IsEnabled = !IsEnabled;
         }
     }
 }
