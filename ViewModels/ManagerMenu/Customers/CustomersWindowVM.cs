@@ -22,6 +22,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
             _editCustomerWindowVM = new EditCustomerWindowVM();
 
             SetUpdatingSystem();
+            SetResettingSystem();
             SetWindowsNavigation();
 
             Window.Closed += (sender, e) =>
@@ -40,8 +41,8 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
             windowsNavigator.SetWay(ManagerCustomers.EditCustomer, _editCustomerWindowVM.Window, 
                 OnOpeningEditCustomerHandler);
             
-            SetEnabilitySystem(_addCustomerWindowVM);
-            SetEnabilitySystem(_editCustomerWindowVM);
+            SetChangingEnabilityByOpeningAnotherWindow(_addCustomerWindowVM);
+            SetChangingEnabilityByOpeningAnotherWindow(_editCustomerWindowVM);
         }
         
         private void OnOpeningEditCustomerHandler()
@@ -56,30 +57,31 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
 
         private void SetUpdatingSystem()
         {
+            Window.IsEnabledChanged += (sender, e) =>
+            { 
+                // window is enabled
+                if ((bool)e.NewValue)
+                {
+                    ViewModel.UpdateCustomers();
+                }
+            };
+        }
+
+        private void SetResettingSystem()
+        {
             Window.IsVisibleChanged += (sender, e) =>
             {
                 // window is hiden
-                if (!(bool)e.NewValue) return;
+                if (!(bool)e.NewValue)
+                {
+                    return;
+                }
                 // window is shown
                 ViewModel.Reset();
             };
-            SetUpdatingAfterHiden(_addCustomerWindowVM);
-            SetUpdatingAfterHiden(_editCustomerWindowVM);
         }
-        
-        private void SetUpdatingAfterHiden<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM) 
-            where TWindow : Window, new()
-            where TViewModel : ViewModel, new()
-        {
-            windowVM.Window.IsVisibleChanged += (sender, e) =>
-            {
-                if ((bool)e.NewValue) return; // window is shown
-                // window is hiden
-                ViewModel.UpdateCustomers();
-            };
-        }
-        
-        private void SetEnabilitySystem<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
+
+        private void SetChangingEnabilityByOpeningAnotherWindow<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
             where TWindow : Window, new()
             where TViewModel : ViewModel, new()
         {

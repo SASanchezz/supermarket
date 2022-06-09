@@ -1,5 +1,4 @@
 ﻿using supermarket.Utils;
-using System;
 using supermarket.Middlewares.Customer;
 using Cust = supermarket.Models.Customer;
 using System.Windows;
@@ -138,7 +137,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
         public void SetData(string[] data)
         {
             InitCardNumber = data[Cust.card_number];
-            ChangedCardNumber = data[Cust.card_number];
+            ChangedCardNumber = InitCardNumber;
             Name = data[Cust.name];
             Surname = data[Cust.surname];
             Patronymic = data[Cust.patronymic];

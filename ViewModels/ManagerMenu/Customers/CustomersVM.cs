@@ -14,7 +14,6 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
     internal class CustomersVM : ViewModel, IWindowOpeningVM<ManagerCustomers>
     {
         private List<string[]> _customers;
-        private string[] _selectedCustomer;
 
         private double _sliderMax;
         private double _sliderMin;
@@ -55,15 +54,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
 
         public RelayCommand<object> CloseCommand { get; }
 
-        public string[] SelectedCustomer
-        {
-            get => _selectedCustomer;
-            set
-            {
-                _selectedCustomer = value;
-                OnPropertyChanged();
-            }
-        }
+        public string[] SelectedCustomer { get; set; }
 
         public double SliderMax
         {
@@ -98,7 +89,6 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
         {
             SliderMin = 0;
             SliderMax = 100;
-            UpdateCustomers();
         }
 
         private void PrintCustomers()
