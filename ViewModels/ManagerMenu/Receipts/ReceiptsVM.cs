@@ -21,14 +21,14 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
         
         public ReceiptsVM()
         {
-            UpdateReceipts();
-            CloseCommand = new RelayCommand<object>(_ => CloseWindow());
             OpenDetailsReceiptWindowCommand =
                 new RelayCommand<object>(_ => OpenWindowViewModel(ManagerReceipts.DetailsReceipt));
 
             PrintReceiptsCommand = new RelayCommand<object>(_ => PrintReceipts());
 
             CountReceiptsSumCommand = new RelayCommand<object>(_ => OnPropertyChanged(nameof(ReceiptsSum)));
+            
+            CloseCommand = new RelayCommand<object>(_ => CloseWindow());
         }
         
         public List<string[]> Receipts
@@ -133,13 +133,17 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
             
             Receipts = Rec.GetAllReceipts(FilteredIdCashier.Split(' ')[0], MinPrintDate, MaxPrintDate);
 
-            if (Receipts == null) return;
+            if (Receipts == null)
+            {
+                return;
+            }
         
             foreach (var receipt in Receipts)
             {
                 receipt[Rec.name_employee] += " " + receipt[Rec.surname_employee]
                                                   + " " + receipt[Rec.patronymic_employee];
             }
+            
             OnPropertyChanged(nameof(ReceiptsSum));
         }
 

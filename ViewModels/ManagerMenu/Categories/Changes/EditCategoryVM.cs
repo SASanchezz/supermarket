@@ -51,7 +51,7 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
             _initNumber = data[Cat.number];
             _initName = data[Cat.name];
             ChangedNumber = _initNumber;
-            ChangedName = data[Cat.name];
+            ChangedName = _initName;
         }
         
         private void UpdateCategory()
@@ -68,7 +68,7 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
             
             CloseWindow();
         }
-        
+
         private void DeleteCategory()
         {
             Cat.DeleteCategoryByNumber(_initNumber);

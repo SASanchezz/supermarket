@@ -25,7 +25,7 @@
                  VerticalContentAlignment="Center" 
                  FontSize="14" 
                  Margin="0,0,0,15"
-                 Text="{Binding Number, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Number, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBlock Grid.Row="0" 
                    Grid.Column="1" 
@@ -45,7 +45,7 @@
                  VerticalContentAlignment="Center" 
                  FontSize="14" 
                  Margin="0,0,0,15"
-                 Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         
 
         <Button Content="Додати нову категорію" 

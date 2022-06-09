@@ -1,27 +1,51 @@
-using System;
 using System.Windows;
 using supermarket.Middlewares.Category;
-using supermarket.Models;
 using supermarket.Utils;
 using supermarket.ViewModels.BaseClasses;
+using Cat = supermarket.Models.Category;
 
 namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
 {
     internal class AddCategoryVM : ViewModel
     {
+        private string _number;
+        private string _name;
+        
         public AddCategoryVM()
         {
             AddCategoryCommand = new RelayCommand<object>(_ => AddCategory(), CanExecute);
             CloseCommand = new RelayCommand<object>(_ => CloseWindow());
         }
         
-        public string Number { get; set; }
+        public string Number
+        {
+            get => _number;
+            set
+            {
+                _number = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public string Name { get; set; }
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                _name = value;
+                OnPropertyChanged();
+            }
+        }
 
         public RelayCommand<object> AddCategoryCommand { get; }
 
         public RelayCommand<object> CloseCommand { get; }
+
+        public void Reset()
+        {
+            Number = null;
+            Name = null;
+        }
         
         private void AddCategory()
         {
@@ -35,10 +59,8 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
             }
 
             //Query to insert new category
-            Category.AddCategory(Number, Name);
-            
-            // добавить обнуление свойств
-            
+            Cat.AddCategory(Number, Name);
+
             CloseWindow();
         }
         

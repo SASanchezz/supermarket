@@ -26,6 +26,7 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
                 // window is shown
                 ViewModel.Reset();
             };
+            
             SetUpdatingAfterHiden(_detailsReceiptWindowVM);
         }
         

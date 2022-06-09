@@ -4,18 +4,22 @@ using supermarket.ViewModels.BaseClasses;
 using System;
 using System.Collections.Generic;
 using supermarket.Printing;
+using Cat = supermarket.Models.Category;
 
 namespace supermarket.ViewModels.ManagerMenu.Categories
 {
     internal class CategoriesVM : ViewModel, IWindowOpeningVM<ManagerCategories>
     {
         private List<string[]> _categories;
-        private string[] _selectedCategory;
 
         public CategoriesVM()
         {
-            OpenAddCategoryWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(ManagerCategories.AddCategory));
-            OpenEditCategoryWindowCommand= new RelayCommand<object>(_ => OpenWindowViewModel(ManagerCategories.EditCategory));
+            OpenAddCategoryWindowCommand = 
+                new RelayCommand<object>(_ => OpenWindowViewModel(ManagerCategories.AddCategory));
+            
+            OpenEditCategoryWindowCommand= 
+                new RelayCommand<object>(_ => OpenWindowViewModel(ManagerCategories.EditCategory));
+            
             PrintCategoriesCommand = new RelayCommand<object>(_ => PrintCategories());
             CloseCommand = new RelayCommand<object>(_ => CloseWindow());
         }
@@ -32,15 +36,7 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
             }
         }
 
-        public string[] SelectedCategory
-        {
-            get => _selectedCategory;
-            set
-            {
-                _selectedCategory = value;
-                OnPropertyChanged();
-            }
-        }
+        public string[] SelectedCategory { get; set; }
 
         public RelayCommand<object> OpenAddCategoryWindowCommand { get; }
 
@@ -52,7 +48,7 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
 
         public void UpdateCategories()
         {
-            Categories = DbQueries.GetAllCategories();
+            Categories = Cat.GetAllCategories();
         }
 
         private void PrintCategories()
