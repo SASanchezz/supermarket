@@ -135,7 +135,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
 
                 for (int h = 0; ; ++h)
                 {
-                    if (h == 9) break; 
+                    if (h == 9) { break; } 
                     printerEmployees[i].SetValue(Employees[i][h], h);
                 }
 

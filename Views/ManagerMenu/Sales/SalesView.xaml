@@ -64,7 +64,7 @@
                 FontSize="12" 
                 FontWeight="DemiBold" 
                 Margin="0,15,0,0"
-                Command="{Binding PrintReceiptsCommand}"/>
+                Command="{Binding PrintSalesCommand}"/>
 
         <Button Grid.Row="0" 
                 Grid.Column="3"

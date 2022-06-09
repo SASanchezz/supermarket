@@ -6,6 +6,7 @@ using supermarket.ViewModels.BaseClasses;
 using Rec = supermarket.Models.Receipt;
 using Employee = supermarket.Models.Employee;
 using supermarket.Data;
+using supermarket.Printing;
 
 namespace supermarket.ViewModels.ManagerMenu.Receipts
 {
@@ -20,9 +21,12 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
         
         public ReceiptsVM()
         {
+            UpdateReceipts();
             CloseCommand = new RelayCommand<object>(_ => CloseWindow());
             OpenDetailsReceiptWindowCommand =
                 new RelayCommand<object>(_ => OpenWindowViewModel(ManagerReceipts.DetailsReceipt));
+
+            PrintReceiptsCommand = new RelayCommand<object>(_ => PrintReceipts());
 
             CountReceiptsSumCommand = new RelayCommand<object>(_ => OnPropertyChanged(nameof(ReceiptsSum)));
         }
@@ -147,5 +151,31 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
         }
 
         public Action<ManagerReceipts> OpenWindowViewModel { get; set; }
+
+        private void PrintReceipts()
+        {
+            var printerReceipts = new List<string[]>();
+
+            for (int i = 0; i < Receipts.Count; ++i)
+            {
+                printerReceipts.Add(new string[Receipts[0].Length]);
+
+                for (int h = 0; h < Receipts[0].Length; ++h)
+                {
+                    printerReceipts[i].SetValue(Receipts[i][h], h);
+                }
+            }
+
+            Printer.PrintDataGrid(printerReceipts, new string[]
+            {
+                "Номер",
+                "id касира",
+                "ПІБ касира",
+                "Номер карти клієнта",
+                "Дата",
+                "Сума",
+                "ПДВ",
+            });
+        }
     }
 }

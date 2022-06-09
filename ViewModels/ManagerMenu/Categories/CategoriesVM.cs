@@ -57,6 +57,18 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
 
         private void PrintCategories()
         {
+            var printerCategories = new List<string[]>();
+
+            for (int i = 0; i < Categories.Count; ++i)
+            {
+                printerCategories.Add(new string[Categories[0].Length]);
+
+                for (int h = 0; h < Categories[0].Length; ++h)
+                {
+                    printerCategories[i].SetValue(Categories[i][h], h);
+                }
+            }
+
             Printer.PrintDataGrid(Categories, new string[]
             {
                 "Номер",
