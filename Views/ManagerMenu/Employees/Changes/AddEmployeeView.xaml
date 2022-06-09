@@ -12,56 +12,56 @@
 
         <TextBlock Text="Прізвище" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Foreground="DimGray" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
         <TextBox Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
-                 Text="{Binding Surname, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBlock Text="Ім'я" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" Foreground="DimGray" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
         <TextBox Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
-                 Text="{Binding Name, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBlock Text="По батькові" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" Foreground="DimGray" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
         <TextBox Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
-                 Text="{Binding Patronymic, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Patronymic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBlock Text="Посада" Grid.Row="4" Grid.Column="0" Foreground="DimGray" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
         <ComboBox Grid.Row="4" Grid.Column="0" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,15"
-                  SelectedItem="{Binding Role, Mode=OneWayToSource}" ItemsSource="{Binding Roles}">
+                  SelectedItem="{Binding Role, Mode=TwoWay}" ItemsSource="{Binding Roles}">
         </ComboBox>
 
         <TextBlock Text="Зарплата(грн)" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Foreground="DimGray" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
         <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
-                Text="{Binding Salary, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                Text="{Binding Salary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBlock Text="Дата народження" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center"  Foreground="DimGray" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
         <DatePicker Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
-                    SelectedDate="{Binding DateOfBirth, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, FallbackValue={x:Static sys:DateTime.Now}}"/>
+                    SelectedDate="{Binding DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue={x:Static sys:DateTime.Now}}"/>
 
         <TextBlock Text="Дата початку роботи" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Foreground="DimGray" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
         <DatePicker Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
-                    SelectedDate="{Binding DateOfStart, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, FallbackValue={x:Static sys:DateTime.Now}}"/>
+                    SelectedDate="{Binding DateOfStart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue={x:Static sys:DateTime.Now}}"/>
 
         <TextBlock Text="Телефон" Grid.Row="4" Grid.Column="1" Foreground="DimGray" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
         <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
-                 Text="{Binding PhoneNumber, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBlock Text="Місто" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" Foreground="DimGray" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
         <TextBox Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
-                 Text="{Binding City, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBlock Text="Вулиця" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" Foreground="DimGray" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
         <TextBox Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
-                 Text="{Binding Street, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Street, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBlock Text="Поштовий індекс" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" Foreground="DimGray" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
         <TextBox Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
-                 Text="{Binding Zipcode, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Zipcode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBlock Text="Пароль" Grid.Row="4" Grid.Column="2" Foreground="DimGray" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
         <TextBox Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
-                 Text="{Binding Password, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Button Content="Зареєструвати" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" Width="128" Height="30" VerticalAlignment="Center" FontSize="12" Margin="0,0,0,5"
                 Command="{Binding AddEmployeeCommand}"/>
-        <Button Content="←Назад" Grid.Row="0" HorizontalAlignment="Left" Width="64" Height="24" VerticalAlignment="Center" FontSize="12" Margin="0,0,0,0"
+        <Button Content="←Назад" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Width="64" Height="24" VerticalAlignment="Center" FontSize="12" Margin="0,0,0,0"
                 Command="{Binding CloseCommand}"/>
 
         <Grid.RowDefinitions>

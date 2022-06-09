@@ -205,9 +205,8 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
 
             Password = Password == "" ? employee[Empl.password] : CryptUtils.HashPassword(Password);
 
-            Empl.UpdateEmployee(Id, Surname, Name, Patronymic, Role,
-            Salary, DateOfBirth, DateOfStart, PhoneNumber,
-            Password, City, Street, Zipcode);
+            Empl.UpdateEmployee(Id, Surname, Name, Patronymic, Role, Salary, 
+                DateOfBirth, DateOfStart, PhoneNumber, Password, City, Street, Zipcode);
 
             CloseWindow();
         }
