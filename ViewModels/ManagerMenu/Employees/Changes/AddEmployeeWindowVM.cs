@@ -8,6 +8,24 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
      */
     internal class AddEmployeeWindowVM : WindowViewModel<AddEmployeeWindow, AddEmployeeVM>
     {
-
+        public AddEmployeeWindowVM()
+        {
+            SetResettingSystem();
+        }
+        
+        private void SetResettingSystem()
+        {
+            Window.IsVisibleChanged += (sender, e) =>
+            {
+                // window is hiden
+                if (!(bool)e.NewValue)
+                {
+                    return;
+                }
+            
+                // window is shown
+                ViewModel.Reset();
+            };
+        }
     }
 }

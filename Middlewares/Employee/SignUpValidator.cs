@@ -36,7 +36,8 @@ namespace supermarket.Middlewares.SignUp
             try
             {
                 int findRole = Roles.roleKeys[role];
-            } catch (KeyNotFoundException)
+            } 
+            catch (KeyNotFoundException)
             {
                 return "Нема такої ролі";
             }

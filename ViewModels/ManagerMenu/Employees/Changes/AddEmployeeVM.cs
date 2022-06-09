@@ -1,5 +1,6 @@
 ﻿using supermarket.Utils;
 using System;
+using System.Windows;
 using supermarket.Middlewares.SignUp;
 using supermarket.Models;
 using supermarket.ViewModels.BaseClasses;
@@ -8,50 +9,181 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
 {
     internal class AddEmployeeVM : ViewModel
     {
+        private string _id;
+        private string _surname;
+        private string _name;
+        private string _patronymic;
+        private string _role;
+        private string _salary;
+        private DateTime _dateOfBirth;
+        private DateTime _dateOfStart;
+        private string _phoneNumber;
+        private string _password;
+        private string _city;
+        private string _street;
+        private string _zipcode;
+        
         public AddEmployeeVM()
         {
             AddEmployeeCommand = new RelayCommand<object>(_ => AddEmployee(), CanExecute);
             CloseCommand = new RelayCommand<object>(_ => CloseWindow());
         }
 
-        public string Surname { get; set; }
+        public string Id
+        {
+            get => _id;
+            set
+            {
+                _id = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public string Name { get; set; }
+        public string Surname
+        {
+            get => _surname;
+            set
+            {
+                _surname = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public string Patronymic { get; set; }
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                _name = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public string Role { get; set; }
+        public string Patronymic
+        {
+            get => _patronymic;
+            set
+            {
+                _patronymic = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public string Salary { get; set; }
+        public string Role
+        {
+            get => _role;
+            set
+            {
+                _role = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public DateTime DateOfBirth { get; set; }
+        public string Salary
+        {
+            get => _salary;
+            set
+            {
+                _salary = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public DateTime DateOfStart { get; set; }
+        public DateTime DateOfBirth
+        {
+            get => _dateOfBirth;
+            set
+            {
+                _dateOfBirth = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public string PhoneNumber { get; set; }
+        public DateTime DateOfStart
+        {
+            get => _dateOfStart;
+            set
+            {
+                _dateOfStart = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public string Password { get; set; }
+        public string PhoneNumber
+        {
+            get => _phoneNumber;
+            set
+            {
+                _phoneNumber = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public string City { get; set; }
+        public string Password
+        {
+            get => _password;
+            set
+            {
+                _password = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public string Street { get; set; }
+        public string City
+        {
+            get => _city;
+            set
+            {
+                _city = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public string Zipcode { get; set; }
+        public string Street
+        {
+            get => _street;
+            set
+            {
+                _street = value;
+                OnPropertyChanged();
+            }
+        }
 
+        public string Zipcode
+        {
+            get => _zipcode;
+            set
+            {
+                _zipcode = value;
+                OnPropertyChanged();
+            }
+        }
+        
         public static string[] Roles => Data.Roles.roleNames;
 
         public RelayCommand<object> AddEmployeeCommand { get; }
 
         public RelayCommand<object> CloseCommand { get; }
 
+        public void Reset()
+        {
+            Id = null;
+            Surname = null;
+            Name = null;
+            Patronymic = null;
+            Role = null;
+            Salary = null;
+            DateOfBirth = DateTime.Now;
+            DateOfStart = DateTime.Now;
+            PhoneNumber = null;
+            Password = null;
+            City = null;
+            Street = null;
+            Zipcode = null;
+        }
+
         private void AddEmployee()
         {
-            // сюда саша
-            // Yes honey
-            /*
-            * This method sign up new user
-            */
-
             ////Validates entered information
             string result = SignUpValidator.Validate(Surname, Name, Patronymic, Role,
                 Salary, DateOfBirth, DateOfStart, PhoneNumber,
@@ -59,7 +191,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
 
             if (result.Length != 0)
             {
-                //MessageBox.Show(result);
+                MessageBox.Show(result);
                 return;
             }
 
@@ -67,9 +199,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
             Employee.AddEmployee(Surname, Name, Patronymic, Role,
                 Salary, DateOfBirth, DateOfStart, PhoneNumber,
                 City, Street, Zipcode, Password);
-            
-            // добавить обнуление свойств
-            
+
             CloseWindow();
         }
 
@@ -83,7 +213,8 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
                 && !string.IsNullOrWhiteSpace(Password)
                 && !string.IsNullOrWhiteSpace(City)
                 && !string.IsNullOrWhiteSpace(Street)
-                && !string.IsNullOrWhiteSpace(Zipcode);
+                && !string.IsNullOrWhiteSpace(Zipcode)
+                && (Role != null);
         }
     }
 }

@@ -17,10 +17,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
         private const string AllString = "Всі";
 
         private List<string[]> _employees;
-        private string[] _selectedEmployee;
-
         private string _filteredSurname = "";
-
         private string _selectedRole = AllString;
 
         public EmployeesVM()
@@ -62,15 +59,8 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
 
         public RelayCommand<object> CloseCommand { get; }
 
-        public string[] SelectedEmployee
-        {
-            get => _selectedEmployee;
-            set
-            {
-                _selectedEmployee = value;
-                OnPropertyChanged();
-            }
-        }
+        public string[] SelectedEmployee { get; set; }
+        
         public string FilteredSurname
         {
             get => _filteredSurname;
