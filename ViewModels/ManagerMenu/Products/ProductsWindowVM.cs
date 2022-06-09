@@ -18,6 +18,7 @@ namespace supermarket.ViewModels.ManagerMenu.Products
             _editProductWindowVM = new EditProductWindowVM();
 
             SetUpdatingSystem();
+            SetResettingSystem();
             SetWindowsNavigation();
             
             Window.Closed += (sender, e) =>
@@ -35,8 +36,8 @@ namespace supermarket.ViewModels.ManagerMenu.Products
             windowsNavigator.SetWay(ManagerProducts.AddProduct, _addProductWindowVM.Window);
             windowsNavigator.SetWay(ManagerProducts.EditProduct, _editProductWindowVM.Window, OnOpeningEditProduct);
             
-            SetEnabilitySystem(_addProductWindowVM);
-            SetEnabilitySystem(_editProductWindowVM);
+            SetChangingEnabilityByOpeningAnotherWindow(_addProductWindowVM);
+            SetChangingEnabilityByOpeningAnotherWindow(_editProductWindowVM);
         }
 
         private void OnOpeningEditProduct()
@@ -51,14 +52,24 @@ namespace supermarket.ViewModels.ManagerMenu.Products
 
         private void SetUpdatingSystem()
         {
+            Window.IsEnabledChanged += (sender, e) =>
+            { 
+                // window is enabled
+                if ((bool)e.NewValue)
+                {
+                    ViewModel.UpdateProducts();
+                }
+            };
+        }
+        
+        private void SetResettingSystem()
+        {
             Window.IsVisibleChanged += (sender, e) =>
             {
                 if (!(bool)e.NewValue) return; // window is hiden
                 // window is shown
                 ViewModel.Reset();
             };
-            SetUpdatingAfterHiden(_addProductWindowVM);
-            SetUpdatingAfterHiden(_editProductWindowVM);
         }
         
         private void SetUpdatingAfterHiden<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
@@ -73,7 +84,7 @@ namespace supermarket.ViewModels.ManagerMenu.Products
             };
         }
 
-        private void SetEnabilitySystem<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
+        private void SetChangingEnabilityByOpeningAnotherWindow<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
             where TWindow : Window, new()
             where TViewModel : ViewModel, new()
         {

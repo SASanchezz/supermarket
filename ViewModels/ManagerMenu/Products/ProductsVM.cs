@@ -6,6 +6,7 @@ using Prod = supermarket.Models.Product;
 using supermarket.ViewModels.BaseClasses;
 using System;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace supermarket.ViewModels.ManagerMenu.Products
 {
@@ -14,18 +15,19 @@ namespace supermarket.ViewModels.ManagerMenu.Products
         private const string AllString = "Всі";
 
         private List<string[]> _products;
-        private string[] _selectedProduct;
 
         private string _filteredName = "";
         private string _selectedCategory = AllString;
+        private string[] _selectiveCategories;
 
         public ProductsVM()
         {
-            OpenAddProductWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(ManagerProducts.AddProduct));
-            OpenEditProductWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(ManagerProducts.EditProduct));
+            OpenAddProductWindowCommand = 
+                new RelayCommand<object>(_ => OpenWindowViewModel(ManagerProducts.AddProduct));
+            OpenEditProductWindowCommand = 
+                new RelayCommand<object>(_ => OpenWindowViewModel(ManagerProducts.EditProduct));
             PrintProductsCommand = new RelayCommand<object>(_ => PrintProducts());
             CloseCommand = new RelayCommand<object>(_ => CloseWindow());
-            SetSelectiveCategories();
         }
 
         public Action<ManagerProducts> OpenWindowViewModel { get; set; }
@@ -40,15 +42,7 @@ namespace supermarket.ViewModels.ManagerMenu.Products
             }
         }
 
-        public string[] SelectedProduct
-        {
-            get => _selectedProduct;
-            set
-            {
-                _selectedProduct = value;
-                OnPropertyChanged();
-            }
-        }
+        public string[] SelectedProduct { get; set; }
 
         public string FilteredName
         {
@@ -62,7 +56,15 @@ namespace supermarket.ViewModels.ManagerMenu.Products
             }
         }
 
-        public string[] SelectiveCategories { get; private set; }
+        public string[] SelectiveCategories
+        {
+            get => _selectiveCategories;
+            set
+            {
+                _selectiveCategories = value;
+                OnPropertyChanged();
+            }
+        }
 
         public string SelectedCategory
         {
@@ -92,16 +94,21 @@ namespace supermarket.ViewModels.ManagerMenu.Products
         {
             SelectedCategory = null;
             FilteredName = null;
+            SelectiveCategories = GetSelectiveCategories();
         }
 
-        private void SetSelectiveCategories() {
-
-            SelectiveCategories = new string[Categ.GetAllCategories().Count + 1];
-            SelectiveCategories.SetValue(AllString, 0);
+        private string[] GetSelectiveCategories() 
+        {
+            string[] categories = new string[Categ.GetAllCategories().Count + 1];
+            categories.SetValue(AllString, 0);
+            
             for (int i = 0; i < Categ.GetAllCategories().Count; ++i)
             {
-                SelectiveCategories[i + 1] = Categ.GetAllCategoriesNames()[i];
+                categories[i + 1] = Categ.GetAllCategoriesNames()[i];
             }
+
+            MessageBox.Show("Get Categotires");
+            return categories;
         }
 
         private void PrintProducts()
