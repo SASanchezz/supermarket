@@ -1,6 +1,7 @@
 ﻿using supermarket.Data;
 using supermarket.Utils;
 using System;
+using System.Windows;
 using Categ = supermarket.Models.Category;
 using supermarket.Middlewares.SignUp;
 using supermarket.Models;
@@ -11,27 +12,82 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
 {
     internal class AddProductVM : ViewModel
     {
+        private string _id_product;
+        private string _product_name;
+        private string _category_name;
+        private string _manufacturer;
+        private string _characteristics;
+        
         public AddProductVM()
         {
             AddProductCommand = new RelayCommand<object>(_ => AddProduct(), CanExecute);
             CloseCommand = new RelayCommand<object>(_ => CloseWindow());
         }
 
-        public string IdProduct { get; set; }
+        public string IdProduct
+        {
+            get => _id_product;
+            set
+            {
+                _id_product = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public string CategoryName { get; set; }
+        public string ProductName
+        {
+            get => _product_name;
+            set
+            {
+                _product_name = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public string ProductName { get; set; }
+        public string CategoryName
+        {
+            get => _category_name;
+            set
+            {
+                _category_name = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public string Characteristics { get; set; }
+        public string Manufacturer
+        {
+            get => _manufacturer;
+            set
+            {
+                _manufacturer = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public string Manufacturer { get; set; }
+        public string Characteristics
+        {
+            get => _characteristics;
+            set
+            {
+                _characteristics = value;
+                OnPropertyChanged();
+            }
+        }
 
         public static string[] CategoriesNames => Categ.GetAllCategoriesNames();
 
         public RelayCommand<object> AddProductCommand { get; }
 
         public RelayCommand<object> CloseCommand { get; }
+
+        public void Reset()
+        {
+            IdProduct = null;
+            ProductName = null;
+            CategoryName = null;
+            Characteristics = null;
+            Manufacturer = null;
+        }
         
         private void AddProduct()
         {
@@ -41,7 +97,7 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
 
             if (result.Length != 0)
             {
-                //MessageBox.Show(result);
+                MessageBox.Show(result);
                 return;
             }
 
