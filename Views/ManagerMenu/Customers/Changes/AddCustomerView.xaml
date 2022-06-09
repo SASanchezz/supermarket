@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:supermarket.Views.ManagerMenu.Customers.Changes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="500" d:DesignWidth="850"
              FontFamily="Montserrat" FontWeight="Medium">
     <Grid Background="LightGray">
         
@@ -26,7 +26,7 @@
                  VerticalContentAlignment="Center" 
                  FontSize="14" 
                  Margin="0,0,0,0"
-                 Text="{Binding CardNumber, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding CardNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         
         <TextBlock Grid.Row="0" 
                    Grid.Column="1" 
@@ -46,7 +46,7 @@
                  VerticalContentAlignment="Center" 
                  FontSize="14" 
                  Margin="0,0,0,0"
-                 Text="{Binding Surname, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
 
         <TextBlock Grid.Row="1" 
@@ -67,7 +67,7 @@
                  VerticalContentAlignment="Center" 
                  FontSize="14" 
                  Margin="0,0,0,0"
-                 Text="{Binding Name, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBlock Grid.Row="1" 
                    Grid.Column="1" 
@@ -87,7 +87,7 @@
                  VerticalContentAlignment="Center" 
                  FontSize="14" 
                  Margin="0,0,0,0"
-                 Text="{Binding Patronymic, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Patronymic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBlock Grid.Row="2" 
                    Grid.Column="0" 
@@ -107,7 +107,7 @@
                  VerticalContentAlignment="Center" 
                  FontSize="14" 
                  Margin="0,0,0,0"
-                 Text="{Binding PhoneNumber, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBlock Grid.Row="2" 
                    Grid.Column="1" 
@@ -127,7 +127,7 @@
                  VerticalContentAlignment="Center" 
                  FontSize="14" 
                  Margin="0,0,0,0"
-                 Text="{Binding City, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBlock Grid.Row="3" 
                    Grid.Column="0" 
@@ -147,7 +147,7 @@
                  VerticalContentAlignment="Center" 
                  FontSize="14" 
                  Margin="0,0,0,0"
-                 Text="{Binding Street, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Street, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBlock Grid.Row="3" 
                    Grid.Column="1" 
@@ -167,7 +167,7 @@
                  VerticalContentAlignment="Center" 
                  FontSize="14" 
                  Margin="0,0,0,0"
-                 Text="{Binding Zipcode, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Zipcode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBlock Grid.Row="4" 
                    Grid.Column="0" 
@@ -187,7 +187,7 @@
                  VerticalContentAlignment="Center" 
                  FontSize="14" 
                  Margin="0,0,0,0"
-                 Text="{Binding Percent, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Percent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
 
         <Button Content="Додати нового клієнта" 
