@@ -20,28 +20,27 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
         
         private void SetUpdatingSystem()
         {
-            Window.IsVisibleChanged += (sender, e) =>
-            {
-                if (!(bool)e.NewValue) return; // window is hiden
-                // window is shown
-                ViewModel.Reset();
+            Window.IsEnabledChanged += (sender, e) =>
+            { 
+                // window is enabled
+                if ((bool)e.NewValue)
+                {
+                    ViewModel.UpdateReceipts();
+                }
             };
             
-            SetUpdatingAfterHiden(_detailsReceiptWindowVM);
-        }
-        
-        private void SetUpdatingAfterHiden<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM) 
-            where TWindow : Window, new()
-            where TViewModel : ViewModel, new()
-        {
-            windowVM.Window.IsVisibleChanged += (sender, e) =>
+            Window.IsVisibleChanged += (sender, e) =>
             {
-                if ((bool)e.NewValue) return; // window is shown
                 // window is hiden
+                if (!(bool)e.NewValue) 
+                {
+                    return; 
+                }
+                // window is shown
                 ViewModel.UpdateReceipts();
             };
         }
-        
+
         private void SetWindowsNavigation()
         {
             var windowsNavigator =
@@ -50,10 +49,10 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
             windowsNavigator.SetWay(ManagerReceipts.DetailsReceipt, _detailsReceiptWindowVM.Window, 
                 OnOpeningDetailsReceipt);
 
-            SetEnabilitySystem(_detailsReceiptWindowVM);
+            SetChangingEnabilityByOpeningAnotherWindow(_detailsReceiptWindowVM);
         }
         
-        private void SetEnabilitySystem<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
+        private void SetChangingEnabilityByOpeningAnotherWindow<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
             where TWindow : Window, new()
             where TViewModel : ViewModel, new()
         {
@@ -68,7 +67,6 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
             }
 
             _detailsReceiptWindowVM.ViewModel.SetData(ViewModel.SelectedReceipt);
-            ViewModel.SelectedReceipt = null;
         }
     }
 }

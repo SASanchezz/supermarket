@@ -25,6 +25,8 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
         
         public AddEmployeeVM()
         {
+            DateOfBirth = DateTime.Now;
+            DateOfStart =DateTime.Now;
             AddEmployeeCommand = new RelayCommand<object>(_ => AddEmployee(), CanExecute);
             CloseCommand = new RelayCommand<object>(_ => CloseWindow());
         }
@@ -165,21 +167,21 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
 
         public RelayCommand<object> CloseCommand { get; }
 
-        public void Reset()
+        private void ResetFields()
         {
-            Id = null;
-            Surname = null;
-            Name = null;
-            Patronymic = null;
-            Role = null;
-            Salary = null;
+            Id = "";
+            Surname = "";
+            Name = "";
+            Patronymic = "";
+            Role = "";
+            Salary = "";
             DateOfBirth = DateTime.Now;
             DateOfStart = DateTime.Now;
-            PhoneNumber = null;
-            Password = null;
-            City = null;
-            Street = null;
-            Zipcode = null;
+            PhoneNumber = "";
+            Password = "";
+            City = "";
+            Street = "";
+            Zipcode = "";
         }
 
         private void AddEmployee()
@@ -200,6 +202,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
                 Salary, DateOfBirth, DateOfStart, PhoneNumber,
                 City, Street, Zipcode, Password);
 
+            ResetFields();
             CloseWindow();
         }
 

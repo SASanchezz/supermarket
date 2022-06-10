@@ -5,6 +5,7 @@ using System.Windows;
 using supermarket.Models;
 using System.Collections.Generic;
 using supermarket.Navigation.ViewModels;
+using supermarket.ViewModels.ManagerMenu.Categories.Changes;
 using StrProduct = supermarket.Models.StoreProduct;
 
 namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.NonProm
@@ -20,9 +21,12 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.NonProm
         private string _price;
         private string _amount;
 
-        private RelayCommand<object> _updateCommand;
-        private RelayCommand<object> _deleteCommand;
-        private RelayCommand<object> _closeCommand;
+        public EditStoreProductVM()
+        {
+            UpdateCommand = new RelayCommand<object>(_ => UpdateStoreProduct(), CanExecute);
+            DeleteCommand = new RelayCommand<object>(_ => DeleteStoreProduct());
+            CloseCommand = new RelayCommand<object>(_ => CloseWindow());
+        }
 
         public string ChangedUpc
         {
@@ -40,6 +44,7 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.NonProm
             set
             {
                 _subProduct = value;
+                OnPropertyChanged();
                 OnPropertyChanged(nameof(SelectiveProducts));
             }
         }
@@ -78,21 +83,13 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.NonProm
 
                 return resultProducts;
             }
-            set { }
         }
 
-        public RelayCommand<object> UpdateCommand
-        {
-            get => _updateCommand ??= new RelayCommand<object>(_ => UpdateStoreProduct(), CanExecute);
-        }
-        public RelayCommand<object> DeleteCommand
-        {
-            get => _deleteCommand ??= new RelayCommand<object>(_ => DeleteStoreProduct());
-        }
-        public RelayCommand<object> CloseCommand
-        {
-            get => _closeCommand ??= new RelayCommand<object>(_ => CloseWindow());
-        }
+        public RelayCommand<object> UpdateCommand { get; }
+        
+        public RelayCommand<object> DeleteCommand { get; }
+        
+        public RelayCommand<object> CloseCommand { get; }
 
         public override void SetData(string[] data)
         {

@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:supermarket.Views.ManagerMenu.Employees.Changes"
-             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              FontFamily="Montserrat" FontWeight="Medium">
@@ -33,11 +32,11 @@
 
         <TextBlock Text="Дата народження" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center"  Foreground="DimGray" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
         <DatePicker Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
-                    SelectedDate="{Binding DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue={x:Static sys:DateTime.Now}}"/>
+                    SelectedDate="{Binding DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBlock Text="Дата початку роботи" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Foreground="DimGray" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
         <DatePicker Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
-                    SelectedDate="{Binding DateOfStart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue={x:Static sys:DateTime.Now}}"/>
+                    SelectedDate="{Binding DateOfStart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBlock Text="Телефон" Grid.Row="4" Grid.Column="1" Foreground="DimGray" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
         <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"

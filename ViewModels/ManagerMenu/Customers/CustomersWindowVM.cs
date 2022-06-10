@@ -22,7 +22,6 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
             _editCustomerWindowVM = new EditCustomerWindowVM();
 
             SetUpdatingSystem();
-            SetResettingSystem();
             SetWindowsNavigation();
 
             Window.Closed += (sender, e) =>
@@ -65,10 +64,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
                     ViewModel.UpdateCustomers();
                 }
             };
-        }
-
-        private void SetResettingSystem()
-        {
+            
             Window.IsVisibleChanged += (sender, e) =>
             {
                 // window is hiden
@@ -77,7 +73,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
                     return;
                 }
                 // window is shown
-                ViewModel.Reset();
+                ViewModel.UpdateCustomers();
             };
         }
 

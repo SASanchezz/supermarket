@@ -14,22 +14,20 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
         private const string AllString = "Всі";
 
         private List<string[]> _storeProducts;
-        private string[] _selectedStoreProduct;
         private string _selectedProm = AllString;
         private string _subUPC = "";
 
-        private RelayCommand<object> _open_nonProm_AddStoreProductWindowCommand;
-        private RelayCommand<object> _open_Prom_AddStoreProductWindowCommand;
-
-        private RelayCommand<object> _openEditStoreProductWindowCommand;
-
-        private RelayCommand<object> _printStoreProductsCommand;
-
-        private RelayCommand<object> _closeCommand;
-
         public StoreProductsVM()
         {
-            UpdateStoreProducts();
+            Open_nonProm_AddStoreProductWindowCommand = 
+                new RelayCommand<object>(_ => OpenWindowViewModel(ManagerStoreProducts.AddNonPromStoreProduct));
+            Open_Prom_AddStoreProductWindowCommand = 
+                new RelayCommand<object>(_ => OpenWindowViewModel(ManagerStoreProducts.AddPromStoreProduct));
+            OpenEditStoreProductWindowCommand = 
+                new RelayCommand<object>(_ => OpenWindowViewModel(ManagerStoreProducts.EditStoreProduct));
+            
+            PrintStoreProductsCommand = new RelayCommand<object>(_ => PrintStoreProducts());
+            CloseCommand = new RelayCommand<object>(_ => CloseWindow());
         }
 
         public Action<ManagerStoreProducts> OpenWindowViewModel { get; set; }
@@ -44,50 +42,24 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
             }
         }
 
-        public RelayCommand<object> Open_nonProm_AddStoreProductWindowCommand
-        {
-            get => _open_nonProm_AddStoreProductWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(ManagerStoreProducts.AddNonPromStoreProduct));
-        }
+        public RelayCommand<object> Open_nonProm_AddStoreProductWindowCommand { get; }
 
-        public RelayCommand<object> Open_Prom_AddStoreProductWindowCommand
-        {
-            get => _open_Prom_AddStoreProductWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(ManagerStoreProducts.AddPromStoreProduct));
-        }
+        public RelayCommand<object> Open_Prom_AddStoreProductWindowCommand { get; }
 
-        public RelayCommand<object> OpenEditStoreProductWindowCommand
-        {
-            get => _openEditStoreProductWindowCommand ??= new RelayCommand<object>(_ => OpenWindowViewModel(ManagerStoreProducts.EditStoreProduct));
-        }
+        public RelayCommand<object> OpenEditStoreProductWindowCommand { get; }
 
-        public RelayCommand<object> PrintStoreProductsCommand
-        {
-            get
-            {
-                return _printStoreProductsCommand ??= new RelayCommand<object>(_ => PrintStoreProducts());
-            }
-        }
+        public RelayCommand<object> PrintStoreProductsCommand { get; }
 
-        public RelayCommand<object> CloseCommand
-        {
-            get => _closeCommand ??= new RelayCommand<object>(_ => CloseWindow());
-        }
+        public RelayCommand<object> CloseCommand { get; }
 
-        public string[] SelectedStoreProduct
-        {
-            get => _selectedStoreProduct;
-            set
-            {
-                _selectedStoreProduct = value;
-                OnPropertyChanged();
-            }
-        }
+        public string[] SelectedStoreProduct { get; set; }
 
         public string SelectedProm
         {
             get => _selectedProm;
             set
             {
-                _selectedProm = value;
+                _selectedProm = value ?? SelectiveProms[0];
                 UpdateStoreProducts();
                 OnPropertyChanged();
             }
@@ -104,18 +76,21 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
             }
         }
 
-        public static string[] SelectiveProms { 
-            get {
-                string[] result = new string[3];
+        public static string[] SelectiveProms 
+        { 
+            get 
+            {
+                var result = new string[3];
                 result[0] = AllString;
+                
                 for(int i = 1; i < 3; i++)
                 {
                     result[i] = Proms.promNames[i - 1];
                 }
 
                 return result;
-            }   
-                private set {} }
+            }
+        }
 
         public void UpdateStoreProducts()
         {

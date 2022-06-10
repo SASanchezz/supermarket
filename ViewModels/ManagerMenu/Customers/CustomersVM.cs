@@ -13,8 +13,6 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
      */
     internal class CustomersVM : ViewModel, IWindowOpeningVM<ManagerCustomers>
     {
-        private List<string[]> _customers;
-
         private double _sliderMax;
         private double _sliderMin;
 
@@ -27,7 +25,6 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
                 new RelayCommand<object>(_ => OpenWindowViewModel(ManagerCustomers.EditCustomer));
 
             PrintCustomersCommand = new RelayCommand<object>(_ => PrintCustomers());
-
             CloseCommand = new RelayCommand<object>(_ => CloseWindow());
             
             SliderMax = 100;
@@ -36,15 +33,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
 
         public Action<ManagerCustomers> OpenWindowViewModel { get; set; }
 
-        public List<string[]> Customers
-        {
-            get => _customers;
-            set
-            {
-                _customers = value;
-                OnPropertyChanged();
-            }
-        }
+        public List<string[]> Customers => Cust.GetAllCustomers(_sliderMin, _sliderMax);
 
         public RelayCommand<object> OpenAddCustomerWindowCommand { get; }
 
@@ -82,13 +71,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
 
         public void UpdateCustomers()
         {
-            Customers = Cust.GetAllCustomers(_sliderMin, _sliderMax);
-        }
-
-        public void Reset()
-        {
-            SliderMin = 0;
-            SliderMax = 100;
+            OnPropertyChanged(nameof(Customers));
         }
 
         private void PrintCustomers()

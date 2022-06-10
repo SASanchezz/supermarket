@@ -10,8 +10,6 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
 {
     internal class CategoriesVM : ViewModel, IWindowOpeningVM<ManagerCategories>
     {
-        private List<string[]> _categories;
-
         public CategoriesVM()
         {
             OpenAddCategoryWindowCommand = 
@@ -26,15 +24,7 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
         
         public Action<ManagerCategories> OpenWindowViewModel { get; set; }
 
-        public List<string[]> Categories
-        {
-            get => _categories;
-            set
-            {
-                _categories = value;
-                OnPropertyChanged();
-            }
-        }
+        public List<string[]> Categories => Cat.GetAllCategories();
 
         public string[] SelectedCategory { get; set; }
 
@@ -48,7 +38,7 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
 
         public void UpdateCategories()
         {
-            Categories = Cat.GetAllCategories();
+            OnPropertyChanged(nameof(Categories));
         }
 
         private void PrintCategories()

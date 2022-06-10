@@ -77,7 +77,7 @@
                 FontSize="12" 
                 FontWeight="DemiBold" 
                 Margin="0,30,250,0"
-                Command="{Binding PrintStoreProductsCommand}"/>
+                Command="{Binding OpenEditStoreProductWindowCommand}"/>
 
         <ComboBox Grid.Row="0"
                   Text="All" 
