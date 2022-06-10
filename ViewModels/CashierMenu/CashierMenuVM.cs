@@ -1,6 +1,7 @@
 ﻿using supermarket.Navigation.ViewModels;
 using supermarket.Navigation.WindowViewModels;
 using System;
+using supermarket.Utils;
 
 namespace supermarket.ViewModels.CashierMenu
 {
@@ -9,6 +10,17 @@ namespace supermarket.ViewModels.CashierMenu
      */
     internal class CashierMenuVM : NavigatableViewModel<MainViewsTypes>, IWindowOpeningVM<Main>
     {
+        public CashierMenuVM()
+        {
+            OpenProductsWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(Main.CashierProducts));
+            //
+        }
+        
         public Action<Main> OpenWindowViewModel { get; set; }
+        
+        public RelayCommand<object> OpenProductsWindowCommand { get; }
+        public RelayCommand<object> OpenStoreProductsWindowCommand { get; }
+        public RelayCommand<object> OpenClientsWindowCommand { get; }
+        public RelayCommand<object> OpenReceiptsWindowCommand { get; }
     }
 }

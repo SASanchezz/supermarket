@@ -1,12 +1,14 @@
-﻿<Window Background="LightSlateGray" x:Class="supermarket.MainWindow"
+﻿<Window x:Class="supermarket.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:signInViews="clr-namespace:supermarket.Views.SignIn"
         xmlns:managerMenuViews="clr-namespace:supermarket.Views.ManagerMenu"
+        xmlns:cashierMenuViews="clr-namespace:supermarket.Views.CashierMenu"
         xmlns:signInVM="clr-namespace:supermarket.ViewModels.SignIn"
         xmlns:managerMenuVM="clr-namespace:supermarket.ViewModels.ManagerMenu"
+        xmlns:cashierMenuVM="clr-namespace:supermarket.ViewModels.CashierMenu"
         xmlns:local="clr-namespace:supermarket"
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="800"
@@ -21,7 +23,9 @@
         <DataTemplate DataType="{ x:Type managerMenuVM:ManagerMenuVM}">
             <managerMenuViews:ManagerMenuView/>
         </DataTemplate>
-        <!--+ кассир-->
+        <DataTemplate DataType="{ x:Type cashierMenuVM:CashierMenuVM}">
+            <cashierMenuViews:CashierMenuView/>
+        </DataTemplate>
     </Window.Resources>
     
 </Window>

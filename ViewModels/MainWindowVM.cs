@@ -13,6 +13,8 @@ using supermarket.Navigation.WindowViewModels;
 using supermarket.ViewModels.BaseClasses;
 using supermarket.ViewModels.ManagerMenu.Receipts;
 using supermarket.ViewModels.ManagerMenu.Sales;
+using M = supermarket.ViewModels.ManagerMenu;
+using C = supermarket.ViewModels.CashierMenu;
 using supermarket.Windows.ManagerMenu.Receipts;
 
 namespace supermarket.ViewModels
@@ -24,13 +26,15 @@ namespace supermarket.ViewModels
      */
     internal class MainWindowVM : WindowViewModel<MainWindow>
     {
-        private EmployeesWindowVM _employeesWindowVM;    
-        private CustomersWindowVM _customersWindowVM;
-        private CategoriesWindowVM _categoriesWindowVM;
-        private ProductsWindowVM _productsWindowVM;
-        private StoreProductsWindowVM _storeProductsWindowVM;
-        private ReceiptsWindowVM _receiptsWindowVM;
-        private SalesWindowVM _salesWindowVM;
+        private EmployeesWindowVM _m_employeesWindowVM;    
+        private CustomersWindowVM _m_customersWindowVM;
+        private CategoriesWindowVM _m_categoriesWindowVM;
+        private M.Products.ProductsWindowVM _m_productsWindowVM;
+        private StoreProductsWindowVM _m_storeProductsWindowVM;
+        private ReceiptsWindowVM _m_receiptsWindowVM;
+        private SalesWindowVM _m_salesWindowVM;
+
+        private C.Products.ProductsWindowVM _c_productsWindowVM;
 
         // controllable ViewModels
         private SignInVM _signInVM;
@@ -44,13 +48,15 @@ namespace supermarket.ViewModels
 
         public MainWindowVM(MainWindow window) : base(window)
         {
-            _employeesWindowVM = new EmployeesWindowVM();
-            _customersWindowVM = new CustomersWindowVM();
-            _categoriesWindowVM = new CategoriesWindowVM();
-            _productsWindowVM = new ProductsWindowVM();
-            _storeProductsWindowVM = new StoreProductsWindowVM();
-            _receiptsWindowVM = new ReceiptsWindowVM();
-            _salesWindowVM = new SalesWindowVM();
+            _m_employeesWindowVM = new EmployeesWindowVM();
+            _m_customersWindowVM = new CustomersWindowVM();
+            _m_categoriesWindowVM = new CategoriesWindowVM();
+            _m_productsWindowVM = new M.Products.ProductsWindowVM();
+            _m_storeProductsWindowVM = new StoreProductsWindowVM();
+            _m_receiptsWindowVM = new ReceiptsWindowVM();
+            _m_salesWindowVM = new SalesWindowVM();
+
+            _c_productsWindowVM = new C.Products.ProductsWindowVM();
             
             _signInVM = new SignInVM();
             _managerMenuVM = new ManagerMenuVM();
@@ -76,21 +82,25 @@ namespace supermarket.ViewModels
         {
             var windowsNavigator = new WindowVMNavigator<Main>(new IWindowOpeningVM<Main>[] { _managerMenuVM, _cashierMenuVM });
 
-            windowsNavigator.SetWay(Main.ManagerEmployees, _employeesWindowVM.Window);
-            windowsNavigator.SetWay(Main.ManagerCustomers, _customersWindowVM.Window);
-            windowsNavigator.SetWay(Main.ManagerCategories, _categoriesWindowVM.Window);
-            windowsNavigator.SetWay(Main.ManagerProducts, _productsWindowVM.Window);
-            windowsNavigator.SetWay(Main.ManagerStoreProducts, _storeProductsWindowVM.Window);
-            windowsNavigator.SetWay(Main.ManagerReceipts, _receiptsWindowVM.Window);
-            windowsNavigator.SetWay(Main.ManagerSales, _salesWindowVM.Window);
+            windowsNavigator.SetWay(Main.ManagerEmployees, _m_employeesWindowVM.Window);
+            windowsNavigator.SetWay(Main.ManagerCustomers, _m_customersWindowVM.Window);
+            windowsNavigator.SetWay(Main.ManagerCategories, _m_categoriesWindowVM.Window);
+            windowsNavigator.SetWay(Main.ManagerProducts, _m_productsWindowVM.Window);
+            windowsNavigator.SetWay(Main.ManagerStoreProducts, _m_storeProductsWindowVM.Window);
+            windowsNavigator.SetWay(Main.ManagerReceipts, _m_receiptsWindowVM.Window);
+            windowsNavigator.SetWay(Main.ManagerSales, _m_salesWindowVM.Window);
+            
+            windowsNavigator.SetWay(Main.CashierProducts, _c_productsWindowVM.Window);
 
-            SetEnabilitySystem(_employeesWindowVM);
-            SetEnabilitySystem(_customersWindowVM);
-            SetEnabilitySystem(_categoriesWindowVM);
-            SetEnabilitySystem(_productsWindowVM);
-            SetEnabilitySystem(_storeProductsWindowVM);
-            SetEnabilitySystem(_receiptsWindowVM);
-            SetEnabilitySystem(_salesWindowVM);
+            SetEnabilitySystem(_m_employeesWindowVM);
+            SetEnabilitySystem(_m_customersWindowVM);
+            SetEnabilitySystem(_m_categoriesWindowVM);
+            SetEnabilitySystem(_m_productsWindowVM);
+            SetEnabilitySystem(_m_storeProductsWindowVM);
+            SetEnabilitySystem(_m_receiptsWindowVM);
+            SetEnabilitySystem(_m_salesWindowVM);
+            
+            SetEnabilitySystem(_c_productsWindowVM);
         }
 
         private void SetViewsNavigation()

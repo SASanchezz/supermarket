@@ -80,6 +80,5 @@ namespace supermarket.ViewModels.ManagerMenu.Products
         {
             windowVM.Window.IsVisibleChanged += (sender, e) => IsEnabled = !IsEnabled;
         }
-
     }
 }
