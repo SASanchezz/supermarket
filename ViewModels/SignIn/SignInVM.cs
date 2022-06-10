@@ -27,11 +27,12 @@ namespace supermarket.ViewModels.SignIn
             try
             {
                 //SignInValidator.Validate(Login, Password);
-                SignInValidator.Validate("+380634412925", "admin");
+                //SignInValidator.Validate("+380634412925", "admin");
 
                 // вот тут хуйню с проверкой менеджер это или кассир надо сообразить
-                ChangeViewModel(MainViewsTypes.ManagerMenu);
-                //_goToCashierMenu();
+                if (Login == "к") ChangeViewModel(MainViewsTypes.CashierMenu);
+                else ChangeViewModel(MainViewsTypes.ManagerMenu);
+                
             }
             catch (Exception ex)
             {

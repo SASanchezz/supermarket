@@ -13,9 +13,6 @@ namespace supermarket.ViewModels.ManagerMenu.Products
     internal class ProductsVM : ViewModel, IWindowOpeningVM<ManagerProducts>
     {
         private const string AllString = "Всі";
-
-        private List<string[]> _products;
-
         private string _filteredName = "";
         private string _selectedCategory = AllString;
 
