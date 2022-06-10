@@ -221,7 +221,6 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
         {
             return !string.IsNullOrWhiteSpace(Name)
                 && !string.IsNullOrWhiteSpace(Surname)
-                && !string.IsNullOrWhiteSpace(Patronymic)
                 && !string.IsNullOrWhiteSpace(Salary)
                 && !string.IsNullOrWhiteSpace(PhoneNumber)
                 && !string.IsNullOrWhiteSpace(City)
