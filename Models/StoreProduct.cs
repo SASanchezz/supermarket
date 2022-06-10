@@ -83,7 +83,7 @@ namespace supermarket.Models
 
             sql = "SELECT UPC, UPC_prom, Store_Product.id_product, selling_price, products_number, promotional_product, Product.product_name " +
                 "FROM (Store_Product LEFT JOIN Product " +
-                "ON Store_Product.id_product = Product.id_product) ";
+                "ON Store_Product.id_product = Product.id_product) WHERE promotional_product = 0 ";
             result = DbUtils.FindAll(sql);
 
             return result.Count > 0 ? result : null;
@@ -129,17 +129,17 @@ namespace supermarket.Models
                          $"SET UPC='{changedUpc}', id_product={idProduct}, " +
                          $"selling_price={price}, products_number={productNumber} " +
                          $"WHERE UPC='{initUpc}'";
-            
+
             DbUtils.Execute(sql);
 
             string[] fatherStoreProduct = GetStoreProductByUPC(changedUpc);
             string sqlProm = "UPDATE Store_Product " +
-                             $"SET id_product={idProduct}, selling_price={price*0.8}, products_number={productNumber} " +
+                             $"SET id_product={idProduct}, selling_price={price * 0.8}, products_number={productNumber} " +
                              $"WHERE UPC='{fatherStoreProduct[UPC_prom]}'";
-            
+
             DbUtils.Execute(sqlProm);
         }
-        
+
         public static void UpdatePromStoreProduct(string initUpcProm, string changedUpcProm, string changedUpcParent)
         {
             string[] oldFatherStoreProduct = GetStoreProductByPromUPC(initUpcProm);
@@ -150,9 +150,9 @@ namespace supermarket.Models
             if (changedUpcParent != oldFatherStoreProduct[UPC])
             {
                 string sqlSetNull = "UPDATE Store_Product " +
-                                    "SET UPC_Prom=null " + 
+                                    "SET UPC_Prom=null " +
                                     $"WHERE UPC='{oldFatherStoreProduct[UPC]}'";
-                
+
                 DbUtils.Execute(sqlSetNull);
             }
 
@@ -160,7 +160,7 @@ namespace supermarket.Models
             string sqlFather = "UPDATE Store_Product " +
                                $"SET UPC_Prom='{changedUpcParent}' " +
                                $"WHERE UPC='{changedUpcProm}'";
-            
+
             DbUtils.Execute(sqlFather);
 
             // Update promotion product table
@@ -169,7 +169,7 @@ namespace supermarket.Models
                              $"selling_price={double.Parse(newFatherStoreProduct[selling_price]) * 0.8}, " +
                              $"products_number={newFatherStoreProduct[products_number]} " +
                              $"WHERE UPC='{initUpcProm}'";
-            
+
             DbUtils.Execute(sqlProm);
         }
     }
