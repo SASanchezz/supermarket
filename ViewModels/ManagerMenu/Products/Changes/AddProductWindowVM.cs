@@ -10,11 +10,6 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
     {
         public AddProductWindowVM()
         {
-            SetResettingSystem();
-        }
-        
-        private void SetResettingSystem()
-        {
             Window.IsVisibleChanged += (sender, e) =>
             {
                 // window is hiden
@@ -24,7 +19,7 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
                 }
             
                 // window is shown
-                ViewModel.Reset();
+                ViewModel.UpdateSelectiveCategories();
             };
         }
     }

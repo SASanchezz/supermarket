@@ -1,6 +1,7 @@
 ﻿using supermarket.Navigation.ViewModels;
 using supermarket.ViewModels.BaseClasses;
 using supermarket.Windows.ManagerMenu.StoreProducts.Changes;
+using StrProduct = supermarket.Models.StoreProduct;
 
 namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes
 {
@@ -27,7 +28,7 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes
             
             ViewsNavigator.SetWay(EditStoreProductViewsTypes.EditNonPromStoreProduct, _nonProm_editStoreProductVM);
             ViewsNavigator.SetWay(EditStoreProductViewsTypes.EditPromStoreProduct, _prom_editStoreProductVM);
-            CurrentViewModel = new Prom.EditStoreProductVM();
+            CurrentViewModel = _nonProm_editStoreProductVM;
         }
         
         public VMNavigator<EditStoreProductViewsTypes> ViewsNavigator { get; }
@@ -40,6 +41,20 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes
                 _currentViewModel = value;
                 OnPropertyChanged();
             }
+        }
+
+        public void SetSelectedStoreProduct(string[] product)
+        {
+            if (product[StrProduct.promotional_product] == "False")
+            {
+                ViewsNavigator.Navigate(EditStoreProductViewsTypes.EditNonPromStoreProduct);
+            } 
+            else
+            {
+                ViewsNavigator.Navigate(EditStoreProductViewsTypes.EditPromStoreProduct);
+            }
+            
+            CurrentViewModel.SetData(product);
         }
     }
 }

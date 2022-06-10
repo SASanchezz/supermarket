@@ -11,27 +11,44 @@ namespace supermarket.ViewModels.ManagerMenu.Sales
     {
         private DateTime _minPrintDate;
         private DateTime _maxPrintDate;
-        private List<string[]> _sales;
 
         public SalesVM()
         {
+            MinPrintDate = DateTime.Now.AddYears(-3);
+            MaxPrintDate = DateTime.Now;
             PrintSalesCommand = new RelayCommand<object>(_ => PrintSales());
         }
 
         public RelayCommand<object> PrintSalesCommand { get; }
-        private void DeleteReceipt()
-        {
-            //Sale.DeleteReceiptByReceiptNumber(ReceiptNumber);
-            CloseWindow();
-        }
 
-        public List<string[]> Sales { 
-            get => _sales;
-            set
+        public List<string[]> Sales 
+        {
+            get
             {
-                _sales = value;
-                OnPropertyChanged();
-            } }
+                List<string[]> sales = Sale.GetAllSales(MinPrintDate, MaxPrintDate);
+
+                if (sales == null)
+                {
+                    return new List<string[]>();
+                }
+            
+                for (int i = 0; i < sales.Count; ++i)
+                {
+                    string[] oldSale = sales[i];
+                    string[] newSale = new string[7];
+                    for (int h = 0; h < 5; ++h)
+                    {
+                        newSale[h] = oldSale[h];
+                    }
+                
+                    newSale[5] = (double.Parse(newSale[4]) * double.Parse(newSale[3])).ToString();
+                    newSale[6] = oldSale[5];
+                    sales[i] = newSale;
+                }
+
+                return sales;
+            }
+        }
         
         public DateTime MinPrintDate
         {
@@ -54,32 +71,9 @@ namespace supermarket.ViewModels.ManagerMenu.Sales
             }
         }
 
-        public void Reset()
-        {
-            MinPrintDate = DateTime.Now.AddYears(-3);
-            MaxPrintDate = DateTime.Now;
-            UpdateSales();
-        }
-
         public void UpdateSales()
         {
-            Sales = Sale.GetAllSales(MinPrintDate, MaxPrintDate);
-            
-            if (Sales == null) return;
-            
-            for (int i = 0; i < Sales.Count; ++i)
-            {
-                string[] oldSale = Sales[i];
-                string[] newSale = new string[7];
-                for (int h = 0; h < 5; ++h)
-                {
-                    newSale[h] = oldSale[h];
-                }
-                
-                newSale[5] = (double.Parse(newSale[4]) * double.Parse(newSale[3])).ToString();
-                newSale[6] = oldSale[5];
-                Sales[i] = newSale;
-            }
+            OnPropertyChanged(nameof(Sales));
         }
 
         private void PrintSales()

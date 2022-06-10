@@ -16,7 +16,6 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
     {
         private const string AllString = "Всі";
 
-        private List<string[]> _employees;
         private string _filteredSurname = "";
         private string _selectedRole = AllString;
 
@@ -34,20 +33,24 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
 
         public List<string[]> Employees
         {
-            get => _employees;
-            set
+            get
             {
-                _employees = value;
-                // set word-roles
-                if (_employees != null)
+                List<string[]> employees = Empl.GetAllEmployee(_selectedRole, _filteredSurname);
+
+                if (employees == null)
                 {
-                    foreach (var employee in _employees)
-                    {
-                        employee[Empl.role] = Roles.roleNames[int.Parse(employee[Empl.role])];
-                    }
+                    return new List<string[]>();
                 }
-                
-                OnPropertyChanged();
+
+                foreach (var employee in employees)
+                {
+                    // set word-roles
+                    employee[Empl.role] = Roles.roleNames[int.Parse(employee[Empl.role])];
+                    employee[Empl.date_of_birth] = DateTime.Parse(employee[6]).ToShortDateString();
+                    employee[Empl.date_of_start] = DateTime.Parse(employee[7]).ToShortDateString();
+                }
+
+                return employees;
             }
         }
 
@@ -88,21 +91,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
 
         public void UpdateEmployees()
         {
-            Employees = Empl.GetAllEmployee(_selectedRole, _filteredSurname);
-
-            if (Employees == null) return;
-
-            foreach (var employee in Employees)
-            {
-                employee[6] = DateTime.Parse(employee[6]).ToShortDateString();
-                employee[7] = DateTime.Parse(employee[7]).ToShortDateString();
-            }
-        }
-
-        public void Reset()
-        {
-            SelectedRole = null;
-            FilteredSurname = null;
+            OnPropertyChanged(nameof(Employees));
         }
 
         private void SetSelectiveRoles()

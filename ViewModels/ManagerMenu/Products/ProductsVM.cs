@@ -18,7 +18,6 @@ namespace supermarket.ViewModels.ManagerMenu.Products
 
         private string _filteredName = "";
         private string _selectedCategory = AllString;
-        private string[] _selectiveCategories;
 
         public ProductsVM()
         {
@@ -32,15 +31,7 @@ namespace supermarket.ViewModels.ManagerMenu.Products
 
         public Action<ManagerProducts> OpenWindowViewModel { get; set; }
         
-        public List<string[]> Products
-        {
-            get => _products;
-            set
-            {
-                _products = value;
-                OnPropertyChanged();
-            }
-        }
+        public List<string[]> Products => Prod.GetAllProducts(_selectedCategory, _filteredName);
 
         public string[] SelectedProduct { get; set; }
 
@@ -58,11 +49,17 @@ namespace supermarket.ViewModels.ManagerMenu.Products
 
         public string[] SelectiveCategories
         {
-            get => _selectiveCategories;
-            set
+            get
             {
-                _selectiveCategories = value;
-                OnPropertyChanged();
+                string[] categories = new string[Categ.GetAllCategories().Count + 1];
+                categories.SetValue(AllString, 0);
+            
+                for (int i = 0; i < Categ.GetAllCategories().Count; ++i)
+                {
+                    categories[i + 1] = Categ.GetAllCategoriesNames()[i];
+                }
+            
+                return categories;
             }
         }
 
@@ -87,28 +84,12 @@ namespace supermarket.ViewModels.ManagerMenu.Products
 
         public void UpdateProducts()
         {
-            Products = Prod.GetAllProducts(_selectedCategory, _filteredName);
+            OnPropertyChanged(nameof(Products));
         }
 
-        public void Reset()
+        public void UpdateSelectiveCategories()
         {
-            SelectedCategory = null;
-            FilteredName = null;
-            SelectiveCategories = GetSelectiveCategories();
-        }
-
-        private string[] GetSelectiveCategories() 
-        {
-            string[] categories = new string[Categ.GetAllCategories().Count + 1];
-            categories.SetValue(AllString, 0);
-            
-            for (int i = 0; i < Categ.GetAllCategories().Count; ++i)
-            {
-                categories[i + 1] = Categ.GetAllCategoriesNames()[i];
-            }
-
-            MessageBox.Show("Get Categotires");
-            return categories;
+            OnPropertyChanged(nameof(SelectiveCategories));
         }
 
         private void PrintProducts()

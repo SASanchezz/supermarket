@@ -11,22 +11,24 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.NonProm
 {
     internal class AddStoreProductVM : ViewModel
     {
-        private string _UPC;
+        private string _upc;
         private string _subProduct = "";
         private string _price;
         private string _amount;
 
-        private RelayCommand<object> _addStoreProductCommand;
-        private RelayCommand<object> _closeCommand;
+        public AddStoreProductVM()
+        {
+            AddStoreProductCommand = new RelayCommand<object>(_ => AddStoreProduct(), CanExecute);
+            CloseCommand = new RelayCommand<object>(_ => CloseWindow());
+        }
 
-        public Action Close { get; set; }
-
-        public string UPC
+        public string Upc
         { 
-            get => _UPC;
-            set {
-            _UPC = value;
-            OnPropertyChanged();
+            get => _upc;
+            set 
+            {
+                _upc = value;
+                OnPropertyChanged();
             }
         }
 
@@ -64,35 +66,35 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.NonProm
 
         public List<string> SelectiveProducts
         {
-            get {
+            get 
+            {
                 List<string[]> products = Product.GetProductBySubNameOrId(SubProduct);
-                if (products == null) return new List<string>(0);
-                List<string> resultProducts = new(products.Count);
-                for (int i = 0; i < products.Count; i++)
+                
+                if (products == null)
                 {
-                    resultProducts.Add(products[i][Product.id_product] + "  --  " + products[i][Product.product_name]);
+                    return new List<string>(0);
+                }
+                
+                List<string> resultProducts = new(products.Count);
+                
+                foreach (var product in products)
+                {
+                    resultProducts.Add(product[Product.id_product] + "  --  " + product[Product.product_name]);
                 }
 
                 return resultProducts;
             }
-            set { }
         }
 
-        public RelayCommand<object> AddStoreProductCommand
-        {
-            get => _addStoreProductCommand ??= new RelayCommand<object>(_ => AddStoreProduct(), CanExecute);
-        }
+        public RelayCommand<object> AddStoreProductCommand { get; }
 
-        public RelayCommand<object> CloseCommand
-        {
-            get => _closeCommand ??= new RelayCommand<object>(_ => Close());
-        }
+        public RelayCommand<object> CloseCommand { get; }
 
         private void AddStoreProduct()
         {
 
             ////Validates entered information
-            string result = StoreProductAddValidator.ValidateNotProm(UPC, SubProduct.Split(' ')[0], Price, Amount);
+            string result = StoreProductAddValidator.ValidateNotProm(Upc, SubProduct.Split(' ')[0], Price, Amount);
 
             if (result.Length != 0)
             {
@@ -101,19 +103,23 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.NonProm
             }
 
             //Query to insert new employee
-            StoreProduct.AddNonPromStoreProduct(UPC, SubProduct.Split(' ')[0], double.Parse(Price), Amount);
+            StoreProduct.AddNonPromStoreProduct(Upc, SubProduct.Split(' ')[0], double.Parse(Price), Amount);
 
-            UPC = "";
+            ResetFields();
+            CloseWindow();
+        }
+        
+        private void ResetFields()
+        {
+            Upc = "";
             SubProduct = "";
             Price = "";
             Amount = "";
-
-            Close();
         }
 
         private bool CanExecute(object obj)
         {
-            return !string.IsNullOrWhiteSpace(UPC)
+            return !string.IsNullOrWhiteSpace(Upc)
                 && !string.IsNullOrWhiteSpace(SubProduct)
                 && !string.IsNullOrWhiteSpace(Price)
                 && !string.IsNullOrWhiteSpace(Amount);

@@ -5,6 +5,7 @@ using supermarket.Models;
 using supermarket.ViewModels.BaseClasses;
 using supermarket.Middlewares.StoreProduct;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
 {
@@ -13,9 +14,12 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
         private string _UPCProm = "";
         private string _UPCFather = "";
 
-        private RelayCommand<object> _addStoreProductCommand;
-        private RelayCommand<object> _closeCommand;
-
+        public AddStoreProductVM()
+        {
+            AddStoreProductCommand = new RelayCommand<object>(_ => AddStoreProduct(), CanExecute);
+            CloseCommand = new RelayCommand<object>(_ => CloseWindow());
+        }
+        
         public string UPCProm
         {
             get => _UPCProm;
@@ -42,7 +46,12 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
             get
             {
                 List<string[]> UPCs = StoreProduct.GetFatherStoreProductLikeSubUPC(_UPCFather);
-                if (UPCs == null) return new List<string>(0);
+                
+                if (UPCs == null)
+                {
+                    return new List<string>(0);
+                }
+                
                 List<string> resultUPCs = new(UPCs.Count);
                 for (int i = 0; i < UPCs.Count; i++)
                 {
@@ -51,18 +60,11 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
 
                 return resultUPCs;
             }
-            set { }
         }
 
-        public RelayCommand<object> AddStoreProductCommand
-        {
-            get => _addStoreProductCommand ??= new RelayCommand<object>(_ => AddStoreProduct(), CanExecute);
-        }
+        public RelayCommand<object> AddStoreProductCommand { get; }
 
-        public RelayCommand<object> CloseCommand
-        {
-            get => _closeCommand ??= new RelayCommand<object>(_ => CloseWindow());
-        }
+        public RelayCommand<object> CloseCommand { get; }
 
         private void AddStoreProduct()
         {
@@ -71,17 +73,21 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
 
             if (result.Length != 0)
             {
-                //MessageBox.Show(result);
+                MessageBox.Show(result);
                 return;
             }
 
             //Query to insert new employee
             StoreProduct.AddPromStoreProduct(UPCFather.Split(' ')[0], UPCProm);
-
-            UPCFather = "";
-            UPCProm = "";
-
+            
+            ResetFields();
             CloseWindow();
+        }
+
+        private void ResetFields()
+        {
+            UPCFather = "";
+            UPCProm = "";  
         }
 
         private bool CanExecute(object obj)

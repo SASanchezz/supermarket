@@ -13,13 +13,16 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
      */
     internal class EditStoreProductVM : NavigatableViewModel<EditStoreProductViewsTypes>
     {
-        private string _initUPCProm = "";
-        private string _changedUPCProm = "";
-        private string _UPCFather = "";
+        private string _initUPCProm;
+        private string _changedUPCProm;
+        private string _UPCFather;
 
-        private RelayCommand<object> _updateCommand;
-        private RelayCommand<object> _deleteCommand;
-        private RelayCommand<object> _closeCommand;
+        public EditStoreProductVM()
+        {
+            UpdateCommand = new RelayCommand<object>(_ => UpdateStoreProduct(), CanExecute);
+            DeleteCommand = new RelayCommand<object>(_ => DeleteStoreProduct());
+            CloseCommand = new RelayCommand<object>(_ => CloseWindow());
+        }
 
         public string ChangedUPCProm
         {
@@ -56,21 +59,13 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
 
                 return resultUPCs;
             }
-            set { }
         }
 
-        public RelayCommand<object> UpdateCommand
-        {
-            get => _updateCommand ??= new RelayCommand<object>(_ => UpdateStoreProduct(), CanExecute);
-        }
-        public RelayCommand<object> DeleteCommand
-        {
-            get => _deleteCommand ??= new RelayCommand<object>(_ => DeleteStoreProduct());
-        }
-        public RelayCommand<object> CloseCommand
-        {
-            get => _closeCommand ??= new RelayCommand<object>(_ => CloseWindow());
-        }
+        public RelayCommand<object> UpdateCommand { get; }
+        
+        public RelayCommand<object> DeleteCommand { get; }
+        
+        public RelayCommand<object> CloseCommand { get; }
 
         public override void SetData(string[] data)
         {

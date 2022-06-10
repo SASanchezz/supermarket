@@ -3,11 +3,6 @@ using supermarket.ViewModels.BaseClasses;
 using Categ = supermarket.Models.Category;
 using Prod = supermarket.Models.Product;
 using supermarket.Middlewares.Product;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace supermarket.ViewModels.ManagerMenu.Products.Changes
 {
@@ -87,7 +82,7 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
             }
         }
 
-        public static string[] CategoriesNames => Categ.GetAllCategoriesNames();
+        public string[] SelectiveCategories => Categ.GetAllCategoriesNames();
 
         public RelayCommand<object> UpdateProductCommand { get; }
         
@@ -103,6 +98,11 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
             CategoryName = data[Prod.category_name];
             Characteristics = data[Prod.characteristics];
             Manufacturer = data[Prod.manufacturer];
+        }
+
+        public void UpdateSelectiveCategories()
+        {
+            OnPropertyChanged(nameof(SelectiveCategories));
         }
 
         private void UpdateProduct()

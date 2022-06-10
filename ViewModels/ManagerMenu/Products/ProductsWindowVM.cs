@@ -18,7 +18,6 @@ namespace supermarket.ViewModels.ManagerMenu.Products
             _editProductWindowVM = new EditProductWindowVM();
 
             SetUpdatingSystem();
-            SetResettingSystem();
             SetWindowsNavigation();
             
             Window.Closed += (sender, e) =>
@@ -58,12 +57,10 @@ namespace supermarket.ViewModels.ManagerMenu.Products
                 if ((bool)e.NewValue)
                 {
                     ViewModel.UpdateProducts();
+                    ViewModel.UpdateSelectiveCategories();
                 }
             };
-        }
-        
-        private void SetResettingSystem()
-        {
+            
             Window.IsVisibleChanged += (sender, e) =>
             {
                 // window is hiden
@@ -72,7 +69,8 @@ namespace supermarket.ViewModels.ManagerMenu.Products
                     return; 
                 }
                 // window is shown
-                ViewModel.Reset();
+                ViewModel.UpdateProducts();
+                ViewModel.UpdateSelectiveCategories();
             };
         }
 

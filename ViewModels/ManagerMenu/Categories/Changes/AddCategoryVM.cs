@@ -41,10 +41,10 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
 
         public RelayCommand<object> CloseCommand { get; }
 
-        public void Reset()
+        private void ResetFields()
         {
-            Number = null;
-            Name = null;
+            Number = "";
+            Name = "";
         }
         
         private void AddCategory()
@@ -60,7 +60,8 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
 
             //Query to insert new category
             Cat.AddCategory(Number, Name);
-
+            
+            ResetFields();
             CloseWindow();
         }
         

@@ -16,7 +16,7 @@ namespace supermarket.ViewModels.ManagerMenu.Sales
             {
                 if (!(bool)e.NewValue) return; // window is hiden
                 // window is shown
-                ViewModel.Reset();
+                ViewModel.UpdateSales();
             };
         }
     }

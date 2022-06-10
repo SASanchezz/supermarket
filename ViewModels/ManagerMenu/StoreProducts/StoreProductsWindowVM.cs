@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using supermarket.Navigation.ViewModels;
 using supermarket.Navigation.WindowViewModels;
 using supermarket.ViewModels.BaseClasses;
 using supermarket.ViewModels.ManagerMenu.StoreProducts.Changes;
@@ -13,26 +12,26 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
 {
     internal class StoreProductsWindowVM : WindowViewModel<StoreProductsWindow, StoreProductsVM>
     {
-        private NonProm.AddStoreProdcutWindowVM _nonProm_addStoreProdcutWindowVM;
-        private Prom.AddStoreProdcutWindowVM _prom_addStoreProdcutWindowVM;
+        private NonProm.AddStoreProdcutWindowVM _nonProm_addStoreProductWindowVM;
+        private Prom.AddStoreProdcutWindowVM _prom_addStoreProductWindowVM;
         
-        private EditStoreProductWindowVM _editStoreProdcutWindowVM;
+        private EditStoreProductWindowVM _editStoreProductWindowVM;
 
         public StoreProductsWindowVM()
         {
-            _nonProm_addStoreProdcutWindowVM = new NonProm.AddStoreProdcutWindowVM();
-            _prom_addStoreProdcutWindowVM = new Prom.AddStoreProdcutWindowVM();
+            _nonProm_addStoreProductWindowVM = new NonProm.AddStoreProdcutWindowVM();
+            _prom_addStoreProductWindowVM = new Prom.AddStoreProdcutWindowVM();
             
-            _editStoreProdcutWindowVM = new EditStoreProductWindowVM();
+            _editStoreProductWindowVM = new EditStoreProductWindowVM();
 
+            SetUpdatingSystem();
             SetWindowsNavigation();
 
             Window.Closed += (sender, e) =>
             {
-                _nonProm_addStoreProdcutWindowVM.Window.Close();
-                _prom_addStoreProdcutWindowVM.Window.Close();
-                
-                _editStoreProdcutWindowVM.Window.Close();
+                _nonProm_addStoreProductWindowVM.Window.Close();
+                _prom_addStoreProductWindowVM.Window.Close();
+                _editStoreProductWindowVM.Window.Close();
             };
         }
 
@@ -42,28 +41,16 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
                 new WindowVMNavigator<ManagerStoreProducts>(new IWindowOpeningVM<ManagerStoreProducts>[] { ViewModel });
 
             windowsNavigator.SetWay(ManagerStoreProducts.AddNonPromStoreProduct,
-                _nonProm_addStoreProdcutWindowVM.Window, OnOpeningNonPromAddStoreProduct);
+                _nonProm_addStoreProductWindowVM.Window);
             windowsNavigator.SetWay(ManagerStoreProducts.AddPromStoreProduct,
-                _prom_addStoreProdcutWindowVM.Window, OnOpeningPromAddStoreProduct);
+                _prom_addStoreProductWindowVM.Window);
 
             windowsNavigator.SetWay(ManagerStoreProducts.EditStoreProduct,
-                _editStoreProdcutWindowVM.Window, OnOpeningEditStoreProduct);
-
-
-            SetVisibilitySystem(_nonProm_addStoreProdcutWindowVM);
-            SetVisibilitySystem(_prom_addStoreProdcutWindowVM);
+                _editStoreProductWindowVM.Window, OnOpeningEditStoreProduct);
             
-            SetVisibilitySystem(_editStoreProdcutWindowVM);
-        }
-
-        private void OnOpeningNonPromAddStoreProduct()
-        {
-            SetUpdatingSystem(_nonProm_addStoreProdcutWindowVM);
-        }
-        
-        private void OnOpeningPromAddStoreProduct()
-        {
-            SetUpdatingSystem(_prom_addStoreProdcutWindowVM);
+            SetChangingEnabilityByOpeningAnotherWindow(_nonProm_addStoreProductWindowVM);
+            SetChangingEnabilityByOpeningAnotherWindow(_prom_addStoreProductWindowVM);
+            SetChangingEnabilityByOpeningAnotherWindow(_editStoreProductWindowVM);
         }
 
         private void OnOpeningEditStoreProduct()
@@ -72,56 +59,41 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
             {
                 throw new Exception("No selected item");
             }
+
+            _editStoreProductWindowVM.SetSelectedStoreProduct(ViewModel.SelectedStoreProduct);
+        }
+        
+        private void SetUpdatingSystem()
+        {
+            Window.IsEnabledChanged += (sender, e) =>
+            { 
+                // window is enabled
+                if ((bool)e.NewValue)
+                {
+                    ViewModel.UpdateStoreProducts();
+                }
+            };
             
-            if (ViewModel.SelectedStoreProduct[StrProduct.promotional_product] == "False")
+            Window.IsVisibleChanged += (sender, e) =>
             {
-                SetUpdatingSystem(_editStoreProdcutWindowVM);
-                _editStoreProdcutWindowVM.ViewsNavigator.Navigate(EditStoreProductViewsTypes.EditNonPromStoreProduct);
-                _editStoreProdcutWindowVM.CurrentViewModel.SetData(ViewModel.SelectedStoreProduct);
-            } 
-            else
-            {
-                SetUpdatingSystem(_editStoreProdcutWindowVM);
-                _editStoreProdcutWindowVM.ViewsNavigator.Navigate(EditStoreProductViewsTypes.EditPromStoreProduct);
-                _editStoreProdcutWindowVM.CurrentViewModel.SetData(ViewModel.SelectedStoreProduct);
-            }
-
-            ViewModel.SelectedStoreProduct = null;
-        }
-
-        private void SetUpdatingSystem<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
-            where TWindow : Window, new()
-            where TViewModel : ViewModel, new()
-        {
-        
-            windowVM.Window.IsVisibleChanged += (sender, e) =>
-            {
-                if ((bool)e.NewValue) return;
-        
-                ViewModel.UpdateStoreProducts();
-            };
-        }
-        
-        private void SetUpdatingSystem<TWindow>(WindowViewModel<TWindow> windowVM)
-            where TWindow : Window, new()
-        {
-        
-            windowVM.Window.IsVisibleChanged += (sender, e) =>
-            {
-                if ((bool)e.NewValue) return;
-        
+                // window is hiden
+                if (!(bool)e.NewValue) 
+                {
+                    return; 
+                }
+                // window is shown
                 ViewModel.UpdateStoreProducts();
             };
         }
 
-        private void SetVisibilitySystem<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
+        private void SetChangingEnabilityByOpeningAnotherWindow<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
             where TWindow : Window, new()
             where TViewModel : ViewModel, new()
         {
             windowVM.Window.IsVisibleChanged += (sender, e) => IsEnabled = !IsEnabled;
         }
         
-        private void SetVisibilitySystem<TWindow>(WindowViewModel<TWindow> windowVM)
+        private void SetChangingEnabilityByOpeningAnotherWindow<TWindow>(WindowViewModel<TWindow> windowVM)
             where TWindow : Window, new()
         {
             windowVM.Window.IsVisibleChanged += (sender, e) => IsEnabled = !IsEnabled;

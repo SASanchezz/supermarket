@@ -17,7 +17,6 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
         private string _category_name;
         private string _manufacturer;
         private string _characteristics;
-        private static string[] _selectiveCategories;
 
         public AddProductVM()
         {
@@ -75,28 +74,24 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
             }
         }
 
-        public string[] SelectiveCategories
-        {
-            get => _selectiveCategories;
-            set
-            {
-                _selectiveCategories = value;
-                OnPropertyChanged();
-            }
-        }
+        public string[] SelectiveCategories => Categ.GetAllCategoriesNames();
 
         public RelayCommand<object> AddProductCommand { get; }
 
         public RelayCommand<object> CloseCommand { get; }
 
-        public void Reset()
+        public void UpdateSelectiveCategories()
         {
-            IdProduct = null;
-            ProductName = null;
+            OnPropertyChanged(nameof(SelectiveCategories));
+        }
+
+        private void ResetFields()
+        {
+            IdProduct = "";
+            ProductName = "";
             CategoryName = null;
-            Characteristics = null;
-            Manufacturer = null;
-            SelectiveCategories = Categ.GetAllCategoriesNames();
+            Characteristics = "";
+            Manufacturer = "";
         }
         
         private void AddProduct()
@@ -115,6 +110,7 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
             Product.AddProduct(IdProduct, Categ.GetIDByName(CategoryName)[0], ProductName, 
                 Characteristics, Manufacturer);
 
+            ResetFields();
             CloseWindow();
         }
 

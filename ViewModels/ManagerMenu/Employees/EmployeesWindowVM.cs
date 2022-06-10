@@ -22,7 +22,6 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             _editEmployeeWindowVM = new EditEmployeeWindowVM();
             
             SetUpdatingSystem();
-            SetResettingSystem();
             SetWindowsNavigation();
 
             Window.Closed += (sender, e) =>
@@ -65,10 +64,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
                     ViewModel.UpdateEmployees();
                 }
             };
-        }
-
-        private void SetResettingSystem()
-        {
+            
             Window.IsVisibleChanged += (sender, e) =>
             {
                 // window is hiden
@@ -77,10 +73,9 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
                     return;
                 }
                 // window is shown
-                ViewModel.Reset();
+                ViewModel.UpdateEmployees();
             };
         }
-        
 
         private void SetChangingEnabilityByOpeningAnotherWindow<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
             where TWindow : Window, new()
