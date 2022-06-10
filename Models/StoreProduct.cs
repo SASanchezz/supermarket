@@ -83,7 +83,7 @@ namespace supermarket.Models
 
             sql = "SELECT UPC, UPC_prom, Store_Product.id_product, selling_price, products_number, promotional_product, Product.product_name " +
                 "FROM (Store_Product LEFT JOIN Product " +
-                "ON Store_Product.id_product = Product.id_product) ";
+                "ON Store_Product.id_product = Product.id_product) WHERE promotional_product = 0";
             result = DbUtils.FindAll(sql);
 
             return result.Count > 0 ? result : null;
