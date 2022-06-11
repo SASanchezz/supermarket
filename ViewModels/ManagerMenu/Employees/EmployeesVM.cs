@@ -124,7 +124,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
                 }
             }
 
-            Printer.PrintDataGrid(printerEmployees, new string[]
+            Printer.PrintDataGrid(printerEmployees, "Працівники станом на " + DateTime.UtcNow.ToString("dd.MM.yyyy"), new string[]
             {
                 "id",
                 "Прізвище",

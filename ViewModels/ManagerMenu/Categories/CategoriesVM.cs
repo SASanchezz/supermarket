@@ -55,7 +55,7 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
                 }
             }
 
-            Printer.PrintDataGrid(Categories, new string[]
+            Printer.PrintDataGrid(Categories, "Категорії станом на " + DateTime.UtcNow.ToString("dd.MM.yyyy"), new string[]
             {
                 "Номер",
                 "Назва"

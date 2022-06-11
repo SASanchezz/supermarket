@@ -88,7 +88,7 @@ namespace supermarket.ViewModels.ManagerMenu.Customers
                 }
             }
 
-            Printer.PrintDataGrid(Customers, new string[]
+            Printer.PrintDataGrid(Customers, "Клієнти станом на " + DateTime.UtcNow.ToString("dd.MM.yyyy"), new string[]
             {
                 "Номер карти",
                 "Прізвище",

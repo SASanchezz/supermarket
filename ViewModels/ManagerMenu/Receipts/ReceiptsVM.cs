@@ -147,15 +147,25 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
 
             for (int i = 0; i < Receipts.Count; ++i)
             {
-                printerReceipts.Add(new string[Receipts[0].Length]);
+                printerReceipts.Add(new string[Receipts[0].Length - 2]);
 
-                for (int h = 0; h < Receipts[0].Length; ++h)
+                for (int h = 0; ; ++h)
                 {
+                    if (h == 2)
+                    {
+                        printerReceipts[i].SetValue(Receipts[i][6], h);
+                        break;
+                    }
                     printerReceipts[i].SetValue(Receipts[i][h], h);
+                }
+
+                for (int h = 2; h < Receipts[0].Length - 3; ++h)
+                {
+                    printerReceipts[i].SetValue(Receipts[i][h], h + 1);
                 }
             }
 
-            Printer.PrintDataGrid(printerReceipts, new string[]
+            Printer.PrintDataGrid(printerReceipts, "Чеки станом на " + DateTime.UtcNow.ToString("dd.MM.yyyy"), new string[]
             {
                 "Номер",
                 "id касира",
