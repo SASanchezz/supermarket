@@ -90,7 +90,7 @@ namespace supermarket.ViewModels.ManagerMenu.Sales
                 }
             }
 
-            Printer.PrintDataGrid(printerSales, new string[]
+            Printer.PrintDataGrid(printerSales, "Продажі станом на " + DateTime.UtcNow.ToString("dd.MM.yyyy"), new string[]
             {
                 "UPC",
                 "id товару",

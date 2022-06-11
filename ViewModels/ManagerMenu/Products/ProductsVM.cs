@@ -95,10 +95,16 @@ namespace supermarket.ViewModels.ManagerMenu.Products
 
             for (int i = 0; i < Products.Count; ++i)
             {
-                printerProducts.Add(new string[Products[0].Length]);
+                printerProducts.Add(new string[Products[0].Length - 1]);
 
                 for (int h = 0; ; ++h)
                 { 
+                    if (h == 1)
+                    {
+                        printerProducts[i].SetValue(Products[i][2], h);
+                        continue;
+                    }
+
                     if (h == 2)
                     {
                         printerProducts[i].SetValue(Products[i][5], h);
@@ -107,18 +113,17 @@ namespace supermarket.ViewModels.ManagerMenu.Products
                     printerProducts[i].SetValue(Products[i][h], h);
                 }
 
-                for (int h = 2; h < Products[0].Length - 1; ++h)
+                for (int h = 3; h < Products[0].Length - 1; ++h)
                 {
-                    printerProducts[i].SetValue(Products[i][h], h + 1);
+                    printerProducts[i].SetValue(Products[i][h], h);
                 }
             }
 
-            Printer.PrintDataGrid(printerProducts, new string[]
+            Printer.PrintDataGrid(printerProducts, "Товари станом на " + DateTime.UtcNow.ToString("dd.MM.yyyy"), new string[]
             {
                 "id",
-                "Номер категорії",
-                "Категорія",
                 "Назва",
+                "Категорія",
                 "Опис",
                 "Виробник"
             });

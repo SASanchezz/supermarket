@@ -160,9 +160,6 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
                 && !string.IsNullOrWhiteSpace(Name)
                 && !string.IsNullOrWhiteSpace(Surname)
                 && !string.IsNullOrWhiteSpace(PhoneNumber)
-                && !string.IsNullOrWhiteSpace(City)
-                && !string.IsNullOrWhiteSpace(Street)
-                && !string.IsNullOrWhiteSpace(Zipcode)
                 && !string.IsNullOrWhiteSpace(Percent);
         }
     }

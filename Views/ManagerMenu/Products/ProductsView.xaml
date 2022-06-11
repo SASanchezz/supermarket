@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:supermarket.Views.ManagerMenu.Products"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             FontFamily="Montserrat">
+             FontFamily="Montserrat"
+             MinWidth="800">
 
     <Grid Background="#F2F2F2">
         
@@ -60,11 +61,11 @@
                 Content="Друк" 
                 Width="75" 
                 Height="24" 
-                HorizontalAlignment="Left" 
+                HorizontalAlignment="Right" 
                 VerticalAlignment="Center" 
                 FontSize="12" 
                 FontWeight="DemiBold" 
-                Margin="480,0,0,0"
+                Margin="0,0,220,0"
                 Command="{Binding PrintProductsCommand}"/>
 
         <Button Grid.Row="0"
@@ -83,14 +84,15 @@
             <StackPanel>
                 <DataGrid AutoGenerateColumns="False" 
                           SelectionMode="Single"
+                          CanUserDeleteRows="False"
                           ItemsSource="{Binding Products}" 
                           SelectedItem="{Binding SelectedProduct, Mode=OneWayToSource}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="id"             Binding="{Binding Path=[0]}"    Width="Auto"    IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Назва"          Binding="{Binding Path=[2]}"    Width="*"       IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Категорія"      Binding="{Binding Path=[5]}"    Width="2*"      IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Опис"           Binding="{Binding Path=[3]}"    Width="4*"      IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Виробник"       Binding="{Binding Path=[4]}"    Width="2*"      IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="Опис"           Binding="{Binding Path=[3]}"    Width="4*"      IsReadOnly="True" CanUserSort="False"/>     
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
