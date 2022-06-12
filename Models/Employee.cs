@@ -54,10 +54,11 @@ namespace supermarket.Models
             return result.Count > 0 ? result[0] : null;
         }
 
-        public static void DeleteEmployeeById(string employeeId)
+        public static int DeleteEmployeeById(string employeeId)
         {
             string sql = $"DELETE FROM Employee WHERE id_employee='{employeeId}'";
-            DbUtils.Execute(sql);
+            int response = DbUtils.Execute(sql);
+            return response;
         }
 
         public static string[] GetEmployeeByPhone(string phoneNumber)

@@ -89,10 +89,11 @@ namespace supermarket.Models
             return result.Count > 0 ? result : null;
         }
 
-        public static void DeleteStoreProductByUPC(string UPC)
+        public static int DeleteStoreProductByUPC(string UPC)
         {
             string sql = $"DELETE FROM Store_Product WHERE UPC = '{UPC}'";
-            DbUtils.Execute(sql);
+            int response = DbUtils.Execute(sql);
+            return response;
         }
 
         public static void AddNonPromStoreProduct(string upc, string idProduct, double price, string productNumber)

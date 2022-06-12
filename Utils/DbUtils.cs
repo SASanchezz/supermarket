@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Common;
 using MySql.Data.MySqlClient;
 using supermarket.Connections;
@@ -11,9 +12,9 @@ namespace supermarket.Utils
 {
     internal static class DbUtils
     {
-
+        const int ERROR = -1;
+        const int GOOD = 1;
         static MySqlConnection s_connection;
-
         /*
          * This method initiates connection with MySQL server
          */
@@ -31,10 +32,19 @@ namespace supermarket.Utils
         /*
          * This method executes most SQL query BESIDES "SELECT"
          */
-        public static void Execute(string sql)
+        public static int Execute(string sql)
         {
             MySqlCommand cmd = new(sql, GetDb());
-            cmd.ExecuteNonQuery();
+            try
+            {
+                cmd.ExecuteNonQuery();
+            } catch (Exception err)
+            {
+                Logger.log("dbLogs.txt", cmd.CommandText);
+                Logger.log("dbLogs.txt", err.ToString());
+                return ERROR;
+            }
+            return GOOD;
         }
 
         /*

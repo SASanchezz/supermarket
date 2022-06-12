@@ -64,10 +64,11 @@ namespace supermarket.Models
             return result.Count > 0 ? double.Parse(result[0][0]) : 0;
         }
 
-        public static void DeleteReceiptByReceiptNumber(string receiptNumber)
+        public static int DeleteReceiptByReceiptNumber(string receiptNumber)
         {
             string sql = $"DELETE FROM Receipt WHERE receipt_number ={receiptNumber}";
-            DbUtils.Execute(sql);
+            int response = DbUtils.Execute(sql);
+            return response;
         }
     }
 }

@@ -45,10 +45,11 @@ namespace supermarket.Models
             return result.Count > 0 ? result[0] : null;
         }
 
-        public static void DeleteCustomerByCardNumber(string cardNumber)
+        public static int DeleteCustomerByCardNumber(string cardNumber)
         {
             string sql = $"DELETE FROM Customer_Card WHERE card_number ={cardNumber}";
-            DbUtils.Execute(sql);
+            int response = DbUtils.Execute(sql);
+            return response;
         }
 
         public static void AddCustomer(string cardNumber, string surname, string name, string patronymic,

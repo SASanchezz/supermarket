@@ -22,6 +22,10 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
         private string _zipcode;
         private string _percent;
 
+        int ERROR = -1;
+        int GOOD = 1;
+        string deleteErrorMessage = "Цей клієнт використовується";
+
         public EditCustomerVM()
         {
             UpdateCustomerCommand = new RelayCommand<object>(_ => UpdateCustomer(), CanExecute);
@@ -167,7 +171,8 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
 
         private void DeleteCustomer()
         {
-            Cust.DeleteCustomerByCardNumber(InitCardNumber);
+            int response = Cust.DeleteCustomerByCardNumber(InitCardNumber);
+            if (response == ERROR) MessageBox.Show(deleteErrorMessage);
             CloseWindow();
         }
 

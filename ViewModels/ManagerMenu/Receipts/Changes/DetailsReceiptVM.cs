@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Windows;
 using supermarket.Models;
 using supermarket.Utils;
 using supermarket.ViewModels.BaseClasses;
@@ -11,6 +12,10 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts.Changes
         private string _receiptNumber;
         private List<string[]> _sales;
 
+        int ERROR = -1;
+        int GOOD = 1;
+        string deleteErrorMessage = "Цей чек використовується";
+
         public DetailsReceiptVM()
         {
             DeleteReceiptCommand = new RelayCommand<object>(_ => DeleteReceipt());
@@ -18,7 +23,8 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts.Changes
 
         private void DeleteReceipt()
         {
-            Rec.DeleteReceiptByReceiptNumber(ReceiptNumber);
+            int response = Rec.DeleteReceiptByReceiptNumber(ReceiptNumber);
+            if (response == ERROR) MessageBox.Show(deleteErrorMessage);
             CloseWindow();
         }
 

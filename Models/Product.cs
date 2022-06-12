@@ -75,10 +75,11 @@ namespace supermarket.Models
             return result.Count > 0 ? result[0] : null;
         }
 
-        public static void DeleteProductByID(string productId)
+        public static int DeleteProductByID(string productId)
         {
             string sql = $"DELETE FROM Product WHERE id_product={productId}";
-            DbUtils.Execute(sql);
+            int response = DbUtils.Execute(sql);
+            return response;
         }
 
         public static void AddProduct(string productId, string categoryNumber, string name, string characteristic, string manufacturer)
