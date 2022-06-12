@@ -35,6 +35,7 @@ namespace supermarket.ViewModels
         private SalesWindowVM _m_salesWindowVM;
 
         private C.Products.ProductsWindowVM _c_productsWindowVM;
+        private C.StoreProducts.StoreProductsWindowVM _c_storeProductsWindowVM;
 
         // controllable ViewModels
         private SignInVM _signInVM;
@@ -57,6 +58,7 @@ namespace supermarket.ViewModels
             _m_salesWindowVM = new SalesWindowVM();
 
             _c_productsWindowVM = new C.Products.ProductsWindowVM();
+            _c_storeProductsWindowVM = new C.StoreProducts.StoreProductsWindowVM();
             
             _signInVM = new SignInVM();
             _managerMenuVM = new ManagerMenuVM();
@@ -91,6 +93,7 @@ namespace supermarket.ViewModels
             windowsNavigator.SetWay(Main.ManagerSales, _m_salesWindowVM.Window);
             
             windowsNavigator.SetWay(Main.CashierProducts, _c_productsWindowVM.Window);
+            windowsNavigator.SetWay(Main.CashierStoreProducts, _c_storeProductsWindowVM.Window);
 
             SetEnabilitySystem(_m_employeesWindowVM);
             SetEnabilitySystem(_m_customersWindowVM);
