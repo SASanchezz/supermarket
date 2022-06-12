@@ -11,9 +11,23 @@
     <EmbeddedResource Remove="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\**" />
     <None Remove="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\**" />
     <Page Remove="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\**" />
+    <Page Update="Views\CashierMenu\StoreProducts\StoreProductsView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\CashierMenu\StoreProducts\StoreProductsWindow.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Windows\ManagerMenu\StoreProducts\Changes\EditStoreProductWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Compile Update="Views\CashierMenu\StoreProducts\StoreProductsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\CashierMenu\StoreProducts\StoreProductsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Windows\ManagerMenu\StoreProducts\Changes\EditStoreProductWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
