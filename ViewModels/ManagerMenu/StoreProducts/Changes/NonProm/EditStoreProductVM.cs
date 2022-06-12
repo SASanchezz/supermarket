@@ -21,6 +21,10 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.NonProm
         private string _price;
         private string _amount;
 
+        int ERROR = -1;
+        int GOOD = 1;
+        string deleteErrorMessage = "Цей чек використовується";
+
         public EditStoreProductVM()
         {
             UpdateCommand = new RelayCommand<object>(_ => UpdateStoreProduct(), CanExecute);
@@ -119,7 +123,8 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.NonProm
 
         private void DeleteStoreProduct()
         {
-            StrProduct.DeleteStoreProductByUPC(_initUpc);
+            int response = StrProduct.DeleteStoreProductByUPC(_initUpc);
+            if (response == ERROR) MessageBox.Show(deleteErrorMessage);
             CloseWindow();
         }
 

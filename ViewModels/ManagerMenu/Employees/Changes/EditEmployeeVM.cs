@@ -27,6 +27,10 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
         private string _street;
         private string _zipcode;
 
+        int ERROR = -1;
+        int GOOD = 1;
+        string deleteErrorMessage = "Цей робітник використовується";
+
         public EditEmployeeVM()
         {
             UpdateEmployeeCommand = new RelayCommand<object>(_ => UpdateEmployee(), CanExecute);
@@ -213,7 +217,8 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
 
         private void DeleteEmployee()
         {
-            Empl.DeleteEmployeeById(Id);
+            int response = Empl.DeleteEmployeeById(Id);
+            if (response == ERROR) MessageBox.Show(deleteErrorMessage);
             CloseWindow();
         }
 

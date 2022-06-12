@@ -13,6 +13,10 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
         private string _changedNumber;
         private string _changedName;
 
+        int ERROR = -1;
+        int GOOD = 1;
+        string deleteErrorMessage = "Ця Категорія використовується";
+
         public EditCategoryVM()
         {
             UpdateCategoryCommand = new RelayCommand<object>(_ => UpdateCategory(), CanExecute);
@@ -71,7 +75,8 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
 
         private void DeleteCategory()
         {
-            Cat.DeleteCategoryByNumber(_initNumber);
+            int response = Cat.DeleteCategoryByNumber(_initNumber);
+            if (response == ERROR) MessageBox.Show(deleteErrorMessage);
             CloseWindow();
         }
         

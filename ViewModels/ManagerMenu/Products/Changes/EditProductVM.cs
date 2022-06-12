@@ -3,6 +3,7 @@ using supermarket.ViewModels.BaseClasses;
 using Categ = supermarket.Models.Category;
 using Prod = supermarket.Models.Product;
 using supermarket.Middlewares.Product;
+using System.Windows;
 
 namespace supermarket.ViewModels.ManagerMenu.Products.Changes
 {
@@ -14,6 +15,10 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
         private string _category_name;
         private string _manufacturer;
         private string _characteristics;
+
+        int ERROR = -1;
+        int GOOD = 1;
+        string deleteErrorMessage = "Цей продукт використовується";
 
         public EditProductVM()
         {
@@ -124,7 +129,8 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
 
         private void DeleteProduct()
         {
-            Prod.DeleteProductByID(InitIdProduct);
+            int response = Prod.DeleteProductByID(InitIdProduct);
+            if (response == ERROR) MessageBox.Show(deleteErrorMessage);
             CloseWindow();
         }
 

@@ -9,6 +9,8 @@ namespace supermarket.Models
         public const int number = 0;
         public const int name = 1;
 
+        const int ERROR = -1;
+        const int GOOD = 1;
         public static List<string[]> GetAllCategories()
         {
             string sql = "SELECT * FROM Category";
@@ -45,10 +47,11 @@ namespace supermarket.Models
             return result.Count > 0 ? result[0] : null;
         }
 
-        public static void DeleteCategoryByNumber(string categoryNumber)
+        public static int DeleteCategoryByNumber(string categoryNumber)
         {
             string sql = $"DELETE FROM Category WHERE category_number={categoryNumber}";
-            DbUtils.Execute(sql);
+            int response = DbUtils.Execute(sql);
+            return response;
         }
 
         public static void AddCategory(string categoryNumber, string categoryName)
