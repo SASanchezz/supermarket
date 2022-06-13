@@ -40,7 +40,7 @@ namespace supermarket.Models
         {
             string whereClause = "WHERE 1";
             whereClause = isPromotional == AllString ? whereClause : whereClause += string.Format(" AND promotional_product={0}", Proms.promKeys[isPromotional]);
-            whereClause = subUPC == "" ? whereClause : whereClause += string.Format(" AND UPC LIKE '%{0}%'", subUPC);
+            whereClause = subUPC == "" ? whereClause : whereClause += $" AND (UPC LIKE '%{subUPC}%' OR Product.product_name LIKE '%{subUPC}%')";
 
             string sql = string.Format("SELECT UPC, UPC_prom, Store_Product.id_product, selling_price, products_number, promotional_product, Product.product_name" +
                 " FROM Store_Product" +
