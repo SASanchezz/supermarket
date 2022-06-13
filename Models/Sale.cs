@@ -10,8 +10,10 @@ namespace supermarket.Models
         private const int check_number = 1;
         private const int product_number = 2;
         private const int selling_price = 3;
-        
-        public static List<string[]> GetAllSales(DateTime minPrintDate, DateTime maxPrintDate)
+
+        private const string AllString = "Âñ³";
+
+        public static List<string[]> GetAllSales(string idProduct,  DateTime minPrintDate, DateTime maxPrintDate)
         {
             string dateFormat = "yyyy-MM-dd";
             string minPrintDateString = minPrintDate.ToString(dateFormat);
@@ -25,6 +27,11 @@ namespace supermarket.Models
                          "LEFT JOIN Receipt ON Sale.check_number = Receipt.receipt_number " +
                          $"WHERE DATE(Receipt.print_date) >= '{minPrintDateString}' " +
                          $"AND DATE(Receipt.print_date) <= '{maxPrintDateString}'";
+
+            if (idProduct != AllString)
+            {
+                sql += $" AND Product.id_product LIKE '%{idProduct}%'";
+            }
 
             List<string[]> result = DbUtils.FindAll(sql);
             
