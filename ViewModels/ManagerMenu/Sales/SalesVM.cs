@@ -4,11 +4,15 @@ using supermarket.Models;
 using supermarket.Printing;
 using supermarket.Utils;
 using supermarket.ViewModels.BaseClasses;
+using Product = supermarket.Models.Product;
 
 namespace supermarket.ViewModels.ManagerMenu.Sales
 {
     internal class SalesVM : ViewModel
     {
+        private const string AllString = "Âñ³";
+        private string _filteredProduct = AllString;
+
         private DateTime _minPrintDate;
         private DateTime _maxPrintDate;
 
@@ -25,7 +29,7 @@ namespace supermarket.ViewModels.ManagerMenu.Sales
         {
             get
             {
-                List<string[]> sales = Sale.GetAllSales(MinPrintDate, MaxPrintDate);
+                List<string[]> sales = Sale.GetAllSales(FilteredProduct.Split(' ')[0], MinPrintDate, MaxPrintDate);
 
                 if (sales == null)
                 {
@@ -68,6 +72,40 @@ namespace supermarket.ViewModels.ManagerMenu.Sales
                 _maxPrintDate = value;
                 UpdateSales();
                 OnPropertyChanged();
+            }
+        }
+
+        public string FilteredProduct
+        {
+            get => _filteredProduct;
+            set
+            {
+                _filteredProduct = value;
+                UpdateSales();
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(SelectiveProducts));
+            }
+        }
+
+        public List<string> SelectiveProducts
+        {
+            get
+            {
+                List<string[]> storeProducts = Product.GetProductBySubNameOrId(FilteredProduct);
+
+                if (storeProducts == null)
+                {
+                    return new List<string>(0);
+                }
+
+                List<string> resultStoreProducts = new(storeProducts.Count + 1) { AllString };
+
+                foreach (var storeProduct in storeProducts)
+                {
+                    resultStoreProducts.Add(storeProduct[Product.id_product] + "  --  " + storeProduct[Product.product_name]);
+                }
+
+                return resultStoreProducts;
             }
         }
 

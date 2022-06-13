@@ -89,6 +89,29 @@ namespace supermarket.Models
             return result.Count > 0 ? result : null;
         }
 
+        public static List<string[]> GetStoreProductsLikeUPCOrProductName(string subString = "")
+        {
+            string whereClause = "WHERE 1 ";
+
+            whereClause = subString == "" ? whereClause : whereClause +=
+                $"AND UPC LIKE '%{subString}%' OR Product.product_name LIKE '%{subString}%'";
+
+
+            string sql = "SELECT UPC, UPC_prom, Store_Product.id_product, selling_price, products_number, promotional_product, Product.product_name " +
+                "FROM (Store_Product LEFT JOIN Product " +
+                "ON Store_Product.id_product = Product.id_product) " + whereClause;
+            List<string[]> result = DbUtils.FindAll(sql);
+
+            if (result.Count > 0) return result;
+
+            sql = "SELECT UPC, UPC_prom, Store_Product.id_product, selling_price, products_number, promotional_product, Product.product_name " +
+                "FROM Store_Product LEFT JOIN Product " +
+                "ON Store_Product.id_product = Product.id_product";
+            result = DbUtils.FindAll(sql);
+
+            return result.Count > 0 ? result : null;
+        }
+
         public static int DeleteStoreProductByUPC(string UPC)
         {
             string sql = $"DELETE FROM Store_Product WHERE UPC = '{UPC}'";
