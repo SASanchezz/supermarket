@@ -53,4 +53,9 @@
     {
         DetailsReceipt
     }
+
+    public enum CashierReceipts
+    {
+        AddReceipt
+    }
 }

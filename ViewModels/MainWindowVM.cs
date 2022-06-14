@@ -15,7 +15,6 @@ using supermarket.ViewModels.ManagerMenu.Receipts;
 using supermarket.ViewModels.ManagerMenu.Sales;
 using M = supermarket.ViewModels.ManagerMenu;
 using C = supermarket.ViewModels.CashierMenu;
-using supermarket.Windows.ManagerMenu.Receipts;
 
 namespace supermarket.ViewModels
 {
@@ -36,6 +35,7 @@ namespace supermarket.ViewModels
 
         private C.Products.ProductsWindowVM _c_productsWindowVM;
         private C.StoreProducts.StoreProductsWindowVM _c_storeProductsWindowVM;
+        private C.Receipts.ReceiptsWindowVM _c_receiptsWindowVM;
 
         // controllable ViewModels
         private SignInVM _signInVM;
@@ -59,6 +59,7 @@ namespace supermarket.ViewModels
 
             _c_productsWindowVM = new C.Products.ProductsWindowVM();
             _c_storeProductsWindowVM = new C.StoreProducts.StoreProductsWindowVM();
+            _c_receiptsWindowVM = new C.Receipts.ReceiptsWindowVM();
             
             _signInVM = new SignInVM();
             _managerMenuVM = new ManagerMenuVM();
@@ -94,6 +95,7 @@ namespace supermarket.ViewModels
             
             windowsNavigator.SetWay(Main.CashierProducts, _c_productsWindowVM.Window);
             windowsNavigator.SetWay(Main.CashierStoreProducts, _c_storeProductsWindowVM.Window);
+            windowsNavigator.SetWay(Main.CashierChecks, _c_receiptsWindowVM.Window);
 
             SetEnabilitySystem(_m_employeesWindowVM);
             SetEnabilitySystem(_m_customersWindowVM);
@@ -104,6 +106,8 @@ namespace supermarket.ViewModels
             SetEnabilitySystem(_m_salesWindowVM);
             
             SetEnabilitySystem(_c_productsWindowVM);
+            SetEnabilitySystem(_c_storeProductsWindowVM);
+            SetEnabilitySystem(_c_receiptsWindowVM);
         }
 
         private void SetViewsNavigation()

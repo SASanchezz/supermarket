@@ -15,6 +15,8 @@ namespace supermarket.ViewModels.CashierMenu
             OpenProductsWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(Main.CashierProducts));
             //
             OpenStoreProductsWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(Main.CashierStoreProducts));
+            //
+            OpenReceiptsWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(Main.CashierChecks));
 
         }
 

@@ -96,6 +96,12 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\CashierMenu\Receipts\Changes\AddReceiptView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\CashierMenu\Receipts\ReceiptsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\CashierMenu\StoreProducts\StoreProductsView.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -145,6 +151,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\ManagerMenu\StoreProducts\StoreProductsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\CashierMenu\Receipts\Changes\AddReceiptWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\CashierMenu\Receipts\ReceiptsWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\CashierMenu\StoreProducts\StoreProductsWindow.xaml">

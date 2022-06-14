@@ -21,6 +21,18 @@ namespace supermarket.Utils
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
+        public static string ReceiptId(int length = 9)
+        {
+            return '#' + RandomNumbers(length);
+        }
+
+        public static string RandomNumbers(int length = 9)
+        {
+            const string chars = "0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
         /*
         * This method adds 'i' before id so WPF doesn't swear on x:Name 
         */

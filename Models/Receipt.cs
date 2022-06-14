@@ -21,7 +21,7 @@ namespace supermarket.Models
         //private static DateTime _minPrintDate = DateTime.Today.AddYears(-3); to validator
         private const string AllString = "Âñ³";
 
-        public static List<string[]> GetAllReceipts(string idCashier, DateTime minPrintDate, DateTime maxPrintDate)
+        public static List<string[]> GetAllReceipts(string idCashier, DateTime minPrintDate, DateTime maxPrintDate, string likeReceiptId = "")
         {
             const string dateFormat = "yyyy-MM-dd";
             string minPrintDateString = minPrintDate.ToString(dateFormat);
@@ -36,7 +36,12 @@ namespace supermarket.Models
             {
                 sql += $" AND Receipt.id_employee LIKE '%{idCashier}%'";
             }
-            
+
+            if (likeReceiptId != "")
+            {
+                sql += $" AND Receipt.receipt_number LIKE '%{likeReceiptId}%'";
+            }
+
             List<string[]> result = DbUtils.FindAll(sql);
             
             return result.Count > 0 ? result : null;
@@ -55,13 +60,23 @@ namespace supermarket.Models
             string sql = "SELECT COALESCE(SUM(sum_total), 0) " +
                          "FROM Receipt LEFT JOIN Employee ON Receipt.id_employee=Employee.id_employee " + whereClause;
 
-
-
-
-
             List<string[]> result = DbUtils.FindAll(sql);
 
             return result.Count > 0 ? double.Parse(result[0][0]) : 0;
+        }
+
+
+
+        public static void AddReceipt( string employeeId, string cardNumber, string sumTotal)
+        {
+            string vat = (double.Parse(sumTotal) * 0.8).ToString().Replace(',', '.');
+            sumTotal = sumTotal.Replace(',', '.');
+
+            string sql = "INSERT INTO Receipt " +
+                         "(receipt_number, id_employee, card_number, print_date, sum_total, vat) " +
+                         $"VALUES ('{IdUtils.ReceiptId()}', '{employeeId}', '{cardNumber}', {DateTime.Now}, {sumTotal}, {vat})";
+
+            DbUtils.Execute(sql);
         }
 
         public static int DeleteReceiptByReceiptNumber(string receiptNumber)

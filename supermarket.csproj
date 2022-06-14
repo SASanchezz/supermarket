@@ -11,9 +11,23 @@
     <EmbeddedResource Remove="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\**" />
     <None Remove="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\**" />
     <Page Remove="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\**" />
+    <Page Update="Views\CashierMenu\Receipts\Changes\AddReceiptView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\CashierMenu\Receipts\ReceiptsView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
     <Page Update="Views\CashierMenu\StoreProducts\StoreProductsView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\CashierMenu\Receipts\Changes\AddReceiptWindow.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\CashierMenu\Receipts\ReceiptsWindow.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
     <Page Update="Windows\CashierMenu\StoreProducts\StoreProductsWindow.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
@@ -22,7 +36,13 @@
     <Page Update="Windows\ManagerMenu\StoreProducts\Changes\EditStoreProductWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Compile Update="Views\CashierMenu\Receipts\Changes\AddReceiptView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\CashierMenu\StoreProducts\StoreProductsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\CashierMenu\Receipts\Changes\AddReceiptWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Windows\CashierMenu\StoreProducts\StoreProductsWindow.xaml.cs">
