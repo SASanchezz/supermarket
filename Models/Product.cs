@@ -19,14 +19,12 @@ namespace supermarket.Models
         //Joined
         public const int category_name = 5;
 
-        private const string AllString = "Всі";
-
-        public static List<string[]> GetAllProducts(string categoryName = AllString, string name = "") // NOT id of category
+        public static List<string[]> GetAllProducts(string categoryName = Constants.AllString, string name = "") // NOT id of category
         {
             
             string whereClause = "WHERE 1 ";
 
-            whereClause = categoryName == AllString ? whereClause : whereClause +=
+            whereClause = categoryName == Constants.AllString ? whereClause : whereClause +=
                 "AND Product.category_number IN " + 
                 "(SELECT category_number " + 
                 "FROM Category " +

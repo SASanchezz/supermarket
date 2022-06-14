@@ -21,16 +21,14 @@ namespace supermarket.Models
         public const int city = 10;
         public const int street = 11;
         public const int zipcode = 12;
-
-        const string s_format = "yyyy-MM-dd HH:mm:ss";
-        private const string AllString = "Всі";
+        
         private const int AllPosition = -1;
 
-        public static List<string[]> GetAllEmployee(string roleName = AllString, string surname = "")
+        public static List<string[]> GetAllEmployee(string roleName = Constants.AllString, string surname = "")
         {
             string whereClause = "WHERE 1 ";
 
-            whereClause = roleName == AllString ? whereClause : whereClause +=
+            whereClause = roleName == Constants.AllString ? whereClause : whereClause +=
                 "AND empl_role_id IN " + 
                     "(SELECT employee_role_id " + 
                     "FROM Employee_Role " +
@@ -69,11 +67,11 @@ namespace supermarket.Models
             return result.Count > 0 ? result[0] : null;
         }
 
-        public static List<string[]> GetCashierLikeIdOrSNP(string IdOrSNP = AllString) // SNP - Surname Name Patronymic
+        public static List<string[]> GetCashierLikeIdOrSNP(string IdOrSNP = Constants.AllString) // SNP - Surname Name Patronymic
         {
             string whereClause = "WHERE Employee_Role.employee_role_title = 'Касир' ";
 
-            whereClause = IdOrSNP == AllString ? whereClause : whereClause +=
+            whereClause = IdOrSNP == Constants.AllString ? whereClause : whereClause +=
                 $"AND (id_employee LIKE '%{IdOrSNP}%' OR empl_surname LIKE '%{IdOrSNP}%' OR empl_name LIKE '%{IdOrSNP}%' OR empl_patronymic LIKE '%{IdOrSNP}%') ";
 
 
@@ -99,7 +97,7 @@ namespace supermarket.Models
             string sql = "INSERT INTO Employee " + "(empl_surname, empl_name, empl_patronymic, empl_role_id, salary, " +
                          "date_of_birth, date_of_start, phone_number, password, city, street, zip_code) " +
                          $"VALUES ('{surname}', '{name}', '{patronymic}', {Roles.roleKeys[role]}, {float.Parse(salary)}, " +
-                         $"'{dateBirth.ToString(s_format)}', '{dateStart.ToString(s_format)}', '{phoneNumber}', " +
+                         $"'{dateBirth.ToString(Constants.DateTimeStringFormat)}', '{dateStart.ToString(Constants.DateTimeStringFormat)}', '{phoneNumber}', " +
                          $"'{CryptUtils.HashPassword(password)}', '{city}', '{street}', '{zipcode}')";
 
             DbUtils.Execute(sql);
@@ -112,8 +110,8 @@ namespace supermarket.Models
             string sql = "UPDATE Employee " +
                          $"SET empl_surname='{surname}', empl_name='{name}', empl_patronymic='{patronymic}', " +
                          $"empl_role_id={Roles.roleKeys[role]}, salary={float.Parse(salary)}, " +
-                         $"date_of_birth='{Convert.ToDateTime(dateBirth).ToString(s_format)}', " +
-                         $"date_of_start='{Convert.ToDateTime(dateStart).ToString(s_format)}', " +
+                         $"date_of_birth='{Convert.ToDateTime(dateBirth).ToString(Constants.DateTimeStringFormat)}', " +
+                         $"date_of_start='{Convert.ToDateTime(dateStart).ToString(Constants.DateTimeStringFormat)}', " +
                          $"phone_number='{phoneNumber}', password='{password}', city='{city}', " +
                          $"street='{street}', zip_code='{zipcode}'" +
                          $"WHERE id_employee='{id}'";

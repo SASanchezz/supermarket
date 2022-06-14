@@ -6,8 +6,6 @@ namespace supermarket.Models
 {
     internal static class StoreProduct
     {
-        private const string AllString = "Всі";
-
         //Native
         public const int UPC = 0;
         public const int UPC_prom = 1;
@@ -25,6 +23,7 @@ namespace supermarket.Models
 
             return result.Count > 0 ? result : null;
         }
+        
         public static List<string[]> GetAllStoreProductsOfProduct(string productId = "")
         {
             string whereClause = "WHERE 1";
@@ -36,10 +35,11 @@ namespace supermarket.Models
             return result.Count > 0 ? result : null;
         }
 
-        public static List<string[]> GetAllStoreProducts(string isPromotional = AllString, string subUPC = "")
+        public static List<string[]> GetAllStoreProducts(string isPromotional = Constants.AllString, string subUPC = "")
         {
             string whereClause = "WHERE 1";
-            whereClause = isPromotional == AllString ? whereClause : whereClause += string.Format(" AND promotional_product={0}", Proms.promKeys[isPromotional]);
+            whereClause = isPromotional == Constants.AllString ? whereClause : whereClause +=
+                $" AND promotional_product={Proms.promKeys[isPromotional]}";
             whereClause = subUPC == "" ? whereClause : whereClause += $" AND (UPC LIKE '%{subUPC}%' OR Product.product_name LIKE '%{subUPC}%')";
 
             string sql = string.Format("SELECT UPC, UPC_prom, Store_Product.id_product, selling_price, products_number, promotional_product, Product.product_name" +
@@ -51,6 +51,7 @@ namespace supermarket.Models
 
             return result.Count > 0 ? result : null;
         }
+        
         public static string[] GetStoreProductByUPC(string UPC)
         {
             string sql = $"SELECT * FROM Store_Product WHERE UPC ='{UPC}'";
@@ -58,6 +59,7 @@ namespace supermarket.Models
 
             return result.Count > 0 ? result[0] : null;
         }
+        
         public static string[] GetStoreProductByPromUPC(string UPC_Prom)
         {
             string sql = $"SELECT * FROM Store_Product WHERE UPC_Prom ='{UPC_Prom}'";
@@ -135,7 +137,7 @@ namespace supermarket.Models
             string sqlInsert = "INSERT INTO Store_Product " +
                                "(UPC, UPC_Prom, id_product, selling_price, products_number, promotional_product) " +
                                $"VALUES ({upcProm}, null, {fatherStoreProduct[id_product]}, " +
-                               $"{double.Parse(fatherStoreProduct[selling_price]) * 0.8}, " +
+                               $"{double.Parse(fatherStoreProduct[selling_price]) * Constants.PromPercent}, " +
                                $"{fatherStoreProduct[products_number]}, 1)";
 
             DbUtils.Execute(sqlInsert);
@@ -158,7 +160,7 @@ namespace supermarket.Models
 
             string[] fatherStoreProduct = GetStoreProductByUPC(changedUpc);
             string sqlProm = "UPDATE Store_Product " +
-                             $"SET id_product={idProduct}, selling_price={price * 0.8}, products_number={productNumber} " +
+                             $"SET id_product={idProduct}, selling_price={price * Constants.PromPercent}, products_number={productNumber} " +
                              $"WHERE UPC='{fatherStoreProduct[UPC_prom]}'";
 
             DbUtils.Execute(sqlProm);
@@ -168,7 +170,6 @@ namespace supermarket.Models
         {
             string[] oldFatherStoreProduct = GetStoreProductByPromUPC(initUpcProm);
             string[] newFatherStoreProduct = GetStoreProductByUPC(changedUpcParent);
-
 
             // Set Prom_UPC null on current father store product
             if (changedUpcParent != oldFatherStoreProduct[UPC])
@@ -190,7 +191,7 @@ namespace supermarket.Models
             // Update promotion product table
             string sqlProm = "UPDATE Store_Product " +
                              $"SET UPC='{changedUpcProm}', id_product={newFatherStoreProduct[id_product]}, " +
-                             $"selling_price={double.Parse(newFatherStoreProduct[selling_price]) * 0.8}, " +
+                             $"selling_price={double.Parse(newFatherStoreProduct[selling_price]) * Constants.PromPercent}, " +
                              $"products_number={newFatherStoreProduct[products_number]} " +
                              $"WHERE UPC='{initUpcProm}'";
 

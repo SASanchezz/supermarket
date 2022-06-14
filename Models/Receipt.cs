@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Windows;
 using supermarket.Utils;
 
 namespace supermarket.Models
@@ -18,21 +17,16 @@ namespace supermarket.Models
         public const int surname_employee = 7;
         public const int patronymic_employee = 8;
 
-        //private static DateTime _minPrintDate = DateTime.Today.AddYears(-3); to validator
-        private const string AllString = "Âñ³";
-
-        public static List<string[]> GetAllReceipts(string idCashier, DateTime minPrintDate, DateTime maxPrintDate, string likeReceiptId = "")
+        public static List<string[]> GetAllReceipts(string idCashier, DateTime minPrintDate, DateTime maxPrintDate, 
+            string likeReceiptId = "")
         {
-            const string dateFormat = "yyyy-MM-dd";
-            string minPrintDateString = minPrintDate.ToString(dateFormat);
-            string maxPrintDateString = maxPrintDate.ToString(dateFormat);
-            
             string sql = "SELECT receipt_number, Receipt.id_employee, card_number, print_date, sum_total, " +
                          "vat, empl_name, empl_surname, empl_patronymic " +
                          "FROM Receipt LEFT JOIN Employee ON Receipt.id_employee=Employee.id_employee " +
-                         $"WHERE DATE(print_date) >= '{minPrintDateString}' AND DATE(print_date) <= '{maxPrintDateString}'";
+                         $"WHERE DATE(print_date) >= '{minPrintDate.ToString(Constants.DateStringFormat)}' " +
+                         $"AND DATE(print_date) <= '{maxPrintDate.ToString(Constants.DateStringFormat)}'";
 
-            if (idCashier != AllString)
+            if (idCashier != Constants.AllString)
             {
                 sql += $" AND Receipt.id_employee LIKE '%{idCashier}%'";
             }
@@ -49,13 +43,10 @@ namespace supermarket.Models
 
         public static double GetAllReceiptsSum(string idCashier, DateTime minPrintDate, DateTime maxPrintDate)
         {
-            const string dateFormat = "yyyy-MM-dd";
-            string minPrintDateString = minPrintDate.ToString(dateFormat);
-            string maxPrintDateString = maxPrintDate.ToString(dateFormat);
+            string whereClause = $"WHERE DATE(print_date) >= '{minPrintDate.ToString(Constants.DateStringFormat)}' " +
+                                 $"AND DATE(print_date) <= '{maxPrintDate.ToString(Constants.DateStringFormat)}' ";
 
-            string whereClause = $"WHERE DATE(print_date) >= '{minPrintDateString}' AND DATE(print_date) <= '{maxPrintDateString}' ";
-
-            whereClause = idCashier == AllString ? whereClause : whereClause += $"AND Receipt.id_employee LIKE '%{idCashier}%' ";
+            whereClause = idCashier == Constants.AllString ? whereClause : whereClause += $"AND Receipt.id_employee LIKE '%{idCashier}%' ";
 
             string sql = "SELECT COALESCE(SUM(sum_total), 0) " +
                          "FROM Receipt LEFT JOIN Employee ON Receipt.id_employee=Employee.id_employee " + whereClause;
@@ -64,8 +55,6 @@ namespace supermarket.Models
 
             return result.Count > 0 ? double.Parse(result[0][0]) : 0;
         }
-
-
 
         public static void AddReceipt( string employeeId, string cardNumber, string sumTotal)
         {
@@ -81,7 +70,7 @@ namespace supermarket.Models
 
         public static int DeleteReceiptByReceiptNumber(string receiptNumber)
         {
-            string sql = $"DELETE FROM Receipt WHERE receipt_number ={receiptNumber}";
+            string sql = $"DELETE FROM Receipt WHERE receipt_number = {receiptNumber}";
             int response = DbUtils.Execute(sql);
             return response;
         }
