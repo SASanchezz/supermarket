@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using supermarket.Data;
 using supermarket.Utils;
 using Empl = supermarket.Models.Employee;
 
@@ -10,7 +12,6 @@ namespace supermarket.Middlewares.Employee
             string salary, DateTime birtDate, DateTime startDate, string phoneNumber,
             string city, string street, string zipcode, string password)
         {
-
             if (surname.Length is 0 or > 51)
             {
                 throw new Exception("Введіть прізвище довжиною < 51");
@@ -29,6 +30,7 @@ namespace supermarket.Middlewares.Employee
             /*
              * Check if we have such role in static data
              */
+
             // try
             // {
             //     int findRole = Roles.roleKeys[role];
@@ -101,11 +103,10 @@ namespace supermarket.Middlewares.Employee
             }
         }
          
-         public static void ValidateUpdate(string id, string surname, string name, string patronymic, string role,
+         public static string ValidateUpdate(string id, string surname, string name, string patronymic, string role,
             string salary, DateTime birtDate, DateTime startDate, string phoneNumber,
             string city, string street, string zipcode, string password)
         {
-
             if (surname.Length is 0 or > 51)
             {
                 throw new Exception("Введіть прізвище довжиною < 51");

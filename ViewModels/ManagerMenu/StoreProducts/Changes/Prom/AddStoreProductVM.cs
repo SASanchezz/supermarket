@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using supermarket.Utils;
 using supermarket.Models;
 using supermarket.ViewModels.BaseClasses;
