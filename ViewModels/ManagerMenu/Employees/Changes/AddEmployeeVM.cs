@@ -167,6 +167,29 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
 
         public RelayCommand<object> CloseCommand { get; }
 
+        private void AddEmployee()
+        {
+            try
+            {
+                //Validates entered information
+                EmployeeValidator.ValidateInsert(Surname, Name, Patronymic, Role,
+                    Salary, DateOfBirth, DateOfStart, PhoneNumber,
+                    City, Street, Zipcode, Password);
+                
+                //Query to insert new employee
+                Employee.AddEmployee(Surname, Name, Patronymic, Role,
+                    Salary, DateOfBirth, DateOfStart, PhoneNumber,
+                    City, Street, Zipcode, Password);
+
+                ResetFields();
+                CloseWindow();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+        
         private void ResetFields()
         {
             Id = "";
@@ -182,28 +205,6 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
             City = "";
             Street = "";
             Zipcode = "";
-        }
-
-        private void AddEmployee()
-        {
-            ////Validates entered information
-            string result = EmployeeValidator.ValidateInsert(Surname, Name, Patronymic, Role,
-                Salary, DateOfBirth, DateOfStart, PhoneNumber,
-                City, Street, Zipcode, Password);
-
-            if (result.Length != 0)
-            {
-                MessageBox.Show(result);
-                return;
-            }
-
-            //Query to insert new employee
-            Employee.AddEmployee(Surname, Name, Patronymic, Role,
-                Salary, DateOfBirth, DateOfStart, PhoneNumber,
-                City, Street, Zipcode, Password);
-
-            ResetFields();
-            CloseWindow();
         }
 
         private bool CanExecute(object obj)

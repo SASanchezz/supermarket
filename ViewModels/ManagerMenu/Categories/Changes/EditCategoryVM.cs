@@ -1,3 +1,4 @@
+using System;
 using System.Windows;
 using supermarket.Middlewares.Category;
 using supermarket.Utils;
@@ -60,17 +61,20 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
         
         private void UpdateCategory()
         {
-            string result = CategoryValidator.ValidateUpdate(_initNumber, _initName,ChangedNumber, ChangedName);
-            
-            if (result.Length != 0)
+            try
             {
-                MessageBox.Show(result);
-                return;
+                //Validates entered information
+                CategoryValidator.ValidateUpdate(_initNumber, _initName, ChangedNumber, ChangedName);
+                
+                //Query to update category
+                Cat.UpdateCategory(_initNumber, ChangedNumber, ChangedName);
+            
+                CloseWindow();
             }
-            
-            Cat.UpdateCategory(_initNumber, ChangedNumber, ChangedName);
-            
-            CloseWindow();
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
         private void DeleteCategory()

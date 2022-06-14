@@ -108,17 +108,20 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.NonProm
 
         private void UpdateStoreProduct()
         {
-            string result = StoreProductEditValidator.ValidateNotProm(_initUpc, _changedUpc, _subProduct.Split(' ')[0], _price, _amount);
-
-            if (result.Length != 0)
+            try
             {
-                MessageBox.Show(result);
-                return;
+                StoreProductValidator.ValidateUpdateNotProm(_initUpc, _changedUpc, _subProduct.Split(' ')[0], _price, _amount);
+                
+                StrProduct.UpdateNonPromStoreProduct(_initUpc, _changedUpc, _subProduct.Split(' ')[0], double.Parse(_price), _amount);
+
+                CloseWindow();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
             }
 
-            StrProduct.UpdateNonPromStoreProduct(_initUpc, _changedUpc, _subProduct.Split(' ')[0], double.Parse(_price), _amount);
-
-            CloseWindow();
+            
         }
 
         private void DeleteStoreProduct()

@@ -195,24 +195,26 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
 
         private void UpdateEmployee()
         {
-            string result = EmployeeValidator.ValidateUpdate(Id, Surname, Name, Patronymic, Role,
-                Salary, DateOfBirth, DateOfStart, PhoneNumber,
-                City, Street, Zipcode, Password);
-
-            if (result.Length != 0)
+            try
             {
-                MessageBox.Show(result);
-                return;
+                //Validates entered information
+                EmployeeValidator.ValidateUpdate(Id, Surname, Name, Patronymic, Role, Salary, 
+                    DateOfBirth, DateOfStart, PhoneNumber, City, Street, Zipcode, Password);
+                
+                string[] employee = DbQueries.GetEmployeeByID(Id)[0];
+
+                Password = (Password == "") ? employee[Empl.password] : CryptUtils.HashPassword(Password);
+                
+                //Query to update employee
+                Empl.UpdateEmployee(Id, Surname, Name, Patronymic, Role, Salary, 
+                    DateOfBirth, DateOfStart, PhoneNumber, Password, City, Street, Zipcode);
+
+                CloseWindow();
             }
-
-            string[] employee = DbQueries.GetEmployeeByID(Id)[0];
-
-            Password = Password == "" ? employee[Empl.password] : CryptUtils.HashPassword(Password);
-
-            Empl.UpdateEmployee(Id, Surname, Name, Patronymic, Role, Salary, 
-                DateOfBirth, DateOfStart, PhoneNumber, Password, City, Street, Zipcode);
-
-            CloseWindow();
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
         private void DeleteEmployee()

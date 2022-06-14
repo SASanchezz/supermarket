@@ -1,4 +1,5 @@
-﻿using supermarket.Utils;
+﻿using System;
+using supermarket.Utils;
 using supermarket.Middlewares.Customer;
 using supermarket.Models;
 using System.Windows;
@@ -117,41 +118,39 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
         public RelayCommand<object> AddCustomerCommand { get; }
 
         public RelayCommand<object> CloseCommand { get; }
-        
-        public void Reset()
-        {
-            CardNumber = null;
-            Surname = null;
-            Name = null;
-            Patronymic = null;
-            PhoneNumber = null;
-            City = null;
-            Street = null;
-            Zipcode = null;
-            Percent = null;
-        }
 
         private void AddCustomer()
         {
-            /*S
-            * This method sign up new customer
-            */
-
-            ////Validates entered information
-            string result = CustomerValidator.ValidateInsert(CardNumber, Surname, Name, Patronymic,
-                PhoneNumber, City, Street, Zipcode, Percent);
-
-            if (result.Length != 0)
+            try
             {
-                MessageBox.Show(result);
-                return;
+                //Validates entered information
+                CustomerValidator.ValidateInsert(CardNumber, Surname, Name, Patronymic,
+                    PhoneNumber, City, Street, Zipcode, Percent);
+                
+                //Query to insert new customer
+                Customer.AddCustomer(CardNumber, Surname, Name, Patronymic,
+                    PhoneNumber, City, Street, Zipcode, Percent);
+
+                ResetFields();
+                CloseWindow();
             }
-
-            //Query to insert new employee
-            Customer.AddCustomer(CardNumber, Surname, Name, Patronymic,
-                PhoneNumber, City, Street, Zipcode, Percent);
-
-            CloseWindow();
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+        
+        private void ResetFields()
+        {
+            CardNumber = "";
+            Surname = "";
+            Name = "";
+            Patronymic = "";
+            PhoneNumber = "";
+            City = "";
+            Street = "";
+            Zipcode = "";
+            Percent = "";
         }
 
         private bool CanExecute(object obj)

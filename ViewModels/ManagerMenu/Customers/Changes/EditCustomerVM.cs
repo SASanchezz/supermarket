@@ -1,4 +1,5 @@
-﻿using supermarket.Utils;
+﻿using System;
+using supermarket.Utils;
 using supermarket.Middlewares.Customer;
 using Cust = supermarket.Models.Customer;
 using System.Windows;
@@ -154,19 +155,22 @@ namespace supermarket.ViewModels.ManagerMenu.Customers.Changes
 
         private void UpdateCustomer()
         {
-            string result = CustomerValidator.ValidateUpdate(InitCardNumber, ChangedCardNumber, Surname, Name, Patronymic,
-                PhoneNumber, City, Street, Zipcode, Percent);
-
-            if (result.Length != 0)
+            try
             {
-                MessageBox.Show(result);
-                return;
-            }
-            
-            Cust.UpdateCustomer(InitCardNumber, ChangedCardNumber, Surname, Name, Patronymic,
-                PhoneNumber, City, Street, Zipcode, Percent);
+                //Validates entered information
+                CustomerValidator.ValidateUpdate(InitCardNumber, ChangedCardNumber, Surname, Name, Patronymic,
+                    PhoneNumber, City, Street, Zipcode, Percent);
+                
+                //Query to update customer
+                Cust.UpdateCustomer(InitCardNumber, ChangedCardNumber, Surname, Name, Patronymic,
+                    PhoneNumber, City, Street, Zipcode, Percent);
 
-            CloseWindow();
+                CloseWindow();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
         private void DeleteCustomer()

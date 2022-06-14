@@ -1,4 +1,5 @@
-﻿using supermarket.Utils;
+﻿using System;
+using supermarket.Utils;
 using supermarket.Models;
 using supermarket.ViewModels.BaseClasses;
 using supermarket.Middlewares.StoreProduct;
@@ -66,20 +67,21 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
 
         private void AddStoreProduct()
         {
-            ////Validates entered information
-            string result = StoreProductAddValidator.ValidateProm(UPCFather.Split(' ')[0], UPCProm);
-
-            if (result.Length != 0)
+            try
             {
-                MessageBox.Show(result);
-                return;
-            }
-
-            //Query to insert new employee
-            StoreProduct.AddPromStoreProduct(UPCFather.Split(' ')[0], UPCProm);
+                //Validates entered information
+                StoreProductValidator.ValidateInsertProm(UPCFather.Split(' ')[0], UPCProm);
+                
+                //Query to insert new employee
+                StoreProduct.AddPromStoreProduct(UPCFather.Split(' ')[0], UPCProm);
             
-            ResetFields();
-            CloseWindow();
+                ResetFields();
+                CloseWindow();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
         private void ResetFields()

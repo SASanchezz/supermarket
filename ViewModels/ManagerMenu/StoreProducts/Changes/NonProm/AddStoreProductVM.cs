@@ -92,21 +92,22 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.NonProm
 
         private void AddStoreProduct()
         {
-
-            ////Validates entered information
-            string result = StoreProductAddValidator.ValidateNotProm(Upc, SubProduct.Split(' ')[0], Price, Amount);
-
-            if (result.Length != 0)
+            try
             {
-                MessageBox.Show(result);
-                return;
+                //Validates entered information
+                StoreProductValidator.ValidateInsertNotProm(Upc, SubProduct.Split(' ')[0], Price, Amount);
+
+                //Query to insert new store product
+                StoreProduct.AddNonPromStoreProduct(Upc, SubProduct.Split(' ')[0], double.Parse(Price), Amount);
+
+                ResetFields();
+                CloseWindow();
             }
-
-            //Query to insert new employee
-            StoreProduct.AddNonPromStoreProduct(Upc, SubProduct.Split(' ')[0], double.Parse(Price), Amount);
-
-            ResetFields();
-            CloseWindow();
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                throw;
+            }
         }
         
         private void ResetFields()

@@ -1,3 +1,4 @@
+using System;
 using System.Windows;
 using supermarket.Middlewares.Category;
 using supermarket.Utils;
@@ -41,28 +42,29 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
 
         public RelayCommand<object> CloseCommand { get; }
 
+        private void AddCategory()
+        {
+            try
+            {
+                //Validates entered information
+                CategoryValidator.ValidateInsert(Number, Name);
+                
+                //Query to insert new category
+                Cat.AddCategory(Number, Name);
+            
+                ResetFields();
+                CloseWindow();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+        
         private void ResetFields()
         {
             Number = "";
             Name = "";
-        }
-        
-        private void AddCategory()
-        {
-            ////Validates entered information
-            string result = CategoryValidator.ValidateInsert(Number, Name);
-
-            if (result.Length != 0)
-            {
-                MessageBox.Show(result);
-                return;
-            }
-
-            //Query to insert new category
-            Cat.AddCategory(Number, Name);
-            
-            ResetFields();
-            CloseWindow();
         }
         
         private bool CanExecute(object obj)

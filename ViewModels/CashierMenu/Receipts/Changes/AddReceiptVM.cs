@@ -51,33 +51,33 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
             }
         }
         
-
         public RelayCommand<object> AddReceiptCommand { get; }
 
         public RelayCommand<object> CloseCommand { get; }
 
+        private void AddReceipt()
+        {
+            try
+            {
+                //Validates entered information
+                ReceiptValidator.Validate(CardNumber, Sum);
+                
+                //Query to insert new receipt
+                Receipt.AddReceipt(_cashier_id, CardNumber, Sum);
+
+                ResetFields();
+                CloseWindow();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+        
         private void ResetFields()
         {
             CardNumber = "";
             Sum = "";
-        }
-
-        private void AddReceipt()
-        {
-            ////Validates entered information
-            string result = ReceiptValidator.Validate(CardNumber, Sum);
-
-            if (result.Length != 0)
-            {
-                MessageBox.Show(result);
-                return;
-            }
-
-            //Query to insert new employee
-            Receipt.AddReceipt(_cashier_id, CardNumber, Sum);
-
-            ResetFields();
-            CloseWindow();
         }
 
         private bool CanExecute(object obj)

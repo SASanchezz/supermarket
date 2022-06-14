@@ -84,6 +84,26 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
             OnPropertyChanged(nameof(SelectiveCategories));
         }
 
+        private void AddProduct()
+        {
+            try
+            {
+                //Validates entered information
+                ProductValidator.Validate(IdProduct, ProductName, Characteristics, Manufacturer);
+                
+                //Query to insert new product
+                Product.AddProduct(IdProduct, Categ.GetIDByName(CategoryName)[0], ProductName, 
+                    Characteristics, Manufacturer);
+
+                ResetFields();
+                CloseWindow();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+        
         private void ResetFields()
         {
             IdProduct = "";
@@ -91,26 +111,6 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
             CategoryName = null;
             Characteristics = "";
             Manufacturer = "";
-        }
-        
-        private void AddProduct()
-        {
-            ////Validates entered information
-            string result = ProductValidator.Validate(IdProduct, ProductName, 
-                Characteristics, Manufacturer);
-
-            if (result.Length != 0)
-            {
-                MessageBox.Show(result);
-                return;
-            }
-
-            //Query to insert new product
-            Product.AddProduct(IdProduct, Categ.GetIDByName(CategoryName)[0], ProductName, 
-                Characteristics, Manufacturer);
-
-            ResetFields();
-            CloseWindow();
         }
 
         private bool CanExecute(object obj)

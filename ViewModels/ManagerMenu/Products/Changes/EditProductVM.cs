@@ -1,4 +1,5 @@
-﻿using supermarket.Utils;
+﻿using System;
+using supermarket.Utils;
 using supermarket.ViewModels.BaseClasses;
 using Categ = supermarket.Models.Category;
 using Prod = supermarket.Models.Product;
@@ -112,19 +113,19 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
 
         private void UpdateProduct()
         {
-            string result = ProductValidator.ValidateUpdate(InitIdProduct, ChangedIdProduct, ProductName, 
-                Characteristics, Manufacturer);
-
-            if (result.Length != 0)
+            try
             {
-               //MessageBox.Show(result);
-                return;
+                ProductValidator.ValidateUpdate(InitIdProduct, ChangedIdProduct, ProductName, Characteristics, Manufacturer);
+                
+                Prod.UpdateProduct(InitIdProduct, ChangedIdProduct, 
+                    Categ.GetIDByName(CategoryName)[0], ProductName, Characteristics, Manufacturer);
+
+                CloseWindow();
             }
-
-            Prod.UpdateProduct(InitIdProduct, ChangedIdProduct, 
-                Categ.GetIDByName(CategoryName)[0], ProductName, Characteristics, Manufacturer);
-
-            CloseWindow();
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
         private void DeleteProduct()

@@ -80,17 +80,18 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
 
         private void UpdateStoreProduct()
         {
-            string result = StoreProductEditValidator.ValidateProm(_initUPCProm, _changedUPCProm, _UPCFather);
-
-            if (result.Length != 0)
+            try
             {
-                MessageBox.Show(result);
-                return;
+                StoreProductValidator.ValidateUpdateProm(_initUPCProm, _changedUPCProm, _UPCFather);
+                
+                StrProduct.UpdatePromStoreProduct(_initUPCProm, _changedUPCProm, _UPCFather);
+
+                CloseWindow();
             }
-
-            StrProduct.UpdatePromStoreProduct(_initUPCProm, _changedUPCProm, _UPCFather);
-
-            CloseWindow();
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
         private void DeleteStoreProduct()
