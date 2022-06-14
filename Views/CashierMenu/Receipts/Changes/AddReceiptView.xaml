@@ -15,9 +15,9 @@
 
         <TextBlock Text="Сума" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Foreground="DimGray" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
         <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
-                Text="{Binding Sum, Mode=Two, UpdateSourceTrigger=PropertyChanged}"/>
+                Text="{Binding Sum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <Button Content="Створити чек" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" Width="128" Height="30" VerticalAlignment="Center" FontSize="12" Margin="0,0,0,5"
+        <Button Content="Створити чек" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Width="128" Height="30" VerticalAlignment="Center" FontSize="12" Margin="0,0,0,5"
                 Command="{Binding AddReceiptCommand}"/>
         <Button Content="←Назад" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Width="64" Height="24" VerticalAlignment="Center" FontSize="12" Margin="0,0,0,0"
                 Command="{Binding CloseCommand}"/>
