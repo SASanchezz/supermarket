@@ -63,7 +63,7 @@ namespace supermarket.Models
 
             string sql = "INSERT INTO Receipt " +
                          "(receipt_number, id_employee, card_number, print_date, sum_total, vat) " +
-                         $"VALUES ('{IdUtils.ReceiptId()}', '{employeeId}', '{cardNumber}', {DateTime.Now}, {sumTotal}, {vat})";
+                         $"VALUES ('{IdUtils.ReceiptId()}', {employeeId}, '{cardNumber}', '{DateTime.Now:yyyy-MM-dd HH:mm:ss}', {sumTotal}, {vat})";
 
             DbUtils.Execute(sql);
         }
