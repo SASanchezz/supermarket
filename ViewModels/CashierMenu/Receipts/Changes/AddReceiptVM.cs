@@ -13,7 +13,7 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
         private const string cashierId = "44"; //constant cashier id
 
         private string _cashier_id = cashierId;
-        private string _card_number;
+        private string _client_card;
         private string _sum;
         
         public AddReceiptVM()
@@ -28,15 +28,16 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
             set
             {
                 _cashier_id = value;
+                OnPropertyChanged();
             }
         }
 
-        public string CardNumber
+        public string ClientCard
         {
-            get => _card_number;
+            get => _client_card;
             set
             {
-                _card_number = value;
+                _client_card = value;
                 OnPropertyChanged();
             }
         }
@@ -50,7 +51,6 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
                 OnPropertyChanged();
             }
         }
-        
 
         public RelayCommand<object> AddReceiptCommand { get; }
 
@@ -58,14 +58,14 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
 
         private void ResetFields()
         {
-            CardNumber = "";
+            ClientCard = "";
             Sum = "";
         }
 
         private void AddReceipt()
         {
             ////Validates entered information
-            string result = ReceiptValidator.Validate(CardNumber, Sum);
+            string result = ReceiptValidator.Validate(ClientCard, Sum);
 
             if (result.Length != 0)
             {
@@ -74,7 +74,7 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
             }
 
             //Query to insert new employee
-            Receipt.AddReceipt(_cashier_id, CardNumber, Sum);
+            Receipt.AddReceipt(_cashier_id, ClientCard, Sum);
 
             ResetFields();
             CloseWindow();
@@ -82,7 +82,7 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
 
         private bool CanExecute(object obj)
         {
-            return !string.IsNullOrWhiteSpace(CardNumber)
+            return !string.IsNullOrWhiteSpace(ClientCard)
                 && !string.IsNullOrWhiteSpace(Sum);
         }
     }

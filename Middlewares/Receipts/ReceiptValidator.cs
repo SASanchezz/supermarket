@@ -20,7 +20,7 @@ namespace supermarket.Middlewares.Receipts
 
             if (double.Parse(sum) < 0) return "Сума не може бути вуд'ємною";
             if (sum.Split('.')[0].Length > 13) return "Максимум - 13 знаків до точки";
-            if (sum.Split('.')[1].Length > 4) return "Максимум - 4 знаків після точки";
+            if (sum.Split('.').Length > 1 && sum.Split('.')[1].Length > 4) return "Максимум - 4 знаків після точки";
 
             return ""; //OK
         }
