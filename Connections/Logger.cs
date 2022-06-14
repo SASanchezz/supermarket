@@ -4,7 +4,7 @@ namespace supermarket.Connections
 {
     internal static class Logger
     {
-        public static void log(string fileName, string text)
+        public static void Log(string fileName, string text)
         {
             try
             {
@@ -17,9 +17,11 @@ namespace supermarket.Connections
                                 "LOGS:\n" +
                                 text +
                                 "\n\n");
-            } catch { }
-            
+            }
+            catch
+            {
+                // ignored
+            }
         }
-       
     }
 }

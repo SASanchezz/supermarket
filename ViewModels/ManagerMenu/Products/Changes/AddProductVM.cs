@@ -3,7 +3,6 @@ using supermarket.Utils;
 using System;
 using System.Windows;
 using Categ = supermarket.Models.Category;
-using supermarket.Middlewares.SignUp;
 using supermarket.Models;
 using supermarket.ViewModels.BaseClasses;
 using supermarket.Middlewares.Product;

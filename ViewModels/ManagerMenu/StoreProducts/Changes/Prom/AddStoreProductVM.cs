@@ -1,6 +1,4 @@
 ﻿using supermarket.Utils;
-using System;
-using supermarket.Middlewares.SignUp;
 using supermarket.Models;
 using supermarket.ViewModels.BaseClasses;
 using supermarket.Middlewares.StoreProduct;

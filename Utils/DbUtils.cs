@@ -40,8 +40,8 @@ namespace supermarket.Utils
                 cmd.ExecuteNonQuery();
             } catch (Exception err)
             {
-                Logger.log("dbLogs.txt", cmd.CommandText);
-                Logger.log("dbLogs.txt", err.ToString());
+                Logger.Log("dbLogs.txt", cmd.CommandText);
+                Logger.Log("dbLogs.txt", err.ToString());
                 return ERROR;
             }
             return GOOD;

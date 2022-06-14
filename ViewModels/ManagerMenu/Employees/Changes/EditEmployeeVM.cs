@@ -195,7 +195,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
 
         private void UpdateEmployee()
         {
-            string result = UpdateDataValidator.Validate(Id, Surname, Name, Patronymic, Role,
+            string result = EmployeeValidator.ValidateUpdate(Id, Surname, Name, Patronymic, Role,
                 Salary, DateOfBirth, DateOfStart, PhoneNumber,
                 City, Street, Zipcode, Password);
 
