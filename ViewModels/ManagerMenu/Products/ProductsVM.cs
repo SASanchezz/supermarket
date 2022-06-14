@@ -7,12 +7,13 @@ using supermarket.ViewModels.BaseClasses;
 using System;
 using System.Collections.Generic;
 using System.Windows;
+using supermarket.Models;
 
 namespace supermarket.ViewModels.ManagerMenu.Products
 {
     internal class ProductsVM : ViewModel, IWindowOpeningVM<ManagerProducts>
     {
-        private const string AllString = "Всі";
+        private const string AllString = Constants.AllString;
         private string _filteredName = "";
         private string _selectedCategory = AllString;
 

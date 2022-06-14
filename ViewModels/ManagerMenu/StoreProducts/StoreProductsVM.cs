@@ -4,6 +4,7 @@ using supermarket.ViewModels.BaseClasses;
 using supermarket.Data;
 using System;
 using System.Collections.Generic;
+using supermarket.Models;
 using StrProduct = supermarket.Models.StoreProduct;
 using supermarket.Printing;
 
@@ -11,7 +12,7 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
 {
     internal class StoreProductsVM : ViewModel, IWindowOpeningVM<ManagerStoreProducts>
     {
-        private const string AllString = "Всі";
+        private const string AllString = Constants.AllString;
 
         private List<string[]> _storeProducts;
         private string _selectedProm = AllString;

@@ -11,8 +11,6 @@ namespace supermarket.Models
         private const int product_number = 2;
         private const int selling_price = 3;
 
-        private const string AllString = "Âñ³";
-
         public static List<string[]> GetAllSales(string idProduct,  DateTime minPrintDate, DateTime maxPrintDate)
         {
             string dateFormat = "yyyy-MM-dd";
@@ -28,7 +26,7 @@ namespace supermarket.Models
                          $"WHERE DATE(Receipt.print_date) >= '{minPrintDateString}' " +
                          $"AND DATE(Receipt.print_date) <= '{maxPrintDateString}'";
 
-            if (idProduct != AllString)
+            if (idProduct != Constants.AllString)
             {
                 sql += $" AND Product.id_product LIKE '%{idProduct}%'";
             }

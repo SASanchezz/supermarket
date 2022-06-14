@@ -22,8 +22,10 @@ namespace supermarket.Models
         {
             string minPercentString = minPercent.ToString().Replace(',', '.');
             string maxPercentString = maxPercent.ToString().Replace(',', '.');
+            
             string sql =
                 $"SELECT * FROM Customer_Card WHERE percent>={minPercentString} AND percent<={maxPercentString}";
+            
             List<string[]> result = DbUtils.FindAll(sql);
 
             return result.Count > 0 ? result : null;

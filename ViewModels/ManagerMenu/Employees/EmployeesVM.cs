@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System;
 using supermarket.Data;
+using supermarket.Models;
 using Empl = supermarket.Models.Employee;
 using supermarket.Navigation.WindowViewModels;
 using supermarket.ViewModels.BaseClasses;
@@ -14,7 +15,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
      */
     internal class EmployeesVM : ViewModel, IWindowOpeningVM<ManagerEmployees>
     {
-        private const string AllString = "Всі";
+        private const string AllString = Constants.AllString;
 
         private string _filteredSurname = "";
         private string _selectedRole = AllString;

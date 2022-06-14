@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using supermarket.Models;
 using supermarket.Navigation.WindowViewModels;
 using supermarket.Utils;
 using supermarket.ViewModels.BaseClasses;
@@ -11,17 +12,14 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
 {
     internal class ReceiptsVM : ViewModel, IWindowOpeningVM<ManagerReceipts>
     {
-        private const string AllString = "Âñ³";
+        private const string AllString = Constants.AllString;
         private string _filteredIdCashier = AllString;
         
-        private DateTime _minPrintDate;
-        private DateTime _maxPrintDate;
+        private DateTime _minPrintDate = DateTime.Now.AddYears(-3);
+        private DateTime _maxPrintDate = DateTime.Now;
         
         public ReceiptsVM()
         {
-            MinPrintDate = DateTime.Now.AddYears(-3);
-            MaxPrintDate = DateTime.Now;
-            
             OpenDetailsReceiptWindowCommand =
                 new RelayCommand<object>(_ => OpenWindowViewModel(ManagerReceipts.DetailsReceipt));
 

@@ -10,16 +10,14 @@ namespace supermarket.ViewModels.ManagerMenu.Sales
 {
     internal class SalesVM : ViewModel
     {
-        private const string AllString = "Âñ³";
+        private const string AllString = Constants.AllString;
         private string _filteredProduct = AllString;
 
-        private DateTime _minPrintDate;
-        private DateTime _maxPrintDate;
+        private DateTime _minPrintDate = DateTime.Now.AddYears(-3);
+        private DateTime _maxPrintDate = DateTime.Now;
 
         public SalesVM()
         {
-            MinPrintDate = DateTime.Now.AddYears(-3);
-            MaxPrintDate = DateTime.Now;
             PrintSalesCommand = new RelayCommand<object>(_ => PrintSales());
         }
 
