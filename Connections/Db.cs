@@ -21,7 +21,7 @@ namespace supermarket.Connections
                 "Server={0};Database={1};port={2};User Id={3};password={4}",
                 host, database, port, username, password);
 
-            return new(connectionString);
+            return new MySqlConnection(connectionString);
         }
     }
 }

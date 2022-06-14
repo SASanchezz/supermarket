@@ -1,7 +1,7 @@
 ﻿using supermarket.Utils;
 using System;
 using System.Windows;
-using supermarket.Middlewares.SignUp;
+using supermarket.Middlewares.Employee;
 using supermarket.Models;
 using supermarket.ViewModels.BaseClasses;
 
@@ -187,7 +187,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
         private void AddEmployee()
         {
             ////Validates entered information
-            string result = SignUpValidator.Validate(Surname, Name, Patronymic, Role,
+            string result = EmployeeValidator.ValidateInsert(Surname, Name, Patronymic, Role,
                 Salary, DateOfBirth, DateOfStart, PhoneNumber,
                 City, Street, Zipcode, Password);
 
