@@ -45,6 +45,20 @@ namespace supermarket.ViewModels.ManagerMenu.Categories.Changes
         private void AddCategory()
         {
             try
+<<<<<<< Updated upstream
+=======
+            {
+                CategoryValidator.ValidateInsert(Number, Name);
+            }
+            catch(Exception e)
+            {
+                
+            }
+            ////Validates entered information
+            string result = 
+
+            if (result.Length != 0)
+>>>>>>> Stashed changes
             {
                 //Validates entered information
                 CategoryValidator.ValidateInsert(Number, Name);

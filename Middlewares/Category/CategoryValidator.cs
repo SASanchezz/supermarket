@@ -1,4 +1,8 @@
 ﻿using System;
+<<<<<<< Updated upstream
+=======
+using supermarket.Utils;
+>>>>>>> Stashed changes
 using System.Linq;
 using Cat = supermarket.Models.Category;
 
