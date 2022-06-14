@@ -3,9 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converters="clr-namespace:supermarket.Utils.Converters"
              xmlns:local="clr-namespace:supermarket.Views.CashierMenu.StoreProducts"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" MinWidth="800">
+    
+    <UserControl.Resources>
+        <converters:BoolStringConverter x:Key="BoolStringConverter"/>
+    </UserControl.Resources>
     
     <Grid Margin="10" 
           Background="LightGray">
@@ -81,7 +86,7 @@
                         <DataGridTextColumn Header="Назва продукту"     Binding="{Binding Path=[6]}"    Width="*" IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Ціна"               Binding="{Binding Path=[3]}"    Width="*" IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Кількість"          Binding="{Binding Path=[4]}"    Width="*" IsReadOnly="True" CanUserSort="True"/>
-                        <DataGridTextColumn Header="Акційний продукт"   Binding="{Binding Path=[5]}"    Width="*" IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Акційний продукт"   Binding="{Binding Path=[5], Converter={StaticResource BoolStringConverter}}"    Width="*" IsReadOnly="True" CanUserSort="False"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
