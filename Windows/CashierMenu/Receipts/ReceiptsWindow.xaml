@@ -1,0 +1,18 @@
+<Window x:Class="supermarket.Windows.CashierMenu.Receipts.ReceiptsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:viewModels="clr-namespace:supermarket.ViewModels.CashierMenu.Receipts"
+        xmlns:views="clr-namespace:supermarket.Views.CashierMenu.Receipts"
+        xmlns:local="clr-namespace:supermarket.Windows.CashierMenu.Receipts"
+        mc:Ignorable="d"
+        Title="ReceiptsWindow" Height="500" Width="900"
+        Content="{Binding ViewModel, Mode=OneWay}" 
+        IsEnabled="{Binding IsEnabled, Mode=OneWay}">
+    <Window.Resources>
+        <DataTemplate DataType="{ x:Type viewModels:ReceiptsVM}">
+            <views:ReceiptsView/>
+        </DataTemplate>
+    </Window.Resources>
+</Window>
