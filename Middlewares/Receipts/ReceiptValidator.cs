@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Customers = supermarket.Models.Customer;
 
 namespace supermarket.Middlewares.Receipts
 {
@@ -10,8 +6,14 @@ namespace supermarket.Middlewares.Receipts
     {
         public static string Validate(string cardNumber, string sum)
         {
-            if (cardNumber.Length > 13) return "завелика довжина номера карти";
-            if (cardNumber.Length < 12) return "замаленька довжина номера карти";
+            if (cardNumber.Length != 0) //if card number is emtpy, don't add it to receipt
+            {
+                if (cardNumber.Length > 13) return "Завелика довжина номера карти";
+                if (cardNumber.Length < 12) return "Замаленька довжина номера карти";
+
+                if (Customers.GetCustomerByCardNumber(cardNumber) == null) return "Нема такого клієнта";
+            }
+            
 
             try
             {

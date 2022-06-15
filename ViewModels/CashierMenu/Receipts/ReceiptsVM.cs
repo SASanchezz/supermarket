@@ -37,7 +37,7 @@ namespace supermarket.ViewModels.CashierMenu.Receipts
         {
             get
             {
-                List<string[]> receipts = Rec.GetAllReceipts(FilteredIdCashier.Split(' ')[0], MinPrintDate, MaxPrintDate, FilteredReceiptId);
+                List<string[]> receipts = Rec.GetAllReceipts(FilteredIdCashier, MinPrintDate, MaxPrintDate, FilteredReceiptId);
 
                 if (receipts == null)
                 {

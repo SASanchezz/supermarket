@@ -49,7 +49,7 @@
                  VerticalAlignment="Bottom"
                  HorizontalAlignment="Center"
                  Margin="0,0,0,20"
-                 Text="{Binding FilteredReceiptId, Mode=OneWayToSource}"/>
+                 Text="{Binding FilteredReceiptId, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
         
         
         <Button Grid.Row="0" 

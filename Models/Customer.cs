@@ -47,6 +47,30 @@ namespace supermarket.Models
             return result.Count > 0 ? result[0] : null;
         }
 
+        public static List<string[]> GetCustomersLikeSNPOrCardOrPhone(string subString)
+        {
+            string sql = $"SELECT * FROM Customer_Card ";
+
+            if (subString != "")
+            {
+                sql += $"WHERE card_number LIKE '%{subString}%'" +
+                    $" OR cust_surname LIKE '%{subString}%'" +
+                    $" OR cust_name LIKE '%{subString}%'" +
+                    $" OR cust_patronymic LIKE '%{subString}%'" +
+                    $" OR phone_number LIKE '%{subString}%'";
+            }
+
+            List<string[]> result = DbUtils.FindAll(sql);
+
+            if (result.Count > 0) return result;
+
+
+            sql = $"SELECT * FROM Customer_Card ";
+            result = DbUtils.FindAll(sql);
+
+            return result.Count > 0 ? result : null;
+        }
+
         public static int DeleteCustomerByCardNumber(string cardNumber)
         {
             string sql = $"DELETE FROM Customer_Card WHERE card_number ={cardNumber}";

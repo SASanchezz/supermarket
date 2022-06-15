@@ -5,6 +5,7 @@ using supermarket.Middlewares.Receipts;
 using supermarket.Models;
 using supermarket.ViewModels.BaseClasses;
 using Receipt = supermarket.Models.Receipt;
+using System.Collections.Generic;
 
 namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
 {
@@ -13,13 +14,37 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
         private const string cashierId = "44"; //constant cashier id
 
         private string _cashier_id = cashierId;
-        private string _client_card;
+        private string _client_card = "";
         private string _sum;
         
         public AddReceiptVM()
         {
             AddReceiptCommand = new RelayCommand<object>(_ => AddReceipt(), CanExecute);
             CloseCommand = new RelayCommand<object>(_ => CloseWindow());
+        }
+
+        public List<string> SelectiveClients
+        {
+            get
+            {
+                List<string[]> customers = Models.Customer.GetCustomersLikeSNPOrCardOrPhone(_client_card);
+
+                if (customers == null)
+                {
+                    return new List<string>(0);
+                }
+
+                List<string> resultCustomers = new(customers.Count);
+
+                foreach (var customer in customers)
+                {
+                    resultCustomers.Add(customer[Customer.card_number] + "  --  " +
+                        customer[Customer.phone_number] + "  --  " +
+                        customer[Customer.surname]);
+                }
+
+                return resultCustomers;
+            }
         }
 
         public string CashierId
@@ -34,11 +59,12 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
 
         public string ClientCard
         {
-            get => _client_card;
+            get => _client_card.Split(' ')[0];
             set
             {
                 _client_card = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(SelectiveClients));
             }
         }
 
@@ -82,8 +108,7 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
 
         private bool CanExecute(object obj)
         {
-            return !string.IsNullOrWhiteSpace(ClientCard)
-                && !string.IsNullOrWhiteSpace(Sum);
+            return !string.IsNullOrWhiteSpace(Sum);
         }
     }
 }
