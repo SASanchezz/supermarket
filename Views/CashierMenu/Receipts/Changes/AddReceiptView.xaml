@@ -10,8 +10,9 @@
     <Grid Background="#F2F2F2">
 
         <TextBlock Text="Номер карти клієнта" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" Foreground="DimGray" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
-        <TextBox Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
-                 Text="{Binding ClientCard, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <ComboBox IsEditable="True" IsTextSearchEnabled="False" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
+                 ItemsSource="{Binding SelectiveClients}"
+                  Text="{Binding ClientCard, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBlock Text="Сума" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Foreground="DimGray" VerticalAlignment="Top" FontSize="18" Margin="0,5,0,0"/>
         <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,15"
