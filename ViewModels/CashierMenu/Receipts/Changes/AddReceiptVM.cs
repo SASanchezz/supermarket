@@ -11,6 +11,9 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
 {
     internal class AddReceiptVM : ViewModel
     {
+        private List<string[]> _selectedProducts = new(0);
+
+
         private const string cashierId = "44"; //constant cashier id
 
         private string _cashier_id = cashierId;
@@ -19,6 +22,10 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
         
         public AddReceiptVM()
         {
+            //Temp
+            string[] one = { "Milk", "23" };
+            _selectedProducts.Add(one);
+            //Temp
             AddReceiptCommand = new RelayCommand<object>(_ => AddReceipt(), CanExecute);
             CloseCommand = new RelayCommand<object>(_ => CloseWindow());
         }
@@ -44,6 +51,15 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
                 }
 
                 return resultCustomers;
+            }
+        }
+
+        public List<string[]> SelectedProducts
+        {
+            get => _selectedProducts;
+            set
+            {
+                _selectedProducts = value;
             }
         }
 
