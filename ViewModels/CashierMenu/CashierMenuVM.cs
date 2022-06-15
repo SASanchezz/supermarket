@@ -17,14 +17,18 @@ namespace supermarket.ViewModels.CashierMenu
             OpenStoreProductsWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(Main.CashierStoreProducts));
             //
             OpenReceiptsWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(Main.CashierChecks));
-
+            //
+            OpenCustomersWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(Main.CashierCustomers));
+            //
+            GoToSignInCommand = new RelayCommand<object>(_ => ChangeViewModel(MainViewsTypes.SignIn));
         }
 
         public Action<Main> OpenWindowViewModel { get; set; }
         
         public RelayCommand<object> OpenProductsWindowCommand { get; }
         public RelayCommand<object> OpenStoreProductsWindowCommand { get; }
-        public RelayCommand<object> OpenClientsWindowCommand { get; }
+        public RelayCommand<object> OpenCustomersWindowCommand { get; }
         public RelayCommand<object> OpenReceiptsWindowCommand { get; }
+        public RelayCommand<object> GoToSignInCommand { get; }
     }
 }

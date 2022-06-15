@@ -7,30 +7,13 @@
              mc:Ignorable="d"
              d:DesignHeight="500" d:DesignWidth="800" 
              FontFamily="Montserrat" FontWeight="DemiBold">
-   <Grid Background="#F2F2F2">
-        <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top"
-                   Text="Меню касира" FontSize="25" FontWeight="Bold"/>
+    
+    <Grid>
 
-        <Button Content="Панель товарів" FontSize="12"
-                Grid.Row="2" Grid.Column="1" Width="180" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"
-                Command="{Binding OpenProductsWindowCommand}"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/cashier.png" Stretch="UniformToFill"></ImageBrush>
+        </Grid.Background>
 
-        <Button Content="Панель товарів магазину" FontSize="12"
-                Grid.Row="3" Grid.Column="1" Width="180" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"
-                Command="{Binding OpenStoreProductsWindowCommand}"/>
-        
-        <Button Content="Панель клієнтів" FontSize="12"
-                Grid.Row="4" Grid.Column="1" Width="180" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"
-                Command="{Binding OpenClientsWindowCommand}"/>
-        
-        <Button Content="Панель чеків" FontSize="12"
-                Grid.Row="5" Grid.Column="1" Width="180" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"
-                Command="{Binding OpenReceiptsWindowCommand}"/>
-
-        <Button Content="Назад" FontSize="12"
-                Grid.Row="0" Grid.Column="0" Width="70" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10, 0, 0, 0"
-                Command="{Binding GoToSignInCommand}"/>
-        
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition/>
@@ -38,12 +21,143 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
-            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+
+        <Button Grid.Row="3" 
+                Grid.Column="0" 
+                HorizontalContentAlignment="Left"
+                FontSize="25"
+                Width="40" 
+                Height="38" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Margin="55, 0, 0, 0"
+                Background="{x:Null}"
+                BorderThickness="0"
+                Foreground="White"
+                Command="{Binding InfoWindowCommand}">
+
+            <Image Source="/Images/icon.png"
+                   Height="40"></Image>
+
+        </Button>
+
+        <Button Grid.Row="4" 
+                Grid.Column="0" 
+                Content="  Товари" 
+                HorizontalContentAlignment="Left"
+                FontSize="25"
+                Width="240" 
+                Height="38" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Margin="45, 0, 0, 0"
+                Background="#43273b"
+                BorderThickness="0"
+                Foreground="White"
+                Command="{Binding OpenProductsWindowCommand}">
+
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20"/>
+                </Style>
+            </Button.Resources>
+
+        </Button>
+
+        <Button Grid.Row="5" 
+                Grid.Column="0"
+                Content="  Товари магазину" 
+                HorizontalContentAlignment="Left"
+                FontSize="25"
+                Width="265" 
+                Height="38" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Margin="45, 0, 0, 0"
+                Background="#43273b"
+                BorderThickness="0"
+                Foreground="White"
+                Command="{Binding OpenStoreProductsWindowCommand}">
+
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20"/>
+                </Style>
+            </Button.Resources>
+
+        </Button>
+
+        <Button Grid.Row="6" 
+                Grid.Column="0" 
+                Content="  Клієнти" 
+                HorizontalContentAlignment="Left"
+                FontSize="25"
+                Width="290" 
+                Height="38" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Margin="45, 0, 0, 0"
+                Background="#43273b"
+                BorderThickness="0"
+                Foreground="White"
+                Command="{Binding OpenCustomersWindowCommand}">
+
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20"/>
+                </Style>
+            </Button.Resources>
+
+        </Button>
+
+        <Button Grid.Row="7" 
+                Grid.Column="0" 
+                Content="  Чеки" 
+                HorizontalContentAlignment="Left"
+                FontSize="25"
+                Width="315"
+                Height="38" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Margin="45, 0, 0, 0"
+                Background="#43273b"
+                BorderThickness="0"
+                Foreground="White"
+                Command="{Binding OpenReceiptsWindowCommand}">
+
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20"/>
+                </Style>
+            </Button.Resources>
+
+        </Button>
+
+        <Button Grid.Row="0" 
+                Grid.Column="1"
+                Grid.RowSpan="2"
+                Content="Вихід" 
+                FontSize="20"
+                Width="70" 
+                Height="30" 
+                HorizontalAlignment="Right" 
+                Background="#43273b"
+                Foreground="White"
+                BorderThickness="0"
+                VerticalAlignment="Center" 
+                Margin="10, 12, 52, 0"
+                Command="{Binding GoToSignInCommand}"/>
+
     </Grid>
+    
 </UserControl>
