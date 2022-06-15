@@ -42,7 +42,7 @@ namespace supermarket.Models
                          "FROM Sale " +
                          "LEFT JOIN Store_Product ON Store_Product.UPC = Sale.UPC " +
                          "LEFT JOIN Product ON Store_Product.id_product = Product.id_product " +
-                         $"WHERE check_number = {checkNumber}";
+                         $"WHERE check_number = '{checkNumber}'";
 
             List<string[]> result = DbUtils.FindAll(sql);
             

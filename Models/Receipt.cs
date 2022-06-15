@@ -72,7 +72,7 @@ namespace supermarket.Models
 
         public static int DeleteReceiptByReceiptNumber(string receiptNumber)
         {
-            string sql = $"DELETE FROM Receipt WHERE receipt_number = {receiptNumber}";
+            string sql = $"DELETE FROM Receipt WHERE receipt_number = '{receiptNumber}'";
             int response = DbUtils.Execute(sql);
             return response;
         }
