@@ -4,7 +4,7 @@ using supermarket.Models;
 using supermarket.Printing;
 using supermarket.Utils;
 using supermarket.ViewModels.BaseClasses;
-using Product = supermarket.Models.Product;
+using Prod = supermarket.Models.Product;
 
 namespace supermarket.ViewModels.ManagerMenu.Sales
 {
@@ -18,9 +18,12 @@ namespace supermarket.ViewModels.ManagerMenu.Sales
 
         public SalesVM()
         {
+            CountNumberOfProductsCommand = new RelayCommand<object>(_ => OnPropertyChanged(nameof(NumberOfProducts)));
             PrintSalesCommand = new RelayCommand<object>(_ => PrintSales());
         }
 
+        public RelayCommand<object> CountNumberOfProductsCommand { get; }
+        
         public RelayCommand<object> PrintSalesCommand { get; }
 
         public List<string[]> Sales 
@@ -100,12 +103,15 @@ namespace supermarket.ViewModels.ManagerMenu.Sales
 
                 foreach (var storeProduct in storeProducts)
                 {
-                    resultStoreProducts.Add(storeProduct[Product.id_product] + "  --  " + storeProduct[Product.product_name]);
+                    resultStoreProducts.Add(storeProduct[Prod.id_product] + "  --  " + storeProduct[Prod.product_name]);
                 }
 
                 return resultStoreProducts;
             }
         }
+
+        public string NumberOfProducts =>
+            Sale.GetSumOfNumberOfProducts(FilteredProduct.Split(' ')[0], MinPrintDate, MaxPrintDate);
 
         public void UpdateSales()
         {
