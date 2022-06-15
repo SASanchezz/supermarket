@@ -11,6 +11,18 @@
     <EmbeddedResource Remove="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\**" />
     <None Remove="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\**" />
     <Page Remove="Windows\ManagerMenu\StoreProducts\Changes\PromStoreProduct\**" />
+    <Page Update="Views\CashierMenu\Customers\Changes\AddCustomerView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\CashierMenu\Customers\Changes\EditCustomerView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\CashierMenu\Customers\CustomersView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\CashierMenu\Receipts\Changes\AddReceiptView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
@@ -19,6 +31,18 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
     <Page Update="Views\CashierMenu\StoreProducts\StoreProductsView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\CashierMenu\Customers\Changes\AddCustomerWindow.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\CashierMenu\Customers\Changes\EditCustomerWindow.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\CashierMenu\Customers\CustomersWindow.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
@@ -36,10 +60,28 @@
     <Page Update="Windows\ManagerMenu\StoreProducts\Changes\EditStoreProductWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Compile Update="Views\CashierMenu\Customers\Changes\AddCustomerView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\CashierMenu\Customers\Changes\EditCustomerView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\CashierMenu\Customers\CustomersView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\CashierMenu\Receipts\Changes\AddReceiptView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\CashierMenu\StoreProducts\StoreProductsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\CashierMenu\Customers\Changes\AddCustomerWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\CashierMenu\Customers\Changes\EditCustomerWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\CashierMenu\Customers\CustomersWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Windows\CashierMenu\Receipts\Changes\AddReceiptWindow.xaml.cs">
@@ -58,6 +100,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Images\cashier.png" />
+    <None Remove="Images\icon.png" />
+    <None Remove="Images\manager.png" />
     <None Remove="Views\SignIn\sign-in.png" />
   </ItemGroup>
 
@@ -76,7 +121,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Views\SignIn\sign-in.png">
+    <Content Include="Images\cashier.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\manager.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\sign-in.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
