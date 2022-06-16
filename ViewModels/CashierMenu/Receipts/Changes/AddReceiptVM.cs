@@ -18,8 +18,12 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
 
         private string _cashier_id = cashierId;
         private string _client_card = "";
+        private string _product_amount = "";
+        private string _choosen_product = "";
         private string _sum;
-        
+        public RelayCommand<object> AddNewProductCommand { get; }
+        public RelayCommand<object> AddReceiptCommand { get; }
+        public RelayCommand<object> CloseCommand { get; }
         public AddReceiptVM()
         {
             //Temp
@@ -27,6 +31,7 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
             _selectedProducts.Add(one);
             //Temp
             AddReceiptCommand = new RelayCommand<object>(_ => AddReceipt(), CanExecute);
+            AddNewProductCommand = new RelayCommand<object>(_ => AddNewProduct(), CanAddNewProduct);
             CloseCommand = new RelayCommand<object>(_ => CloseWindow());
         }
 
@@ -51,6 +56,32 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
                 }
 
                 return resultCustomers;
+            }
+        }
+
+        public List<string> SelectiveStoreProduct
+        {
+            get
+            {
+                List<string[]> strProducts = StoreProduct.GetStoreProductsLikeUPCOrProductName(_choosen_product);
+
+                if (strProducts == null)
+                {
+                    return new List<string>(0);
+                }
+
+                List<string> resultStrProducts = new(strProducts.Count);
+
+                foreach (var strProduct in strProducts)
+                {
+                    string isProm = strProduct[StoreProduct.promotional_product] == "True" ? "Акційний" : "Неакційний";
+
+                    resultStrProducts.Add(strProduct[StoreProduct.UPC] + "  --  " +
+                        strProduct[StoreProduct.product_name] + "  --  " +
+                        isProm);
+                }
+
+                return resultStrProducts;
             }
         }
 
@@ -84,6 +115,40 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
             }
         }
 
+        /**
+         * New product to add to list
+         */
+        public string ChoosenProduct
+        {
+            get
+            {
+                try
+                {
+                    return _choosen_product.Split(" -- ")[1];
+                } catch { return _choosen_product.Split(" ")[0]; }
+            }
+            set
+            {
+                _choosen_product = value;
+                OnPropertyChanged();
+            }
+        }
+        /**
+         * Amount of one selected product
+         */
+        public string ProductAmount
+        {
+            get => _product_amount;
+            set
+            {
+                _product_amount = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /**
+         * Sum of all products
+         */
         public string Sum
         {
             get => _sum;
@@ -94,14 +159,47 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
             }
         }
 
-        public RelayCommand<object> AddReceiptCommand { get; }
-
-        public RelayCommand<object> CloseCommand { get; }
 
         private void ResetFields()
         {
             ClientCard = "";
             Sum = "";
+        }
+
+        private void ResetNewProductFields()
+        {
+            ChoosenProduct = "";
+            ProductAmount = "";
+        }
+        /**
+         * Method to add new product to list
+         */
+        private void AddNewProduct()
+        {
+            ////Validates entered information
+            if (StoreProduct.GetStoreProductByUPC(_choosen_product.Split(" ")[0]) == null)
+            {
+                MessageBox.Show("Немає такого товару");
+                return;
+            }
+
+            try
+            {
+                int.Parse(ProductAmount);
+            }
+            catch {
+                MessageBox.Show("Некоректна ціна товару");
+                return;
+            }
+            if (int.Parse(ProductAmount) <= 0)
+            {
+                MessageBox.Show("Кількість товару від'ємна");
+                return;
+            }
+            SelectedProducts.Add(new string[] { _choosen_product.Split(" -- ")[1], ProductAmount });
+
+            OnPropertyChanged(nameof(SelectedProducts));
+            ResetNewProductFields();
         }
 
         private void AddReceipt()
@@ -125,6 +223,11 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
         private bool CanExecute(object obj)
         {
             return !string.IsNullOrWhiteSpace(Sum);
+        }
+        private bool CanAddNewProduct(object obj)
+        {
+            return !string.IsNullOrWhiteSpace(ChoosenProduct) &&
+                   !string.IsNullOrWhiteSpace(ProductAmount);
         }
     }
 }
