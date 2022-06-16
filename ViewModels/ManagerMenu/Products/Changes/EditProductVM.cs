@@ -117,7 +117,7 @@ namespace supermarket.ViewModels.ManagerMenu.Products.Changes
 
             if (result.Length != 0)
             {
-               //MessageBox.Show(result);
+                MessageBox.Show(result);
                 return;
             }
 

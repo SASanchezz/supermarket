@@ -7,14 +7,13 @@ namespace supermarket.ViewModels.ManagerMenu.Sales
     {
         public SalesWindowVM()
         {
-            SetUpdatingSystem();
-        }
-        
-        private void SetUpdatingSystem()
-        {
             Window.IsVisibleChanged += (sender, e) =>
             {
-                if (!(bool)e.NewValue) return; // window is hiden
+                // window is hiden
+                if (!(bool)e.NewValue) 
+                {
+                    return; 
+                }
                 // window is shown
                 ViewModel.UpdateSales();
             };
