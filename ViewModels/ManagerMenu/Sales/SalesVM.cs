@@ -20,11 +20,14 @@ namespace supermarket.ViewModels.ManagerMenu.Sales
         {
             CountNumberOfProductsCommand = new RelayCommand<object>(_ => OnPropertyChanged(nameof(NumberOfProducts)));
             PrintSalesCommand = new RelayCommand<object>(_ => PrintSales());
+            CloseCommand = new RelayCommand<object>(_ => CloseWindow());
         }
 
         public RelayCommand<object> CountNumberOfProductsCommand { get; }
         
         public RelayCommand<object> PrintSalesCommand { get; }
+        
+        public RelayCommand<object> CloseCommand { get; }
 
         public List<string[]> Sales 
         {
@@ -116,6 +119,7 @@ namespace supermarket.ViewModels.ManagerMenu.Sales
         public void UpdateSales()
         {
             OnPropertyChanged(nameof(Sales));
+            OnPropertyChanged(nameof(SelectiveProducts));
         }
 
         private void PrintSales()
