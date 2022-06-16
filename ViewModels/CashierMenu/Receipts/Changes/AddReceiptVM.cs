@@ -6,14 +6,12 @@ using supermarket.Models;
 using supermarket.ViewModels.BaseClasses;
 using Receipt = supermarket.Models.Receipt;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
 {
     internal class AddReceiptVM : ViewModel
     {
-        private List<string[]> _selectedProducts = new(0);
-
-
         private const string cashierId = "44"; //constant cashier id
 
         private string _cashier_id = cashierId;
@@ -21,19 +19,19 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
         private string _product_amount = "";
         private string _choosen_product = "";
         private string _sum;
-        public RelayCommand<object> AddNewProductCommand { get; }
-        public RelayCommand<object> AddReceiptCommand { get; }
-        public RelayCommand<object> CloseCommand { get; }
+       
         public AddReceiptVM()
         {
-            //Temp
-            string[] one = { "Milk", "23" };
-            _selectedProducts.Add(one);
-            //Temp
             AddReceiptCommand = new RelayCommand<object>(_ => AddReceipt(), CanExecute);
             AddNewProductCommand = new RelayCommand<object>(_ => AddNewProduct(), CanAddNewProduct);
             CloseCommand = new RelayCommand<object>(_ => CloseWindow());
         }
+        
+        public RelayCommand<object> AddNewProductCommand { get; }
+        
+        public RelayCommand<object> AddReceiptCommand { get; }
+        
+        public RelayCommand<object> CloseCommand { get; }
 
         public List<string> SelectiveClients
         {
@@ -85,14 +83,7 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
             }
         }
 
-        public List<string[]> SelectedProducts
-        {
-            get => _selectedProducts;
-            set
-            {
-                _selectedProducts = value;
-            }
-        }
+        public ObservableCollection<string[]> SelectedProducts { get; set; } = new();
 
         public string CashierId
         {
@@ -187,18 +178,20 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
             {
                 int.Parse(ProductAmount);
             }
-            catch {
+            catch 
+            {
                 MessageBox.Show("Некоректна ціна товару");
                 return;
             }
+            
             if (int.Parse(ProductAmount) <= 0)
             {
                 MessageBox.Show("Кількість товару від'ємна");
                 return;
             }
+            
             SelectedProducts.Add(new string[] { _choosen_product.Split(" -- ")[1], ProductAmount });
 
-            OnPropertyChanged(nameof(SelectedProducts));
             ResetNewProductFields();
         }
 
@@ -224,6 +217,7 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
         {
             return !string.IsNullOrWhiteSpace(Sum);
         }
+        
         private bool CanAddNewProduct(object obj)
         {
             return !string.IsNullOrWhiteSpace(ChoosenProduct) &&
