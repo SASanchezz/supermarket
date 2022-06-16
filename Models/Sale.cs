@@ -68,7 +68,7 @@ namespace supermarket.Models
             }
             
             List<string[]> result = DbUtils.FindAll(sql);
-            return result.Count != 0 ? result[0][0] : "0";
+            return result[0][0] != null ? result[0][0] : "0";
         }
     }
 }
