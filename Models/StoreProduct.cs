@@ -18,7 +18,10 @@ namespace supermarket.Models
 
         public static List<string[]> GetAllStoreProducts()
         {
-            string sql = "SELECT * FROM Store_Product";
+            string sql = "SELECT UPC, UPC_prom, Store_Product.id_product, selling_price, products_number, promotional_product, Product.product_name" +
+                " FROM Store_Product" +
+                " LEFT JOIN Product" +
+                " ON Store_Product.id_product  = Product.id_product ";
             List<string[]> result = DbUtils.FindAll(sql);
 
             return result.Count > 0 ? result : null;
@@ -54,7 +57,11 @@ namespace supermarket.Models
         
         public static string[] GetStoreProductByUPC(string UPC)
         {
-            string sql = $"SELECT * FROM Store_Product WHERE UPC ='{UPC}'";
+
+            string sql = $"SELECT UPC, UPC_prom, Store_Product.id_product, selling_price, products_number, promotional_product, Product.product_name" +
+                $" FROM Store_Product" +
+                $" LEFT JOIN Product ON Store_Product.id_product  = Product.id_product " +
+                $" WHERE UPC ='{UPC}'";
             List<string[]> result = DbUtils.FindAll(sql);
 
             return result.Count > 0 ? result[0] : null;

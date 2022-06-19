@@ -56,6 +56,7 @@
 
     public enum CashierReceipts
     {
+        DetailsReceipt,
         AddReceipt
     }
 }
