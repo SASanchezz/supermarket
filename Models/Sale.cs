@@ -34,7 +34,15 @@ namespace supermarket.Models
             
             return result.Count > 0 ? result : null;
         }
-        
+
+        public static void AddSale(string UPC, string checkNumber, string productNumber, string sellingPrice)
+        {
+            string sql = "INSERT INTO Sale (UPC, check_number , product_number, selling_price) " +
+                         $"VALUES ('{UPC}', '{checkNumber}', {productNumber}, {sellingPrice.Replace(',', '.')})";
+
+            DbUtils.Execute(sql);
+        }
+
         public static List<string[]> GetAllSalesByCheckNumber(string checkNumber)
         {
             string sql = "SELECT Sale.UPC, Product.id_product, Product.product_name, Sale.product_number," +
@@ -48,7 +56,7 @@ namespace supermarket.Models
             
             return result.Count > 0 ? result : null;
         }
-
+        
         public static string GetSumOfNumberOfProducts(string productId, DateTime minPrintDate, DateTime maxPrintDate)
         {
             string minPrintDateString = minPrintDate.ToString(Constants.DateStringFormat);

@@ -56,18 +56,20 @@ namespace supermarket.Models
             return result.Count > 0 ? double.Parse(result[0][0]) : 0;
         }
 
-        public static void AddReceipt( string employeeId, string cardNumber, string sumTotal)
+        public static string AddReceipt( string employeeId, string cardNumber, string sumTotal)
         {
+            string receiptId = IdUtils.ReceiptId();
             string vat = (double.Parse(sumTotal) * 0.2).ToString().Replace(',', '.');
             sumTotal = sumTotal.Replace(',', '.');
-
             cardNumber = cardNumber == "" ? "NULL" : $"'{cardNumber}'";
 
             string sql = "INSERT INTO Receipt " +
                          "(receipt_number, id_employee, card_number, print_date, sum_total, vat) " +
-                         $"VALUES ('{IdUtils.ReceiptId()}', {employeeId}, {cardNumber}, '{DateTime.Now:yyyy-MM-dd HH:mm:ss}', {sumTotal}, {vat})";
+                         $"VALUES ('{receiptId}', {employeeId}, {cardNumber}, '{DateTime.Now:yyyy-MM-dd HH:mm:ss}', {sumTotal}, {vat})";
 
             DbUtils.Execute(sql);
+
+            return receiptId;
         }
 
         public static int DeleteReceiptByReceiptNumber(string receiptNumber)

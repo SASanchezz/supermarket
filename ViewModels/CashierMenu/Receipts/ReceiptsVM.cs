@@ -24,7 +24,9 @@ namespace supermarket.ViewModels.CashierMenu.Receipts
         {
             MinPrintDate = DateTime.Now.AddYears(-3);
             MaxPrintDate = DateTime.Now;
-            
+
+            OpenDetailsReceiptWindowCommand =
+                new RelayCommand<object>(_ => OpenWindowViewModel(CashierReceipts.DetailsReceipt));
             OpenAddReceiptWindowCommand =
                 new RelayCommand<object>(_ => OpenWindowViewModel(CashierReceipts.AddReceipt));
 
@@ -65,6 +67,7 @@ namespace supermarket.ViewModels.CashierMenu.Receipts
         public Action<CashierReceipts> OpenWindowViewModel { get; set; }
         
         public RelayCommand<object> OpenAddReceiptWindowCommand { get; }
+        public RelayCommand<object> OpenDetailsReceiptWindowCommand { get; }
         public RelayCommand<object> PrintReceiptsCommand { get; }
         public RelayCommand<object> CountReceiptsSumCommand { get; }
         public RelayCommand<object> SetTodayDataCommand { get; }
