@@ -40,7 +40,7 @@ namespace supermarket.Middlewares.StoreProduct
             return ""; //Alright
         }
 
-        public static string ValidateProm(string initUPCProm, string changedUPCProm, string changedUPCFather)
+        public static string ValidateProm(string initUPCProm, string changedUPCProm, string changedUPCFather, string amount)
         {
             string[] oldFatherStoreProduct = StrProduct.GetStoreProductByPromUPC(initUPCProm);
 
@@ -66,10 +66,23 @@ namespace supermarket.Middlewares.StoreProduct
             {
                 return "UPC неакційного товару не існує";
             }
+            if (StrProduct.GetStoreProductByUPC(changedUPCFather)[StrProduct.promotional_product] == "True")
+            {
+                return "Це акційний товар";
+            }
             //If such UPCFather already has UPC_Prom
             if (oldFatherStoreProduct[StrProduct.UPC] != changedUPCFather && StrProduct.GetStoreProductByUPC(changedUPCFather)[StrProduct.UPC_prom] != null)
             {
                 return "Батьківський товар вже має акційний товар";
+            }
+
+            try
+            {
+                int.Parse(amount);
+            }
+            catch
+            {
+                return "Некоректно введена кількість";
             }
 
             return ""; //Alright

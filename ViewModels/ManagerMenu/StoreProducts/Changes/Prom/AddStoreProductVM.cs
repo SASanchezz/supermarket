@@ -11,6 +11,7 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
     {
         private string _UPCProm = "";
         private string _UPCFather = "";
+        private string _amount = "";
 
         public AddStoreProductVM()
         {
@@ -36,6 +37,16 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
                 _UPCFather = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(SelectiveFatherUPC));
+            }
+        }
+
+        public string Amount
+        {
+            get => _amount;
+            set
+            {
+                _amount = value;
+                OnPropertyChanged();
             }
         }
 
@@ -67,7 +78,7 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
         private void AddStoreProduct()
         {
             ////Validates entered information
-            string result = StoreProductAddValidator.ValidateProm(UPCFather.Split(' ')[0], UPCProm);
+            string result = StoreProductAddValidator.ValidateProm(UPCFather.Split(' ')[0], UPCProm, Amount);
 
             if (result.Length != 0)
             {
@@ -76,7 +87,7 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
             }
 
             //Query to insert new employee
-            StoreProduct.AddPromStoreProduct(UPCFather.Split(' ')[0], UPCProm);
+            StoreProduct.AddPromStoreProduct(UPCFather.Split(' ')[0], UPCProm, Amount);
             
             ResetFields();
             CloseWindow();
@@ -91,7 +102,8 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
         private bool CanExecute(object obj)
         {
             return !string.IsNullOrWhiteSpace(UPCFather)
-                && !string.IsNullOrWhiteSpace(UPCProm);
+                && !string.IsNullOrWhiteSpace(UPCProm)
+                && !string.IsNullOrWhiteSpace(Amount);
         }
     }
 }

@@ -16,6 +16,7 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
         private string _initUPCProm;
         private string _changedUPCProm;
         private string _UPCFather;
+        private string _amount;
 
         int ERROR = -1;
         int GOOD = 1;
@@ -49,6 +50,16 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
             }
         }
 
+        public string Amount
+        {
+            get => _amount;
+            set
+            {
+                _amount = value;
+                OnPropertyChanged();
+            }
+        }
+
         public List<string> SelectiveFatherUPC
         {
             get
@@ -73,14 +84,17 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
 
         public override void SetData(string[] data)
         {
-            _initUPCProm = data[StrProduct.UPC_prom];
-            ChangedUPCProm = data[StrProduct.UPC_prom];
-            UPCFather = data[StrProduct.UPC];
+            _initUPCProm = data[StrProduct.UPC];
+            ChangedUPCProm = data[StrProduct.UPC];
+
+            UPCFather = StrProduct.GetStoreProductByPromUPC(data[StrProduct.UPC])[StrProduct.UPC];
+
+            Amount = data[StrProduct.products_number];
         }
 
         private void UpdateStoreProduct()
         {
-            string result = StoreProductEditValidator.ValidateProm(_initUPCProm, _changedUPCProm, _UPCFather);
+            string result = StoreProductEditValidator.ValidateProm(_initUPCProm, _changedUPCProm, _UPCFather.Split(' ')[0], Amount);
 
             if (result.Length != 0)
             {
@@ -88,7 +102,7 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
                 return;
             }
 
-            StrProduct.UpdatePromStoreProduct(_initUPCProm, _changedUPCProm, _UPCFather);
+            StrProduct.UpdatePromStoreProduct(_initUPCProm, _changedUPCProm, _UPCFather.Split(' ')[0], Amount);
 
             CloseWindow();
         }
@@ -103,7 +117,8 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
         private bool CanExecute(object obj)
         {
             return !string.IsNullOrWhiteSpace(UPCFather)
-                && !string.IsNullOrWhiteSpace(ChangedUPCProm);
+                && !string.IsNullOrWhiteSpace(ChangedUPCProm)
+                && !string.IsNullOrWhiteSpace(Amount);
         }
     }
 }
