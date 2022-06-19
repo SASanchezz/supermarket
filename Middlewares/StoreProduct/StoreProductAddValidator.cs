@@ -56,9 +56,8 @@ namespace supermarket.Middlewares.StoreProduct
             return ""; //Alright
         }
 
-        public static string ValidateProm(string UPCFather, string UPCProm)
+        public static string ValidateProm(string UPCFather, string UPCProm, string amount)
         {
-
             if (UPCFather.Any(x => !char.IsDigit(x)) || UPCFather.Length > 12)
             {
                 return "Невалідний батьківський UPC";
@@ -86,6 +85,14 @@ namespace supermarket.Middlewares.StoreProduct
             if (StrProduct.GetStoreProductByUPC(UPCFather)[StrProduct.UPC_prom] != null)
             {
                 return "Цей товар вже має акційний товар";
+            }
+
+            try
+            {
+                int.Parse(amount);
+            } catch
+            {
+                return "Некоректно введена кількість";
             }
 
             return ""; //Alright

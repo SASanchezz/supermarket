@@ -80,7 +80,7 @@ namespace supermarket.Models
             string whereClause = "WHERE promotional_product = 0 ";
 
             whereClause = subString == "" ? whereClause : whereClause +=
-                $"AND UPC LIKE '%{subString}%' OR Product.product_name LIKE '%{subString}%'";
+                $"AND (UPC LIKE '%{subString}%' OR Product.product_name LIKE '%{subString}%')";
 
 
             string sql = "SELECT UPC, UPC_prom, Store_Product.id_product, selling_price, products_number, promotional_product, Product.product_name " +
@@ -137,7 +137,7 @@ namespace supermarket.Models
             DbUtils.Execute(sql);
         }
 
-        public static void AddPromStoreProduct(string FatherUPC, string upcProm)
+        public static void AddPromStoreProduct(string FatherUPC, string upcProm, string amount)
         {
             string[] fatherStoreProduct = GetStoreProductByUPC(FatherUPC);
 
@@ -145,7 +145,7 @@ namespace supermarket.Models
                                "(UPC, UPC_Prom, id_product, selling_price, products_number, promotional_product) " +
                                $"VALUES ({upcProm}, null, {fatherStoreProduct[id_product]}, " +
                                $"{double.Parse(fatherStoreProduct[selling_price]) * Constants.PromPercent}, " +
-                               $"{fatherStoreProduct[products_number]}, 1)";
+                               $"{amount}, 1)";
 
             DbUtils.Execute(sqlInsert);
 
@@ -167,13 +167,13 @@ namespace supermarket.Models
 
             string[] fatherStoreProduct = GetStoreProductByUPC(changedUpc);
             string sqlProm = "UPDATE Store_Product " +
-                             $"SET id_product={idProduct}, selling_price={price * Constants.PromPercent}, products_number={productNumber} " +
+                             $"SET id_product={idProduct}, selling_price={price * Constants.PromPercent} " +
                              $"WHERE UPC='{fatherStoreProduct[UPC_prom]}'";
 
             DbUtils.Execute(sqlProm);
         }
 
-        public static void UpdatePromStoreProduct(string initUpcProm, string changedUpcProm, string changedUpcParent)
+        public static void UpdatePromStoreProduct(string initUpcProm, string changedUpcProm, string changedUpcParent, string amount)
         {
             string[] oldFatherStoreProduct = GetStoreProductByPromUPC(initUpcProm);
             string[] newFatherStoreProduct = GetStoreProductByUPC(changedUpcParent);
@@ -190,8 +190,8 @@ namespace supermarket.Models
 
             // Update father product table
             string sqlFather = "UPDATE Store_Product " +
-                               $"SET UPC_Prom='{changedUpcParent}' " +
-                               $"WHERE UPC='{changedUpcProm}'";
+                               $"SET UPC_Prom='{changedUpcProm}' " +
+                               $"WHERE UPC='{changedUpcParent}'";
 
             DbUtils.Execute(sqlFather);
 
@@ -199,7 +199,7 @@ namespace supermarket.Models
             string sqlProm = "UPDATE Store_Product " +
                              $"SET UPC='{changedUpcProm}', id_product={newFatherStoreProduct[id_product]}, " +
                              $"selling_price={double.Parse(newFatherStoreProduct[selling_price]) * Constants.PromPercent}, " +
-                             $"products_number={newFatherStoreProduct[products_number]} " +
+                             $"products_number={amount} " +
                              $"WHERE UPC='{initUpcProm}'";
 
             DbUtils.Execute(sqlProm);
