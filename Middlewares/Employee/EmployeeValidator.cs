@@ -47,12 +47,16 @@ namespace supermarket.Middlewares.Employee
             //salary = salary.Replace('.', ',');
             try
             {
-                float.Parse(salary);
+                double.Parse(salary);
             }
             catch (FormatException)
             {
                 return "Некоректно введена зарплата";
             }
+            if (double.Parse(salary) < 0) return "Зарплата не може бути вуд'ємною";
+
+            if (salary.Split('.')[0].Length > 9) return "Максимум - 9 знаків до точки";
+            if (salary.Split('.').Length > 1 && salary.Split('.')[1].Length > 4) return "Максимум - 4 знаків після точки";
 
             /*
             * Check for age correctness 
@@ -82,17 +86,17 @@ namespace supermarket.Middlewares.Employee
                 return "Номер телефону зайнятий";
             }
 
-            if (city.Length is 0 or > 51)
+            if (city != null && city.Length is 0 or > 51)
             {
                 return "Введіть місто довжиною < 51";
             }
             
-            if (street.Length is 0 or > 51)
+            if (street != null && street.Length is 0 or > 51)
             {
                 return "Введіть вулицю довжиною < 51";
             }
             
-            if (zipcode.Length is 0 or > 9)
+            if (zipcode != null && zipcode.Length is 0 or > 9)
             {
                 return "Введіть поштовий індекс довжиною < 10";
             }
@@ -129,12 +133,16 @@ namespace supermarket.Middlewares.Employee
             //salary = salary.Replace(',', '.');
             try
             {
-                float.Parse(salary);
+                double.Parse(salary);
             }
             catch (FormatException)
             {
                 return "Некоректно введена зарплата";
             }
+            if (double.Parse(salary) < 0) return "Зарплата не може бути вуд'ємною";
+
+            if (salary.Split('.')[0].Length > 9) return "Максимум - 9 знаків до точки";
+            if (salary.Split('.').Length > 1 && salary.Split('.')[1].Length > 4) return "Максимум - 4 знаків після точки";
 
             /*
             * Check for age correctness 
@@ -165,17 +173,17 @@ namespace supermarket.Middlewares.Employee
                 return "Номер телефону зайнятий";
             }
 
-            if (city.Length is 0 or > 51)
+            if (city != null && city.Length is 0 or > 51)
             {
                 return "Введіть місто довжиною < 51";
             }
             
-            if (street.Length is 0 or > 51)
+            if (street != null && street.Length is 0 or > 51)
             {
                 return "Введіть вулицю довжиною < 51";
             }
             
-            if (zipcode.Length is 0 or > 9)
+            if (zipcode != null && zipcode.Length is 0 or > 9)
             {
                 return "Введіть поштовий індекс довжиною < 10";
             }

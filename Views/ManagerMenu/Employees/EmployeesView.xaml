@@ -62,19 +62,25 @@
                 Margin="0,0,20,0"
                 Command="{Binding OpenEditEmployeeWindowCommand}"/>
 
+        <TextBlock Grid.Row="0" 
+                  HorizontalAlignment="Left" 
+                  Margin="180, 0, 0, 30"
+                  Text="Прізвище">
+        </TextBlock>
+
         <TextBox Grid.Row="0" 
                   Width="120"
-                  Height="24" 
+                  Height="18" 
                   HorizontalAlignment="Left" 
-                  Margin="150, 0, 0, 30"
+                  Margin="150, 0, 0, 10"
                   Text="{Binding FilteredSurname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
 
         <ComboBox Grid.Row="0" 
                   Width="120"
-                  Height="24" 
+                  Height="20" 
                   HorizontalAlignment="Left" 
-                  Margin="150, 30, 0, 0"
+                  Margin="150, 40, 0, 0"
                   ItemsSource="{Binding SelectiveRoles}" 
                   SelectedItem="{Binding SelectedRole, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         </ComboBox>

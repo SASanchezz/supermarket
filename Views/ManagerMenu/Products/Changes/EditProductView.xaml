@@ -75,8 +75,8 @@
                   HorizontalAlignment="Center" 
                   VerticalAlignment="Bottom" 
                   Margin="0,0,0,15"
-                  SelectedItem="{Binding CategoryName, Mode=TwoWay}" 
-                  ItemsSource="{Binding CategoriesNames}">
+                  SelectedItem="{Binding CategoryName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                  ItemsSource="{Binding SelectiveCategories}">
         </ComboBox>
 
         <TextBlock Grid.Row="1" 
