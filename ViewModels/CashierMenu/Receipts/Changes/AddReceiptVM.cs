@@ -176,11 +176,9 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
                 return;
             }
             
-            Sum -= double.Parse(SelectedStoreProductInReceipt[3]);
+            Sum -= double.Parse(SelectedStoreProductInReceipt[9]);
             SelectedProducts.Remove(SelectedStoreProductInReceipt);
 
-
-            
         }
         /**
          * Method to add new product to list
