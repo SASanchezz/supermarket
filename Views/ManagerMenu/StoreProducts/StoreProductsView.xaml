@@ -104,7 +104,7 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="UPC"              Binding="{Binding Path=[0]}"    Width="*" IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="UPC Акції"        Binding="{Binding Path=[1]}"    Width="*" IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="Назва продукту"   Binding="{Binding Path=[6]}"    Width="*" IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Назва продукту"   Binding="{Binding Path=[6]}"    Width="*" IsReadOnly="True" CanUserSort="True"/>
                         <DataGridTextColumn Header="Ціна"             Binding="{Binding Path=[3]}"    Width="*" IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Кількість"        Binding="{Binding Path=[4]}"    Width="*" IsReadOnly="True" CanUserSort="True"/>
                         <DataGridTextColumn Header="Акційний продукт" Binding="{Binding Path=[5], Converter={StaticResource BoolStringConverter}}" 

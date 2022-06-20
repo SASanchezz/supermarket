@@ -114,8 +114,8 @@
                           SelectedItem="{Binding SelectedCustomer, Mode=OneWayToSource}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Номер карти"        Binding="{Binding Path=[0]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="Прізвище"           Binding="{Binding Path=[1]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="Ім'я"               Binding="{Binding Path=[2]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Прізвище"           Binding="{Binding Path=[1]}"    Width="Auto" IsReadOnly="True" CanUserSort="True"/>
+                        <DataGridTextColumn Header="Ім'я"               Binding="{Binding Path=[2]}"    Width="Auto" IsReadOnly="True" CanUserSort="True"/>
                         <DataGridTextColumn Header="По батькові"        Binding="{Binding Path=[3]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Номер телефону"     Binding="{Binding Path=[4]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Місто"              Binding="{Binding Path=[5]}"    Width="Auto" IsReadOnly="True" CanUserSort="False"/>

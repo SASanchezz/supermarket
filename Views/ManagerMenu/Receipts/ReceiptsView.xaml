@@ -118,7 +118,7 @@
                         <DataGridTextColumn Header="id касира"              Binding="{Binding Path=[1]}"    Width="*"  IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="ПІБ касира"             Binding="{Binding Path=[6]}"    Width="4*"  IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Номер карти клієнта"    Binding="{Binding Path=[2]}"    Width="3*"  IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="Дата"                   Binding="{Binding Path=[3]}"    Width="2*"  IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Дата"                   Binding="{Binding Path=[3]}"    Width="2*"  IsReadOnly="True" CanUserSort="True"/>
                         <DataGridTextColumn Header="Сума"                   Binding="{Binding Path=[4]}"    Width="*"  IsReadOnly="True" CanUserSort="False"/>     
                         <DataGridTextColumn Header="ПДВ"                    Binding="{Binding Path=[5]}"    Width="*"  IsReadOnly="True" CanUserSort="False"/>     
                     </DataGrid.Columns>
