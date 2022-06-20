@@ -15,7 +15,6 @@ namespace supermarket.ViewModels.CashierMenu.Receipts
         private const string cashierId = "44"; //constant cashier id
         private string _filteredIdCashier = cashierId;
         private string _filteredReceiptId = "";
-
         
         private DateTime _minPrintDate;
         private DateTime _maxPrintDate;
