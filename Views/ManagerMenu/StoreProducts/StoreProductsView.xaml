@@ -53,11 +53,19 @@
                 Background="LawnGreen"
                 Command="{Binding Open_Prom_AddStoreProductWindowCommand}"/>
 
+        <TextBlock Grid.Row="0" 
+                  Width="120"
+                  Height="24" 
+                  HorizontalAlignment="Left" 
+                  Margin="150, 0, 0, 20"
+                  Text="UPC або назва продукту">
+        </TextBlock>
+        
         <TextBox Grid.Row="0" 
                   Width="120"
                   Height="24" 
                   HorizontalAlignment="Left" 
-                  Margin="150, 0, 0, 0"
+                  Margin="150, 20, 0, 0"
                   Text="{Binding SubUPC, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
 

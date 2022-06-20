@@ -10,14 +10,10 @@ namespace supermarket.Middlewares.Customer
         {
             if (cardNumber.Length is > 13 or < 12)
             {
-                return "Введіть номер карти < 13 символів";
+                return "Введіть номер карти 12-13 символів";
             }
-            
-            try
-            {
-                int.Parse(cardNumber);
-            } 
-            catch
+
+            if (cardNumber.Any(x => !char.IsDigit(x)))
             {
                 return "Введіть корректний номер карти";
             }
@@ -37,7 +33,7 @@ namespace supermarket.Middlewares.Customer
                 return "Введіть ім'я < 50 символів";
             }
             
-            if (patronymic.Length is > 50)
+            if (patronymic != null && patronymic.Length is > 50)
             {
                 return "Введіть по батькові < 50 символів";
             }
@@ -89,7 +85,7 @@ namespace supermarket.Middlewares.Customer
         {
             if (changedCardNumber.Length is > 13 or < 12)
             {
-                return "Введіть номер карти < 13 символів";
+                return "Введіть номер карти 12-13 символів";
             }
 
             if (changedCardNumber.Any(x => !char.IsDigit(x)))

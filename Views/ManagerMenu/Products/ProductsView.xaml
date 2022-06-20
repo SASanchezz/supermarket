@@ -28,20 +28,26 @@
                 FontWeight="DemiBold"
                 Margin="20,0,0,0"
                 Command="{Binding CloseCommand}"/>
-        
+
+        <TextBlock Grid.Row="0" 
+                  HorizontalAlignment="Left" 
+                  Margin="175, 0, 0, 30"
+                  Text="Назва продукту">
+        </TextBlock>
+
         <TextBox Grid.Row="0" 
                   Width="120"
-                  Height="24" 
+                  Height="18" 
                   HorizontalAlignment="Left" 
-                  Margin="150, 0, 0, 30"
+                  Margin="150, 15, 0, 30"
                   Text="{Binding FilteredName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
 
         <ComboBox Grid.Row="0" 
                   Width="120"
-                  Height="24" 
+                  Height="18" 
                   HorizontalAlignment="Left" 
-                  Margin="150, 30, 0, 0"
+                  Margin="150, 34, 0, 0"
                   ItemsSource="{Binding SelectiveCategories}" 
                   SelectedItem="{Binding SelectedCategory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         </ComboBox>

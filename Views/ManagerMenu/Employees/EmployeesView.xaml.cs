@@ -8,5 +8,10 @@ namespace supermarket.Views.ManagerMenu.Employees
         {
             InitializeComponent();
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
