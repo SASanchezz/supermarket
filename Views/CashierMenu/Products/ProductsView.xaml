@@ -66,7 +66,7 @@
                           ItemsSource="{Binding Products}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="id"         Binding="{Binding Path=[0]}" Width="Auto" IsReadOnly="True" CanUserSort="False"/>
-                        <DataGridTextColumn Header="Назва"      Binding="{Binding Path=[2]}" Width="*"    IsReadOnly="True" CanUserSort="False"/>
+                        <DataGridTextColumn Header="Назва"      Binding="{Binding Path=[2]}" Width="*"    IsReadOnly="True" CanUserSort="True"/>
                         <DataGridTextColumn Header="Категорія"  Binding="{Binding Path=[5]}" Width="2*"   IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Виробник"   Binding="{Binding Path=[4]}" Width="2*"   IsReadOnly="True" CanUserSort="False"/>
                         <DataGridTextColumn Header="Опис"       Binding="{Binding Path=[3]}" Width="4*"   IsReadOnly="True" CanUserSort="False"/>
