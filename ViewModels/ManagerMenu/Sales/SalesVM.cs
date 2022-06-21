@@ -86,8 +86,6 @@ namespace supermarket.ViewModels.ManagerMenu.Sales
             {
                 _filteredProduct = value;
                 UpdateSales();
-                OnPropertyChanged();
-                OnPropertyChanged(nameof(SelectiveProducts));
             }
         }
 

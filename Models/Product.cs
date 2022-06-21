@@ -65,6 +65,30 @@ namespace supermarket.Models
             return result.Count > 0 ? result : null;
         }
 
+        public static List<string[]> GetNotExistingStoreProductsBySubNameOrId(string subString = "") // NOT id of category
+        {
+            string whereClause = "WHERE id_product NOT IN (SELECT id_product FROM Store_Product) ";
+
+            whereClause = subString == "" ? whereClause : whereClause +=
+                $"AND (product_name LIKE '%{subString}%' OR id_product LIKE '%{subString}%')";
+
+
+            string sql = "SELECT id_product, Product.category_number, product_name, characteristics, manufacturer, Category.category_name AS category_name " +
+                "FROM (Product LEFT JOIN Category " +
+                "ON Product.category_number = Category.category_number) " + whereClause;
+            List<string[]> result = DbUtils.FindAll(sql);
+
+            if (result.Count > 0) return result;
+
+            sql = "SELECT id_product, Product.category_number, product_name, characteristics, manufacturer, Category.category_name AS category_name " +
+                "FROM (Product LEFT JOIN Category " +
+                "ON Product.category_number = Category.category_number) " +
+                "WHERE id_product NOT IN (SELECT id_product FROM Store_Product)";
+            result = DbUtils.FindAll(sql);
+
+            return result.Count > 0 ? result : null;
+        }
+
         public static string[] GetProductByID(string productId)
         {
             string sql = $"SELECT * FROM Product WHERE id_product={productId}";

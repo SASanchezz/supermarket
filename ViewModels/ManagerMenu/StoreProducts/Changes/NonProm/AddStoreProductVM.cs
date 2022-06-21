@@ -68,7 +68,7 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.NonProm
         {
             get 
             {
-                List<string[]> products = Product.GetProductBySubNameOrId(SubProduct);
+                List<string[]> products = Product.GetNotExistingStoreProductsBySubNameOrId(SubProduct);
                 
                 if (products == null)
                 {
