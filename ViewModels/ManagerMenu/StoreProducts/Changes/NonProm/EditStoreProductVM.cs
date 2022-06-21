@@ -23,7 +23,7 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.NonProm
 
         int ERROR = -1;
         int GOOD = 1;
-        string deleteErrorMessage = "Цей чек використовується";
+        string deleteErrorMessage = "Цей продукт використовується";
 
         public EditStoreProductVM()
         {
@@ -123,6 +123,13 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.NonProm
 
         private void DeleteStoreProduct()
         {
+            string[] promUPC = StoreProduct.GetStoreProductByUPC(_initUpc);
+            if (promUPC[StoreProduct.UPC_prom] != null)
+            {
+                MessageBox.Show("Неакційний товар використувується акційним");
+                CloseWindow();
+            }
+
             int response = StrProduct.DeleteStoreProductByUPC(_initUpc);
             if (response == ERROR) MessageBox.Show(deleteErrorMessage);
             CloseWindow();

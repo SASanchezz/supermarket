@@ -86,10 +86,17 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts.Changes.Prom
         {
             _initUPCProm = data[StrProduct.UPC];
             ChangedUPCProm = data[StrProduct.UPC];
-
-            UPCFather = StrProduct.GetStoreProductByPromUPC(data[StrProduct.UPC])[StrProduct.UPC];
-
             Amount = data[StrProduct.products_number];
+
+            string[] fatherProduct = StrProduct.GetStoreProductByPromUPC(data[StrProduct.UPC]);
+                if (fatherProduct == null)
+                {
+                    MessageBox.Show("Сталася помилка, порушення цілісності");
+                    return;
+                }
+                UPCFather = fatherProduct[StrProduct.UPC];
+                
+
         }
 
         private void UpdateStoreProduct()
