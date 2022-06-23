@@ -71,8 +71,10 @@
                    Margin="45, 0, 0, 0">
         </TextBlock>
         
-        <Button Grid.Row="3" 
-                Grid.Column="0" 
+        <StackPanel Grid.Row="3" 
+                    Grid.Column="0" 
+                    Orientation="Horizontal">
+            <Button 
                 HorizontalContentAlignment="Left"
                 FontSize="25"
                 Width="40" 
@@ -84,12 +86,26 @@
                 BorderThickness="0"
                 Foreground="White"
                 Style="{StaticResource MyButton}"
-                Command="{Binding InfoWindowCommand}">
+                Command="{Binding OpenInfoWindowCommand}">
 
-            <Image Source="/Images/icon.png"
-                   Height="40"></Image>
+                <Image Source="/Images/icon.png"
+                       Height="40"></Image>
 
-        </Button>
+            </Button>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="{Binding Employee[1]}"
+                           Width="150"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Top"/>
+                <TextBlock Text="{Binding Employee[2]}"
+                           Width="150"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Bottom"/>
+            </StackPanel>
+            
+        </StackPanel>
+        
+        
 
         <Button Grid.Row="4" 
                 Grid.Column="0" 

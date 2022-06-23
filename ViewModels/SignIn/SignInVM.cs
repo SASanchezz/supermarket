@@ -17,6 +17,8 @@ namespace supermarket.ViewModels.SignIn
             SignInCommand = new RelayCommand<object>(_ => SignIn(), CanExecute);
         }
         
+        public static string[] Employee { get; private set; }
+        
         public string Login { get; set; }
 
         public string Password { get; set; }
@@ -29,9 +31,9 @@ namespace supermarket.ViewModels.SignIn
             {
                 SignInValidator.Validate(Login, Password);
 
-                string[] employee = Empl.GetEmployeeByPhone(Login);
+                Employee = Empl.GetEmployeeByPhone(Login);
 
-                ChangeViewModel(employee[Empl.role] == "0" ? MainViewsTypes.ManagerMenu : MainViewsTypes.CashierMenu);
+                ChangeViewModel(Employee[Empl.role] == "0" ? MainViewsTypes.ManagerMenu : MainViewsTypes.CashierMenu);
             }
             catch (Exception ex)
             {
