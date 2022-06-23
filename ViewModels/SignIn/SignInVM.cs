@@ -3,6 +3,7 @@ using supermarket.Utils;
 using System;
 using System.Windows;
 using supermarket.Navigation.ViewModels;
+using Empl = supermarket.Models.Employee;
 
 namespace supermarket.ViewModels.SignIn
 {
@@ -26,13 +27,11 @@ namespace supermarket.ViewModels.SignIn
         {
             try
             {
-                //SignInValidator.Validate(Login, Password);
-                //SignInValidator.Validate("+380634412925", "admin");
+                SignInValidator.Validate(Login, Password);
 
-                // вот тут хуйню с проверкой менеджер это или кассир надо сообразить
-                if (Login == "к") ChangeViewModel(MainViewsTypes.CashierMenu);
-                else ChangeViewModel(MainViewsTypes.ManagerMenu);
-                
+                string[] employee = Empl.GetEmployeeByPhone(Login);
+
+                ChangeViewModel(employee[Empl.role] == "0" ? MainViewsTypes.ManagerMenu : MainViewsTypes.CashierMenu);
             }
             catch (Exception ex)
             {

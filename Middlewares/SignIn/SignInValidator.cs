@@ -20,6 +20,7 @@ namespace supermarket.Middlewares.SignIn
             {
                 throw new Exception("Нема такого телефону");
             }
+            
             if (password.Length == 0 || !CryptUtils.Compare(password, result[0][9]))
             {
                 throw new Exception("Неправильний пароль");
