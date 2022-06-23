@@ -199,8 +199,8 @@ namespace supermarket.ViewModels.ManagerMenu.Employees.Changes
 
             //Query to insert new employee
             Employee.AddEmployee(Surname, Name, Patronymic, Role,
-                Salary, DateOfBirth, DateOfStart, PhoneNumber,
-                City, Street, Zipcode, Password);
+                Salary, DateOfBirth, DateOfStart, PhoneNumber, Password,
+                City, Street, Zipcode);
 
             ResetFields();
             CloseWindow();
