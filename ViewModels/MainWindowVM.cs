@@ -120,9 +120,14 @@ namespace supermarket.ViewModels
             
             viewsNavigator.SetWay(MainViewsTypes.SignIn, _signInVM);
             viewsNavigator.SetWay(MainViewsTypes.ManagerMenu, _managerMenuVM);
-            viewsNavigator.SetWay(MainViewsTypes.CashierMenu, _cashierMenuVM);
+            viewsNavigator.SetWay(MainViewsTypes.CashierMenu, _cashierMenuVM, OnMovingToCashierMenu);
 
             viewsNavigator.Navigate(MainViewsTypes.SignIn);
+        }
+
+        private void OnMovingToCashierMenu()
+        {
+            _cashierMenuVM.Employee = SignInVM.Employee;
         }
 
         private void SetEnabilitySystem<TWindow, TViewModel>(WindowViewModel<TWindow, TViewModel> windowVM)
