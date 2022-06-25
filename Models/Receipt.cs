@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata;
 using supermarket.Utils;
 
 namespace supermarket.Models
@@ -59,7 +60,7 @@ namespace supermarket.Models
         public static string AddReceipt( string employeeId, string cardNumber, string sumTotal)
         {
             string receiptId = IdUtils.ReceiptId();
-            string vat = (double.Parse(sumTotal) * 0.2).ToString().Replace(',', '.');
+            string vat = (double.Parse(sumTotal) * Constants.VatPercent).ToString().Replace(',', '.');
             sumTotal = sumTotal.Replace(',', '.');
             cardNumber = cardNumber == "" ? "NULL" : $"'{cardNumber}'";
 

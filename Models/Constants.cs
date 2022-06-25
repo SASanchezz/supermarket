@@ -7,5 +7,6 @@ namespace supermarket.Models
         public const string AllString = "Всі";
 
         public const double PromPercent = 0.8;
+        public const double VatPercent = 0.2;
     }
 }
