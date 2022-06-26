@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using supermarket.Models;
@@ -47,8 +48,10 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts.Changes
                     {
                         newSale[h] = oldSale[h];
                     }
-                
-                    newSale[5] = (double.Parse(newSale[3]) * double.Parse(newSale[4])).ToString();
+
+                    newSale[4] = Math.Round((double.Parse(newSale[4]) / double.Parse(newSale[3])), 4).ToString();
+                    newSale[5] = oldSale[4];
+
                     sales[i] = newSale;
                 }
 

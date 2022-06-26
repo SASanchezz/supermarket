@@ -5,6 +5,8 @@ using supermarket.Middlewares.Receipts;
 using supermarket.Models;
 using supermarket.ViewModels.BaseClasses;
 using Receipt = supermarket.Models.Receipt;
+using SignInVM = supermarket.ViewModels.SignIn.SignInVM;
+using Empl = supermarket.Models.Employee;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -12,9 +14,8 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
 {
     internal class AddReceiptVM : ViewModel
     {
-        private const string cashierId = "44"; //constant cashier id
 
-        private string _cashier_id = cashierId;
+        private string _cashier_id = "0";
         private string _client_card = "";
         private string _product_amount = "";
         private string _choosen_product = "";
@@ -63,6 +64,8 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
         {
             get
             {
+                CashierId = SignInVM.Employee[Empl.id];
+
                 List<string[]> strProducts = StoreProduct.GetStoreProductsLikeUPCOrProductName(_choosen_product);
 
                 if (strProducts == null)
@@ -155,11 +158,13 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
             }
         }
 
-
         private void ResetFields()
         {
             ClientCard = "";
+            ChoosenProduct = "";
+            ProductAmount = "";
             Sum = 0;
+            SelectedProducts.Clear();
         }
 
         private void ResetNewProductFields()
@@ -252,9 +257,11 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
             CloseWindow();
         }
 
+        
+
         private bool CanExecute(object obj)
         {
-            return true;
+            return SelectedProducts.Count > 0;
         }
         
         private bool CanAddNewProduct(object obj)

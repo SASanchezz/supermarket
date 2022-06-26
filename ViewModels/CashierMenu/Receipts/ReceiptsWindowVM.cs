@@ -3,7 +3,7 @@ using System.Windows;
 using supermarket.Navigation.WindowViewModels;
 using supermarket.ViewModels.BaseClasses;
 using supermarket.Windows.CashierMenu.Receipts;
-using supermarket.Windows.CashierMenu.Receipts.Changes;
+using Empl = supermarket.Models.Employee;
 using supermarket.ViewModels.ManagerMenu.Receipts.Changes;
 
 namespace supermarket.ViewModels.CashierMenu.Receipts
@@ -40,6 +40,7 @@ namespace supermarket.ViewModels.CashierMenu.Receipts
                     return; 
                 }
                 // window is shown
+                ViewModel.FilteredIdCashier = SignIn.SignInVM.Employee[Empl.id];
                 ViewModel.UpdateReceipts();
             };
         }
