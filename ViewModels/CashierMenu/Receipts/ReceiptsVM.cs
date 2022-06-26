@@ -4,6 +4,7 @@ using supermarket.Navigation.WindowViewModels;
 using supermarket.Utils;
 using supermarket.ViewModels.BaseClasses;
 using Rec = supermarket.Models.Receipt;
+using SignInVM = supermarket.ViewModels.SignIn.SignInVM;
 using Empl = supermarket.Models.Employee;
 using supermarket.Printing;
 
@@ -12,8 +13,7 @@ namespace supermarket.ViewModels.CashierMenu.Receipts
     internal class ReceiptsVM : ViewModel, IWindowOpeningVM<CashierReceipts>
     {
         //TODO
-        private const string cashierId = "44"; //constant cashier id
-        private string _filteredIdCashier = cashierId;
+        private string _filteredIdCashier;
         private string _filteredReceiptId = "";
         
         private DateTime _minPrintDate;
@@ -93,8 +93,6 @@ namespace supermarket.ViewModels.CashierMenu.Receipts
                 OnPropertyChanged();
             }
         }
-
-        
 
         public string FilteredIdCashier
         {
