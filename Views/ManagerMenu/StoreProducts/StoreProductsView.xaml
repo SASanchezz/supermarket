@@ -11,15 +11,14 @@
         <converters:BoolStringConverter x:Key="BoolStringConverter"/>
     </UserControl.Resources>
     
-    <Grid Margin="10" 
-          Background="LightGray">
+    <Grid Background="LightGray">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="64"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Rectangle Fill="Azure" />
+        <Rectangle Fill="#43273b" />
 
         <Button Grid.Row="0" 
                 Content="←Назад" 
@@ -54,11 +53,12 @@
                 Command="{Binding Open_Prom_AddStoreProductWindowCommand}"/>
 
         <TextBlock Grid.Row="0" 
-                  Width="120"
+                  Width="140"
                   Height="24" 
                   HorizontalAlignment="Left" 
+                  Foreground="White"
                   Margin="150, 0, 0, 20"
-                  Text="UPC або назва продукту">
+                  Text="UPC або назва продукту:">
         </TextBlock>
         
         <TextBox Grid.Row="0" 
@@ -98,7 +98,7 @@
                   HorizontalAlignment="Left"
                   VerticalAlignment="Center"  
                   FontSize="12" 
-                  Margin="300,0,0,0"
+                  Margin="300,20,0,0"
                   ItemsSource="{Binding SelectiveProms}" 
                   SelectedItem="{Binding SelectedProm, Mode=TwoWay}"/>
 
@@ -106,6 +106,7 @@
             <StackPanel>
                 <DataGrid AutoGenerateColumns="False" 
                           SelectionMode="Single"
+                          AlternatingRowBackground="#5DA733"
                           ItemsSource="{Binding StoreProducts}" 
                           CanUserDeleteRows="False"
                           SelectedItem="{Binding SelectedStoreProduct, Mode=OneWayToSource}">

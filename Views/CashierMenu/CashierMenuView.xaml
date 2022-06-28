@@ -92,16 +92,17 @@
                        Height="40"></Image>
 
             </Button>
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="{Binding Employee[1]}"
-                           Width="150"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Top"/>
-                <TextBlock Text="{Binding Employee[2]}"
-                           Width="150"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Bottom"/>
-            </StackPanel>
+            
+            <TextBlock Text="{Binding EmployeeFullName}"
+                       Width="200"
+                       Height="25"                       
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Bottom" 
+                       FontSize="20"
+                       Background="#62525b"
+                       Margin="5, 0, 0, 5"
+                       Foreground="White"/>
+
             
         </StackPanel>
         

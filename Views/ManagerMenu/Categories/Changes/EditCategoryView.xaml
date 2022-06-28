@@ -6,16 +6,16 @@
              xmlns:local="clr-namespace:supermarket.Views.ManagerMenu.Categories.Changes"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="LightGray">
+    <Grid Background="#62525b">
         
         <TextBlock Grid.Row="0" 
                    Grid.Column="0" 
-                   Text="Код товару" 
-                   Foreground="DimGray" 
+                   Text="Код категорії:" 
+                   Foreground="White" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center" 
                    FontSize="18" 
-                   Margin="0,10,0,0"/>
+                   Margin="0,80,0,0"/>
        
         <TextBox Grid.Row="0" 
                  Grid.Column="0" 
@@ -30,12 +30,12 @@
 
         <TextBlock Grid.Row="0" 
                    Grid.Column="1" 
-                   Text="Назва" 
-                   Foreground="DimGray" 
+                   Text="Назва:" 
+                   Foreground="White" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center" 
                    FontSize="18" 
-                   Margin="0,10,0,0"/>
+                   Margin="0,80,0,0"/>
         
         <TextBox Grid.Row="0" 
                  Grid.Column="1" 
@@ -48,7 +48,7 @@
                  Margin="0,0,0,15"
                  Text="{Binding ChangedName}"/>
 
-        <Button Content="ВИДАЛИТИ" 
+        <Button Content="Видалити" 
                 Background="DarkRed" 
                 Foreground="White" 
                 Grid.Row="1" 
@@ -58,7 +58,7 @@
                 Height="30" 
                 VerticalAlignment="Bottom" 
                 HorizontalAlignment="Left" 
-                FontSize="12"  
+                FontSize="19"  
                 Margin="50,0,0,50"
                 Command="{Binding DeleteCategoryCommand}"/>
         
@@ -70,7 +70,7 @@
                 Height="30" 
                 VerticalAlignment="Bottom" 
                 HorizontalAlignment="Right" 
-                FontSize="12"  
+                FontSize="19"  
                 Margin="0,0,50,50"
                 Command="{Binding UpdateCategoryCommand}"/>
 

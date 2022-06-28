@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:supermarket.Views.CashierMenu.Products"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="#F2F2F2">
+    <Grid Background="LightGray">
         
         <Grid.RowDefinitions>
             <RowDefinition Height="64"/>
@@ -17,8 +17,8 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        
-        <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Fill="Azure" />
+
+        <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Fill="#43273b" />
         
         <Button Grid.Row="0"
                 Grid.Column="0"
@@ -40,7 +40,9 @@
             <TextBlock Text="Назва товару:"
                        Width="100"
                        Height="20"
-                       HorizontalAlignment="Left"/>
+                       HorizontalAlignment="Left"
+                       Foreground="White"/>
+            
             <TextBox Width="120"
                      Height="24"
                      Margin="0, 0, 0, 0"
@@ -63,6 +65,7 @@
             <StackPanel>
                 <DataGrid AutoGenerateColumns="False"
                           SelectionMode="Single"
+                          AlternatingRowBackground="#5DA733"
                           ItemsSource="{Binding Products}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="id"         Binding="{Binding Path=[0]}" Width="Auto" IsReadOnly="True" CanUserSort="False"/>

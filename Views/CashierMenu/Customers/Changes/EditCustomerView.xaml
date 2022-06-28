@@ -7,49 +7,49 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800"
              FontFamily="Montserrat" FontWeight="Medium">
-    <Grid Background="LightGray">
+    <Grid Background="#62525b">
 
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="номер карти" Foreground="DimGray" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="0,0,0,0"/>
-        <TextBox x:Name="cardNumberBox" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,0"
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Номер карти:" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="0,0,0,0"/>
+        <TextBox  Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Width="218" Height="28" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,5"
                  Text="{Binding ChangedCardNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="прізвище" Foreground="DimGray" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="0,0,0,0"/>
-        <TextBox x:Name="surnameBox" Grid.Row="0" Grid.Column="1" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,0"
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="Прізвище:" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="0,0,0,0"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,5"
                  Text="{Binding Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="ім'я" Foreground="DimGray" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="0,0,0,0"/>
-        <TextBox x:Name="nameBox" Grid.Row="1" Grid.Column="0" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,0"
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Ім'я:" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="0,0,0,0"/>
+        <TextBox Grid.Row="1" Grid.Column="0" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,5"
                  Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="по батькові" Foreground="DimGray" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="0,0,0,0"/>
-        <TextBox x:Name="patronymicBox" Grid.Row="1" Grid.Column="1" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,0"
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="По батькові:" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="0,0,0,0"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,5"
                  Text="{Binding Patronymic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="номер телефону" Foreground="DimGray" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="0,0,0,0"/>
-        <TextBox x:Name="phoneNumberBox" Grid.Row="2" Grid.Column="0" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,0"
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Номер телефону:" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="0,0,0,0"/>
+        <TextBox Grid.Row="2" Grid.Column="0" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,5"
                  Text="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <TextBlock Grid.Row="2" Grid.Column="1" Text="місто" Foreground="DimGray" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="0,0,0,0"/>
-        <TextBox x:Name="cityBox" Grid.Row="2" Grid.Column="1" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,0"
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="Місто:" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="0,0,0,0"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,5"
                  Text="{Binding City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="вулиця" Foreground="DimGray" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="0,0,0,0"/>
-        <TextBox x:Name="streetBox" Grid.Row="3" Grid.Column="0" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,0"
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Вулиця:" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="0,0,0,0"/>
+        <TextBox Grid.Row="3" Grid.Column="0" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,5"
                  Text="{Binding Street, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <TextBlock Grid.Row="3" Grid.Column="1" Text="поштовий індекс" Foreground="DimGray" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="0,0,0,0"/>
-        <TextBox x:Name="zipcodeBox" Grid.Row="3" Grid.Column="1" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,0"
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="Поштовий індекс:" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="0,0,0,0"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,5"
                  Text="{Binding Zipcode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <TextBlock Grid.Row="4" Grid.Column="0" Text="Знижка (%)" Foreground="DimGray" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="0,0,0,0"/>
-        <TextBox x:Name="percentBox" Grid.Row="4" Grid.Column="0" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,0"
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Знижка (%):" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="0,0,0,0"/>
+        <TextBox x:Name="percentBox" Grid.Row="4" Grid.Column="0" Width="218" Height="28" HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Center" FontSize="14" Margin="0,0,0,5"
                  Text="{Binding Percent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
 
-        <Button Content="ВИДАЛИТИ" Background="DarkRed" Foreground="White" Grid.Row="4" Grid.Column="1" Width="140" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="12" Margin="15,0,0,0"
+        <Button Content="Видалити" Background="DarkRed" Foreground="White" Grid.Row="4" Grid.Column="1" Width="140" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="19" Margin="25,0,0,0"
                 Command="{Binding DeleteCustomerCommand}"/>
         
-        <Button Content="Оновити" Grid.Row="4" Grid.Column="1" Width="140" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="12" Margin="0,0,15,0"
+        <Button Content="Оновити" Grid.Row="4" Grid.Column="1" Width="140" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="19" Margin="0,0,25,0"
                 Command="{Binding UpdateCustomerCommand}"/>
 
         <Button Content="←Назад" Grid.Row="0" HorizontalAlignment="Left" Width="64" Height="24" VerticalAlignment="Top" FontSize="12" Margin="0,0,0,0"

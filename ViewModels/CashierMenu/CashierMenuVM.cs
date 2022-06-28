@@ -32,6 +32,8 @@ namespace supermarket.ViewModels.CashierMenu
 
         public string[] Employee { get; set; }
 
+        public string EmployeeFullName { get { return Employee[1] + " " + Employee[2]; } }
+
         public Action<Main> OpenWindowViewModel { get; set; }
         
         public RelayCommand<object> OpenInfoWindowCommand { get; }

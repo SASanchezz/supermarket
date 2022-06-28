@@ -7,8 +7,8 @@
              mc:Ignorable="d"
              d:DesignHeight="500" d:DesignWidth="900" MinWidth="800">
     <Grid Background="#F2F2F2">
-        
-        <Rectangle Fill="Azure" Grid.ColumnSpan="5" Grid.Column="0"/>
+
+        <Rectangle Fill="#43273b" Grid.ColumnSpan="5" Grid.Column="0"/>
 
         <Button Grid.Row="0" 
                 Grid.Column="0"
@@ -27,19 +27,22 @@
                     Orientation="Vertical"
                     VerticalAlignment="Center"
                     Width="150">
-            <TextBlock Text="З"/>
+            <TextBlock Text="З"
+                       Foreground="White"/>
             <DatePicker SelectedDate="{Binding MinPrintDate, Mode=TwoWay, 
             UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock Text="До"/>
+            <TextBlock Text="До"
+                       Foreground="White"/>
             <DatePicker SelectedDate="{Binding MaxPrintDate, Mode=TwoWay, 
             UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
         
         <TextBlock Grid.Row="0" 
                  Grid.Column="2"
-                 Text="id касира"
+                 Text="ID касира:"
                  VerticalAlignment="Top"
                  HorizontalAlignment="Left"
+                   Foreground="White"
                  Margin="30,25,0,0"/>
         
         <ComboBox Grid.Row="0" 
@@ -89,7 +92,7 @@
                 FontSize="16"
                 FontWeight="DemiBold"
                 Margin="0,15,0,0"
-                Background="LightSkyBlue"
+                Background="#b5b3b4"
                 HorizontalContentAlignment="Right"
                 Command="{Binding CountReceiptsSumCommand}"/>
 
@@ -103,7 +106,7 @@
                 FontSize="12" 
                 FontWeight="DemiBold" 
                 Margin="0,0,0,15"
-                Background="LightSkyBlue"
+                Background="#b5b3b4"
                 Text = "{Binding ReceiptsSum, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <ScrollViewer Grid.Row="1" Grid.ColumnSpan="5" Grid.Column="0">
@@ -111,6 +114,7 @@
                 <DataGrid AutoGenerateColumns="False" 
                           SelectionMode="Single"
                           CanUserDeleteRows="False"
+                          AlternatingRowBackground="#5DA733"
                           ItemsSource="{Binding Receipts}" 
                           SelectedItem="{Binding SelectedReceipt, Mode=OneWayToSource}">
                     <DataGrid.Columns>

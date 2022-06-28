@@ -16,7 +16,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Rectangle Fill="BlanchedAlmond" />
+        <Rectangle Fill="#43273b" />
         
         <Button Grid.Row="0"
                 Content="←Назад" 
@@ -46,6 +46,7 @@
                 Height="24" 
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center" 
+                Background="LawnGreen"
                 FontSize="12" 
                 FontWeight="DemiBold" 
                 Margin="0,0,20,0"
@@ -64,8 +65,9 @@
 
         <TextBlock Grid.Row="0" 
                   HorizontalAlignment="Left" 
-                  Margin="180, 0, 0, 30"
-                  Text="Прізвище">
+                  Margin="150, 0, 0, 30"
+                   Foreground="White"
+                  Text="Прізвище:">
         </TextBlock>
 
         <TextBox Grid.Row="0" 
@@ -90,6 +92,7 @@
                 <DataGrid AutoGenerateColumns="False" 
                           SelectionMode="Single"
                           CanUserDeleteRows="False"
+                          AlternatingRowBackground="#5DA733"
                           ItemsSource="{Binding Employees}" 
                           SelectedItem="{Binding SelectedEmployee, Mode=OneWayToSource}">
                     <DataGrid.Columns>
