@@ -13,8 +13,8 @@
             <RowDefinition Height="64"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        
-        <Rectangle Fill="Azure" />
+
+        <Rectangle Fill="#43273b" />
 
         <Button Grid.Row="0"
                 Content="←Назад" 
@@ -63,6 +63,7 @@
                           SelectionMode="Single"
                           CanUserDeleteRows="False"
                           ItemsSource="{Binding Categories}" 
+                          AlternatingRowBackground="#5DA733"
                           SelectedItem="{Binding SelectedCategory, Mode=OneWayToSource}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Номер"     Binding="{Binding Path=[0]}"    Width="*"  IsReadOnly="True" CanUserSort="False"/>

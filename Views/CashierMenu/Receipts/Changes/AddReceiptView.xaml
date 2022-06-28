@@ -7,15 +7,15 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              FontFamily="Montserrat" FontWeight="Medium">
-    <Grid Background="#F2F2F2">
+    <Grid Background="#62525b">
 
-        <TextBlock Text="Номер карти клієнта"
+        <TextBlock Text="Номер карти клієнта:"
                    Grid.Row="0"
                    HorizontalAlignment="Center"
-                   Foreground="DimGray" 
+                   Foreground="White" 
                    VerticalAlignment="Top"
                    FontSize="18"
-                   Margin="0,5,0,0"/>
+                   Margin="-30,5,0,0"/>
         
         <ComboBox IsEditable="True"
                   IsTextSearchEnabled="False"
@@ -32,47 +32,50 @@
 
         <TextBlock Grid.Row="1"
                  HorizontalAlignment="Left"
-                 VerticalAlignment="Bottom"
-                 FontSize="14"
-                 Text="Товар"
-                 Margin="50,0,0,20"/>
+                 VerticalAlignment="Center"
+                 FontSize="19"
+                 Text="Товар:"
+                 Foreground="White"
+                 Margin="30,5,0,0"/>
         
         <ComboBox IsEditable="True"
                   IsTextSearchEnabled="False"
                   Grid.Row="1"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Bottom"
-                  Width="218"
+                  Width="215"
                   Height="28"
                   VerticalContentAlignment="Center"
                   FontSize="14"
-                  Margin="100,0,0,15"
+                  Margin="90,0,0,15"
                  ItemsSource="{Binding SelectiveStoreProduct}"
                   Text="{Binding ChoosenProduct, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBlock Grid.Row="1"
-                 HorizontalAlignment="Right"
-                 VerticalAlignment="Bottom"
-                 FontSize="14"
-                 Text="Кількість"
-                 Margin="0,0,400,20"/>
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Center"
+                 FontSize="19"
+                 Text="Кількість:"
+                 Foreground="White"
+                 Margin="0,5,60,0"/>
+        
         <TextBox  Grid.Row="1"
-                  HorizontalAlignment="Right"
-                  VerticalAlignment="Bottom"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
                   Width="50"
                   Height="28"
                   VerticalContentAlignment="Center"
                   FontSize="14"
-                  Margin="0,0,340,15"
+                  Margin="75,5,0,0"
                   Text="{Binding ProductAmount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <Button Content="Додати товар" Grid.Row="1"
+        <Button Content="Додати" Grid.Row="1"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
-                Width="110"
+                Width="80"
                 Height="30"
-                Background="LawnGreen"
-                FontSize="16"
+                Background="#55a666"
+                FontSize="14"
                 Margin="0,0,220,15"
                 Command="{Binding AddNewProductCommand}"/>
 
@@ -81,8 +84,8 @@
                 VerticalAlignment="Bottom"
                 Width="80"
                 Height="30"
-                Background="Red"
-                FontSize="13"
+                Background="#ac5252"
+                FontSize="14"
                 Margin="0,0,135,15"
                 Command="{Binding DeleteProductFromListCommand}"/>
 
@@ -92,24 +95,25 @@
                  Width="86"
                  Height="28"
                  FontSize="14"
-                 Background="Aqua"
+                 Background="#b5b3b4"
                  Margin="0,0,40,15"
                 Text="{Binding Sum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         
         <TextBlock Grid.Row="1"
                  HorizontalAlignment="Right"
-                 VerticalAlignment="Bottom"
+                 VerticalAlignment="Center"
                  Height="28"
-                 FontSize="14"
-                 Margin="0,0,15,10"
-                Text="грн"/>
+                 FontSize="18"
+                 Margin="0,20,5,0"
+                 Foreground="White"
+                 Text="грн"/>
 
         <Button Content="Створити чек" Grid.Row="0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
                 Width="128"
                 Height="30"
-                Background="LawnGreen"
+                Background="#5DA733"
                 FontSize="16"
                 Margin="0,0,15,5"
                 Command="{Binding AddReceiptCommand}"/>

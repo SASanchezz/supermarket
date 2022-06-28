@@ -20,7 +20,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Rectangle Fill="Azure" />
+        <Rectangle Fill="#43273b" />
 
         <Button Grid.Row="0" 
                 Content="←Назад" 
@@ -34,8 +34,9 @@
 
         <TextBlock Grid.Row="0" 
                   HorizontalAlignment="Left" 
-                  Margin="170, 10, 0, 0"
-                  Text="Назва або UPC">
+                  Margin="150, 10, 0, 0"
+                  Text="Назва або UPC:"
+                  Foreground="White">
         </TextBlock>
         
         <TextBox Grid.Row="0" 
@@ -54,7 +55,7 @@
                 VerticalAlignment="Center" 
                 FontSize="12" 
                 FontWeight="DemiBold" 
-                Margin="0,5,250,0"
+                Margin="0,0,20,0"
                 Command="{Binding PrintStoreProductsCommand}"/>
         
 
@@ -65,7 +66,7 @@
                   HorizontalAlignment="Left"
                   VerticalAlignment="Center"  
                   FontSize="12" 
-                  Margin="300,0,0,0"
+                  Margin="300,20,0,0"
                   ItemsSource="{Binding SelectiveProms}" 
                   SelectedItem="{Binding SelectedProm, Mode=TwoWay}"/>
 
@@ -75,6 +76,7 @@
                           SelectionMode="Single"
                           ItemsSource="{Binding StoreProducts}" 
                           CanUserDeleteRows="False"
+                          AlternatingRowBackground="#5DA733"
                           SelectedItem="{Binding SelectedStoreProduct, Mode=OneWayToSource}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="UPC"                Binding="{Binding Path=[0]}"    Width="*" IsReadOnly="True" CanUserSort="False"/>

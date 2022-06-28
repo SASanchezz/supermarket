@@ -6,15 +6,16 @@
              xmlns:local="clr-namespace:supermarket.Views.ManagerMenu.Categories.Changes"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="LightGray">
+    <Grid Background="#62525b">
+        
         <TextBlock Grid.Row="0" 
                    Grid.Column="0" 
-                   Text="код товару" 
-                   Foreground="DimGray" 
+                   Text="Код категорії:" 
+                   Foreground="White" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center" 
                    FontSize="18" 
-                   Margin="0,10,0,0"/>
+                   Margin="0,80,0,0"/>
         
         <TextBox Grid.Row="0" 
                  Grid.Column="0" 
@@ -29,12 +30,12 @@
 
         <TextBlock Grid.Row="0" 
                    Grid.Column="1" 
-                   Text="назва" 
-                   Foreground="DimGray"
+                   Text="Назва:" 
+                   Foreground="White" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center" 
                    FontSize="18" 
-                   Margin="0,10,0,0"/>
+                   Margin="0,80,0,0"/>
         
         <TextBox Grid.Row="0" 
                  Grid.Column="1" 
@@ -48,16 +49,17 @@
                  Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         
 
-        <Button Content="Додати нову категорію" 
+        <Button Content="Додати категорію" 
                 Grid.Row="1" 
                 Grid.ColumnSpan="2" 
                 Grid.Column="0" 
-                Width="140" 
+                Width="170" 
                 Height="30" 
                 VerticalAlignment="Bottom" 
                 HorizontalAlignment="Center" 
-                FontSize="12"  
+                FontSize="19"  
                 Margin="0,0,0,50"
+                Background="#5DA733"
                 Command="{Binding AddCategoryCommand}"/>
 
         <Button Content="←Назад" 
