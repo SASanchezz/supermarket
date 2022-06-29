@@ -66,7 +66,26 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts.Changes
             {
                 _receiptNumber = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(ReceiptSumWithoutDiscount));
+                OnPropertyChanged(nameof(CustomerPercentDiscount));
                 UpdateSales();
+            }
+        }
+
+        public string ReceiptSumWithoutDiscount
+        {
+            get
+            {
+                return Rec.getRealReceiptSum(_receiptNumber).ToString();
+            }
+        }
+
+
+        public string CustomerPercentDiscount
+        {
+            get
+            {
+                return Rec.GetReceiptCustomerDiscount(_receiptNumber).ToString();
             }
         }
 
