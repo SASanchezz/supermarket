@@ -18,6 +18,9 @@ namespace supermarket.Models
         public const int surname_employee = 7;
         public const int patronymic_employee = 8;
 
+        static int ERROR = -1;
+        static int GOOD = 1;
+
         public static List<string[]> GetAllReceipts(string idCashier, DateTime minPrintDate, DateTime maxPrintDate, 
             string likeReceiptId = "")
         {
@@ -75,8 +78,22 @@ namespace supermarket.Models
 
         public static int DeleteReceiptByReceiptNumber(string receiptNumber)
         {
+            List<string[]> receiptSales = Sale.GetAllSalesByCheckNumber(receiptNumber);
+            receiptSales.ForEach(sale =>
+            {
+                string sql = $"UPDATE Store_Product " +
+                                $"SET products_number = products_number + {sale[Sale.product_number]} " +
+                                $"WHERE UPC = '{sale[Sale.upc]}'";
+
+                DbUtils.Execute(sql);
+            });
+
             string sql = $"DELETE FROM Receipt WHERE receipt_number = '{receiptNumber}'";
             int response = DbUtils.Execute(sql);
+            if (response == GOOD)
+            {
+
+            }
             return response;
         }
     }

@@ -6,10 +6,11 @@ namespace supermarket.Models
 {
     internal class Sale
     {
-        private const int upc = 0;
-        private const int check_number = 1;
-        private const int product_number = 2;
-        private const int selling_price = 3;
+        public const int upc = 0;
+        public const int product_id = 1;
+        public const int product_name = 2;
+        public const int product_number = 3;
+        public const int selling_price = 4;
 
         public static List<string[]> GetAllSales(string productId, DateTime minPrintDate, DateTime maxPrintDate)
         {
@@ -41,6 +42,12 @@ namespace supermarket.Models
                          $"VALUES ('{UPC}', '{checkNumber}', {productNumber}, {sellingPrice.Replace(',', '.')})";
 
             DbUtils.Execute(sql);
+
+            string removeProducts = $"UPDATE Store_Product " +
+                                    $"SET products_number = products_number - {productNumber} " +
+                                    $"WHERE UPC = '{UPC}'";
+
+            DbUtils.Execute(removeProducts);
         }
 
         public static List<string[]> GetAllSalesByCheckNumber(string checkNumber)
