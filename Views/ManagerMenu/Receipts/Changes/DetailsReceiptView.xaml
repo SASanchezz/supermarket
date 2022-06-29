@@ -38,7 +38,51 @@
                    Text="{Binding ReceiptNumber}"
                    FontSize="20"
                    Margin="70, 0, 0, 0"/>
+
+        <TextBlock Grid.Row="0"
+                   Width="150"
+                   Height="20"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   TextAlignment="Left"
+                   Text="Ціна без знижки"
+                   Foreground="White"
+                   FontSize="16"
+                   Margin="0, 0, 150, 20"/>
         
+        <TextBlock Grid.Row="0"
+                   Width="100"
+                   Height="20"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   TextAlignment="Left"
+                   Foreground="White"
+                   Text="{Binding ReceiptSumWithoutDiscount}"
+                   FontSize="16"
+                   Margin="0, 0, 60, 20"/>
+
+        <TextBlock Grid.Row="0"
+                   Width="150"
+                   Height="20"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   TextAlignment="Left"
+                   Text="Знижка клієнта"
+                   Foreground="White"
+                   FontSize="16"
+                   Margin="0, 20, 150, 0"/>
+
+        <TextBlock Grid.Row="0"
+                   Width="100"
+                   Height="20"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   TextAlignment="Left"
+                   Foreground="White"
+                   Text="{Binding CustomerPercentDiscount}"
+                   FontSize="16"
+                   Margin="0, 20, 60, 0"/>
+
         <ScrollViewer Grid.Row="1" Grid.Column="0">
             <StackPanel>
                 <DataGrid AutoGenerateColumns="False" 
