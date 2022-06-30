@@ -120,7 +120,7 @@ namespace supermarket.ViewModels.ManagerMenu.Products
                 }
             }
 
-            Printer.PrintDataGrid(printerProducts, "Товари станом на " + DateTime.UtcNow.ToString("dd.MM.yyyy"), new string[]
+            new Printer().PrintDataGrid(printerProducts, "Товари станом на " + DateTime.UtcNow.ToString("dd.MM.yyyy"), new string[]
             {
                 "id",
                 "Назва",

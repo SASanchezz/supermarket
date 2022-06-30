@@ -163,15 +163,15 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
                 }
             }
 
-            Printer.PrintDataGrid(printerReceipts, "Чеки станом на " + DateTime.UtcNow.ToString("dd.MM.yyyy"), new string[]
+            new Printer().PrintDataGrid(printerReceipts, "пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ " + DateTime.UtcNow.ToString("dd.MM.yyyy"), new string[]
             {
-                "Номер",
-                "id касира",
-                "ПІБ касира",
-                "Номер карти клієнта",
-                "Дата",
-                "Сума",
-                "ПДВ",
+                "пїЅпїЅпїЅпїЅпїЅ",
+                "id пїЅпїЅпїЅпїЅпїЅпїЅ",
+                "ПІпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ",
+                "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅлієпїЅпїЅпїЅ",
+                "пїЅпїЅпїЅпїЅ",
+                "пїЅпїЅпїЅпїЅ",
+                "пїЅпїЅпїЅ",
             });
         }
     }
