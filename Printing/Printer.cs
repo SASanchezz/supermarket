@@ -4,24 +4,39 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
+using supermarket.Utils;
 
 namespace supermarket.Printing
 {
-    internal static class Printer
+    internal class Printer
     {
-        // изменение
-        public static void PrintDataGrid(List<string[]> list, string tableName, string[] columnNames)
+        public Printer()
         {
+            PrintCommand = new RelayCommand<object>(_ => OpenPrintDialog());
+        }
+        
+        public FlowDocument Document { get; set; }
+
+        public RelayCommand<object> PrintCommand { get; }
+
+        private void OpenPrintDialog()
+        {
+            var printDialog = new PrintDialog();
+            printDialog.ShowDialog();
+            printDialog.PrintTicket.PageOrientation = System.Printing.PageOrientation.Landscape;
+            IDocumentPaginatorSource idpSource = Document;
+            printDialog.PrintDocument(idpSource.DocumentPaginator, "");
+        }
+
+        public void PrintDataGrid(List<string[]> list, string tableName, string[] columnNames)
+        {
+            PrintPreviewWindow printPreviewWindow = new PrintPreviewWindow();
+            
             if (list[0].Length != columnNames.Length)
             {
                 throw new Exception("Not the same length");
             }
 
-            var printDialog = new PrintDialog();
-            printDialog.PrintTicket.PageOrientation = System.Printing.PageOrientation.Landscape;
-
-            if (printDialog.ShowDialog() != true) return;
-            
             var table = new Table();
             table.BorderBrush = Brushes.Black;
             table.BorderThickness = new Thickness(0.5);
@@ -72,19 +87,14 @@ namespace supermarket.Printing
                 table.RowGroups[0].Rows.Add(row);
             }
 
-            var size = new Size(printDialog.PrintableAreaWidth, printDialog.PrintableAreaHeight);
-            var doc = new FlowDocument(table)
+            Document = new FlowDocument(table)
             {
                 FontFamily = new FontFamily("Calibri"),
-                
-                PageWidth = size.Width,
-                PageHeight = size.Height,
                 ColumnWidth = 1024,
                 FontSize = 14
             };
-            
-            IDocumentPaginatorSource idpSource = doc;
-            printDialog.PrintDocument(idpSource.DocumentPaginator, "");
+            printPreviewWindow.DataContext = this;
+            printPreviewWindow.Show();
         }
     }
 }

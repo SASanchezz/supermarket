@@ -121,7 +121,7 @@ namespace supermarket.ViewModels.CashierMenu.StoreProducts
                 }
             }
 
-            Printer.PrintDataGrid(printerStoreProducts, "Товари в магазині станом на " + DateTime.UtcNow.ToString("dd.MM.yyyy"), new string[]
+            new Printer().PrintDataGrid(printerStoreProducts, "Товари в магазині станом на " + DateTime.UtcNow.ToString("dd.MM.yyyy"), new string[]
             {
                 "UPC",
                 "UPC Акції",

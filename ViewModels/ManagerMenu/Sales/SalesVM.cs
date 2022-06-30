@@ -134,15 +134,15 @@ namespace supermarket.ViewModels.ManagerMenu.Sales
                 }
             }
 
-            Printer.PrintDataGrid(printerSales, "Продажі станом на " + DateTime.UtcNow.ToString("dd.MM.yyyy"), new string[]
+            new Printer().PrintDataGrid(printerSales, "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ " + DateTime.UtcNow.ToString("dd.MM.yyyy"), new string[]
             {
                 "UPC",
-                "id товару",
-                "Назва товару",
-                "Ціна",
-                "Кількість",
-                "Сума",
-                "Дата продажу"
+                "id пїЅпїЅпїЅпїЅпїЅпїЅ",
+                "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ",
+                "ЦіпїЅпїЅ",
+                "КіпїЅпїЅпїЅпїЅпїЅпїЅ",
+                "пїЅпїЅпїЅпїЅ",
+                "пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
             });
         }
     }
