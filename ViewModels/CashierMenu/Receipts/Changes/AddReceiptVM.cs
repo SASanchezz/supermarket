@@ -9,6 +9,7 @@ using SignInVM = supermarket.ViewModels.SignIn.SignInVM;
 using Empl = supermarket.Models.Employee;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
 {
@@ -197,6 +198,12 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
                 MessageBox.Show("Немає такого товару");
                 return;
             }
+            
+            if (SelectedProducts.Any(p => p[StoreProduct.UPC] == storeProiduct[StoreProduct.UPC]))
+            {
+                MessageBox.Show("Цей товар вже є в чеку");
+                return;
+            }
 
             try
             {
@@ -211,6 +218,12 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
             if (int.Parse(ProductAmount) <= 0)
             {
                 MessageBox.Show("Кількість товару від'ємна");
+                return;
+            }
+            
+            if (int.Parse(ProductAmount) > int.Parse(storeProiduct[Models.StoreProduct.products_number]))
+            {
+                MessageBox.Show("Введена кількість перевищує наявну");
                 return;
             }
 
