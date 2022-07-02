@@ -91,6 +91,7 @@
                            Margin="25,5,0,0"/>
                 <TextBlock/>
                 <TextBlock Text="{Binding NumberOfProducts}" 
+                           Foreground="White"
                            FontSize="16" 
                            HorizontalAlignment="Left" 
                            Margin="100,5,0,0"/>

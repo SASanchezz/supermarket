@@ -160,6 +160,8 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
                 for (int h = 2; h < Receipts[0].Length - 3; ++h)
                 {
                     printerReceipts[i].SetValue(Receipts[i][h], h + 1);
+
+                    if (h == 2) printerReceipts[i].SetValue(Receipts[i][9], 7);
                 }
             }
 
@@ -172,6 +174,7 @@ namespace supermarket.ViewModels.ManagerMenu.Receipts
                 "����",
                 "����",
                 "���",
+                "Сума без знижки"
             });
         }
     }
