@@ -57,7 +57,7 @@
                   Height="24" 
                   HorizontalAlignment="Left" 
                   Foreground="White"
-                  Margin="150, 0, 0, 20"
+                  Margin="100, 0, 0, 20"
                   Text="UPC або назва продукту:">
         </TextBlock>
         
@@ -65,7 +65,7 @@
                   Width="120"
                   Height="24" 
                   HorizontalAlignment="Left" 
-                  Margin="150, 20, 0, 0"
+                  Margin="100, 20, 0, 0"
                   Text="{Binding SubUPC, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
 
@@ -98,9 +98,20 @@
                   HorizontalAlignment="Left"
                   VerticalAlignment="Center"  
                   FontSize="12" 
-                  Margin="300,20,0,0"
+                  Margin="240,20,0,0"
                   ItemsSource="{Binding SelectiveProms}" 
                   SelectedItem="{Binding SelectedProm, Mode=TwoWay}"/>
+
+        <Button Grid.Row="0"
+                Content="Товари з чеків"
+                Width="110" 
+                Height="24" 
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center" 
+                FontSize="12" 
+                FontWeight="DemiBold" 
+                Margin="0,20,370,0"
+                Command="{Binding GetProductsOfAllReceiptsCommand}"/>
 
         <ScrollViewer Grid.Row="1">
             <StackPanel>

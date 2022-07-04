@@ -70,5 +70,19 @@ namespace supermarket.Models
 
             DbUtils.Execute(sql);
         }
+
+        public static List<string[]> GetCategorySum(string categoryName)
+        {
+            string sql = "SELECT Cat.category_number, Cat.category_name, SUM(S_P.products_number), SUM(S_P.selling_price*S_P.products_number) " +
+                        "FROM Category Cat LEFT JOIN Product Pro ON Cat.category_number =  Pro.category_number " +
+                        "LEFT JOIN Store_Product S_P ON Pro.id_product =  S_P.id_product " +
+
+                        $"WHERE Cat.category_name = '{categoryName}' " +
+                         "GROUP BY Cat.category_number, Cat.category_name;";
+
+            List<string[]> result = DbUtils.FindAll(sql);
+
+            return result.Count > 0 ? result : null;
+        }
     }
 }

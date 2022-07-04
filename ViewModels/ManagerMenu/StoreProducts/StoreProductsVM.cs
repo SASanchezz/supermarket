@@ -26,7 +26,8 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
                 new RelayCommand<object>(_ => OpenWindowViewModel(ManagerStoreProducts.AddPromStoreProduct));
             OpenEditStoreProductWindowCommand = 
                 new RelayCommand<object>(_ => OpenWindowViewModel(ManagerStoreProducts.EditStoreProduct));
-            
+
+            GetProductsOfAllReceiptsCommand = new RelayCommand<object>(_ => GetProductsOfAllReceipts());
             PrintStoreProductsCommand = new RelayCommand<object>(_ => PrintStoreProducts());
             CloseCommand = new RelayCommand<object>(_ => CloseWindow());
         }
@@ -50,6 +51,7 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
         public RelayCommand<object> OpenEditStoreProductWindowCommand { get; }
 
         public RelayCommand<object> PrintStoreProductsCommand { get; }
+        public RelayCommand<object> GetProductsOfAllReceiptsCommand { get; }
 
         public RelayCommand<object> CloseCommand { get; }
 
@@ -91,6 +93,11 @@ namespace supermarket.ViewModels.ManagerMenu.StoreProducts
 
                 return result;
             }
+        }
+
+        public void GetProductsOfAllReceipts()
+        {
+            StoreProducts = StrProduct.GetProductsOfAllReceipts(DateTime.Today);
         }
 
         public void UpdateStoreProducts()

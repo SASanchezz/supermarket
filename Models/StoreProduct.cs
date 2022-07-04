@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using supermarket.Utils;
 using supermarket.Data;
 
@@ -33,6 +34,32 @@ namespace supermarket.Models
             whereClause = productId == "" ? whereClause : whereClause += string.Format(" AND id_product={0}", productId);
 
             string sql = "SELECT * FROM Store_Product " + whereClause;
+            List<string[]> result = DbUtils.FindAll(sql);
+
+            return result.Count > 0 ? result : null;
+        }
+
+        public static List<string[]> GetProductsOfAllReceipts(DateTime day)
+        {
+            string getReceipts = "SELECT * " +
+                                "FROM Receipt R " +
+                                $"WHERE DATE(print_date) = '{day:yyyy-MM-dd}' ";
+
+            List<string[]> resultReceipts = DbUtils.FindAll(getReceipts);
+            if (resultReceipts.Count == 0) return null;
+
+            string sql = "SELECT UPC, UPC_prom, SP.id_product, selling_price, products_number, promotional_product, P.product_name " +
+                        "FROM Store_Product SP LEFT JOIN Product P ON SP.id_product = P.id_product " +
+                        "WHERE NOT EXISTS(SELECT * " +
+                                        "FROM Receipt R " +
+                                        $"WHERE DATE(print_date) = '{day:yyyy-MM-dd}' " +
+                                    "AND NOT EXISTS(SELECT * " +
+                                                    "FROM Sale S " +
+                                                    "WHERE S.UPC = SP.UPC " +
+                                                    "AND S.check_number = R.receipt_number " +
+                                                    ")" +
+                                        ");";
+
             List<string[]> result = DbUtils.FindAll(sql);
 
             return result.Count > 0 ? result : null;

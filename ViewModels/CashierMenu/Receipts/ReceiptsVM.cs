@@ -150,15 +150,15 @@ namespace supermarket.ViewModels.CashierMenu.Receipts
                 }
             }
 
-            new Printer().PrintDataGrid(printerReceipts, "���� ������ �� " + DateTime.UtcNow.ToString("dd.MM.yyyy"), new string[]
+            new Printer().PrintDataGrid(printerReceipts, "Чеки станом на " + DateTime.UtcNow.ToString("dd.MM.yyyy"), new string[]
             {
-                "�����",
-                "id ������",
-                "ϲ� ������",
-                "����� ����� �볺���",
-                "����",
-                "����",
-                "���",
+                "Номер",
+                "id касира",
+                "ПІБ касира",
+                "Номер карти клієнта",
+                "Дата",
+                "Сума",
+                "ПДВ",
                 "Сума без знижки"
             });
         }

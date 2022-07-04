@@ -217,7 +217,7 @@ namespace supermarket.ViewModels.CashierMenu.Receipts.Changes
             
             if (int.Parse(ProductAmount) <= 0)
             {
-                MessageBox.Show("Кількість товару від'ємна");
+                MessageBox.Show("Кількість товару має бути натуральним числом");
                 return;
             }
             
