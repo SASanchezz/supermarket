@@ -19,12 +19,14 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
 
         private string _filteredSurname = "";
         private string _selectedRole = AllString;
+        private bool _isCheckedQuery = false;
 
         public EmployeesVM()
         {
             OpenAddEmployeeWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(ManagerEmployees.AddEmployee));
             OpenEditEmployeeWindowCommand = new RelayCommand<object>(_ => OpenWindowViewModel(ManagerEmployees.EditEmployee));
             PrintEmployeesCommand = new RelayCommand<object>(_ => PrintEmployees());
+            CleanCommand = new RelayCommand<object>(_ => CleanFilters());
             CloseCommand = new RelayCommand<object>(_ => CloseWindow());
                 
             SetSelectiveRoles();
@@ -36,7 +38,7 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
         {
             get
             {
-                List<string[]> employees = Empl.GetAllEmployee(_selectedRole, _filteredSurname);
+                List<string[]> employees = Empl.GetAllEmployee(_selectedRole, _filteredSurname, _isCheckedQuery);
 
                 if (employees == null)
                 {
@@ -60,6 +62,8 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
         public RelayCommand<object> OpenEditEmployeeWindowCommand { get; }
 
         public RelayCommand<object> PrintEmployeesCommand { get; }
+
+        public RelayCommand<object> CleanCommand { get; }
 
         public RelayCommand<object> CloseCommand { get; }
 
@@ -89,6 +93,16 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
                 UpdateEmployees();
             }
         }
+        public bool IsCheckedQuery
+        {
+            get => _isCheckedQuery;
+            set
+            {
+                _isCheckedQuery = value;
+                OnPropertyChanged();
+                UpdateEmployees();
+            }
+        }
 
         public void UpdateEmployees()
         {
@@ -103,6 +117,13 @@ namespace supermarket.ViewModels.ManagerMenu.Employees
             {
                 SelectiveRoles.SetValue(Data.Roles.roleNames[i], i + 1);
             }
+        }
+
+        private void CleanFilters()
+        {
+            FilteredSurname = "";
+            SelectedRole = AllString;
+            IsCheckedQuery = false;
         }
 
         private void PrintEmployees()

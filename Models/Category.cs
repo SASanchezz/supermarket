@@ -18,6 +18,20 @@ namespace supermarket.Models
 
             return result.Count > 0 ? result : null;
         }
+        public static List<string[]> GetAllCategories(string filteredSum)
+        {
+            filteredSum = filteredSum.Replace(',', '.');
+            string sql = "SELECT * " +
+                        " FROM Category " +
+                        " WHERE category_number IN (SELECT category_number " +
+                                                " FROM (Sale INNER JOIN Store_Product ON Sale.UPC = Store_Product.UPC) " +
+                                                " INNER JOIN Product ON Store_Product.id_product = Product.id_product " +
+                                                " GROUP BY category_number " +
+                                                $" HAVING SUM(Sale.selling_price) > {filteredSum})";
+            List<string[]> result = DbUtils.FindAll(sql);
+
+            return result.Count > 0 ? result : null;
+        }
         public static string[] GetCategoryByNumber(string categoryNumber)
         {
             string sql = $"SELECT * FROM Category WHERE category_number='{categoryNumber}'";

@@ -26,6 +26,23 @@
                 Margin="20,0,0,0"
                 Command="{Binding CloseCommand}"/>
 
+        <TextBlock Grid.Row="0" 
+                  HorizontalAlignment="Left" 
+                  Width="170"
+                  Margin="130, 0, 0, 30"
+                  Foreground="White"
+                  Text="Знайти категорії, сума товарів яких перевищує (грн):"
+                  TextWrapping="Wrap">
+        </TextBlock>
+
+        <TextBox Grid.Row="0" 
+                  Width="120"
+                  Height="18" 
+                  HorizontalAlignment="Left" 
+                  Margin="130, 20, 0, 0"
+                  Text="{Binding FilteredSum, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
+        </TextBox>
+
         <Button Grid.Row="0"
                 Content="Редагувати" 
                 Width="124" 

@@ -34,10 +34,10 @@
                 Width="75" 
                 Height="24" 
                 HorizontalAlignment="Right" 
-                VerticalAlignment="Center" 
+                VerticalAlignment="Top" 
                 FontSize="12" 
                 FontWeight="DemiBold" 
-                Margin="0,0,250,0"
+                Margin="0,5,270,0"
                 Command="{Binding PrintEmployeesCommand}"/>
 
         <Button Grid.Row="0"
@@ -45,27 +45,40 @@
                 Width="195" 
                 Height="24" 
                 HorizontalAlignment="Right"
-                VerticalAlignment="Center" 
+                VerticalAlignment="Bottom" 
                 Background="LawnGreen"
                 FontSize="12" 
                 FontWeight="DemiBold" 
-                Margin="0,0,20,0"
+                Margin="0,0,20,5"
                 Command="{Binding OpenAddEmployeeWindowCommand}"/>
 
+        <Button Grid.Row="0"
+                Content="Очистити фільтри" 
+                Width="110" 
+                Height="24" 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Bottom" 
+                FontSize="12" 
+                FontWeight="DemiBold" 
+                Margin="0,5,253,5"
+                Command="{Binding CleanCommand}"/>
+        
         <Button Grid.Row="0"
                 Content="Редагувати"
                 Width="110" 
                 Height="24" 
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center" 
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top" 
                 FontSize="12" 
                 FontWeight="DemiBold" 
-                Margin="0,0,20,0"
+                Margin="0,5,62,0"
                 Command="{Binding OpenEditEmployeeWindowCommand}"/>
+        
+        
 
         <TextBlock Grid.Row="0" 
                   HorizontalAlignment="Left" 
-                  Margin="150, 0, 0, 30"
+                  Margin="130, 0, 0, 30"
                    Foreground="White"
                   Text="Прізвище:">
         </TextBlock>
@@ -74,7 +87,7 @@
                   Width="120"
                   Height="18" 
                   HorizontalAlignment="Left" 
-                  Margin="150, 0, 0, 10"
+                  Margin="130, 0, 0, 10"
                   Text="{Binding FilteredSurname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
 
@@ -82,11 +95,32 @@
                   Width="120"
                   Height="20" 
                   HorizontalAlignment="Left" 
-                  Margin="150, 40, 0, 0"
+                  Margin="130, 40, 0, 0"
                   ItemsSource="{Binding SelectiveRoles}" 
                   SelectedItem="{Binding SelectedRole, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         </ComboBox>
+
+        <TextBlock Grid.Row="0" 
+                  HorizontalAlignment="Left" 
+                  VerticalAlignment="Center"
+                  Width="150"
+                  FontSize="12"
+                  TextWrapping="Wrap"
+                  Margin="290, 0, 0, 0"
+                  Foreground="White"
+                  Text="Тільки працівники, що обслуговували всіх постійних клієнтів з Києва">
+        </TextBlock>
         
+        <CheckBox Grid.Row="0"
+                Width="20" 
+                Height="19" 
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center" 
+                FontSize="12" 
+                FontWeight="DemiBold" 
+                Margin="270,0,0,0"
+                IsChecked="{Binding IsCheckedQuery}"/>
+
         <ScrollViewer Grid.Row="1">
             <StackPanel>
                 <DataGrid AutoGenerateColumns="False" 

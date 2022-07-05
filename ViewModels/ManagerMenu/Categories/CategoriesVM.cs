@@ -5,26 +5,39 @@ using System;
 using System.Collections.Generic;
 using supermarket.Printing;
 using Cat = supermarket.Models.Category;
+using System.Windows;
 
 namespace supermarket.ViewModels.ManagerMenu.Categories
 {
     internal class CategoriesVM : ViewModel, IWindowOpeningVM<ManagerCategories>
     {
+        private string _filteredSum = "";
         public CategoriesVM()
         {
-            OpenAddCategoryWindowCommand = 
+            OpenAddCategoryWindowCommand =
                 new RelayCommand<object>(_ => OpenWindowViewModel(ManagerCategories.AddCategory));
-            
-            OpenEditCategoryWindowCommand= 
+
+            OpenEditCategoryWindowCommand =
                 new RelayCommand<object>(_ => OpenWindowViewModel(ManagerCategories.EditCategory));
-            
+
             PrintCategoriesCommand = new RelayCommand<object>(_ => PrintCategories());
             CloseCommand = new RelayCommand<object>(_ => CloseWindow());
         }
-        
+
         public Action<ManagerCategories> OpenWindowViewModel { get; set; }
 
-        public List<string[]> Categories => Cat.GetAllCategories();
+        public List<string[]> Categories {
+            get
+            {
+                if (string.IsNullOrEmpty(_filteredSum)) { return Cat.GetAllCategories(); }
+                else { return Cat.GetAllCategories(_filteredSum); }
+            }
+            set 
+            {
+                if (string.IsNullOrEmpty(_filteredSum)) { Categories = Cat.GetAllCategories(); }
+                else { Categories = Cat.GetAllCategories(_filteredSum); }
+            }
+        }
 
         public string[] SelectedCategory { get; set; }
 
@@ -35,6 +48,24 @@ namespace supermarket.ViewModels.ManagerMenu.Categories
         public RelayCommand<object> PrintCategoriesCommand { get; }
 
         public RelayCommand<object> CloseCommand { get; }
+
+        public string FilteredSum
+        {
+            get => _filteredSum;
+            set
+            {
+                if (double.Parse(value) < 0) { 
+                    _filteredSum = ""; 
+                    MessageBox.Show("Введіть натуральне число"); 
+                }
+                else { 
+                    _filteredSum = value; 
+                }
+
+                OnPropertyChanged();
+                UpdateCategories();
+            }
+        }
 
         public void UpdateCategories()
         {

@@ -85,21 +85,22 @@ namespace supermarket.Models
         public static string AddReceipt( string employeeId, string cardNumber, string sumTotal)
         {
             string receiptId = IdUtils.ReceiptId();
-            string vat = (double.Parse(sumTotal) * Constants.VatPercent).ToString().Replace(',', '.');
-            sumTotal = sumTotal.Replace(',', '.');
+            string vat = (double.Parse(sumTotal) * Constants.VatPercent).ToString();
+            sumTotal = sumTotal.Replace('.', ',');
+
             if (cardNumber == "")
             {
                 cardNumber = "NULL";
             } else
             {
                 string[] customer = Customer.GetCustomerByCardNumber(cardNumber);
-                sumTotal = (double.Parse(sumTotal) * (100 - double.Parse(customer[Customer.percent])) / 100).ToString();
+                sumTotal = (double.Parse(sumTotal) * (100 - double.Parse(customer[Customer.percent].Replace('.', ','))) / 100).ToString();
                 cardNumber = $"'{cardNumber}'";
             }
 
             string sql = "INSERT INTO Receipt " +
                          "(receipt_number, id_employee, card_number, print_date, sum_total, vat) " +
-                         $"VALUES ('{receiptId}', {employeeId}, {cardNumber}, '{DateTime.Now:yyyy-MM-dd HH:mm:ss}', {sumTotal}, {vat})";
+                         $"VALUES ('{receiptId}', {employeeId}, {cardNumber}, '{DateTime.Now:yyyy-MM-dd HH:mm:ss}', {sumTotal.Replace(',', '.')}, {vat.Replace(',', '.')})";
 
             DbUtils.Execute(sql);
 

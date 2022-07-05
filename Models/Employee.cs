@@ -24,7 +24,7 @@ namespace supermarket.Models
         
         private const int AllPosition = -1;
 
-        public static List<string[]> GetAllEmployee(string roleName = Constants.AllString, string surname = "")
+        public static List<string[]> GetAllEmployee(string roleName = Constants.AllString, string surname = "", bool isQuery = false)
         {
             string whereClause = "WHERE 1 ";
 
@@ -36,6 +36,14 @@ namespace supermarket.Models
 
             whereClause = surname == "" ? whereClause : whereClause +=
                 $"AND empl_surname LIKE '%{surname}%'";
+
+            whereClause = (!isQuery) ? whereClause : whereClause +=
+                " AND NOT EXISTS (SELECT card_number " +
+                                " FROM Customer_Card " +
+                                " WHERE NOT EXISTS (SELECT * " +
+                                                    "FROM Receipt " +
+                                                    "WHERE Customer_Card.card_number = card_number " +
+                                                    "AND Employee.id_employee=id_employee ) AND Customer_Card.city = 'Київ' );";
 
 
             string sql = "SELECT * FROM Employee " + whereClause;
