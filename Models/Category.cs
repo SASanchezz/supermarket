@@ -73,7 +73,7 @@ namespace supermarket.Models
 
         public static List<string[]> GetCategorySum(string categoryName)
         {
-            string sql = "SELECT Cat.category_number, Cat.category_name, SUM(S_P.products_number), SUM(S_P.selling_price*S_P.products_number) " +
+            string sql = "SELECT Cat.category_number, Cat.category_name, SUM(S_P.products_number), AVG(S_P.selling_price) " +
                         "FROM Category Cat LEFT JOIN Product Pro ON Cat.category_number =  Pro.category_number " +
                         "LEFT JOIN Store_Product S_P ON Pro.id_product =  S_P.id_product " +
 
