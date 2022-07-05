@@ -1,0 +1,26 @@
+<Window x:Class="supermarket.Windows.ManagerMenu.Sales.Query_1_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:supermarket.Windows.ManagerMenu.Sales"
+        mc:Ignorable="d"
+        Title="Query_1_Window" Height="450" Width="800"
+        IsEnabled="{Binding IsEnabled, Mode=OneWay}">
+    <Grid>
+        <ScrollViewer>
+            <StackPanel>
+                <DataGrid AutoGenerateColumns="False" 
+                          AlternatingRowBackground="#5DA733"
+                          SelectionMode="Single"
+                          CanUserDeleteRows="False"
+                          ItemsSource="{Binding ManufacturerProductsSales}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Manufacturer" Binding="{Binding Path=[0]}"    Width="*"  IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Count of sales" Binding="{Binding Path=[1]}"    Width="*"  IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

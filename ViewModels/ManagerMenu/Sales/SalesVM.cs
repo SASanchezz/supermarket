@@ -4,6 +4,7 @@ using supermarket.Models;
 using supermarket.Printing;
 using supermarket.Utils;
 using supermarket.ViewModels.BaseClasses;
+using supermarket.Windows.ManagerMenu.Sales;
 using Prod = supermarket.Models.Product;
 
 namespace supermarket.ViewModels.ManagerMenu.Sales
@@ -15,17 +16,29 @@ namespace supermarket.ViewModels.ManagerMenu.Sales
 
         private DateTime _minPrintDate = DateTime.Now.AddYears(-3);
         private DateTime _maxPrintDate = DateTime.Now;
+        private string _selectedManufacturer;
 
         public SalesVM()
         {
             CountNumberOfProductsCommand = new RelayCommand<object>(_ => OnPropertyChanged(nameof(NumberOfProducts)));
             PrintSalesCommand = new RelayCommand<object>(_ => PrintSales());
+            OpenSalesInfoCommand = new RelayCommand<object>(_ => OpenSalesInfo());
             CloseCommand = new RelayCommand<object>(_ => CloseWindow());
+            _selectedManufacturer = SelectiveManufacturers[0];
+        }
+
+        private void OpenSalesInfo()
+        {
+            Query_1_Window w = new Query_1_Window();
+            w.SetManufacturer(SelectedManufacturer);
+            w.Show();
         }
 
         public RelayCommand<object> CountNumberOfProductsCommand { get; }
         
         public RelayCommand<object> PrintSalesCommand { get; }
+        
+        public RelayCommand<object> OpenSalesInfoCommand { get; }
         
         public RelayCommand<object> CloseCommand { get; }
 
@@ -110,6 +123,31 @@ namespace supermarket.ViewModels.ManagerMenu.Sales
                 return resultStoreProducts;
             }
         }
+        
+        public string[] SelectiveManufacturers
+        {
+            get
+            {
+                string[] manufacturers = new string[Product.GetAllManufacturers().Count];
+
+                for (int i = 0; i < Product.GetAllManufacturers().Count; ++i)
+                {
+                    manufacturers[i] = Product.GetAllManufacturers()[i][0];
+                }
+            
+                return manufacturers;
+            }
+        }
+        
+        public string SelectedManufacturer
+        {
+            get => _selectedManufacturer;
+            set
+            {
+                _selectedManufacturer = value ?? SelectiveManufacturers[0];
+                OnPropertyChanged();
+            }
+        }
 
         public string NumberOfProducts =>
             Sale.GetSumOfNumberOfProducts(FilteredProduct.Split(' ')[0], MinPrintDate, MaxPrintDate);
@@ -118,6 +156,7 @@ namespace supermarket.ViewModels.ManagerMenu.Sales
         {
             OnPropertyChanged(nameof(Sales));
             OnPropertyChanged(nameof(SelectiveProducts));
+            OnPropertyChanged(nameof(SelectiveManufacturers));
         }
 
         private void PrintSales()

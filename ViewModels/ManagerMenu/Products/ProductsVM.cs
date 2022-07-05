@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using supermarket.Models;
+using supermarket.Windows.ManagerMenu.Products;
 
 namespace supermarket.ViewModels.ManagerMenu.Products
 {
@@ -21,10 +22,20 @@ namespace supermarket.ViewModels.ManagerMenu.Products
         {
             OpenAddProductWindowCommand = 
                 new RelayCommand<object>(_ => OpenWindowViewModel(ManagerProducts.AddProduct));
+            
+            OpenPopularProductsInfoCommand = new RelayCommand<object>(_ => OpenPopularProductsInfo());
+            
             OpenEditProductWindowCommand = 
                 new RelayCommand<object>(_ => OpenWindowViewModel(ManagerProducts.EditProduct));
             PrintProductsCommand = new RelayCommand<object>(_ => PrintProducts());
             CloseCommand = new RelayCommand<object>(_ => CloseWindow());
+        }
+
+        private void OpenPopularProductsInfo()
+        {
+            Query_2_Window w = new Query_2_Window();
+            w.SetData();
+            w.Show();
         }
 
         public Action<ManagerProducts> OpenWindowViewModel { get; set; }
@@ -75,7 +86,9 @@ namespace supermarket.ViewModels.ManagerMenu.Products
         public RelayCommand<object> OpenAddProductWindowCommand { get; }
 
         public RelayCommand<object> OpenEditProductWindowCommand { get; }
-
+        
+        public RelayCommand<object> OpenPopularProductsInfoCommand { get; }
+        
         public RelayCommand<object> PrintProductsCommand { get; }
         
         public RelayCommand<object> CloseCommand { get; }

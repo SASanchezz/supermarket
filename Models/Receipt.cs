@@ -93,7 +93,7 @@ namespace supermarket.Models
             } else
             {
                 string[] customer = Customer.GetCustomerByCardNumber(cardNumber);
-                sumTotal = (double.Parse(sumTotal) * (100 - double.Parse(customer[Customer.percent])) / 100).ToString();
+                sumTotal = (double.Parse(sumTotal.Replace('.', ',')) * (100 - double.Parse(customer[Customer.percent].Replace('.', ','))) / 100).ToString().Replace(',', '.');
                 cardNumber = $"'{cardNumber}'";
             }
 

@@ -121,5 +121,42 @@ namespace supermarket.Models
 
             DbUtils.Execute(sql);
         }
+
+        public static List<string[]> GetAllManufacturers()
+        {
+            string sql = "SELECT DISTINCT manufacturer FROM Product";
+
+            return DbUtils.FindAll(sql);
+        }
+        
+        public static List<string[]> GetManufacturerCountSales(string manufacturer)
+        {
+            string sql = "SELECT Product.product_name, COUNT(Sale.UPC) as sales_count " +
+                         "FROM Product " +
+                         "LEFT JOIN Store_Product ON Product.id_product = Store_Product.id_product " +
+                         "LEFT JOIN Sale ON Store_Product.UPC = Sale.UPC " +
+                         $"WHERE manufacturer = '{manufacturer}' " +
+                         "GROUP BY Product.id_product";
+
+            return DbUtils.FindAll(sql);
+        }
+        
+        public static List<string[]> GetPopularProducts()
+        {
+            string sql = "SELECT * " +
+                         "FROM Product R " +
+                         "WHERE NOT EXISTS( " +
+                         "          SELECT * " +
+                         "          FROM Customer_Card C " +
+                         "          WHERE NOT EXISTS( " +
+                         "                  SELECT * " +
+                         "                  FROM Sale " +
+                         "                  JOIN Receipt ON Sale.check_number=Receipt.receipt_number " +
+                         "                  JOIN Store_Product ON Sale.UPC=Store_Product.UPC " +
+                         "                  WHERE Store_Product.id_product=R.id_product " +
+                         "                      AND C.card_number=Receipt.card_number))";
+
+            return DbUtils.FindAll(sql);
+        }
     }
 }

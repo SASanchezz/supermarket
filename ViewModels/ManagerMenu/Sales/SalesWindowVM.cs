@@ -1,3 +1,4 @@
+using supermarket.Navigation.WindowViewModels;
 using supermarket.ViewModels.BaseClasses;
 using supermarket.Windows.ManagerMenu.Sales;
 

@@ -69,11 +69,22 @@
                 Width="75" 
                 Height="24" 
                 HorizontalAlignment="Right" 
-                VerticalAlignment="Center" 
+                VerticalAlignment="Top" 
                 FontSize="12" 
                 FontWeight="DemiBold" 
-                Margin="0,0,220,0"
+                Margin="0,5,220,0"
                 Command="{Binding PrintProductsCommand}"/>
+        
+        <Button Grid.Row="0"
+                Content="Купили всі клієнти" 
+                Width="135" 
+                Height="24" 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Bottom" 
+                FontSize="12" 
+                FontWeight="DemiBold" 
+                Margin="0,0,190,5"
+                Command="{Binding OpenPopularProductsInfoCommand}"/>
 
         <Button Grid.Row="0"
                 Content="Додати новий товар" 
